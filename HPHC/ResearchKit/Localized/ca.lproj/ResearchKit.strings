@@ -176,7 +176,7 @@
 
 /* Boolean answer strings */
 "BOOL_NO" = "No";
-"BOOL_YES" = "Sí";
+"BOOL_YES" = "Si";
 
 /* Measuring unit abbreviations */
 "MEASURING_UNIT_CM" = "cm";

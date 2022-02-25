@@ -23,8 +23,8 @@ import Foundation
 let kComprehensionFailureViewIdentifier = "ComprehensionFailure"
 
 protocol ComprehensionFailureDelegate {
-    func didTapOnRetry();
-    func didTapOnCancel();
+    func didTapOnRetry()
+    func didTapOnCancel()
 }
 class ComprehensionFailure: UIView {
     
@@ -37,12 +37,14 @@ class ComprehensionFailure: UIView {
         
         super.init(coder: aDecoder)
        
-        //sets border color for bottom view
+        // sets border color for bottom view
         buttonRetry?.layer.borderColor =   kUicolorForButtonBackground
     }
-    class func instanceFromNib(frame: CGRect,detail: Dictionary<String,Any>?) -> ComprehensionFailure {
+    class func instanceFromNib(frame: CGRect, detail: Dictionary<String, Any>?) -> ComprehensionFailure {
         
-        let view = UINib(nibName: kComprehensionFailureViewIdentifier, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! ComprehensionFailure
+        let view =
+            UINib(nibName: kComprehensionFailureViewIdentifier, bundle: nil).instantiate(withOwner: nil, options: nil)[0]
+            as! ComprehensionFailure
         view.frame = frame
         view.buttonRetry?.layer.borderColor =   kUicolorForButtonBackground
         

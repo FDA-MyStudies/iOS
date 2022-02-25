@@ -19,7 +19,6 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 import Foundation
 
-
 protocol searchBarDelegate {
     func didTapOnCancel()
     func search(text: String, studyId: String)
@@ -38,10 +37,10 @@ class SearchBarView: UIView {
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
-        //fatalError("init(coder:) has not been implemented")
+        // fatalError("init(coder:) has not been implemented")
         
     }
-    class func instanceFromNib(frame: CGRect,detail: Dictionary<String,Any>?) -> SearchBarView {
+    class func instanceFromNib(frame: CGRect, detail: Dictionary<String, Any>?) -> SearchBarView {
         
         let view = UINib(nibName: "SearchBarView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! SearchBarView
         view.frame = frame
@@ -49,15 +48,15 @@ class SearchBarView: UIView {
         
         view.viewBackground?.layer.cornerRadius = 3.0
         view.viewBackground?.clipsToBounds = true
-        
+        view.segementToken?.setTitle(NSLocalizedStrings("token", comment: ""), forSegmentAt: 0)
+        view.segementToken?.setTitle(NSLocalizedStrings("keyword", comment: ""), forSegmentAt: 1)
         return view
     }
     
     @IBAction func segmentPressed(_ sender: UIButton) {
         if segementToken?.selectedSegmentIndex == 1 {
             segementToken?.selectedSegmentIndex = 0
-        }
-        else {
+        } else {
             segementToken?.selectedSegmentIndex = 1
         }
         segmentPlaceholderSelection(segementToken)
@@ -67,7 +66,7 @@ class SearchBarView: UIView {
         if sender?.selectedSegmentIndex == 0 {
             let text = textFieldSearch?.text
             textFieldSearch?.text = ""
-            textFieldSearch?.placeholder = "Enter a token"
+            textFieldSearch?.placeholder = kEnterToken
             textFieldSearch?.resignFirstResponder()
             textFieldSearch?.becomeFirstResponder()
             textFieldSearch?.text = text
@@ -75,7 +74,7 @@ class SearchBarView: UIView {
         } else if sender?.selectedSegmentIndex == 1 {
             let text = textFieldSearch?.text
             textFieldSearch?.text = ""
-            textFieldSearch?.placeholder = "Enter keyword(s)"
+            textFieldSearch?.placeholder = kEnterKeyword
             textFieldSearch?.resignFirstResponder()
             textFieldSearch?.becomeFirstResponder()
             textFieldSearch?.text = text
@@ -89,10 +88,9 @@ class SearchBarView: UIView {
                        delay: 0.1,
                        options: UIView.AnimationOptions.preferredFramesPerSecond60,
                        animations: { () -> Void in
-                        self.frame = CGRect(x: 0 , y: -300 , width: self.frame.size.width , height: 64.0)
+                        self.frame = CGRect(x: 0, y: -300, width: self.frame.size.width, height: 64.0)
                         
-                        
-        }, completion: { (finished) -> Void in
+        }, completion: { (_) -> Void in
             
             self.delegate?.didTapOnCancel()
            
@@ -103,19 +101,17 @@ class SearchBarView: UIView {
 extension SearchBarView: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print(textField.tag)
-        
+               
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        
         let finalString = textField.text! + string
-        
         
         if textField == textFieldSearch {
             
-            if finalString != nil && finalString.count > 500 {
+            if finalString.count > 500 {
+            // if finalString != nil && finalString.count > 500 {
                 return false
             } else {
                 return true
@@ -127,7 +123,7 @@ extension SearchBarView: UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print(textField.text!)
+        
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         textField.resignFirstResponder()
@@ -136,8 +132,7 @@ extension SearchBarView: UITextFieldDelegate{
         if textField.text != nil && (textField.text?.count)! > 0 {
             self.delegate?.search(text: textField.text!, studyId: (switchVal ? textField.text! : ""))
         }
-        
-        
+                
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

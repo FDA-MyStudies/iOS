@@ -25,7 +25,7 @@ import WebKit
 
 let kPdfMimeType = "application/pdf"
 let kUTF8Encoding = "UTF-8"
-let kEmailSubject = "Signed Consent"
+let kEmailSubject = NSLocalizedStrings("Signed Consent", comment: "")
 let kEmailSubjectDashboard = "Dashboard"
 let kEmailSubjectCharts = "Charts"
 let kConsentFileName = "Consent"
@@ -50,8 +50,7 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
     
     @IBOutlet weak var buttonNext: UIButton?
     
-    
-    // MARK:ORKstepView Controller Init methods
+    // MARK: ORKstepView Controller Init methods
     override init(step: ORKStep?) {
         super.init(step: step)
     }
@@ -68,7 +67,7 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
         super.goForward()
     }
     
-    // MARK:Button Actions
+    // MARK: Button Actions
     
     @IBAction func buttonActionNext(sender: UIBarButtonItem?) {
         self.goForward()
@@ -78,12 +77,15 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
         self.sendConsentByMail()
     }
     
-    // MARK:View controller delegates
+    // MARK: View controller delegates
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         webView.contentScaleFactor = 1.0
         webView.navigationDelegate = self
+        
+        self.buttonNext?.setTitle(NSLocalizedStrings("Done", comment: ""), for: .normal)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -106,18 +108,19 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
         mailComposerVC.setSubject(kEmailSubject)
         mailComposerVC.setMessageBody("", isHTML: false)
        
-        let Filename =   "\((Study.currentStudy?.name)!)" + "_SignedConsent"   + ".pdf"
-        
+        let Filename =   "\((Study.currentStudy?.name)!)" + NSLocalizedStrings("_SignedConsent", comment: "")   + ".pdf"
         mailComposerVC.addAttachmentData(pdfData!, mimeType: "application/pdf", fileName: Filename)
         
         if MFMailComposeViewController.canSendMail() {
             self.present(mailComposerVC, animated: true, completion: nil)
             
-        }else {
+        } else {
             
-            let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: kFailedToConnectAppleMail, preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: kTitleError,
+                                          message: kFailedToConnectAppleMail,
+                                          preferredStyle: UIAlertController.Style.alert)
             
-            alert.addAction(UIAlertAction.init(title: NSLocalizedString(kTitleOk, comment: ""), style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction.init(title: kTitleOk, style: .default, handler: { (_) in
                 
 //                self.dismiss(animated: true, completion: nil)
             }))
@@ -125,7 +128,6 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
             UIApplication.topMostViewController?.present(alert, animated: true, completion: nil)
         }
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -144,7 +146,6 @@ extension ConsentPdfViewerStepViewController: MFMailComposeViewControllerDelegat
 // MARK: WebView Delegate
 extension ConsentPdfViewerStepViewController: WKNavigationDelegate{
     
-    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.removeProgressIndicator()
     }
@@ -152,10 +153,12 @@ extension ConsentPdfViewerStepViewController: WKNavigationDelegate{
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         self.removeProgressIndicator()
         
-        let buttonTitleOK = NSLocalizedString("OK", comment: "")
-        let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: error.localizedDescription,preferredStyle: UIAlertController.Style.alert)
+        let buttonTitleOK = kTitleOKCapital
+        let alert = UIAlertController(title: kTitleError,
+                                      message: error.localizedDescription,
+                                      preferredStyle: UIAlertController.Style.alert)
         
-        alert.addAction(UIAlertAction.init(title: buttonTitleOK, style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction.init(title: buttonTitleOK, style: .default, handler: { (_) in
             self.dismiss(animated: true, completion: nil)
             
         }))
@@ -164,7 +167,3 @@ extension ConsentPdfViewerStepViewController: WKNavigationDelegate{
     }
     
 }
-
-
-
-

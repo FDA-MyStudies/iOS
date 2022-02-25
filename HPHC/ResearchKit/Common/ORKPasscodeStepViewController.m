@@ -136,6 +136,8 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
             forgotPasscodeButton.frame = CGRectMake(x, _originalForgotPasscodeY, width, kForgotPasscodeHeight);
             
             NSString *buttonTitle = [self forgotPasscodeButtonText];
+            forgotPasscodeButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+            forgotPasscodeButton.titleLabel.textAlignment = NSTextAlignmentCenter;
             [forgotPasscodeButton setTitle:buttonTitle forState:UIControlStateNormal];
             [forgotPasscodeButton addTarget:self
                                      action:@selector(forgotPasscodeTapped)

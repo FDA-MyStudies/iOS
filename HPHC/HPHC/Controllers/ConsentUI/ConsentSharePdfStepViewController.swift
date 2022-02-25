@@ -22,9 +22,8 @@ import UIKit
 import ResearchKit
 
 let kConsentCompletionResultIdentifier = "ConsentCompletion"
-let kMainTitle = "Thanks for providing consent for this Study"
-let kSubTitle = "You can now start participating in the Study"
-
+let kMainTitle = NSLocalizedStrings("Thanks for providing consent for this Study", comment: "")
+let kSubTitle = NSLocalizedStrings("You can now start participating in the Study", comment: "")
 
 /* Consent Completion Step
  @mainTitle: title displayed in Consent Completion UI
@@ -54,8 +53,7 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
     
     var taskResult: ConsentCompletionTaskResult = ConsentCompletionTaskResult(identifier: kConsentCompletionResultIdentifier)
     
-    
-    // MARK:ORKstepView Controller Init methods
+    // MARK: ORKstepView Controller Init methods
     override init(step: ORKStep?) {
         super.init(step: step)
     }
@@ -80,8 +78,7 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
         
     }
     
-    
-    // MARK:Button Actions
+    // MARK: Button Actions
     
     @IBAction func buttonActionNext(sender: UIButton?) {
         self.taskResult.didTapOnViewPdf = false
@@ -94,11 +91,11 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
         }
         self.taskResult.pdfData = PDFData
         self.taskResult.didTapOnViewPdf = true
-        //Navigate to next step
+        // Navigate to next step
         self.goForward()
     }
     
-    // MARK:View controller delegates
+    // MARK: View controller delegates
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,12 +109,18 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
         
         buttonNext?.layer.borderColor =   kUicolorForButtonBackground
         
-        NotificationCenter.default.addObserver(self, selector: #selector(enrollmentCompleted), name: NSNotification.Name(rawValue: "NotificationStudyEnrollmentCompleted"), object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(enrollmentCompleted),
+                                               name: NSNotification.Name(rawValue: "NotificationStudyEnrollmentCompleted"),
+                                               object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(enrollmentFailed), name: NSNotification.Name(rawValue: "NotificationStudyEnrollmentFailed"), object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(enrollmentFailed),
+                                               name: NSNotification.Name(rawValue: "NotificationStudyEnrollmentFailed"),
+                                               object: nil)
 
             activityIndicator.startAnimating()
-            //hide views until enrollment completed
+            // hide views until enrollment completed
             buttonNext?.isHidden = true
             buttonViewPdf?.isHidden = true
             labelTitle.isHidden = true
@@ -126,7 +129,9 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
       super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "NotificationStudyEnrollmentCompleted"), object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: NSNotification.Name(rawValue: "NotificationStudyEnrollmentCompleted"),
+                                                  object: nil)
     }
     
     @objc func enrollmentCompleted() {
@@ -147,9 +152,7 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
     }
     
 }
-
-
-//Overrriding the ORKTaskResult to get customized results
+// Overrriding the ORKTaskResult to get customized results
 open class ConsentCompletionTaskResult: ORKResult {
     
     open var didTapOnViewPdf: Bool = false
@@ -168,5 +171,3 @@ open class ConsentCompletionTaskResult: ORKResult {
         }
     }
 }
-
-

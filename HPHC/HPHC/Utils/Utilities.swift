@@ -24,7 +24,6 @@ import UIKit
 let MAX_WIDTH = 1000
 let MAX_HEIGHT = 100
 
-
 enum DirectoryType: String {
     case study = "Study"
     case gateway = "Gateway"
@@ -71,7 +70,11 @@ class Utilities: NSObject {
         
     }
     
-    class func getAttributedText(plainString pstr: String, boldString bstr: String, fontSize size: CGFloat,plainFontName: String,boldFontName: String) -> NSAttributedString {
+    class func getAttributedText(plainString pstr: String,
+                                 boldString bstr: String,
+                                 fontSize size: CGFloat,
+                                 plainFontName: String,
+                                 boldFontName: String) -> NSAttributedString {
         
         let title: String = pstr + " " + bstr
         let attributedString = NSMutableAttributedString(string: title)
@@ -100,12 +103,12 @@ class Utilities: NSObject {
         
         var cString: String =  hex.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
         
-        if (cString.hasPrefix("#")) {
+        if cString.hasPrefix("#") {
             let index = cString.index(cString.startIndex, offsetBy: 1)
-            cString =  String(cString[index...])//cString.substring(from: cString.index(cString.startIndex, offsetBy: 1))
+            cString =  String(cString[index...]) // cString.substring(from: cString.index(cString.startIndex, offsetBy: 1))
         }
         
-        if ((cString.count) != 6) {
+        if (cString.count) != 6 {
             return UIColor.gray
         }
         
@@ -120,7 +123,7 @@ class Utilities: NSObject {
         )
     }
     
-    class func getDateStringWithFormat(_ dateFormatter: String,date: Date) ->String{
+    class func getDateStringWithFormat(_ dateFormatter: String, date: Date) -> String{
         
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "us")
@@ -131,7 +134,7 @@ class Utilities: NSObject {
         return dateString
     }
     
-    class func getDateFromStringWithFormat(_ dateFormate: String,resultDate: String) -> Date? {
+    class func getDateFromStringWithFormat(_ dateFormate: String, resultDate: String) -> Date? {
         
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "us")
@@ -145,19 +148,21 @@ class Utilities: NSObject {
     class func frameForText(_ text: String, font: UIFont) -> CGSize {
         
         let attrString = NSAttributedString.init(string: text, attributes: [NSAttributedString.Key.font: font])
-        let rect = attrString.boundingRect(with: CGSize(width: MAX_WIDTH,height: MAX_HEIGHT), options: NSStringDrawingOptions.usesLineFragmentOrigin, context: nil)
+        let rect = attrString.boundingRect(with: CGSize(width: MAX_WIDTH, height: MAX_HEIGHT),
+                                           options: NSStringDrawingOptions.usesLineFragmentOrigin,
+                                           context: nil)
         let size = CGSize(width: rect.size.width, height: rect.size.height)
         return size
     }
     
     class func clearTheNotificationData(){
-        //clearing notificationArray inUserdefaults
+        // clearing notificationArray inUserdefaults
         UserDefaults.standard.removeObject(forKey: "NotifName")
         UserDefaults.standard.removeObject(forKey: "NotifTime")
     }
     
     // MARK: Validation Methods
-    class func validateInputValue(value: String, valueType: String)-> Bool{
+    class func validateInputValue(value: String, valueType: String) -> Bool{
         
         var valueRegex = ""
         if valueType == "Phone" {
@@ -181,9 +186,12 @@ class Utilities: NSObject {
     }
     
     class func isValidEmail(testStr: String) -> Bool {
-        
-        let emailRegEx = "[A-Z0-9a-z._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-        
+        var emailRegEx = "[A-Z0-9a-z._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let locale = Locale.current.languageCode ?? "en"
+        if locale.hasPrefix("es") {
+            emailRegEx = "[A-Z0-9a-z._-zñáéíóúüA-ZÑÁÉÍÓÚÜ-]+@[A-Za-z0-9.-zñáéíóúüA-ZÑÁÉÍÓÚÜ-]+\\.[A-Za-zzñáéíóúüA-ZÑÁÉÍÓÚÜ-]{2,}"
+            //        /^[A-Za-z0-9-zñáéíóúüA-ZÑÁÉÍÓÚÜ-]*$/ Without Localisation
+        }
         let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         
         if testStr.count > 255 {
@@ -195,6 +203,40 @@ class Utilities: NSObject {
     
     //checks all the validations for password
     class func isPasswordValid( text: String) -> Bool {
+        
+        let locale3 = getLanguageLocale()
+        if locale3.hasPrefix("es") {
+            let text = text
+            
+            let lowercaseLetterRegEx  = ".*[a-z-ñáéíóúü-]+.*"
+            let lowercaseTextTest = NSPredicate(format: "SELF MATCHES %@", lowercaseLetterRegEx)
+            let lowercaseresult = lowercaseTextTest.evaluate(with: text)
+            
+            let capitalLetterRegEx  = ".*[A-Z-ÑÁÉÍÓÚÜ-]+.*"
+            let texttest = NSPredicate(format: "SELF MATCHES %@", capitalLetterRegEx)
+            let capitalresult = texttest.evaluate(with: text)
+            
+            let numberRegEx  = ".*[0-9]+.*"
+            let texttest1 = NSPredicate(format: "SELF MATCHES %@", numberRegEx)
+            let numberresult = texttest1.evaluate(with: text)
+            
+            let specialCharacterRegEx  = ".*[!#$%&'()*+,-.:;\\[\\]<>=?@^_{}|~]+.*"
+            let texttest2 = NSPredicate(format:"SELF MATCHES %@", specialCharacterRegEx)
+            
+            let specialresult = texttest2.evaluate(with: text)
+            
+            let textCountResult = text.count > 7 && text.count <= 64 ? true : false
+            
+            if capitalresult == false ||
+                numberresult == false ||
+                specialresult == false ||
+                textCountResult ==  false ||
+                lowercaseresult == false {
+                return false
+            }
+            
+            return true
+        }
         let text = text
         
         let lowercaseLetterRegEx  = ".*[a-z]+.*"
@@ -204,30 +246,30 @@ class Utilities: NSObject {
         let capitalLetterRegEx  = ".*[A-Z]+.*"
         let texttest = NSPredicate(format: "SELF MATCHES %@", capitalLetterRegEx)
         let capitalresult = texttest.evaluate(with: text)
-        print("\(capitalresult)")
         
         let numberRegEx  = ".*[0-9]+.*"
         let texttest1 = NSPredicate(format: "SELF MATCHES %@", numberRegEx)
         let numberresult = texttest1.evaluate(with: text)
-        print("\(numberresult)")
         
         let specialCharacterRegEx  = ".*[!#$%&'()*+,-.:;\\[\\]<>=?@^_{}|~]+.*"
         let texttest2 = NSPredicate(format:"SELF MATCHES %@", specialCharacterRegEx)
         
         let specialresult = texttest2.evaluate(with: text)
-        print("\(specialresult)")
         
         let textCountResult = text.count > 7 && text.count <= 64 ? true : false
         
-        if capitalresult == false || numberresult == false || specialresult == false || textCountResult ==  false || lowercaseresult == false{
+        if capitalresult == false ||
+            numberresult == false ||
+            specialresult == false ||
+            textCountResult ==  false ||
+            lowercaseresult == false {
             return false
         }
         
         return true
     }
     
-    
-    class func formatNumber( mobileNumber: NSString)-> NSString {
+    class func formatNumber( mobileNumber: NSString) -> NSString {
         var mobileNumber = mobileNumber
         mobileNumber = mobileNumber.replacingOccurrences(of: "(", with: "") as NSString
         mobileNumber = mobileNumber.replacingOccurrences(of: ")", with: "") as NSString
@@ -236,13 +278,13 @@ class Utilities: NSObject {
         mobileNumber = mobileNumber.replacingOccurrences(of: "+", with: "") as NSString
         
         let length = mobileNumber.length
-        if(length > 10)
+        if length > 10
         {
             mobileNumber = mobileNumber.substring(from: length - 10) as NSString
             
         }
         
-        return mobileNumber;
+        return mobileNumber
     }
     
     class  func getLength( mobileNumber: NSString) -> Int {
@@ -264,17 +306,12 @@ class Utilities: NSObject {
         let texttest = NSPredicate(format: "SELF MATCHES %@", capitalLetterRegEx)
         let capitalresult = texttest.evaluate(with: password)
         
-        print("\(capitalresult)")
-        
         let numberRegEx  = ".*[a-z0-9A-Z]+.*"
         let texttest1 = NSPredicate(format: "SELF MATCHES %@", numberRegEx)
         let numberresult = texttest1.evaluate(with: password)
         
-        print("\(numberresult)")
-        
         return capitalresult && numberresult
     }
-    
     
     /*
      Method to validate a value for Null condition
@@ -301,7 +338,10 @@ class Utilities: NSObject {
             } else if someObject as? Bool != nil && (someObject as! Bool == true || someObject as! Bool == false){
                 return true
                 
-            } else  if someObject as? Double != nil && (someObject as? Double)?.isFinite == true && (someObject as? Double)?.isZero == false && (someObject as? Double)! > 0 {
+            } else  if someObject as? Double != nil &&
+                        (someObject as? Double)?.isFinite == true &&
+                        (someObject as? Double)?.isZero == false &&
+                        (someObject as? Double)! > 0 {
                 return true
                 
             } else if someObject as? Date != nil {
@@ -322,7 +362,7 @@ class Utilities: NSObject {
      @type:must a specific class Type
      returns boolean
      */
-    class func isValidValueAndOfType(someValue: AnyObject? , type: AnyClass ) ->Bool {
+    class func isValidValueAndOfType(someValue: AnyObject?, type: AnyClass ) -> Bool {
         guard let someObject = someValue else {
             // is null
             
@@ -354,7 +394,9 @@ class Utilities: NSObject {
         }
         
         if (someObject is NSNull) ==  false {
-            if someObject as? Dictionary<String, Any> != nil  && (someObject as? Dictionary<String, Any>)?.isEmpty == false && ((someObject as? Dictionary<String, Any>)?.count)! > 0 {
+            if someObject as? Dictionary<String, Any> != nil  &&
+                (someObject as? Dictionary<String, Any>)?.isEmpty == false &&
+                ((someObject as? Dictionary<String, Any>)?.count)! > 0 {
                 return true
                 
             } else if someObject as? NSArray != nil && ((someObject as? NSArray)?.count)! > 0 {
@@ -369,7 +411,52 @@ class Utilities: NSObject {
             return false
         }
     }
-    
+  
+    class func errorMessageDisplayMessage(error: NSError) -> String {
+      var errrorMessage = ""
+      switch error.code {
+      case 401, 561:
+        errrorMessage = NSLocalizedStrings("Unauthorized exception", comment: "")
+      case 440:
+        errrorMessage = NSLocalizedStrings("session expired", comment: "")
+      case 504:
+        errrorMessage = NSLocalizedStrings("timeout", comment: "")
+      case 400:
+        errrorMessage = NSLocalizedStrings("client error", comment: "")
+      case 520:
+        errrorMessage = NSLocalizedStrings("Unknown error", comment: "")
+      case 500, 444:
+        errrorMessage = NSLocalizedStrings("Internal server error", comment: "")
+      default:
+        errrorMessage = ""
+      }
+      if errrorMessage == "" {
+        let message = error.localizedDescription
+        if message.localizedCaseInsensitiveContains("Unable to enroll into the study") {
+          errrorMessage = NSLocalizedStrings("Unable to enroll into the study", comment: "")
+        } else if message.localizedCaseInsensitiveContains("Try logging in again") {
+          errrorMessage = NSLocalizedStrings("Try logging in again", comment: "")
+        } else if message.localizedCaseInsensitiveContains("Unable to process") {
+          errrorMessage = NSLocalizedStrings("Unable to process", comment: "")
+        } else if message.localizedCaseInsensitiveContains("No data found") {
+          errrorMessage = NSLocalizedStrings("No data found", comment: "")
+        } else if message.localizedCaseInsensitiveContains("Unable to withdraw from the study") {
+          errrorMessage = NSLocalizedStrings("Unable to withdraw from the study", comment: "")
+        } else if message.localizedCaseInsensitiveContains("server error") {
+          errrorMessage = NSLocalizedStrings("server error", comment: "")
+        } else if message.localizedCaseInsensitiveContains("No data") {
+          errrorMessage = NSLocalizedStrings("No data", comment: "")
+        } else if message.localizedCaseInsensitiveContains("is currently not available") {
+          errrorMessage = NSLocalizedStrings("is currently not available", comment: "")
+        } else if message.localizedCaseInsensitiveContains("Token already in use") {
+          errrorMessage = NSLocalizedStrings("Token already in use", comment: "")
+        } else {
+          errrorMessage = error.localizedDescription
+        }
+      }
+      return errrorMessage
+    }
+  
     public static var _formatterShort: DateFormatter?
     public static var formatterShort: DateFormatter! {
         
@@ -380,7 +467,7 @@ class Utilities: NSObject {
             } else {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyy-MM-dd"
-                //formatter.dateStyle = .short
+                // formatter.dateStyle = .short
                 formatter.timeZone = TimeZone.current // TimeZone.init(abbreviation:"IST")
                 _formatterShort = formatter
                 return formatter
@@ -395,13 +482,13 @@ class Utilities: NSObject {
      @dateString:a date String of format "yyyy-MM-dd'T'HH:mm:ssZ"
      returns date for the specified dateString in same format
      */
-    class func getDateFromString(dateString: String) ->Date? {
+    class func getDateFromString(dateString: String) -> Date? {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         
         guard let date = dateFormatter.date(from: dateString) else {
-            //assert(false, "no date from string")
+            // assert(false, "no date from string")
             return nil
         }
         
@@ -416,7 +503,7 @@ class Utilities: NSObject {
      @dateString:a date String of format "yyyy-MM-dd'T'HH:mm:ssZ"
      returns date for the specified dateString in same format
      */
-    class func getDateFromStringWithOutTimezone(dateString: String) ->Date? {
+    class func getDateFromStringWithOutTimezone(dateString: String) -> Date? {
         
         let dateWithoutTimeZoneArray = dateString.components(separatedBy: ".")
         let dateWithourTimeZone = dateWithoutTimeZoneArray[0] as String
@@ -424,7 +511,7 @@ class Utilities: NSObject {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         
         guard let date = dateFormatter.date(from: dateWithourTimeZone) else {
-            //assert(false, "no date from string")
+            // assert(false, "no date from string")
             return nil
         }
         
@@ -450,7 +537,7 @@ class Utilities: NSObject {
      @date:a date  of format "yyyy-MM-dd'T'HH:mm:ssZ"
      returns dateString for the specified date in same format
      */
-    class func getStringFromDate(date: Date) ->String? {
+    class func getStringFromDate(date: Date) -> String? {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
@@ -467,20 +554,20 @@ class Utilities: NSObject {
         return version + "." + bundleVersion
     }
     
-    class func getBundleIdentifier()->String{
+    class func getBundleIdentifier() -> String{
         
         return Bundle.main.bundleIdentifier!
     }
     
     // MARK: Alert handlers
-    class func showAlertWithMessage(alertMessage: String) ->Void {
+    class func showAlertWithMessage(alertMessage: String) {
         self.showAlertWithTitleAndMessage(title: "", message: alertMessage as NSString)
     }
     
-    class func showAlertWithTitleAndMessage(title: NSString, message : NSString)->Void {
+    class func showAlertWithTitleAndMessage(title: NSString, message : NSString) {
         alert.title = title as String
         alert.message = message as String
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: kTitleOKCapital)
         alert.show()
     }
     
@@ -507,7 +594,7 @@ extension FileManager {
      return path of documentDirectory
      */
     class func documentsDir() -> String {
-        var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as [String]
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as [String]
         return paths[0]
     }
     
@@ -516,7 +603,7 @@ extension FileManager {
      */
     class func cachesDir() -> String {
         
-        var paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true) as [String]
+        let paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true) as [String]
         return paths[0]
     }
     
@@ -544,8 +631,8 @@ extension FileManager {
             do {
                 try FileManager.default.createDirectory(atPath: fullPath, withIntermediateDirectories: false, attributes: nil)
                 return fullPath
-            } catch let error as NSError {
-                print(error.localizedDescription);
+            } catch _ as NSError {
+                
                 return ""
             }
         }

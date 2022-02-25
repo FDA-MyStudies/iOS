@@ -12,9 +12,9 @@ import ResearchKit
 /*
 public var textChoiceQuestionTask: ORKOrderedTask = {
     
-    let textChoiceOneText = NSLocalizedString("Chandigarh", comment: "")
-    let textChoiceTwoText = NSLocalizedString("New Delhi", comment: "")
-    let textChoiceThreeText = NSLocalizedString("Bangalore", comment: "")
+    let textChoiceOneText = NSLocalizedStrings("Chandigarh", comment: "")
+    let textChoiceTwoText = NSLocalizedStrings("New Delhi", comment: "")
+    let textChoiceThreeText = NSLocalizedStrings("Bangalore", comment: "")
     
     // The text to display can be separate from the value coded for each choice:
     let textChoices = [
@@ -26,32 +26,29 @@ public var textChoiceQuestionTask: ORKOrderedTask = {
     let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .multipleChoice, textChoices: textChoices)
     
     //=========//
-    let questionStep = ORKQuestionStep(identifier: "questionStep", title: NSLocalizedString("Text Choice", comment: ""), question: NSLocalizedString("Your question goes here.", comment: ""), answer: answerFormat)
+    let questionStep = ORKQuestionStep(identifier: "questionStep", title: NSLocalizedStrings("Text Choice", comment: ""), question: NSLocalizedStrings("Your question goes here.", comment: ""), answer: answerFormat)
     
-    questionStep.text = NSLocalizedString("Additional text can go here.", comment: "")
+    questionStep.text = NSLocalizedStrings("Additional text can go here.", comment: "")
 
     //=========//
-    let newQuestionStep = ORKQuestionStep(identifier: "newQuestionStep", title: NSLocalizedString("Text Choice", comment: ""), question: NSLocalizedString("Which city you belong to?\nWhich city you belong to?", comment: ""), answer: answerFormat)
+    let newQuestionStep = ORKQuestionStep(identifier: "newQuestionStep", title: NSLocalizedStrings("Text Choice", comment: ""), question: NSLocalizedStrings("Which city you belong to?\nWhich city you belong to?", comment: ""), answer: answerFormat)
     
-    newQuestionStep.text = NSLocalizedString("Additional text can go here.Additional text can go here", comment: "")
+    newQuestionStep.text = NSLocalizedStrings("Additional text can go here.Additional text can go here", comment: "")
 
     //=========//
     let otherThirdChoice = OtherChoice(isShowOtherCell: true, isShowOtherField: true, otherTitle: "Other Title goes here", placeholder: "other things",isMandatory: false)
     
-    let thirdQuestionStep = QuestionStep(identifier: "thirdQuestionStep", title: NSLocalizedString("Text Choice", comment: ""), question: NSLocalizedString("Your question goes here.", comment: ""), answer: answerFormat,otherChoice: otherThirdChoice)
+    let thirdQuestionStep = QuestionStep(identifier: "thirdQuestionStep", title: NSLocalizedStrings("Text Choice", comment: ""), question: NSLocalizedStrings("Your question goes here.", comment: ""), answer: answerFormat,otherChoice: otherThirdChoice)
     
-    thirdQuestionStep.text = NSLocalizedString("Additional text can go here.", comment: "")
+    thirdQuestionStep.text = NSLocalizedStrings("Additional text can go here.", comment: "")
 
     //=========//
     let otherForthChoice = OtherChoice(isShowOtherCell: true, isShowOtherField: true, otherTitle: "Other Title goes here", placeholder: "other things")
     
-    let forthQuestionStep = QuestionStep(identifier: "forthQuestionStep", title: NSLocalizedString("Text Choice", comment: ""), question: NSLocalizedString("Your question goes here.", comment: ""), answer: answerFormat,otherChoice: otherForthChoice)
+    let forthQuestionStep = QuestionStep(identifier: "forthQuestionStep", title: NSLocalizedStrings("Text Choice", comment: ""), question: NSLocalizedStrings("Your question goes here.", comment: ""), answer: answerFormat,otherChoice: otherForthChoice)
     
-    thirdQuestionStep.text = NSLocalizedString("Additional text can go here.", comment: "")
+    thirdQuestionStep.text = NSLocalizedStrings("Additional text can go here.", comment: "")
     
     return ORKOrderedTask(identifier: "textChoiceQuestionTask", steps: [questionStep, thirdQuestionStep, newQuestionStep, forthQuestionStep])
 }()
 */
-
-
-

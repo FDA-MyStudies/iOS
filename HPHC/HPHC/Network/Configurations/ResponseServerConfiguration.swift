@@ -20,7 +20,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import UIKit
 enum ResponseMethods: String {
-    //TODO : Write exact name for request method
+    // TODO : Write exact name for request method
     case enroll
     case resolveEnrollmentToken
     case validateEnrollmentToken
@@ -28,7 +28,6 @@ enum ResponseMethods: String {
     case withdrawFromStudy
     case getParticipantResponse
     case executeSQL
-    
     
     var description: String{
         switch self {
@@ -43,7 +42,7 @@ enum ResponseMethods: String {
         switch self {
         case .executeSQL:
             return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeHTTP)
-        case .withdrawFromStudy, .getParticipantResponse,.validateEnrollmentToken:
+        case .withdrawFromStudy, .getParticipantResponse, .validateEnrollmentToken:
             return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
         case .enroll:
             return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
@@ -66,8 +65,7 @@ struct ResponseServerURLConstants {
 class ResponseServerConfiguration: NetworkConfiguration {
     static let configuration = ResponseServerConfiguration()
     
-    
-    // MARK:  Delegates
+    // MARK: Delegates
     override func getProductionURL() -> String {
         return ResponseServerURLConstants.ProductionURL
     }
@@ -76,7 +74,15 @@ class ResponseServerConfiguration: NetworkConfiguration {
     }
     
     override func getDefaultHeaders() -> [String: String] {
-        return Dictionary()
+        let localeDefault = getLanguageLocale()
+        var language = "en"
+        if localeDefault.hasPrefix("es") { // true
+          language = "es"
+        }
+        let headers = ["language": language]
+
+        return headers
+       // return Dictionary()
     }
     override func getDefaultRequestParameters() -> [String: Any] {
         return Dictionary()
@@ -84,16 +90,18 @@ class ResponseServerConfiguration: NetworkConfiguration {
     override func shouldParseErrorMessage() -> Bool {
         return true
     }
-    override func parseError(errorResponse: Dictionary<String,Any>)->NSError {
-        
-        var error = NSError(domain: NSURLErrorDomain, code: 101,userInfo: [NSLocalizedDescriptionKey:"Could not connect to server"])
+    override func parseError(errorResponse: Dictionary<String, Any>) -> NSError {
+        let errorMsg = "Could not connect to server"
+        var error = NSError(domain: NSURLErrorDomain,
+                            code: 101,
+                            userInfo: [NSLocalizedDescriptionKey:
+                                        NSLocalizedStrings(errorMsg, comment: "")])
         
         if let errorMessage =  errorResponse["exception"] {
             
-            error = NSError(domain: NSURLErrorDomain, code: 101,userInfo:[NSLocalizedDescriptionKey:errorMessage])
+            error = NSError(domain: NSURLErrorDomain, code: 101, userInfo: [NSLocalizedDescriptionKey: errorMessage])
         }
         
         return  error
     }
 }
-

@@ -18,21 +18,14 @@ OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
-
 import Foundation
 import ResearchKit
 
-
-
-//Step Constants
+// Step Constants
 let kStepTitle = "title"
 let kStepQuestionTypeValue = "QuestionType"
 
-
-//Question Api Constants
-
-
+// Question Api Constants
 
 let kStepQuestionPhi = "phi"
 let kStepQuestionFormat = "format"
@@ -49,8 +42,7 @@ let kStepQuestionScaleMinDesc = "minDesc"
 let kStepQuestionScaleMaxImage = "maxImage"
 let kStepQuestionScaleMinImage = "minImage"
 
-
-//ContinuosScaleQuestion Type Api Constants
+// ContinuosScaleQuestion Type Api Constants
 
 let kStepQuestionContinuosScaleMaxValue = "maxValue"
 let kStepQuestionContinuosScaleMinValue = "minValue"
@@ -62,12 +54,12 @@ let kStepQuestionContinuosScaleMinDesc = "minDesc"
 let kStepQuestionContinuosScaleMaxImage = "maxImage"
 let kStepQuestionContinuosScaleMinImage = "minImage"
 
-//TextScaleQuestion Type Api Constants
+// TextScaleQuestion Type Api Constants
 let kStepQuestionTextScaleTextChoices = "textChoices"
 let kStepQuestionTextScaleDefault = "default"
 let kStepQuestionTextScaleVertical = "vertical"
 
-//ORKTextChoice Type Api Constants
+// ORKTextChoice Type Api Constants
 
 let kORKTextChoiceText = "text"
 let kORKTextChoiceValue = "value"
@@ -75,7 +67,7 @@ let kORKTextChoiceDetailText = "detail"
 let kORKTextChoiceExclusive = "exclusive"
 let kORKOTherChoice = "other"
 
-//StepQuestionImageChoice Type Api Constants
+// StepQuestionImageChoice Type Api Constants
 
 let kStepQuestionImageChoices = "imageChoices"
 
@@ -84,8 +76,7 @@ let kStepQuestionImageChoiceSelectedImage = "selectedImage"
 let kStepQuestionImageChoiceText = "text"
 let kStepQuestionImageChoiceValue = "value"
 
-
-//TextChoiceQuestion Type Api Constants
+// TextChoiceQuestion Type Api Constants
 
 let kStepQuestionTextChoiceTextChoices = "textChoices"
 let kStepQuestionTextChoiceSelectionStyle = "selectionStyle"
@@ -93,7 +84,7 @@ let kStepQuestionTextChoiceSelectionStyle = "selectionStyle"
 let kStepQuestionTextChoiceSelectionStyleSingle = "Single"
 let kStepQuestionTextChoiceSelectionStyleMultiple = "Multiple"
 
-//NumericQuestion Type Api Constants
+// NumericQuestion Type Api Constants
 
 let kStepQuestionNumericStyle = "style"
 let kStepQuestionNumericUnit = "unit"
@@ -101,8 +92,7 @@ let kStepQuestionNumericMinValue = "minValue"
 let kStepQuestionNumericMaxValue = "maxValue"
 let kStepQuestionNumericPlaceholder = "placeholder"
 
-
-//DateQuestion Type Api Constants
+// DateQuestion Type Api Constants
 
 let kStepQuestionDateStyle = "style"
 let kStepQuestionDateMinDate = "minDate"
@@ -112,8 +102,7 @@ let kStepQuestionDateRange = "dateRange"
 let kStepQuestionDateStyleDate = "Date"
 let kStepQuestionDateStyleDateTime = "Date-Time"
 
-
-//TextQuestion Type Api Constants
+// TextQuestion Type Api Constants
 
 let kStepQuestionTextMaxLength = "maxLength"
 let kStepQuestionTextValidationRegex = "validationRegex"
@@ -121,21 +110,21 @@ let kStepQuestionTextInvalidMessage = "invalidMessage"
 let kStepQuestionTextMultipleLines = "multipleLines"
 let kStepQuestionTextPlaceholder = "placeholder"
 
-//EmailQuestion Type Api Constants
+// EmailQuestion Type Api Constants
 
 let kStepQuestionEmailPlaceholder = "placeholder"
 
-//TimeIntervalQuestion Type Api Constants
+// TimeIntervalQuestion Type Api Constants
 
 let kStepQuestionTimeIntervalDefault = "default"
 let kStepQuestionTimeIntervalStep = "step"
 
-//height Type Api Constants
+// height Type Api Constants
 
 let kStepQuestionHeightMeasurementSystem = "measurementSystem"
 let kStepQuestionHeightPlaceholder = "placeholder"
 
-//LocationQuestion Type Api Constants
+// LocationQuestion Type Api Constants
 
 let kStepQuestionLocationUseCurrentLocation = "useCurrentLocation"
 
@@ -160,7 +149,6 @@ enum HeightMeasurementSystem: String {
 }
 
 enum QuestionStepType: String {
-    
     
     // Step for  Boolean question.
     case boolean = "boolean"
@@ -243,7 +231,6 @@ enum QuestionStepType: String {
     // Video instruction Steps.
     case videoInstructionStep
     
-    
 }
 
 enum PHIType: String {
@@ -254,12 +241,11 @@ enum PHIType: String {
 
 class ActivityQuestionStep: ActivityStep {
     
-    
     var formatDict: Dictionary<String, Any>?
     
     var healthDataKey: String?
     
-    //Following params exclusively used for texscale
+    // Following params exclusively used for texscale
     var textScaleDefaultIndex: Int? = -1
     var textScaleDefaultValue: String? = ""
     
@@ -289,8 +275,7 @@ class ActivityQuestionStep: ActivityStep {
         
     }
     
-    
-    // MARK:Question Step Creation
+    // MARK: Question Step Creation
     
     /* method creates QuestionStep using ActivityStep data
      return ORKQuestionStep
@@ -299,12 +284,12 @@ class ActivityQuestionStep: ActivityStep {
         
         if  Utilities.isValidValue(someObject: resultType  as AnyObject?)   {
             
-            var questionStepAnswerFormat: ORKAnswerFormat? //contains the answerFormat for specific question Type
+            var questionStepAnswerFormat: ORKAnswerFormat? // contains the answerFormat for specific question Type
             
-            var questionStep: ORKQuestionStep? //contains the QuestionStep instance
+            var questionStep: ORKQuestionStep? // contains the QuestionStep instance
             var placeholderText: String? = ""
             
-            //Assigning the answerFormat for the questionStep based on questionStep
+            // Assigning the answerFormat for the questionStep based on questionStep
             switch   QuestionStepType(rawValue: (resultType as? String)!)! as QuestionStepType {
             case .scale:
                 
@@ -316,20 +301,23 @@ class ActivityQuestionStep: ActivityStep {
                     let maxDesc = formatDict?[kStepQuestionScaleMaxDesc] as? String
                     let minDesc = formatDict?[kStepQuestionScaleMinDesc] as? String
                     
-                    //Checking if difference is divisible
+                    // Checking if difference is divisible
                     let difference = (formatDict?[kStepQuestionScaleMaxValue] as? Int)! - (formatDict?[kStepQuestionScaleMinValue] as? Int)!
                     let divisibleValue = difference % (formatDict?[kStepQuestionScaleStep] as? Int)!
                     let stepsValue = difference / (formatDict?[kStepQuestionScaleStep] as? Int)!
                     let defaultPosition = (formatDict?[kStepQuestionScaleDefaultValue] as? Int)!
                     var defaultValue = defaultPosition * stepsValue
                     
-                    //Setting the default Value if Exist
+                    // Setting the default Value if Exist
                     if defaultValue > (formatDict?[kStepQuestionScaleMaxValue] as? Int)! {
                         defaultValue = (formatDict?[kStepQuestionScaleMaxValue] as? Int)!
                     }
                     
-                    //Max != Min && isDivisible == true && (stepsValue >= 1 && stepsValue <= 13)
-                    if ((formatDict?[kStepQuestionScaleMaxValue] as? Int)! != (formatDict?[kStepQuestionScaleMinValue] as? Int)!) && divisibleValue == 0 && (stepsValue >= 1 && stepsValue <= 13) {
+                    // Max != Min && isDivisible == true && (stepsValue >= 1 && stepsValue <= 13)
+                    if ((formatDict?[kStepQuestionScaleMaxValue] as? Int)! != (formatDict?[kStepQuestionScaleMinValue] as? Int)!) &&
+                        divisibleValue == 0 &&
+                        (stepsValue >= 1 &&
+                            stepsValue <= 13) {
                         
                         questionStepAnswerFormat = ORKAnswerFormat.scale(withMaximumValue: (formatDict?[kStepQuestionScaleMaxValue] as? Int)!,
                                                                          minimumValue: (formatDict?[kStepQuestionScaleMinValue] as? Int)!,
@@ -338,8 +326,9 @@ class ActivityQuestionStep: ActivityStep {
                                                                          vertical: (formatDict?[kStepQuestionScaleVertical] as? Bool)!,
                                                                          maximumValueDescription: maxDesc,
                                                                          minimumValueDescription: minDesc)
-                        //Setting the Max & Min Images if exist
-                        if Utilities.isValidValue(someObject: (formatDict?[kStepQuestionScaleMaxImage] as? String as AnyObject)) && Utilities.isValidValue(someObject: (formatDict?[kStepQuestionScaleMinImage] as? String as AnyObject)) {
+                        // Setting the Max & Min Images if exist
+                        if Utilities.isValidValue(someObject: (formatDict?[kStepQuestionScaleMaxImage] as? String as AnyObject)) &&
+                            Utilities.isValidValue(someObject: (formatDict?[kStepQuestionScaleMinImage] as? String as AnyObject)) {
                             
                             let minImageBase64String =  (formatDict![kStepQuestionScaleMinImage] as? String)!
                             let minNormalImageData = NSData(base64Encoded: minImageBase64String, options: .ignoreUnknownCharacters)
@@ -355,7 +344,7 @@ class ActivityQuestionStep: ActivityStep {
                     } else {
                         return nil
                     }
-                    //questionStep?.placeholder =???
+                    // questionStep?.placeholder =???
                 } else {
                     Logger.sharedInstance.debug("Scale Question Step has null values:\(String(describing: formatDict))")
                     return nil
@@ -405,16 +394,23 @@ class ActivityQuestionStep: ActivityStep {
                         }
                     }
                     
-                    if (formatDict?[kStepQuestionContinuosScaleMinValue] as? Double)! != (formatDict?[kStepQuestionContinuosScaleMaxValue] as? Double)! {
+                    if (formatDict?[kStepQuestionContinuosScaleMinValue] as? Double)! !=
+                        (formatDict?[kStepQuestionContinuosScaleMaxValue] as? Double)! {
                         
                         questionStepAnswerFormat = ORKAnswerFormat.continuousScale(withMaximumValue: maxValue,
-                                                                                   minimumValue: minValue, defaultValue: defaultValue, maximumFractionDigits: (formatDict?[kStepQuestionContinuosScaleMaxFractionDigits] as? Int)!,
-                                                                                   vertical: (formatDict?[kStepQuestionContinuosScaleVertical] as? Bool)!,
+                                                                                   minimumValue: minValue,
+                                                                                   defaultValue: defaultValue,
+                                                                                   maximumFractionDigits:
+                                                                                    (formatDict?[kStepQuestionContinuosScaleMaxFractionDigits]
+                                                                                                            as? Int)!,
+                                                                                   vertical: (formatDict?[kStepQuestionContinuosScaleVertical]
+                                                                                                as? Bool)!,
                                                                                    maximumValueDescription: maxDesc,
                                                                                    minimumValueDescription: minDesc)
                         
                         // setting the min & max images if exists
-                        if Utilities.isValidValue(someObject: (formatDict?[kStepQuestionContinuosScaleMaxImage] as? String as AnyObject)) && Utilities.isValidValue(someObject: (formatDict?[kStepQuestionContinuosScaleMinImage] as? String as AnyObject)) {
+                        if Utilities.isValidValue(someObject: (formatDict?[kStepQuestionContinuosScaleMaxImage] as? String as AnyObject)) &&
+                            Utilities.isValidValue(someObject: (formatDict?[kStepQuestionContinuosScaleMinImage] as? String as AnyObject)) {
                             
                             let minImageBase64String =  (formatDict![kStepQuestionContinuosScaleMinImage] as? String)!
                             let minNormalImageData = NSData(base64Encoded: minImageBase64String, options: .ignoreUnknownCharacters)
@@ -448,7 +444,7 @@ class ActivityQuestionStep: ActivityStep {
                     let textChoiceDict = formatDict?[kStepQuestionTextScaleTextChoices] as? [Any] ?? []
                     textChoiceArray = self.getTextChoices(dataArray: textChoiceDict).0
                     
-                    //defaultValue = self.textScaleDefaultIndex!
+                    // defaultValue = self.textScaleDefaultIndex!
                     
                     questionStepAnswerFormat = ORKAnswerFormat.textScale(with: textChoiceArray!,
                                                                          defaultIndex: defaultValue-1,
@@ -506,20 +502,24 @@ class ActivityQuestionStep: ActivityStep {
                         questionStepAnswerFormat = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.singleChoice, textChoices: textChoiceArray!)
                     } else  if ((formatDict?[kStepQuestionTextChoiceSelectionStyle] as? String)!) == kStepQuestionTextChoiceSelectionStyleMultiple {
                         // multiple choice
-                        questionStepAnswerFormat = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.multipleChoice, textChoices: textChoiceArray!)
+                        questionStepAnswerFormat = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.multipleChoice,
+                                                                             textChoices: textChoiceArray!)
                     } else {
                         Logger.sharedInstance.debug("kStepQuestionTextChoiceSelectionStyle has null value:\(String(describing: formatDict))")
                         return nil
                     }
-                   
-
-                    questionStep = QuestionStep(identifier: key!, title: "", question: title!, answer: questionStepAnswerFormat!,otherChoice: otherChoice!)
+   
+                    questionStep = QuestionStep(identifier: key!,
+                                                title: "",
+                                                question: title!,
+                                                answer: questionStepAnswerFormat!,
+                                                otherChoice: otherChoice!)
                     
                     // By default a step is skippable
-                    if (skippable == false) {
+                    if skippable == false {
                         questionStep?.isOptional = false
                     }
-                    //setting the placeholder Value if exist any
+                    // setting the placeholder Value if exist any
                     if  Utilities.isValidValue(someObject: placeholderText as AnyObject?) {
                         questionStep?.placeholder = placeholderText
                     }
@@ -553,12 +553,14 @@ class ActivityQuestionStep: ActivityStep {
                         placeholderText = formatDict?[kStepQuestionNumericPlaceholder] as? String
                     }
                     
-                    let localizedQuestionStepAnswerFormatUnit = NSLocalizedString((formatDict?[kStepQuestionNumericUnit] as? String)! , comment: "")
+                    let localizedQuestionStepAnswerFormatUnit = NSLocalizedStrings(
+                        (formatDict?[kStepQuestionNumericUnit] as? String)!,
+                        comment: "")
                     
                     let style = ((formatDict?[kStepQuestionNumericStyle] as? String)! == "Decimal") ? 0 : 1
                     
                     switch ORKNumericAnswerStyle(rawValue: style)! as ORKNumericAnswerStyle {
-                    case .integer: //Integer Question Step
+                    case .integer: // Integer Question Step
                         
                         if  Utilities.isValidValue(someObject: self.healthDataKey as AnyObject?) {
                             
@@ -566,37 +568,48 @@ class ActivityQuestionStep: ActivityStep {
                             
                             let quantityType = HKQuantityType.quantityType(forIdentifier: quantityTypeId)
                             
-                            var unit: HKUnit? = nil
-                            //Setting the Unit if valid unit exist
-                            if localizedQuestionStepAnswerFormatUnit != "" && self.isUnitValid(unit: localizedQuestionStepAnswerFormatUnit) {
+                            var unit: HKUnit?
+                            // Setting the Unit if valid unit exist
+                            if localizedQuestionStepAnswerFormatUnit != "" &&
+                                self.isUnitValid(unit: localizedQuestionStepAnswerFormatUnit) {
                                 unit = HKUnit.init(from: localizedQuestionStepAnswerFormatUnit)
                             }
                             
-                            questionStepAnswerFormat = ORKHealthKitQuantityTypeAnswerFormat.init(quantityType: quantityType!, unit: unit, style: ORKNumericAnswerStyle.integer)
+                            questionStepAnswerFormat = ORKHealthKitQuantityTypeAnswerFormat.init(quantityType: quantityType!,
+                                                                                                 unit: unit,
+                                                                                                 style: ORKNumericAnswerStyle.integer)
                             
                         } else {
                             if minValue != nil || maxValue != nil {
-                                questionStepAnswerFormat = ORKNumericAnswerFormat.init(style: ORKNumericAnswerStyle.integer, unit: localizedQuestionStepAnswerFormatUnit, minimum: minValue , maximum: maxValue)
+                                questionStepAnswerFormat = ORKNumericAnswerFormat.init(style: ORKNumericAnswerStyle.integer,
+                                                                                       unit: localizedQuestionStepAnswerFormatUnit,
+                                                                                       minimum: minValue ,
+                                                                                       maximum: maxValue)
                             } else {
                                 questionStepAnswerFormat = ORKAnswerFormat.integerAnswerFormat(withUnit:localizedQuestionStepAnswerFormatUnit)
                             }
                         }
-                    case .decimal: //Decimal Question Step
+                    case .decimal: // Decimal Question Step
                         if  Utilities.isValidValue(someObject: self.healthDataKey as AnyObject?) {
                             
                             let quantityTypeId = HKQuantityTypeIdentifier.init(rawValue: self.healthDataKey!)
-                            var unit: HKUnit? = nil
-                            //Setting the Unit if valid unit exist
-                            if localizedQuestionStepAnswerFormatUnit != "" && self.isUnitValid(unit: localizedQuestionStepAnswerFormatUnit) {
+                            var unit: HKUnit?
+                            // Setting the Unit if valid unit exist
+                            if localizedQuestionStepAnswerFormatUnit != "" &&
+                                self.isUnitValid(unit: localizedQuestionStepAnswerFormatUnit) {
                                 unit = HKUnit.init(from: localizedQuestionStepAnswerFormatUnit)
                             }
-                            questionStepAnswerFormat = ORKHealthKitQuantityTypeAnswerFormat.init(quantityType: HKQuantityType.quantityType(forIdentifier: quantityTypeId)!, unit: unit, style: ORKNumericAnswerStyle.decimal)
-                            
-                            
+                            questionStepAnswerFormat =
+                                ORKHealthKitQuantityTypeAnswerFormat.init(quantityType: HKQuantityType.quantityType(forIdentifier: quantityTypeId)!,
+                                                                                                 unit: unit,
+                                                                                                 style: ORKNumericAnswerStyle.decimal)
                         } else {
                             
                             if minValue != nil || maxValue != nil {
-                                questionStepAnswerFormat = ORKNumericAnswerFormat.init(style: ORKNumericAnswerStyle.decimal, unit: localizedQuestionStepAnswerFormatUnit, minimum: minValue , maximum: maxValue)
+                                questionStepAnswerFormat = ORKNumericAnswerFormat.init(style: ORKNumericAnswerStyle.decimal,
+                                                                                       unit: localizedQuestionStepAnswerFormatUnit,
+                                                                                       minimum: minValue ,
+                                                                                       maximum: maxValue)
                             } else {
                                 questionStepAnswerFormat = ORKAnswerFormat.decimalAnswerFormat(withUnit: localizedQuestionStepAnswerFormatUnit)
                             }
@@ -627,9 +640,9 @@ class ActivityQuestionStep: ActivityStep {
                     var minimumDate: NSDate? = dateFormatter.date(from: (formatDict?[kStepQuestionDateMinDate] as? String)!) as NSDate?
                     var maximumDate: NSDate? = dateFormatter.date(from: (formatDict?[kStepQuestionDateMaxDate] as? String)!) as NSDate?
                     
-                    //Setting the date Range
+                    // Setting the date Range
                     switch dateRange! {
-                    case .untilCurrent: //Any date less than Current Date
+                    case .untilCurrent: // Any date less than Current Date
                         maximumDate = Date.init(timeIntervalSinceNow: 0) as NSDate
                     case .afterCurrent: // Any date greater than Current
                         minimumDate = Date.init(timeIntervalSinceNow: 86400) as NSDate
@@ -641,13 +654,19 @@ class ActivityQuestionStep: ActivityStep {
                         
                     case .date:
                         
-                        questionStepAnswerFormat = ORKAnswerFormat.dateAnswerFormat(withDefaultDate: defaultDate as Date?, minimumDate: minimumDate as Date?, maximumDate: maximumDate as Date?, calendar: NSCalendar.current)
+                        questionStepAnswerFormat = ORKAnswerFormat.dateAnswerFormat(withDefaultDate: defaultDate as Date?,
+                                                                                    minimumDate: minimumDate as Date?,
+                                                                                    maximumDate: maximumDate as Date?,
+                                                                                    calendar: NSCalendar.current)
                         
                     case .dateAndTime:
                         
-                        questionStepAnswerFormat = ORKAnswerFormat.dateTime(withDefaultDate: defaultDate as Date?, minimumDate: minimumDate as Date?, maximumDate: maximumDate as Date?, calendar: NSCalendar.current)
+                        questionStepAnswerFormat = ORKAnswerFormat.dateTime(withDefaultDate: defaultDate as Date?,
+                                                                            minimumDate: minimumDate as Date?,
+                                                                            maximumDate: maximumDate as Date?,
+                                                                            calendar: NSCalendar.current)
                         
-                    //default:break
+                    // default:break
                     }
                     
                 } else {
@@ -664,19 +683,20 @@ class ActivityQuestionStep: ActivityStep {
                     
                     var answerFormat = ORKAnswerFormat.textAnswerFormat()
                     
-                    
-                    
-                    if Utilities.isValidValue(someObject: formatDict?[kStepQuestionTextValidationRegex] as AnyObject?) && Utilities.isValidValue(someObject: formatDict?[kStepQuestionTextInvalidMessage] as AnyObject?) {
+                    if Utilities.isValidValue(someObject: formatDict?[kStepQuestionTextValidationRegex] as AnyObject?) &&
+                        Utilities.isValidValue(someObject: formatDict?[kStepQuestionTextInvalidMessage] as AnyObject?) {
                         
-                        var regex: NSRegularExpression? = nil
+                        var regex: NSRegularExpression?
                         do
                         {
-                            regex = try NSRegularExpression.init(pattern: (formatDict?[kStepQuestionTextValidationRegex] as? String)! , options: [])
-                        }catch {
-                            //Do Nothing
+                            regex = try NSRegularExpression.init(pattern: (formatDict?[kStepQuestionTextValidationRegex] as? String)!, options: [])
+                        } catch {
+                            // Do Nothing
                         }
                         if regex != nil {
-                            answerFormat = ORKAnswerFormat.textAnswerFormat(withValidationRegularExpression: regex!, invalidMessage: (formatDict?[kStepQuestionTextInvalidMessage] as? String)!)
+                            answerFormat = ORKAnswerFormat.textAnswerFormat(withValidationRegularExpression: regex!,
+                                                                            invalidMessage: (formatDict?[kStepQuestionTextInvalidMessage]
+                                                                                                as? String)!)
                         }
                     } else {
                         answerFormat.invalidMessage = nil
@@ -713,9 +733,13 @@ class ActivityQuestionStep: ActivityStep {
                         defaultTimeInterval = Double(0.0)
                     }
                     
-                    if (formatDict?[kStepQuestionTimeIntervalStep] as? Int)! >= 1 && (formatDict?[kStepQuestionTimeIntervalStep] as? Int)! <= 30 {
+                    if (formatDict?[kStepQuestionTimeIntervalStep] as? Int)! >= 1 &&
+                        (formatDict?[kStepQuestionTimeIntervalStep] as? Int)! <= 30 {
                         
-                        questionStepAnswerFormat = ORKAnswerFormat.timeIntervalAnswerFormat(withDefaultInterval: defaultTimeInterval!, step: (formatDict?[kStepQuestionTimeIntervalStep] as? Int)!)
+                        questionStepAnswerFormat =
+                            ORKAnswerFormat.timeIntervalAnswerFormat(
+                                withDefaultInterval: defaultTimeInterval!,
+                                step: (formatDict?[kStepQuestionTimeIntervalStep] as? Int)!)
                     } else {
                         return nil
                     }
@@ -761,10 +785,10 @@ class ActivityQuestionStep: ActivityStep {
             
             questionStep = ORKQuestionStep(identifier: key! , title: title!, answer: questionStepAnswerFormat)
             // By default a step is skippable
-            if (skippable == false) {
+            if skippable == false {
                 questionStep?.isOptional = false
             }
-            //setting the placeholder Value if exist any
+            // setting the placeholder Value if exist any
             if  Utilities.isValidValue(someObject: placeholderText as AnyObject?) {
                 questionStep?.placeholder = placeholderText
             }
@@ -776,12 +800,11 @@ class ActivityQuestionStep: ActivityStep {
         }
     }
     
-    
     /* Method  creates ORKTextChoice Array
      @param dataArray: is either array of Dictionary or array of String
      returns array of ORKTextChoice
      */
-    func getTextChoices(dataArray: [Any]) -> ([ORKTextChoice]?,OtherChoice?) {
+    func getTextChoices(dataArray: [Any]) -> ([ORKTextChoice]?, OtherChoice?) {
         
         var textChoiceArray: [ORKTextChoice] = []
         var otherChoice: OtherChoice?
@@ -797,16 +820,26 @@ class ActivityQuestionStep: ActivityStep {
                 
                 if let otherDict = dict[kORKOTherChoice] as? JSONDictionary {
                     
-                    let placeholder = otherDict["placeholder"] as? String ?? "enter here"
+                    let placeholder = otherDict["placeholder"] as? String ?? kEnterHere
                     let isMandatory = otherDict["isMandatory"] as? Bool ?? false
                     let textFieldReq = otherDict["textfieldReq"] as? Bool ?? false
         
-                    otherChoice = OtherChoice(isShowOtherCell: true, isShowOtherField: textFieldReq, otherTitle: text, placeholder: placeholder, isMandatory: isMandatory,isExclusive: isExclusive,detailText: detail, value: value)
+                    otherChoice = OtherChoice(isShowOtherCell: true,
+                                              isShowOtherField: textFieldReq,
+                                              otherTitle: text,
+                                              placeholder: placeholder,
+                                              isMandatory: isMandatory,
+                                              isExclusive: isExclusive,
+                                              detailText: detail,
+                                              value: value)
                     
                     continue // No need to add other text choice
                 }
                 
-                let choice = ORKTextChoice(text: text , detailText: detail, value: value as NSCoding & NSCopying & NSObjectProtocol, exclusive: isExclusive)
+                let choice = ORKTextChoice(text: text ,
+                                           detailText: detail,
+                                           value: value as NSCoding & NSCopying & NSObjectProtocol,
+                                           exclusive: isExclusive)
                 
                 textChoiceArray.append(choice)
                 
@@ -814,7 +847,7 @@ class ActivityQuestionStep: ActivityStep {
             
         } else if let titleArr = dataArray as? [String] {
             
-            for (i,title) in titleArr.enumerated() {
+            for (i, title) in titleArr.enumerated() {
                 
                 let choice = ORKTextChoice(text: title, value: i as NSCoding & NSCopying & NSObjectProtocol)
                 
@@ -831,9 +864,9 @@ class ActivityQuestionStep: ActivityStep {
         }
         
         if textChoiceArray.isEmpty {
-            return (nil,nil)
+            return (nil, nil)
         } else {
-            return (textChoiceArray,otherChoice)
+            return (textChoiceArray, otherChoice)
         }
         
     }
@@ -868,18 +901,22 @@ class ActivityQuestionStep: ActivityStep {
                         
                         let base64String =  (dict[kStepQuestionImageChoiceImage] as? String)!
                         
-                        //generate ImageData from base64String
+                        // generate ImageData from base64String
                         let normalImageData = NSData(base64Encoded: base64String, options: .ignoreUnknownCharacters)
                         
-                        //generate SelectedImageData from base64String
-                        let selectedImageData  = NSData(base64Encoded: ((dict[kStepQuestionImageChoiceSelectedImage] as? String)!), options: .ignoreUnknownCharacters)
+                        // generate SelectedImageData from base64String
+                        let selectedImageData  = NSData(base64Encoded: ((dict[kStepQuestionImageChoiceSelectedImage] as? String)!),
+                                                        options: .ignoreUnknownCharacters)
                         
-                        //Create image Instance from Data
+                        // Create image Instance from Data
                         let normalImage: UIImage = UIImage(data: (normalImageData as Data?)!)!
                         let selectedImage: UIImage =  UIImage(data: (selectedImageData as Data?)!)!
                         
-                        //Create ORKImageChoice
-                        let  choice = ORKImageChoice( normalImage: normalImage ,  selectedImage: selectedImage , text: dict[kStepQuestionImageChoiceText] as? String, value: value  as NSCoding & NSCopying & NSObjectProtocol )
+                        // Create ORKImageChoice
+                        let  choice = ORKImageChoice( normalImage: normalImage ,
+                                                      selectedImage: selectedImage ,
+                                                      text: dict[kStepQuestionImageChoiceText] as?
+                                                        String, value: value  as NSCoding & NSCopying & NSObjectProtocol )
                         
                         imageChoiceArray?.append(choice)
                     } else {
@@ -887,7 +924,7 @@ class ActivityQuestionStep: ActivityStep {
                     }
                 } else {
                     return nil
-                    //Logger.sharedInstance.debug("ORKImageChoice Dictionary is null :\(dataArray[i])")
+                    // Logger.sharedInstance.debug("ORKImageChoice Dictionary is null :\(dataArray[i])")
                 }
             }
         } else {
@@ -905,18 +942,18 @@ class ActivityQuestionStep: ActivityStep {
     func isUnitValid(unit: String) -> Bool {
         
         let filePath = Bundle.main.path(forResource: "Units", ofType: ".json", inDirectory:nil)
-        var resultDict: Dictionary<String,Any>?
+        var resultDict: Dictionary<String, Any>?
         let data = NSData(contentsOfFile: filePath!)
         do {
-            resultDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+            resultDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String, Any>
             
-        }catch let error as NSError {
-            print("\(error)")
+        } catch let _ as NSError {
+            
         }
         
-        let categoryDict = (resultDict!["Category"] as? Dictionary<String,String>)!
+        let categoryDict = (resultDict!["Category"] as? Dictionary<String, String>)!
         if let category =  categoryDict[self.healthDataKey!] {
-            let unitDict = (resultDict!["Unit"] as? Dictionary<String,Any>)!
+            let unitDict = (resultDict!["Unit"] as? Dictionary<String, Any>)!
             if let unitsArray = unitDict[category] as? Array<String> {
                 if unitsArray.contains(unit) {
                     return true
@@ -929,7 +966,3 @@ class ActivityQuestionStep: ActivityStep {
         return false
     }
 }
-
-
-
-

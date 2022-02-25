@@ -47,7 +47,6 @@ class ActivitiesTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    
     /**
      Used to change the cell background color
      @param selected    checks if particular cell is selected
@@ -57,11 +56,10 @@ class ActivitiesTableViewCell: UITableViewCell {
         let color = labelStatus?.backgroundColor
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
-        if(selected) {
+        if selected {
             labelStatus?.backgroundColor = color
         }
     }
-    
     
     /**
      Used to set the cell state ie Highlighted
@@ -71,18 +69,17 @@ class ActivitiesTableViewCell: UITableViewCell {
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         let color = labelStatus?.backgroundColor
         super.setHighlighted(highlighted, animated: animated)
-        if(highlighted) {
+        if highlighted {
             labelStatus?.backgroundColor = color
         }
     }
-    
     
     /**
      Populate the cell data with Activity
      @param activity    Access the value from Activity class
      @param availablityStatus Access the value from ActivityAvailabilityStatus enum
      */
-    func populateCellDataWithActivity(activity: Activity ,availablityStatus: ActivityAvailabilityStatus){
+    func populateCellDataWithActivity(activity: Activity, availablityStatus: ActivityAvailabilityStatus) {
         
         self.availabilityStatus = availablityStatus
         self.currentActivity = activity
@@ -107,7 +104,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         self.calculateActivityTimings(activity: activity)
         self.setUserStatusForActivity(activity: activity)
         
-        //update activity run details as compelted and missed
+        // update activity run details as compelted and missed
         self.updateUserRunStatus(activity: activity)
         
         if availablityStatus == .past{
@@ -119,27 +116,40 @@ class ActivitiesTableViewCell: UITableViewCell {
             } else  if activity.totalRuns == 0 {
                 self.labelStatus?.backgroundColor =  UIColor.gray
                 self.labelStatus?.text = UserActivityStatus.ActivityStatus.expired.description
-            }else {
+            } else {
                 self.labelStatus?.backgroundColor =  kGreenColor
                 self.labelStatus?.text = UserActivityStatus.ActivityStatus.completed.description
             }
         }
     }
     
-    
     /**
      Used to update User Run Status
      @param activity    Access the value from Activity class
      */
     func updateUserRunStatus(activity: Activity) {
+      
+        let kRun = NSLocalizedStrings("Run: ", comment: "")
+        let kdone = NSLocalizedStrings(" done", comment: "")
+        let kmissed = NSLocalizedStrings(" missed", comment: "")
+        let kRuns = NSLocalizedStrings("Run(s):", comment: "")
+        let kDone = NSLocalizedStrings("Done", comment: "")
+        let kMore = NSLocalizedStrings("more", comment: "")
         
         let currentRunId = (activity.totalRuns != 0) ? String(activity.currentRunId) : "0"
         
         var runStatus: String
         if activity.frequencyType != .Ongoing {
-            runStatus = "Run: " + currentRunId + "/" + String(activity.totalRuns) + ", " + String(activity.compeltedRuns) + " done" + ", " + String(activity.incompletedRuns) + " missed"
+            runStatus = kRun +
+                currentRunId + "/" +
+                String(activity.totalRuns) +
+                ", " +
+                String(activity.compeltedRuns) +
+                kdone + ", " +
+                String(activity.incompletedRuns) +
+                kmissed
         } else {
-            runStatus = "Run(s): \(activity.compeltedRuns) Done"
+            runStatus = "\(kRuns) \(activity.compeltedRuns) \(kDone)"
         }
         
         self.labelRunStatus?.text = runStatus
@@ -151,7 +161,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         } else {
             self.buttonMoreSchedules?.isHidden = false
             self.buttonMoreSchedulesBottomLine?.isHidden = false
-            let moreSchedulesTitle =  "+" + String(activity.totalRuns - 1) + " more"
+            let moreSchedulesTitle =  "+" + String(activity.totalRuns - 1) + " \(kMore)"
             self.buttonMoreSchedules?.setTitle(moreSchedulesTitle, for: .normal)
         }
     }
@@ -164,12 +174,15 @@ class ActivitiesTableViewCell: UITableViewCell {
         
         let currentUser = User.currentUser
         
-        if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == activity.actvityId && $0.studyId == activity.studyId && $0.activityRunId == String(activity.currentRunId)}).first {
+        if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId ==
+                                                                                activity.actvityId && $0.studyId ==
+                                                                                activity.studyId && $0.activityRunId ==
+                                                                                String(activity.currentRunId)}).first {
             
-            //assign to study
+            // assign to study
             activity.userParticipationStatus = userActivityStatus
             
-            //user study status
+            // user study status
             labelStatus?.text = userActivityStatus.status.description
             
             switch userActivityStatus.status {
@@ -188,8 +201,8 @@ class ActivitiesTableViewCell: UITableViewCell {
             
             self.labelStatus?.backgroundColor = kBlueColor
             
-            //if in database their is no staus update for past activities 
-            //assigning abandoned status by default
+            // if in database their is no staus update for past activities 
+            // assigning abandoned status by default
             if self.availabilityStatus == .past {
                 
                 self.labelStatus?.backgroundColor =  UIColor.red
@@ -207,30 +220,32 @@ class ActivitiesTableViewCell: UITableViewCell {
         }
     }
     
-    
     /**
      Used to calculate Activity Timings
      @param activity    Access the value from Activity class
      */
     func calculateActivityTimings(activity: Activity){
         
-        var startDate = activity.startDate//?.utcDate()
-        var endDate   = activity.endDate//?.utcDate()
+        var startDate = activity.startDate // ?.utcDate()
+        var endDate   = activity.endDate // ?.utcDate()
         
         var difference = UserDefaults.standard.value(forKey: "offset") as? Int
+        
         if difference != nil {
             difference = difference! * -1
             startDate = startDate?.addingTimeInterval(TimeInterval(difference!))
             endDate = endDate?.addingTimeInterval(TimeInterval(difference!))
+            
         }
         
-    
         let frequency = activity.frequencyType
         
         let startDateString = ActivitiesTableViewCell.oneTimeFormatter.string(from: startDate!)
+        
         var endDateString = ""
         if endDate != nil {
             endDateString = ActivitiesTableViewCell.oneTimeFormatter.string(from: endDate!)
+        
         }
         
         if activity.type == ActivityType.activeTask{
@@ -240,6 +255,7 @@ class ActivitiesTableViewCell: UITableViewCell {
             imageIcon?.image = UIImage.init(named: "surveyIcon")
         }
         labelStatusTopConstraint?.constant = 7
+        
         switch frequency {
         case .One_Time: // Handle for One Time Frequency
             
@@ -311,8 +327,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         }
     }
     
-    
-// MARK:- Button Action
+// MARK: - Button Action
     
     /**
      Clicked on  MoreSchedules
@@ -327,44 +342,50 @@ class ActivitiesTableViewCell: UITableViewCell {
     */
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en")
         formatter.dateFormat = "MMM dd YYYY"
         return formatter
     }()
     
     private static let dailyActivityFormatter: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en")
         formatter.dateFormat = "MMM dd YYYY"
         return formatter
     }()
     
     private static let oneTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en")
         formatter.dateFormat = "hh:mma, MMM dd YYYY"
+        
         return formatter
     }()
     
     private static let weeklyformatter: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en")
         formatter.dateFormat = "hh:mma , EEE MMM dd YYYY"
         return formatter
     }()
 
     private static let monthlyformatter: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en")
         formatter.dateFormat = "hh:mma , dd ;MMM dd YYYY"
         return formatter
     }()
 
     private static let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en")
         formatter.dateFormat = "hh:mma"
         return formatter
     }()
     private static let dailyFormatter: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en")
         formatter.dateFormat = "HH:mm:ss"
         return formatter
     }()
 }
-
-

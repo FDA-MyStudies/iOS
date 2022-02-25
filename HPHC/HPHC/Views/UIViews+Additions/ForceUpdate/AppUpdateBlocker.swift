@@ -43,7 +43,7 @@ class AppUpdateBlocker: UIView {
         super.init(coder: aDecoder)
     }
  
-    class func instanceFromNib(frame: CGRect,detail: Dictionary<String,Any>) -> AppUpdateBlocker {
+    class func instanceFromNib(frame: CGRect, detail: Dictionary<String, Any>) -> AppUpdateBlocker {
         let view = UINib(nibName: "AppUpdateBlocker", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! AppUpdateBlocker
         view.frame = frame
         view.layoutIfNeeded()

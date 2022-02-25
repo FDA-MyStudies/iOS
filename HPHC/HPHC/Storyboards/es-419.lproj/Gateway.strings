@@ -1,0 +1,168 @@
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "038-eu-Tw1"; */
+"038-eu-Tw1.normalTitle" = "Enviar";
+
+/* Class = "UIButton"; normalTitle = "Sign Out"; ObjectID = "0DE-kF-2Xl"; */
+"0DE-kF-2Xl.normalTitle" = "Desconectar";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "0mt-Xu-KqK"; */
+"0mt-Xu-KqK.normalTitle" = "Enviar";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "0vj-iA-puz"; */
+"0vj-iA-puz.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Delete My Account"; ObjectID = "1BA-M1-mXf"; */
+"1BA-M1-mXf.normalTitle" = "Borrar mi cuenta";
+
+/* Class = "UILabel"; text = "A study for pregnant women"; ObjectID = "6pR-ur-c4G"; */
+"6pR-ur-c4G.text" = "Un estudio para mujeres embarazadas";
+
+/* Class = "UILabel"; text = "A new study OTC side-Effects has been launched by the FDA. Check it out now !"; ObjectID = "7Rj-wN-JAX"; */
+"7Rj-wN-JAX.text" = "A new study OTC side-Effects has been launched by the FDA. Check it out now !";
+
+/* Class = "UITextView"; text = "Enter your feedback here"; ObjectID = "8EU-zF-six"; */
+"8EU-zF-six.text" = "Ingrese sus comentarios aquí";
+
+/* Class = "UITextField"; placeholder = "enter email"; ObjectID = "9O9-Ao-Ceo"; */
+"9O9-Ao-Ceo.placeholder" = "ingrese correo electrónico";
+
+/* Class = "UIButton"; normalTitle = "I agree, proceed to deleting my account"; ObjectID = "AqF-5D-BJY"; */
+"AqF-5D-BJY.normalTitle" = "Estoy de acuerdo, procedo a eliminar mi cuenta";
+
+/* Class = "UILabel"; text = "Subject"; ObjectID = "CKp-ZC-FCM"; */
+"CKp-ZC-FCM.text" = "Asunto";
+
+/* Class = "UILabel"; text = "HEALTH"; ObjectID = "COw-Ra-frh"; */
+"COw-Ra-frh.text" = "HEALTH";
+
+/* Class = "UILabel"; text = "Medication survey"; ObjectID = "Dr7-7K-rH5"; */
+"Dr7-7K-rH5.text" = "Medication survey";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "EmJ-Ca-q92"; */
+"EmJ-Ca-q92.normalTitle" = "Cancelar";
+
+/* Class = "UITextField"; placeholder = "enter first name"; ObjectID = "FHg-Y2-WtR"; */
+"FHg-Y2-WtR.placeholder" = "ingrese el primer nombre";
+
+/* Class = "UILabel"; text = "Feedback"; ObjectID = "GZf-6d-030"; */
+"GZf-6d-030.text" = "Comentarios";
+
+/* Class = "UILabel"; text = "A study for pregnant women"; ObjectID = "LLs-YR-ZfM"; */
+"LLs-YR-ZfM.text" = "Borrar mi cuenta";
+
+/* Class = "UITextField"; placeholder = "enter first name"; ObjectID = "MNt-de-Zxv"; */
+"MNt-de-Zxv.placeholder" = "ingrese el primer nombre";
+
+/* Class = "UILabel"; text = "A new study OTC side-Effects has been launched by the FDA. Check it out now !"; ObjectID = "MQK-5z-dG5"; */
+"MQK-5z-dG5.text" = "A new study OTC side-Effects has been launched by the FDA. Check it out now !";
+
+/* Class = "UIButton"; normalTitle = "Apply"; ObjectID = "NY2-tY-i1U"; */
+"NY2-tY-i1U.normalTitle" = "Aplicar";
+
+/* Class = "UIButton"; normalTitle = "Retain My Data"; ObjectID = "OL5-qf-Lfd"; */
+"OL5-qf-Lfd.normalTitle" = "Conservar mis datos";
+
+/* Class = "UILabel"; text = "Yet To Join"; ObjectID = "Otz-hB-kow"; */
+"Otz-hB-kow.text" = "Aún para unirse";
+
+/* Class = "UILabel"; text = "4"; ObjectID = "RlU-TK-JcR"; */
+"RlU-TK-JcR.text" = "4";
+
+/* Class = "UIButton"; normalTitle = "Sign Out"; ObjectID = "TmB-Q7-f8P"; */
+"TmB-Q7-f8P.normalTitle" = "Desconectar";
+
+/* Class = "UILabel"; text = "confirm Password"; ObjectID = "XTf-xa-igQ"; */
+"XTf-xa-igQ.text" = "Confirmar contraseña";
+
+/* Class = "UILabel"; text = "You have chosen to delete your FDA app account. This will result in automatic withdrawl from all Studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw.Please review and confirm."; ObjectID = "Xbh-R9-X5r"; */
+"Xbh-R9-X5r.text" = "You have chosen to delete your FDA app account. This will result in automatic withdrawl from all Studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw.Please review and confirm.";
+
+/* Class = "UILabel"; text = "HEALTH"; ObjectID = "Y5e-Th-t0h"; */
+"Y5e-Th-t0h.text" = "HEALTH";
+
+/* Class = "UILabel"; text = "A study for pregnant women"; ObjectID = "YLI-bb-qxx"; */
+"YLI-bb-qxx.text" = "Borrar mi cuenta";
+
+/* Class = "UILabel"; text = "A study for pregnant women"; ObjectID = "Z1L-Ln-Brn"; */
+"Z1L-Ln-Brn.text" = "Borrar mi cuenta";
+
+/* Class = "UITextField"; placeholder = "enter subject"; ObjectID = "ZAG-q5-tTH"; */
+"ZAG-q5-tTH.placeholder" = "Ingrese el asunto";
+
+/* Class = "UILabel"; text = "0%"; ObjectID = "Zic-wt-Oqv"; */
+"Zic-wt-Oqv.text" = "0%";
+
+/* Class = "UILabel"; text = "ACTIVE"; ObjectID = "aiR-9i-QFj"; */
+"aiR-9i-QFj.text" = "ACTIVO";
+
+/* Class = "UILabel"; text = "We'd love to hear from you! Please share your thoughts on how we can improve your experience of participating in health studies and contributing to a healthier world! Your feedback will be anonymous."; ObjectID = "b0d-he-JiD"; */
+"b0d-he-JiD.text" = "¡Nos encantaría saber de usted! Comparta sus pensamientos sobre cómo podemos mejorar su experiencia de participar en estudios de salud y contribuir a un mundo más saludable. Sus comentarios serán anónimos.";
+
+/* Class = "UIButton"; normalTitle = "Delete My Data"; ObjectID = "b2d-cc-iAX"; */
+"b2d-cc-iAX.normalTitle" = "Borrar mis datos";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "cN6-2N-vAu"; */
+"cN6-2N-vAu.text" = "Label";
+
+/* Class = "UILabel"; text = "Message"; ObjectID = "cTN-Dm-9a6"; */
+"cTN-Dm-9a6.text" = "Mensaje";
+
+/* Class = "UILabel"; text = "Sign up"; ObjectID = "du0-3K-yBm"; */
+"du0-3K-yBm.text" = "Regístrese";
+
+/* Class = "UILabel"; text = "Mental health survey"; ObjectID = "e60-ar-C8w"; */
+"e60-ar-C8w.text" = "Mental health survey";
+
+/* Class = "UILabel"; text = "Set up lead time for study activity reminder"; ObjectID = "fcw-4m-iFo"; */
+"fcw-4m-iFo.text" = "Configure el tiempo de espera para recordatorios de actividades de estudio";
+
+/* Class = "UILabel"; text = "COMPLETION:"; ObjectID = "fuW-0v-Kj3"; */
+"fuW-0v-Kj3.text" = "Terminación:";
+
+/* Class = "UILabel"; text = "jjj"; ObjectID = "gAZ-xG-Pxt"; */
+"gAZ-xG-Pxt.text" = "jjj";
+
+/* Class = "UILabel"; text = "Powered by FDA MyStudies"; ObjectID = "gES-c2-7do"; */
+"gES-c2-7do.text" = "Desarrollado por FDA MyStudies";
+
+/* Class = "UILabel"; text = "Now"; ObjectID = "iFG-Br-6yD"; */
+"iFG-Br-6yD.text" = "Now";
+
+/* Class = "UIButton"; normalTitle = "00:30"; ObjectID = "k3b-X7-wvN"; */
+"k3b-X7-wvN.normalTitle" = "00:30";
+
+/* Class = "UILabel"; text = "Response data will be retained"; ObjectID = "lMv-L4-SqQ"; */
+"lMv-L4-SqQ.text" = "Se conservarán los datos de respuesta";
+
+/* Class = "UIButton"; normalTitle = "I do not wish to delete my account"; ObjectID = "lQD-pA-Zjm"; */
+"lQD-pA-Zjm.normalTitle" = "No deseo borrar mi cuenta";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ng8-aL-gj9"; */
+"ng8-aL-gj9.text" = "Label";
+
+/* Class = "UILabel"; text = "Contact Us"; ObjectID = "p6M-zv-oKh"; */
+"p6M-zv-oKh.text" = "Contáctenos";
+
+/* Class = "UILabel"; text = "First Name"; ObjectID = "pB8-Jw-hq2"; */
+"pB8-Jw-hq2.text" = "Primer nombre";
+
+/* Class = "UILabel"; text = "Sorry, no studies available right now. Please remain signed in to get notified when there are new studies available."; ObjectID = "sfa-0h-9w7"; */
+"sfa-0h-9w7.text" = "Lo siento, no hay estudios disponibles en este momento. Por favor permanezca reistrado para recibir notificaciones cuando haya nuevos estudios disponibles.";
+
+/* Class = "UILabel"; text = "FDA My Studies"; ObjectID = "tRN-H1-1nF"; */
+"tRN-H1-1nF.text" = "FDA My Studies";
+
+/* Class = "UILabel"; text = "First Name"; ObjectID = "tud-Fw-jEG"; */
+"tud-Fw-jEG.text" = "Primer nombre";
+
+/* Class = "UILabel"; text = "ACTIVE"; ObjectID = "uCj-9U-uDm"; */
+"uCj-9U-uDm.text" = "ACTIVO";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "uYJ-Jl-iiH"; */
+"uYJ-Jl-iiH.normalTitle" = "Enviar";
+
+/* Class = "UILabel"; text = "Use Passcode to access  app"; ObjectID = "vfp-9Y-Asr"; */
+"vfp-9Y-Asr.text" = "Utilizar la contraseña para acceder a la aplicación";
+
+/* Class = "UIButton"; normalTitle = "Change Password"; ObjectID = "yrx-fB-aoa"; */
+"yrx-fB-aoa.normalTitle" = "Cambiar contraseña";

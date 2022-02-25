@@ -30,23 +30,26 @@ class StudyOverviewViewControllerFirst: UIViewController {
     @IBOutlet var buttonWatchVideo: UIButton?
     @IBOutlet var buttonVisitWebsite: UIButton?
     @IBOutlet var labelTitle: UILabel?
+    @IBOutlet var labelWatchVideo: UILabel?
     @IBOutlet var labelDescription: UILabel?
     @IBOutlet var imageViewStudy: UIImageView?
-    
+    @IBOutlet var imageWatchVideo: UIImageView?
+  
     var pageIndex: Int!
     var overViewWebsiteLink: String?
     var overviewSectionDetail: OverviewSection!
     var moviePlayer: MPMoviePlayerViewController!
     var playerViewController: AVPlayerViewController!
-    //var player:AVPlayer!
+    // var player:AVPlayer!
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .lightContent
     }
-// MARK:- Viewcontroller Lifecycle
+// MARK: - Viewcontroller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Used to set border color for bottom view
+        let joinStudyTitle =  NSLocalizedStrings("Join Study", comment: "")
+        buttonJoinStudy?.setTitle(joinStudyTitle, for: .normal)
+        // Used to set border color for bottom view
         buttonJoinStudy?.layer.borderColor = kUicolorForButtonBackground
         if overviewSectionDetail.imageURL != nil {
             let url = URL.init(string: overviewSectionDetail.imageURL!)
@@ -55,8 +58,12 @@ class StudyOverviewViewControllerFirst: UIViewController {
         
         if overviewSectionDetail.link != nil {
             buttonWatchVideo?.isHidden = false
+            imageWatchVideo?.isHidden = false
+            labelWatchVideo?.isHidden = false
         } else {
              buttonWatchVideo?.isHidden =  true
+            imageWatchVideo?.isHidden = true
+            labelWatchVideo?.isHidden = true
         }
     }
     
@@ -76,16 +83,19 @@ class StudyOverviewViewControllerFirst: UIViewController {
             fontSize = 14.0
         }
         
-        let attrStr = try! NSAttributedString(
+        let attrStr1 = try? NSAttributedString(
             data: (overviewSectionDetail.text?.data(using: String.Encoding.unicode, allowLossyConversion: true)!)!,
             options: [ NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html],
             documentAttributes: nil)
+      let attrStr = attrStr1!
         
         let attributedText: NSMutableAttributedString = NSMutableAttributedString(attributedString: attrStr)
         attributedText.addAttributes([NSAttributedString.Key.font:UIFont(
             name: "HelveticaNeue",
             size: CGFloat(fontSize))!], range:(attrStr.string as NSString).range(of: attrStr.string))
-        attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: (attrStr.string as NSString).range(of: attrStr.string))
+        attributedText.addAttribute(NSAttributedString.Key.foregroundColor,
+                                    value: UIColor.white,
+                                    range: (attrStr.string as NSString).range(of: attrStr.string))
         
         if Utilities.isValidValue(someObject: attrStr.string as AnyObject?) {
              self.labelDescription?.attributedText = attributedText
@@ -94,10 +104,10 @@ class StudyOverviewViewControllerFirst: UIViewController {
         }
        self.labelDescription?.textAlignment = .center
         
-        //UIApplication.shared.statusBarStyle = .lightContent
+        // UIApplication.shared.statusBarStyle = .lightContent
         setNeedsStatusBarAppearanceUpdate()
         
-        //self.labelDescription?.text = overviewSectionDetail.text!
+        // self.labelDescription?.text = overviewSectionDetail.text!
         
     }
     
@@ -111,8 +121,7 @@ class StudyOverviewViewControllerFirst: UIViewController {
         
     }
     
-    
-// MARK:-
+// MARK: -
     
     /** 
      
@@ -133,8 +142,7 @@ class StudyOverviewViewControllerFirst: UIViewController {
         self.playerViewController.dismiss(animated: true, completion: nil)
     }
     
-   
-// MARK:- Button Actions
+// MARK: - Button Actions
     
     /**
      
@@ -156,7 +164,7 @@ class StudyOverviewViewControllerFirst: UIViewController {
             do{
                 try AVAudioSession.sharedInstance().setMode(.moviePlayback)
             } catch {
-                //Didn't work
+                // Didn't work
             }
             
             let url: NSURL = NSURL(string: overviewSectionDetail.link!)!
@@ -173,7 +181,6 @@ class StudyOverviewViewControllerFirst: UIViewController {
         }
     }
     
-    
     /** 
      
      This method is used to Join Study
@@ -189,7 +196,6 @@ class StudyOverviewViewControllerFirst: UIViewController {
         }
     }
     
-
     /**
      
      This method is used to Visit website 
@@ -211,8 +217,7 @@ class StudyOverviewViewControllerFirst: UIViewController {
     }
 }
 
-
-// MARK:- Webservice Delegates
+// MARK: - Webservice Delegates
 extension StudyOverviewViewControllerFirst: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -225,8 +230,7 @@ extension StudyOverviewViewControllerFirst: NMWebServiceDelegate {
         
         self.removeProgressIndicator()
         if requestName as String ==  RegistrationMethods.logout.description {
-            
-            
+                
         }
     }
     
@@ -237,8 +241,7 @@ extension StudyOverviewViewControllerFirst: NMWebServiceDelegate {
     }
 }
 
-
 // Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+private func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
 	return input.rawValue
 }

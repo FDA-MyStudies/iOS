@@ -26,7 +26,6 @@ import RealmSwift
 // DB instance of Notification model
 class DBNotification: Object {
     
-    
     @objc dynamic var id: String?
     @objc dynamic var title: String?
     @objc dynamic var message: String?
@@ -50,7 +49,6 @@ class DBNotification: Object {
 
 class DBLocalNotification: Object {
     
-    
     @objc dynamic var id: String?
     @objc dynamic var title: String?
     @objc dynamic var message: String?
@@ -72,7 +70,3 @@ class DBLocalNotification: Object {
     }
     
 }
-
-
-
- 

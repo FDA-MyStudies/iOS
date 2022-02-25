@@ -58,20 +58,20 @@ enum StatisticsType: String{
     }
 }
 
-
 class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
     
-    //Statistics cell
+    // Statistics cell
     @IBOutlet var statisticsImage: UIImageView?
     @IBOutlet var labelStatisticsText: UILabel?
     @IBOutlet var labelStatisticsCount: UILabel?
     @IBOutlet var labelUnit: UILabel?
     var stats: DashboardStatistics!
+    let kNA = NSLocalizedStrings("NA", comment: "")
     
     /**
      Display DashboardStats for selected Tab
      */
-    func displayStatisics(data: DashboardStatistics,startDate: Date,endDate: Date?,tab: SelectedTab){
+    func displayStatisics(data: DashboardStatistics, startDate: Date, endDate: Date?, tab: SelectedTab){
         
         stats = data
         labelStatisticsText?.text = data.displayName
@@ -122,7 +122,6 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
             }
         }
         
-        
     }
     
     /**
@@ -153,28 +152,29 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    
-    // MARK:- Date Handlers
+    // MARK: - Date Handlers
     func handleForDay(date: Date){
         
-        let dataList: Array<DBStatisticsData> = stats.statList.filter({$0.startDate! >= date.startOfDay && $0.startDate! <= date.endOfDay!})
+        let dataList: Array<DBStatisticsData> = stats.statList.filter(
+            {$0.startDate! >= date.startOfDay && $0.startDate! <= date.endOfDay!})
         
         let array = dataList.map{$0.data}
         
         if array.count == 0 {
-            labelStatisticsCount?.text = "NA"
+            labelStatisticsCount?.text = kNA
         } else {
             self.calculate(array: array)
         }
     }
-    func handleForWeek(startDate: Date,endDate: Date){
+    func handleForWeek(startDate: Date, endDate: Date){
         
-        let dataList: Array<DBStatisticsData> = stats.statList.filter({$0.startDate! >= startDate && $0.startDate! <= endDate})
+        let dataList: Array<DBStatisticsData> = stats.statList.filter(
+            {$0.startDate! >= startDate && $0.startDate! <= endDate})
         
         let array = dataList.map{$0.data}
         
         if array.count == 0 {
-            labelStatisticsCount?.text = "NA"
+            labelStatisticsCount?.text = kNA
         } else {
             self.calculate(array: array)
         }
@@ -182,12 +182,13 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
     }
     func handleForMonth(date: Date){
         
-        let dataList: Array<DBStatisticsData> = stats.statList.filter({$0.startDate! >= date.startOfMonth() && $0.startDate! <= date.endOfMonth()})
+        let dataList: Array<DBStatisticsData> = stats.statList.filter(
+            {$0.startDate! >= date.startOfMonth() && $0.startDate! <= date.endOfMonth()})
         
         let array = dataList.map{$0.data}
         
         if array.count == 0 {
-            labelStatisticsCount?.text = "NA"
+            labelStatisticsCount?.text = kNA
         } else {
             self.calculate(array: array)
         }
@@ -198,7 +199,6 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
      calculates the stats data and Updates Stats Label
      */
     func calculate(array: Array<Float>){
-        
         
         let data = self.stats!
         

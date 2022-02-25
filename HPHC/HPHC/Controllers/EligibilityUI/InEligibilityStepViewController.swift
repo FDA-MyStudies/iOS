@@ -29,9 +29,7 @@ class InEligibilityStep: ORKStep {
     }
 }
 
-
 class InEligibilityStepViewController: ORKStepViewController {
-    
     
     @IBOutlet weak var buttonDone: UIButton?
     @IBOutlet weak var labelDescription: UILabel?
@@ -59,17 +57,27 @@ class InEligibilityStepViewController: ORKStepViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        buttonDone?.layer.borderColor =   kUicolorForButtonBackground
+      super.viewDidLoad()
+      
+      buttonDone?.layer.borderColor =   kUicolorForButtonBackground
+      
+      let attrs1 = [
+        NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Light", size: 18.5)!,
+        NSAttributedString.Key.foregroundColor : UIColor.black] as [NSAttributedString.Key : Any]
+      labelDescription?.textAlignment = .center
+      let des1 = "Sorry, you are not eligible for participation in this study."
+      let des2 = " We thank you for your interest and time, and encourage you to explore other studies as they are made available in the app."
+
+      labelDescription?.attributedText = NSMutableAttributedString(string:NSLocalizedStrings("\(des1)\(des2)", comment: ""), attributes:attrs1)
     }
     
     // MARK: Methods and Button Actions
     
     func showAlert(message: String){
-        let alert = UIAlertController(title: kErrorTitle as String,message: message as String,preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString(kTitleOK, comment: ""), style: .default, handler: nil))
-        
+        let alert = UIAlertController(title: kErrorTitle as String,
+                                      message: message as String,
+                                      preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: kTitleOKCapital, style: .default, handler: nil))
         
         self.navigationController?.present(alert, animated: true, completion: nil)
         
@@ -85,5 +93,3 @@ class InEligibilityStepViewController: ORKStepViewController {
         // Dispose of any resources that can be recreated.
     }
 }
-
-

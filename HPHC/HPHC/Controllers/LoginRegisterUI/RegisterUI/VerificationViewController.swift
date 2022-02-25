@@ -23,9 +23,8 @@ import UIKit
 
 let kDefaultEmail = "xyz@gmail.com"
 let kSignupCompletionSegue = "signupCompletionSegue"
-let kAlertMessageText = "Message"
-let kAlertMessageVerifyEmail = "Please verify your email address."
-let kAlertMessageResendEmail = "An email verification code has been sent to your registered email."
+let kAlertMessageVerifyEmail = NSLocalizedStrings("Please verify your email address.", comment: "")
+let kAlertMessageResendEmail = NSLocalizedStrings("An email verification code has been sent to your registered email.", comment: "")
 
 let kChangePasswordViewControllerIdentifier = "ChangePasswordViewController"
 
@@ -52,14 +51,13 @@ class VerificationViewController: UIViewController{
     var shouldCreateMenu: Bool = true
     var viewLoadFrom: VerificationLoadFrom = .signup
     
-    
-// MARK:- View Controllere Lifecycle
+// MARK: - View Controllere Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Used to set border color for bottom view
+        // Used to set border color for bottom view
         buttonContinue?.layer.borderColor = kUicolorForButtonBackground
-        self.title = NSLocalizedString("", comment: "")
+        self.title = NSLocalizedStrings("", comment: "")
         
         if labelMessage != nil {
             labelVerificationMessage?.text = labelMessage
@@ -67,7 +65,7 @@ class VerificationViewController: UIViewController{
         
         textFieldEmail?.text = self.emailId!
         
-        //hide navigationbar
+        // hide navigationbar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
        
     }
@@ -75,17 +73,14 @@ class VerificationViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        
     }
     
-    
-// MARK:- Button Actions
+// MARK: - Button Actions
  
     /**
      
@@ -97,7 +92,6 @@ class VerificationViewController: UIViewController{
     @IBAction func buttonActionBack(_ sender: UIButton){
         _ = self.navigationController?.popViewController(animated: true)
     }
-    
     
     /**
      
@@ -114,13 +108,13 @@ class VerificationViewController: UIViewController{
             self.showAlertMessages(textMessage: kMessageVerificationCodeEmpty)
             
         } else {
-            print("Call the webservice")
-            
-            UserServices().verifyEmail(emailId: self.emailId!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
+                        
+            UserServices().verifyEmail(emailId: self.emailId!,
+                                       verificationCode:(self.textFieldVerificationCode?.text)!,
+                                       delegate: self)
             
         }
     }
-    
     
     /**
      
@@ -132,12 +126,13 @@ class VerificationViewController: UIViewController{
     @IBAction func continueButtonAction(_ sender: Any) {
         
         if (textFieldVerificationCode?.text?.count)! > 0 {
-             UserServices().verifyEmail(emailId: User.currentUser.emailId!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
+             UserServices().verifyEmail(emailId: User.currentUser.emailId!,
+                                        verificationCode:(self.textFieldVerificationCode?.text)! ,
+                                        delegate: self)
         } else {
              self.showAlertMessages(textMessage: kMessageVerificationCodeEmpty)
         }
     }
-    
     
     /**
      
@@ -161,8 +156,7 @@ class VerificationViewController: UIViewController{
         }
     }
 
-    
-// MARK:- Segue Methods
+// MARK: - Segue Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let singupCompletion = segue.destination as? SignUpCompleteViewController {
@@ -175,8 +169,7 @@ class VerificationViewController: UIViewController{
         }
     }
     
-    
-// MARK:- Utility Methods
+// MARK: - Utility Methods
 
     /**
      
@@ -186,10 +179,12 @@ class VerificationViewController: UIViewController{
      
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
+        UIUtilities.showAlertMessage("",
+                                     errorMessage: NSLocalizedStrings(textMessage, comment: ""),
+                                     errorAlertActionTitle: kTitleOKCapital,
+                                     viewControllerUsed: self)
     }
 
-    
     /**
      
      Navigate to Sign up completion screen 
@@ -198,7 +193,6 @@ class VerificationViewController: UIViewController{
     func navigateToSignUpCompletionStep(){
         self.performSegue(withIdentifier: kSignupCompletionSegue, sender: nil)
     }
-    
     
     /**
      
@@ -209,7 +203,8 @@ class VerificationViewController: UIViewController{
         
         let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
-        let fda = storyboard.instantiateViewController(withIdentifier: kChangePasswordViewControllerIdentifier) as! ChangePasswordViewController
+        let fda = storyboard.instantiateViewController(
+            withIdentifier: kChangePasswordViewControllerIdentifier) as! ChangePasswordViewController
         
         if shouldCreateMenu {
             fda.viewLoadFrom = .login
@@ -221,8 +216,7 @@ class VerificationViewController: UIViewController{
     }
 }
 
-
-// MARK:- TextField Delegates
+// MARK: - TextField Delegates
 extension VerificationViewController:UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -237,8 +231,7 @@ extension VerificationViewController:UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print(textField.text!)
-       
+               
         if textField == textFieldEmail {
              User.currentUser.emailId = textField.text
             
@@ -248,8 +241,7 @@ extension VerificationViewController:UITextFieldDelegate{
     }
 }
 
-
-// MARK:- Webservice Delegates
+// MARK: - Webservice Delegates
 extension VerificationViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -270,7 +262,7 @@ extension VerificationViewController: NMWebServiceDelegate {
             ud.synchronize()
             
             if viewLoadFrom == .forgotPassword{
-                //pop to login
+                // pop to login
                 
                 self.performSegue(withIdentifier: "signInUnwindSegue", sender: self)
             } else if viewLoadFrom == .joinStudy {
@@ -288,9 +280,9 @@ extension VerificationViewController: NMWebServiceDelegate {
         } else {
             
             if requestName as String == RegistrationMethods.resendConfirmation.description {
-                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageResendEmail, comment: "") as NSString)
+                UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString, message:kAlertMessageResendEmail as NSString)
             } else {
-                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kAlertMessageText, comment: "") as NSString, message: NSLocalizedString(kAlertMessageVerifyEmail, comment: "") as NSString)
+                UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString, message: kAlertMessageVerifyEmail as NSString)
             }
         }
     }
@@ -299,51 +291,54 @@ extension VerificationViewController: NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.removeProgressIndicator()
-        if error.code == 403 { //unauthorized
-            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+        if error.code == 403 { // unauthorized
+            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
+                                                          message: error.localizedDescription,
+                                                          buttonTitle: kTitleOk,
+                                                          viewControllerUsed: self,
+                                                          action: {
                 _ = self.navigationController?.popToRootViewController(animated: true)
             })
         } else {
-            
-            UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+            let errorMsg = base64DecodeError(error.localizedDescription)
+            UIUtilities.showAlertWithTitleAndMessage(title: kErrorTitle as NSString, message: errorMsg as NSString)
         }
     }
 }
 
-// MARK:- ORKTaskViewController Delegate
+// MARK: - ORKTaskViewController Delegate
 extension VerificationViewController: ORKTaskViewControllerDelegate{
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
         return true
     }
     
-    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+    public func taskViewController(_ taskViewController: ORKTaskViewController,
+                                   didFinishWith reason: ORKTaskViewControllerFinishReason,
+                                   error: Error?) {
         
-        //var taskResult: Any?
+        // var taskResult: Any?
         
         switch reason {
             
-        case ORKTaskViewControllerFinishReason.completed:
-            print("completed")
-            //taskResult = taskViewController.result
-        case ORKTaskViewControllerFinishReason.failed:
-            print("failed")
-            //taskResult = taskViewController.result
-        case ORKTaskViewControllerFinishReason.discarded:
-            print("discarded")
+        case ORKTaskViewControllerFinishReason.completed: break
             
-            //taskResult = taskViewController.result
-        case ORKTaskViewControllerFinishReason.saved:
-            print("saved")
-            //taskResult = taskViewController.restorationData
+            // taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.failed: break
             
+            // taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.discarded: break
+                        
+            // taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.saved: break
+            
+            // taskResult = taskViewController.restorationData
         }
         taskViewController.dismiss(animated: true, completion: nil)
     }
     
-    func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
+    func taskViewController(_ taskViewController: ORKTaskViewController,
+                            stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         
     }
 }
-
-

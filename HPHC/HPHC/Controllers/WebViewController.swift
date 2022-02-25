@@ -28,6 +28,7 @@ class WebViewController : UIViewController{
     @IBOutlet weak var webView : WKWebView!
     @IBOutlet var barItemShare : UIBarButtonItem?
     
+    @IBOutlet weak var cancelBtnLabel: UIBarButtonItem!
     var activityIndicator:UIActivityIndicatorView!
     var requestLink:String?
     
@@ -44,7 +45,6 @@ class WebViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,7 +55,7 @@ class WebViewController : UIViewController{
         activityIndicator.center = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY-100)
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-
+        self.cancelBtnLabel.title = NSLocalizedStrings("Cancel", comment: "")
         if self.isEmailAvailable == false {
             
         barItemShare?.isEnabled = false
@@ -91,7 +91,7 @@ class WebViewController : UIViewController{
         webView.navigationDelegate = self
         webView.contentScaleFactor = 1.0
         
-        //UIApplication.shared.statusBarStyle = .default
+        // UIApplication.shared.statusBarStyle = .default
         setNeedsStatusBarAppearanceUpdate()
     }
     
@@ -103,43 +103,40 @@ class WebViewController : UIViewController{
         self.sendConsentByMail()
     }
     
-   
     func sendConsentByMail() {
         let mailComposerVC = MFMailComposeViewController()
         
         mailComposerVC.mailComposeDelegate = self
         
-        mailComposerVC.setSubject("Consent")
+        mailComposerVC.setSubject(NSLocalizedStrings("Consent", comment: ""))
        
         if self.pdfData != nil{
            
-            let consentName:String! = (Study.currentStudy?.name!)! + "_SignedConsent"
-            
+            let consentName:String! = (Study.currentStudy?.name!)! + NSLocalizedStrings("_SignedConsent", comment: "")
+          
             mailComposerVC.addAttachmentData(self.pdfData!, mimeType: "application/pdf", fileName:consentName)
             
             mailComposerVC.setMessageBody("", isHTML: false)
-        }
-        else if self.htmlString != nil {
+        } else if self.htmlString != nil {
             mailComposerVC.setMessageBody(self.htmlString!, isHTML: true)
         }
         
         if MFMailComposeViewController.canSendMail()
         {
             self.present(mailComposerVC, animated: true, completion: nil)
-        }
-        else{
-            let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:kFailedToConnectAppleMail, preferredStyle: UIAlertController.Style.alert)
+        } else {
+            let alert = UIAlertController(title: kTitleError,
+                                          message: kFailedToConnectAppleMail,
+                                          preferredStyle: UIAlertController.Style.alert)
             
-            alert.addAction(UIAlertAction.init(title:NSLocalizedString("OK", comment: ""), style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction.init(title: kTitleOKCapital, style: .default, handler: { (_) in
                 
-//                self.dismiss(animated: true, completion: nil)
+                //  self.dismiss(animated: true, completion: nil)
                 
             }))
             UIApplication.topMostViewController?.present(alert, animated: true, completion: nil)
-
+            
         }
-        
-        
     }
     
 }
@@ -162,8 +159,3 @@ extension WebViewController: WKNavigationDelegate {
         self.activityIndicator.removeFromSuperview()
     }
 }
-
-
-
-
-

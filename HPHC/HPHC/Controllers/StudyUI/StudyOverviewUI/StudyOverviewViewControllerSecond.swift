@@ -35,17 +35,18 @@ class StudyOverviewViewControllerSecond: UIViewController{
     var overViewWebsiteLink: String?
     var overviewSectionDetail: OverviewSection!
     
-    
-// MARK:- Viewcontroller lifecycle
+// MARK: - Viewcontroller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Used to set border color for bottom view
+        // Used to set border color for bottom view
         buttonJoinStudy?.layer.borderColor = kUicolorForButtonBackground
         if overviewSectionDetail.imageURL != nil {
             let url = URL.init(string:overviewSectionDetail.imageURL!)
             imageViewStudy?.sd_setImage(with: url, placeholderImage: nil)
         }
+        let joinStudyTitle =  NSLocalizedStrings("Join Study", comment: "")
+        buttonJoinStudy?.setTitle(joinStudyTitle, for: .normal)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -66,16 +67,19 @@ class StudyOverviewViewControllerSecond: UIViewController{
             fontSize = 14.0
         }
         
-        let attrStr = try! NSAttributedString(
+        let attrStr1 = try? NSAttributedString(
             data: (overviewSectionDetail.text?.data(using: String.Encoding.unicode, allowLossyConversion: true)!)!,
             options: [ NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html],
             documentAttributes: nil)
+      let attrStr = attrStr1!
         
         let attributedText: NSMutableAttributedString = NSMutableAttributedString(attributedString: attrStr)
         attributedText.addAttributes([NSAttributedString.Key.font: UIFont(
             name: "HelveticaNeue",
             size: CGFloat(fontSize))!], range: (attrStr.string as NSString).range(of: attrStr.string))
-        attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.black, range: (attrStr.string as NSString).range(of: attrStr.string))
+        attributedText.addAttribute(NSAttributedString.Key.foregroundColor,
+                                    value: UIColor.black,
+                                    range: (attrStr.string as NSString).range(of: attrStr.string))
         
         if Utilities.isValidValue(someObject: attrStr.string as AnyObject?) {
             self.labelDescription?.attributedText = attributedText
@@ -85,18 +89,15 @@ class StudyOverviewViewControllerSecond: UIViewController{
         }
         self.labelDescription?.textAlignment = .center
 
-        
-        //UIApplication.shared.statusBarStyle = .lightContent
+        // UIApplication.shared.statusBarStyle = .lightContent
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
     }
     
-// MARK:- Button Actions 
+// MARK: - Button Actions 
     
     /**
      This method is used to Join Study
@@ -108,11 +109,11 @@ class StudyOverviewViewControllerSecond: UIViewController{
             let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
             leftController.changeViewController(.reachOut_signIn)
         } else {
-            //TEMP
-             UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kAlertMessageText, comment: "") as NSString, message: NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
+            // TEMP
+             UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString,
+                                                      message: NSLocalizedStrings(kAlertMessageReachoutText, comment: "") as NSString)
         }
     }
-    
     
     /**
      This method is used to Visit website
@@ -123,18 +124,17 @@ class StudyOverviewViewControllerSecond: UIViewController{
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier: "WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
-        //webView.requestLink = "http://www.fda.gov"
+        // webView.requestLink = "http://www.fda.gov"
         
         if sender.tag == 1188 {
-            //Visit Website
+            // Visit Website
             webView.requestLink = overViewWebsiteLink
             
         } else {
-            //View Consent
+            // View Consent
             webView.htmlString = (Study.currentStudy?.consentDocument?.htmlString)
         }
         
         self.navigationController?.present(webViewController, animated: true, completion: nil)
     }
 }
-

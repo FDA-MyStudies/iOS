@@ -21,7 +21,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 import UIKit
 import RealmSwift
 
-
 enum StatisticsFormula: String{
    case Summation
    case Average
@@ -32,10 +31,10 @@ enum StatisticsFormula: String{
 
 enum ChartTimeRange: String{
     
-   case  days_of_week //s,m,t..s   f = daily
+   case  days_of_week // s,m,t..s   f = daily
    case  days_of_month // 1,2,3,4..31   f = daily
    case  weeks_of_month // w1,w2,w3,w4.. w5   f = weekly
-   case  months_of_year //j,f,m..d  f = monthly
+   case  months_of_year // j,f,m..d  f = monthly
    case  runs //   f = sheduled
    case  hours_of_day  // f = withInADay
    
@@ -54,10 +53,10 @@ class StudyDashboard: NSObject {
 }
 
 class DashboardResponse{
-    var key: String? //Stats key
+    var key: String? // Stats key
     var activityId: String?
     var type: String?
-    var values: Array<Dictionary<String,Any>> = []
+    var values: Array<Dictionary<String, Any>> = []
     var date: String?
     var isPHI: String?
     
@@ -85,15 +84,13 @@ class DashboardStatistics {
     /**
      Initializer with dictionary of properties
     */
-    init(detail: Dictionary<String,Any>) {
+    init(detail: Dictionary<String, Any>) {
         
         if Utilities.isValidObject(someObject: detail as AnyObject?){
             
-            
             if Utilities.isValidValue(someObject: detail["title"] as AnyObject ){
                 self.title = detail["title"] as? String
-            }
-            else {
+            } else {
                 self.title = ""
             }
             if Utilities.isValidValue(someObject: detail["displayName"] as AnyObject ){
@@ -109,7 +106,7 @@ class DashboardStatistics {
                 self.calculation = detail["calculation"] as? String
             }
             
-            let datasource = detail["dataSource"] as! Dictionary<String,Any>
+            let datasource = detail["dataSource"] as! Dictionary<String, Any>
             
             if Utilities.isValidValue(someObject: datasource["type"] as AnyObject ){
                 self.dataSourceType = datasource["type"] as? String
@@ -118,7 +115,7 @@ class DashboardStatistics {
                 self.dataSourceKey = datasource["key"] as? String
             }
             
-            let activity = datasource["activity"] as! Dictionary<String,Any>
+            let activity = datasource["activity"] as! Dictionary<String, Any>
             if Utilities.isValidValue(someObject: activity[kActivityId] as AnyObject ){
                 self.activityId = activity[kActivityId] as? String
             }
@@ -135,7 +132,7 @@ class DashboardStatistics {
 
 class DashboardCharts {
     
-    //basic
+    // basic
     var chartId: String?
     var studyId: String?
     var title: String?
@@ -143,7 +140,7 @@ class DashboardCharts {
     var chartType: String?
     var scrollable: Bool = true
     
-    //datasource
+    // datasource
     var activityId: String?
     var activityVersion: String?
     var dataSourceType: String?
@@ -152,12 +149,10 @@ class DashboardCharts {
     var startTime: Date?
     var endTime: Date?
     
-    
-    //settings
+    // settings
     var barColor: String?
     var numberOfPoints: Int = 0
     var chartSubType: String?
-    
     
     var statList = List<DBStatisticsData>()
     
@@ -167,10 +162,9 @@ class DashboardCharts {
     /**
      initializer with dictionary of properties
     */
-    init(detail: Dictionary<String,Any>) {
+    init(detail: Dictionary<String, Any>) {
     
         if Utilities.isValidObject(someObject: detail as AnyObject?){
-            
             
             if Utilities.isValidValue(someObject: detail["title"] as AnyObject ){
                 self.title = detail["title"] as? String
@@ -186,9 +180,8 @@ class DashboardCharts {
                 self.scrollable = detail["scrollable"] as! Bool
             }
             
-            
-            //datasource
-            let datasource = detail["dataSource"] as! Dictionary<String,Any>
+            // datasource
+            let datasource = detail["dataSource"] as! Dictionary<String, Any>
             
             if Utilities.isValidValue(someObject: datasource["type"] as AnyObject ){
                 self.dataSourceType = datasource["type"] as? String
@@ -201,7 +194,7 @@ class DashboardCharts {
             }
 
             // activity detail
-            let activity = datasource["activity"] as! Dictionary<String,Any>
+            let activity = datasource["activity"] as! Dictionary<String, Any>
             if Utilities.isValidValue(someObject: activity[kActivityId] as AnyObject ){
                 self.activityId = activity[kActivityId] as? String
             }
@@ -209,8 +202,8 @@ class DashboardCharts {
                 self.activityVersion = activity["version"] as? String
             }
             
-            //configuration
-            let configuration = detail["configuration"] as! Dictionary<String,Any>
+            // configuration
+            let configuration = detail["configuration"] as! Dictionary<String, Any>
             if Utilities.isValidValue(someObject: configuration["subType"] as AnyObject ){
                 self.chartSubType = configuration["subType"] as? String
             }

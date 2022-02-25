@@ -1,0 +1,9 @@
+
+/* Class = "UIButton"; normalTitle = "UPDATE"; ObjectID = "AaU-Or-nbT"; */
+"AaU-Or-nbT.normalTitle" = "ACTUALIZAR";
+
+/* Class = "UILabel"; text = "The lorem ipsum text is typically a scrambled section of De finibus bonorum et malorum, a 1st-century BC Latin text by Cicero, with words altered, added, and removed to make it nonsensical, improper Latin."; ObjectID = "sEi-f6-3pt"; */
+"sEi-f6-3pt.text" = "The lorem ipsum text is typically a scrambled section of De finibus bonorum et malorum, a 1st-century BC Latin text by Cicero, with words altered, added, and removed to make it nonsensical, improper Latin.";
+
+/* Class = "UILabel"; text = "New Version Avaiable"; ObjectID = "xNA-bz-Y9i"; */
+"xNA-bz-Y9i.text" = "Nueva versión disponible";

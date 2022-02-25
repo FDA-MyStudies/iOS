@@ -24,36 +24,43 @@ class GatewayResourcesListViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView?
     
-    func loadResources(){
+    func loadResources() {
         
-        let plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil)
+        var plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil)
+        let localeDefault = getLanguageLocale()
+        
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        } else if localeDefault.hasPrefix("en"){
+            plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        } else if localeDefault.hasPrefix("es") {
+            plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil, forLocalization: "es")
+        }
         let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
         
         do {
            
-           // let resources = response[kResources] as! Array<Dictionary<String,Any>>
+           // let resources = response[kResources] as! Array<Dictionary<String, Any>>
             var listOfResources: Array<Resource>! = []
             for resource in arrayContent!{
                 let resourceObj = Resource(detail: resource as! Dictionary<String, Any>)
                 listOfResources.append(resourceObj)
             }
             
-            //assgin to Gateway
+            // assgin to Gateway
             Gateway.instance.resources = listOfResources
-            
-            
+                
             self.tableView?.reloadData()
         } catch {
-            print("json error: \(error.localizedDescription)")
+            
         }
-
 
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title =  NSLocalizedString("RESOURCES", comment: "")
+        self.navigationItem.title =  NSLocalizedStrings("RESOURCES", comment: "")
         
         // Do any additional setup after loading the view.
     }
@@ -61,7 +68,7 @@ class GatewayResourcesListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         self.setNavigationBarItem()
-        //WCPServices().getGatewayResources(delegate: self)
+        // WCPServices().getGatewayResources(delegate: self)
         self.loadResources()
     }
 
@@ -70,7 +77,6 @@ class GatewayResourcesListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 
@@ -95,10 +101,9 @@ extension GatewayResourcesListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        //let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
+        // let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "resourcesCell", for: indexPath) as! ResourcesListCell
-        
         
         let resource = Gateway.instance.resources?[indexPath.row]
         cell.labelResourceTitle?.text = resource?.title
@@ -115,13 +120,13 @@ extension GatewayResourcesListViewController:  UITableViewDelegate {
         
         let resource = Gateway.instance.resources?[indexPath.row]
         let storyboard = UIStoryboard(name: kStudyStoryboard, bundle: nil)
-        let resourceDetail =   storyboard.instantiateViewController(withIdentifier: "ResourceDetailViewControllerIdentifier") as! ResourcesDetailViewController
+        let resourceDetail =   storyboard.instantiateViewController(withIdentifier: "ResourceDetailViewControllerIdentifier")
+            as! ResourcesDetailViewController
         resourceDetail.resource = resource
         self.navigationController?.pushViewController(resourceDetail, animated: true)
         
     }
 }
-
 
 extension GatewayResourcesListViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {

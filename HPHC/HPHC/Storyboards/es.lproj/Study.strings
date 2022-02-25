@@ -1,0 +1,171 @@
+
+/* Class = "UILabel"; text = "1st Trimester Survey"; ObjectID = "0BZ-Hr-S5F"; */
+"0BZ-Hr-S5F.text" = "1st Trimester Survey";
+
+/* Class = "UILabel"; text = "DONE WITH THE STUDY"; ObjectID = "1se-Ih-SJx"; */
+"1se-Ih-SJx.text" = "HECHO CON EL ESTUDIO";
+
+/* Class = "UILabel"; text = "How data will be used?"; ObjectID = "3EU-2E-MZV"; */
+"3EU-2E-MZV.text" = "How data will be used?";
+
+/* Class = "UIButton"; normalTitle = "Join Study"; ObjectID = "5NQ-r5-mSz"; */
+"5NQ-r5-mSz.normalTitle" = "Unirse al estudio";
+
+/* Class = "UILabel"; text = "Please wait, loading...."; ObjectID = "5ht-xH-lbp"; */
+"5ht-xH-lbp.text" = "Please wait, loading....";
+
+/* Class = "UILabel"; text = "No stats currently avaialble"; ObjectID = "5lS-ZZ-rEE"; */
+"5lS-ZZ-rEE.text" = "No hay estadísticas disponibles actualmente";
+
+/* Class = "UILabel"; text = "TRENDS"; ObjectID = "7PI-ZW-p9g"; */
+"7PI-ZW-p9g.text" = "TENDENCIAS";
+
+/* Class = "UILabel"; text = "Run: 3/10, 4 done , 5 missed"; ObjectID = "7ys-DM-7dm"; */
+"7ys-DM-7dm.text" = "Run: 3/10, 4 done , 5 missed";
+
+/* Class = "UILabel"; text = "63"; ObjectID = "7z2-GP-epO"; */
+"7z2-GP-epO.text" = "63";
+
+/* Class = "UILabel"; text = "Watch Video"; ObjectID = "AA0-le-tSn"; */
+"AA0-le-tSn.text" = "Ver video";
+
+/* Class = "UILabel"; text = "About the Study"; ObjectID = "AW7-ks-icb"; */
+"AW7-ks-icb.text" = "Sobre el estudio";
+
+/* Class = "UILabel"; text = "1st Trimester Survey"; ObjectID = "AfA-Oz-waF"; */
+"AfA-Oz-waF.text" = "1st Trimester Survey";
+
+/* Class = "UILabel"; text = "  "; ObjectID = "Cao-rB-R9F"; */
+"Cao-rB-R9F.text" = "  ";
+
+/* Class = "UILabel"; text = "Statistics"; ObjectID = "GcS-bY-dZH"; */
+"GcS-bY-dZH.text" = "Estadísticas";
+
+/* Class = "UILabel"; text = "Active"; ObjectID = "H3l-1i-Q8b"; */
+"H3l-1i-Q8b.text" = "Activo";
+
+/* Class = "UILabel"; text = "  Incomplete  "; ObjectID = "HEH-Ox-bPe"; */
+"HEH-Ox-bPe.text" = "  Incomplete  ";
+
+/* Class = "UILabel"; text = "%"; ObjectID = "J3t-SP-0pl"; */
+"J3t-SP-0pl.text" = "%";
+
+/* Class = "UIButton"; normalTitle = "Join Study"; ObjectID = "MKo-wh-p4O"; */
+"MKo-wh-p4O.normalTitle" = "Unirse al estudio";
+
+/* Class = "UILabel"; text = "hello"; ObjectID = "MYB-jk-CRD"; */
+"MYB-jk-CRD.text" = "hello";
+
+/* Class = "UILabel"; text = "STUDY STATUS"; ObjectID = "RTJ-5j-gHp"; */
+"RTJ-5j-gHp.text" = "ESTADO DE ESTUDIO";
+
+/* Class = "UIButton"; normalTitle = "DAY"; ObjectID = "Snh-ik-r6y"; */
+"Snh-ik-r6y.normalTitle" = "DIA";
+
+/* Class = "UILabel"; text = "A STUDY FOR PREGNANT WOMEN"; ObjectID = "TFh-y2-sZW"; */
+"TFh-y2-sZW.text" = "A STUDY FOR PREGNANT WOMEN";
+
+/* Class = "UITabBarItem"; title = "Resources"; ObjectID = "W7D-Iu-sAw"; */
+"W7D-Iu-sAw.title" = "Recursos";
+
+/* Class = "UILabel"; text = "Every Saturday - 02:00 PM"; ObjectID = "X8A-Rm-SyQ"; */
+"X8A-Rm-SyQ.text" = "Every Saturday - 02:00 PM";
+
+/* Class = "UILabel"; text = "Weekly"; ObjectID = "XEW-cJ-D3D"; */
+"XEW-cJ-D3D.text" = "Semanal";
+
+/* Class = "UILabel"; text = "  Incomplete  "; ObjectID = "XbX-KG-vXg"; */
+"XbX-KG-vXg.text" = "  Incomplete  ";
+
+/* Class = "UILabel"; text = "YOU ARE"; ObjectID = "XjP-9a-aCO"; */
+"XjP-9a-aCO.text" = "USTED ESTÁ";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Ymm-EY-vQ9"; */
+"Ymm-EY-vQ9.text" = "Label";
+
+/* Class = "UITabBarItem"; title = "Dashboard"; ObjectID = "arR-Sy-PnO"; */
+"arR-Sy-PnO.title" = "Tablero";
+
+/* Class = "UILabel"; text = "Run: 3/10, 4 done , 5 missed"; ObjectID = "awn-oW-cWh"; */
+"awn-oW-cWh.text" = "Run: 3/10, 4 done , 5 missed";
+
+/* Class = "UILabel"; text = "OF ACTIVITIES SO FAR"; ObjectID = "b43-6R-4Z2"; */
+"b43-6R-4Z2.text" = "DE ACTIVIDADES A TIEMPO";
+
+/* Class = "UIButton"; normalTitle = "Visit Website"; ObjectID = "bc7-W1-fmy"; */
+"bc7-W1-fmy.normalTitle" = "Visita el sito web";
+
+/* Class = "UILabel"; text = "%"; ObjectID = "bpG-X9-tHL"; */
+"bpG-X9-tHL.text" = "%";
+
+/* Class = "UILabel"; text = "The data captured from pregnant women (e.g. medical product exposures, outcomes etc.) will be linked with data from an organization, such as a clinical practise, that has access to electronic health data and this will help provide insights into the efficacy and safety of medical products."; ObjectID = "cQm-5R-c9C"; */
+"cQm-5R-c9C.text" = "The data captured from pregnant women (e.g. medical product exposures, outcomes etc.) will be linked with data from an organization, such as a clinical practise, that has access to electronic health data and this will help provide insights into the efficacy and safety of medical products.";
+
+/* Class = "UILabel"; text = "No activities available"; ObjectID = "cae-09-QSH"; */
+"cae-09-QSH.text" = "No hay actividades disponibles";
+
+/* Class = "UILabel"; text = "HOURS"; ObjectID = "djj-79-ioD"; */
+"djj-79-ioD.text" = "HOURS";
+
+/* Class = "UIButton"; normalTitle = "View Consent"; ObjectID = "gz3-j6-s6W"; */
+"gz3-j6-s6W.normalTitle" = "Ver consentimiento";
+
+/* Class = "UILabel"; text = "TOTAL HOURS OF SLEEP"; ObjectID = "ivQ-Fp-sFD"; */
+"ivQ-Fp-sFD.text" = "TOTAL HOURS OF SLEEP";
+
+/* Class = "UILabel"; text = "Weekly"; ObjectID = "k0A-bo-des"; */
+"k0A-bo-des.text" = "Semanal";
+
+/* Class = "UILabel"; text = "Trends"; ObjectID = "keM-H2-AzW"; */
+"keM-H2-AzW.text" = "tendencias";
+
+/* Class = "UIButton"; normalTitle = "WEEK"; ObjectID = "kn0-VV-AHj"; */
+"kn0-VV-AHj.normalTitle" = "SEMANA";
+
+/* Class = "UIButton"; normalTitle = "Join Study"; ObjectID = "lIT-J9-U7S"; */
+"lIT-J9-U7S.normalTitle" = "Unirse al estudio";
+
+/* Class = "UILabel"; text = "YOU COMPLETED"; ObjectID = "mcT-Pq-7B0"; */
+"mcT-Pq-7B0.text" = "ESTAS COMPLETANDO";
+
+/* Class = "UILabel"; text = "In Progress"; ObjectID = "me4-LJ-i7A"; */
+"me4-LJ-i7A.text" = "En progreso";
+
+/* Class = "UIButton"; normalTitle = "View Consent"; ObjectID = "mud-v9-9iS"; */
+"mud-v9-9iS.normalTitle" = "Ver consentimiento";
+
+/* Class = "UILabel"; text = "30"; ObjectID = "nom-xu-54M"; */
+"nom-xu-54M.text" = "30";
+
+/* Class = "UITabBarItem"; title = "Activities"; ObjectID = "oT5-OT-1EB"; */
+"oT5-OT-1EB.title" = "Actividades";
+
+/* Class = "UILabel"; text = "PARTICIPATION STATUS"; ObjectID = "pju-m4-AKv"; */
+"pju-m4-AKv.text" = "ESTADO DE PARTICIPACIÓN";
+
+/* Class = "UILabel"; text = "No data Available.This feature is under development."; ObjectID = "tW6-6k-q5i"; */
+"tW6-6k-q5i.text" = "No data Available.This feature is under development.";
+
+/* Class = "UIButton"; normalTitle = "+9 more"; ObjectID = "umw-gV-Ub4"; */
+"umw-gV-Ub4.normalTitle" = "+9 more";
+
+/* Class = "UILabel"; text = "A Study for Pregnant Women"; ObjectID = "w0M-Dz-kSR"; */
+"w0M-Dz-kSR.text" = "A Study for Pregnant Women";
+
+/* Class = "UIButton"; normalTitle = "Visit Website"; ObjectID = "wIC-kn-yNP"; */
+"wIC-kn-yNP.normalTitle" = "Visita el sito web";
+
+/* Class = "UILabel"; text = "36"; ObjectID = "wWz-Hb-ZTO"; */
+"wWz-Hb-ZTO.text" = "36";
+
+/* Class = "UIButton"; normalTitle = "MONTH"; ObjectID = "z17-KH-Jlb"; */
+"z17-KH-Jlb.normalTitle" = "MES";
+
+/* Class = "UILabel"; text = "Every Saturday - 02:00 PM"; ObjectID = "zGu-H0-8Cg"; */
+"zGu-H0-8Cg.text" = "Every Saturday - 02:00 PM";
+
+/* Class = "UIButton"; normalTitle = "Visit Website"; ObjectID = "zeM-Up-qJV"; */
+"zeM-Up-qJV.normalTitle" = "Visita el sito web";
+
+/* Class = "UILabel"; text = "No data Available.This feature is under development."; ObjectID = "zyD-Rd-9k5"; */
+"zyD-Rd-9k5.text" = "No data Available.This feature is under development.";

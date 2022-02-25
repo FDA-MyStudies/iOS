@@ -76,26 +76,26 @@ let kConsentViewPdfStoryboardId = "ConsentPdfViewerStepViewControllerIdentifier"
 
 // Comprehenion Instruction Step Keys
 
-let kConsentComprehensionTestTitle = "Comprehension"
-let kConsentComprehensionTestText = "Let's do a quick and simple test of your understanding of this Study."
+let kConsentComprehensionTestTitle = NSLocalizedStrings("Comprehension", comment: "")
+let kConsentComprehensionTestText = NSLocalizedStrings("Let's do a quick and simple test of your understanding of this Study.", comment: "")
 let kComprehensionInstructionStepIdentifier = "ComprehensionInstructionStep"
 
 // Comprehension Completion Step Keys
 
-let kComprehensionCompletionTitle = "Great Job!"
-let kComprehensionCompletionText = "You answered all of the questions correctly. Tap on Next to proceed"
+let kComprehensionCompletionTitle = NSLocalizedStrings("Great Job!", comment: "")
+let kComprehensionCompletionText = NSLocalizedStrings("You answered all of the questions correctly. Tap on Next to proceed", comment: "")
 let kComprehensionCompletionStepIdentifier = "ComprehensionCompletionStep"
 
 // Consent Completion
 
-let kConsentCompletionMainTitle = "Thanks for providing consent for this Study"
-let kConsentCompletionSubTitle = "You can now start participating in the Study"
-let kSignaturePageContentText = "I agree to participate in this research study."
+let kConsentCompletionMainTitle = NSLocalizedStrings("Thanks for providing consent for this Study", comment: "")
+let kConsentCompletionSubTitle = NSLocalizedStrings("You can now start participating in the Study", comment: "")
+let kSignaturePageContentText = NSLocalizedStrings("I agree to participate in this research study.", comment: "")
 
 // Signature Page
 
 let kConsentSignaturePageContent = "signaturePageContent"
-let kConsentSignaturePageTitle = "Participant"
+let kConsentSignaturePageTitle = NSLocalizedStrings("Participant", comment: "")
 
 enum ConsentStatus: String {
     case pending
@@ -149,8 +149,6 @@ class ConsentBuilder {
         consentStatus = .pending
         consentHasVisualStep = false
       
-      print("metaDataDict---\(metaDataDict)")
-
         if Utilities.isValidObject(someObject: metaDataDict as AnyObject?) {
             if Utilities.isValidValue(someObject: metaDataDict[kConsentVersion] as AnyObject?) {
                 version = (metaDataDict[kConsentVersion] as? String)!
@@ -183,15 +181,13 @@ class ConsentBuilder {
                 let valLAR = reviewConsent?.consentByLAR ?? "No"
               if valLAR.caseInsensitiveCompare("yes") == .orderedSame {
                 consentHasLAR = true
-              }
-              else {
+              } else {
                 consentHasLAR = false
               }
                 let valAdditionalSign = reviewConsent?.additionalSignature ?? "No"
                 if valAdditionalSign.caseInsensitiveCompare("yes") == .orderedSame {
                   isAdditionalSign = true
-                }
-                else {
+                } else {
                   isAdditionalSign = false
                 }
                 
@@ -255,7 +251,9 @@ class ConsentBuilder {
                 consentDocument.sections?.append(contentsOf: consentSectionArray)
             }
 
-            let investigatorSignature = ORKConsentSignature(forPersonWithTitle: kConsentSignaturePageTitle, dateFormatString: "MM/dd/YYYY", identifier: "Signature")
+            let investigatorSignature = ORKConsentSignature(forPersonWithTitle: kConsentSignaturePageTitle,
+                                                            dateFormatString: "MM/dd/YYYY",
+                                                            identifier: "Signature")
 
             consentDocument.addSignature(investigatorSignature)
             return consentDocument
@@ -295,18 +293,22 @@ class ConsentBuilder {
             // create Consent Document
             let consentDocument: ORKConsentDocument? = (getConsentDocument() as ORKConsentDocument)
             consentDocument?.htmlReviewContent = reviewConsent?.signatureContent
-            consentDocument?.signaturePageContent = NSLocalizedString(kSignaturePageContentText, comment: "")
+            consentDocument?.signaturePageContent = kSignaturePageContentText
 
             // Initialize review Step
-            reviewConsentStep = ConsentReviewStep(identifier: kReviewTitle, signature: (getConsentDocument() as ORKConsentDocument).signatures?[0], in: getConsentDocument())
+            reviewConsentStep = ConsentReviewStep(identifier: kReviewIdentifier,
+                                                  signature: (getConsentDocument() as ORKConsentDocument).signatures?[0],
+                                                  in: getConsentDocument())
 
         } else {
             // create Consent Document
             let consentDocument: ORKConsentDocument? = (getConsentDocument() as ORKConsentDocument)
-            consentDocument?.signaturePageContent = NSLocalizedString(kSignaturePageContentText, comment: "")
+            consentDocument?.signaturePageContent = kSignaturePageContentText
 
             // Initialize review Step
-            reviewConsentStep = ConsentReviewStep(identifier: kReviewTitle, signature: consentDocument?.signatures?[0], in: consentDocument!)
+            reviewConsentStep = ConsentReviewStep(identifier: kReviewIdentifier,
+                                                  signature: consentDocument?.signatures?[0],
+                                                  in: consentDocument!)
         }
 
         if Utilities.isValidValue(someObject: reviewConsent?.signatureTitle as AnyObject) {
@@ -332,7 +334,10 @@ class ConsentBuilder {
             Utilities.isValidValue(someObject: sharingConsent?.longDesc as AnyObject),
             Utilities.isValidValue(someObject: sharingConsent?.learnMore as AnyObject) {
             // create shareStep
-            let sharingConsentStep = ConsentSharingStep(identifier: kConsentSharing, investigatorShortDescription: (sharingConsent?.shortDesc)!, investigatorLongDescription: (sharingConsent?.longDesc)!, localizedLearnMoreHTMLContent: (sharingConsent?.learnMore)!)
+            let sharingConsentStep = ConsentSharingStep(identifier: kConsentSharing,
+                                                        investigatorShortDescription: (sharingConsent?.shortDesc)!,
+                                                        investigatorLongDescription: (sharingConsent?.longDesc)!,
+                                                        localizedLearnMoreHTMLContent: (sharingConsent?.learnMore)!)
 
             if Utilities.isValidValue(someObject: sharingConsent?.text as AnyObject) {
                 sharingConsentStep.text = sharingConsent?.text
@@ -414,7 +419,7 @@ class ConsentBuilder {
         
         // Final completion step
         let completionStep = CustomCompletionStep(identifier: kConsentCompletionStepIdentifier)
-        completionStep.detailText = NSLocalizedString(kConsentCompletionMainTitle, comment: "")
+        completionStep.detailText = kConsentCompletionMainTitle
         
         if (stepArray?.count)! > 0 {
             
@@ -462,7 +467,7 @@ class ConsentBuilder {
         relationAnswerFormat.maximumLength = 250
         relationAnswerFormat.autocapitalizationType = .words
         
-        let placeHolder = NSLocalizedString("Required", comment: "")
+        let placeHolder = NSLocalizedStrings("Required", comment: "")
         let relationItem = ORKFormItem(identifier: kLARConsentParticipantRelationItem,
                                        text: " ", answerFormat: relationAnswerFormat)
         relationItem.placeholder = placeHolder
@@ -500,19 +505,31 @@ class ConsentBuilder {
         return step
     }
 
-    func LARBranchingRule() -> ORKStepNavigationRule {
-
-        let reviewIdentifier = "Review" //FinalStep
-        let predicate1 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentStep), expectedAnswerValue: "Choice_1" as NSCoding & NSCopying & NSObjectProtocol)
-
-         //Mutiple Predicates
-         let predicate2 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentStep), expectedAnswerValue: "Choice_2" as NSCoding & NSCopying & NSObjectProtocol)
-
-         let predi = [predicate2, predicate1]
-         let desti = [kLARConsentParticipantStep, reviewIdentifier]
-
-         return ORKPredicateStepNavigationRule(resultPredicates: predi, destinationStepIdentifiers: desti, defaultStepIdentifier: reviewIdentifier, validateArrays: true)
-
+    func LARBranchingRule () -> ORKStepNavigationRule {
+      
+      var defaultIdentifierStr = kReviewIdentifier
+      let sharingConsentStep: ConsentSharingStep? = getConsentSharingStep()
+      if sharingConsentStep != nil, !StudyUpdates.studyConsentUpdated {
+        defaultIdentifierStr = kConsentSharing
+      }
+      
+      let predicate1 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentStep),
+                                                                           expectedAnswerValue: "Choice_1"
+                                                                            as NSCoding & NSCopying & NSObjectProtocol)
+      
+      // Mutiple Predicates
+      let predicate2 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentStep),
+                                                                           expectedAnswerValue: "Choice_2"
+                                                                            as NSCoding & NSCopying & NSObjectProtocol)
+      
+      let predi = [predicate2, predicate1]
+      let desti = [kLARConsentParticipantStep, defaultIdentifierStr]
+      
+      return ORKPredicateStepNavigationRule(resultPredicates: predi,
+                                            destinationStepIdentifiers: desti,
+                                            defaultStepIdentifier: defaultIdentifierStr,
+                                            validateArrays: true)
+      
     }
 }
 

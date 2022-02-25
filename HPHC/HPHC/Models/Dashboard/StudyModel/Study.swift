@@ -18,7 +18,6 @@ OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
 import Foundation
 
 let kConsentDocumentType = "type"
@@ -54,7 +53,7 @@ enum StudyWithdrawalConfigrationType:String{
     case notAvailable = "NotAvailable"
 }
 
-// MARK:ConsentDocument
+// MARK: ConsentDocument
 struct ConsentDocument {
     
     var htmlString: String?
@@ -67,7 +66,7 @@ struct ConsentDocument {
         self.version = "No_Version"
     }
     
-    mutating func initData(consentDoucumentdict: Dictionary<String,Any>){
+    mutating func initData(consentDoucumentdict: Dictionary<String, Any>){
         if Utilities.isValidObject(someObject: consentDoucumentdict as AnyObject?){
             
             if Utilities.isValidValue(someObject: consentDoucumentdict[kConsentDocumentType] as AnyObject ){
@@ -87,29 +86,30 @@ struct ConsentDocument {
     }
 }
 
-// MARK:Study
+// MARK: Study
 class Study: Hashable {
     
-    // MARK:Properties
-    var studyId: String! //Unique identifier
+    // MARK: - Properties
+    var studyId: String! // Unique identifier
     var name: String?
-    var version: String? //Current Version
-    var newVersion: String? //Updated Version
+    var version: String? // Current Version
+    var newVersion: String? // Updated Version
     var identifer: String?
     var category: String?
     var startDate: String?
     var endEnd: String?
-    var status: StudyStatus = .Active //Current Study Status
+    var status: StudyStatus = .Active // Current Study Status
+    var studyLanguage: String = "ENGLISH"
     var sponserName: String?
     var description: String?
     var brandingConfiguration: String?
     var logoURL: String?
     var overview: Overview!
     var activities: Array<Activity>! = []
-    var resources: Array<Resource>? = [] //Resources for Study & Activities
+    var resources: Array<Resource>? = [] // Resources for Study & Activities
     var userParticipateState: UserStudyStatus! = nil
     var studySettings: StudySettings!
-    var consentDocument: ConsentDocument? //Study Consent Document
+    var consentDocument: ConsentDocument? // Study Consent Document
     var signedConsentVersion: String?
     var signedConsentFilePath: String?
     var anchorDate: StudyAnchorDate?
@@ -118,17 +118,17 @@ class Study: Hashable {
     var totalCompleteRuns = 0
     
 //    var hashValue: Int {
-//        return hash(into: &self.studyId)//self.studyId.hashValue
+//        return hash(into: &self.studyId)// self.studyId.hashValue
 //
 //    }
     func hash(into hasher: inout Hasher) {
         hasher.combine(self.studyId)
     }
     
-    var withdrawalConfigration: StudyWithdrawalConfigration?
+    var withdrawalConfigration: StudyWithdrawalConfig?
     
-    static var currentStudy: Study? = nil
-    static var currentActivity: Activity? = nil
+    static var currentStudy: Study?
+    static var currentActivity: Activity? 
     
     init() {
         
@@ -136,7 +136,7 @@ class Study: Hashable {
     /**
      Study Initializer with dictionary of properties
      */
-    init(studyDetail: Dictionary<String,Any>) {
+    init(studyDetail: Dictionary<String, Any>) {
         
         if Utilities.isValidObject(someObject: studyDetail as AnyObject?){
             
@@ -152,13 +152,16 @@ class Study: Hashable {
             }
             
             if Utilities.isValidValue(someObject: studyDetail[kStudyCategory] as AnyObject ){
-                self.category = studyDetail[kStudyCategory] as? String
+              self.category = categoryCorrection(studyDetail[kStudyCategory] as? String ?? "")
             }
             if Utilities.isValidValue(someObject: studyDetail[kStudySponserName] as AnyObject ){
                 self.sponserName = studyDetail[kStudySponserName] as? String
             }
             if Utilities.isValidValue(someObject: studyDetail[kStudyTagLine] as AnyObject ){
                 self.description = studyDetail[kStudyTagLine] as? String
+            }
+            if Utilities.isValidValue(someObject: studyDetail[kStudyLanguage] as AnyObject ){
+              self.studyLanguage = studyDetail[kStudyLanguage] as? String ?? "ENGLISH"
             }
             if Utilities.isValidValue(someObject: studyDetail[kStudyLogoURL] as AnyObject ) {
                 self.logoURL = studyDetail[kStudyLogoURL] as? String
@@ -181,11 +184,40 @@ class Study: Hashable {
             Logger.sharedInstance.debug("Study Dictionary is null:\(studyDetail)")
         }
     }
+  
+    // Category correction for Spanish Language
+    func categoryCorrection(_ category: String) -> String {
+      switch category {
+      case "Seguridad de los productos biológicos":
+        return "1Biologics Safety"
+      case "Ensayos clínicos":
+        return "1Clinical Trials"
+      case "Seguridad de los cosméticos":
+        return "1Cosmetics Safety"
+      case "Seguridad de los medicamentos":
+        return "1Drug Safety"
+      case "Seguridad alimenticia":
+        return "1Food Safety"
+      case "Seguridad de dispositivos médicos":
+        return "1Medical Device Safety"
+      case "Estudios observacionales":
+        return "1Observational Studies"
+      case "Salud pública":
+        return "1Public Health"
+      case "Productos emisores de radiación":
+        return "1Radiation-Emitting Products"
+      case "Productos de radiación":
+        return "1Radiation-Emitting Products"
+      case "El consumo de tabaco":
+        return "1Tobacco Use"
+      default:
+        return category // Category is in English OR category Not recognised
+      }
+    }
     
     static func ==(lhs: Study, rhs: Study) -> Bool {
         return lhs.studyId == rhs.studyId
     }
-    
     
     class func updateCurrentActivity(activity: Activity) {
         Study.currentActivity = activity
@@ -193,11 +225,11 @@ class Study: Hashable {
     
     class  func updateCurrentStudy(study: Study) {
         Study.currentStudy = study
-      print("Study.currentStudy---\(Study.currentStudy)")
+      
     }
 }
 
-// MARK:StudySettings
+// MARK: StudySettings
 class StudySettings{
     
     var enrollingAllowed = true
@@ -210,7 +242,7 @@ class StudySettings{
     /**
      Initializer with dictionary of properties of settings
      */
-    init(settings: Dictionary<String,Any>) {
+    init(settings: Dictionary<String, Any>) {
         
         if Utilities.isValidObject(someObject: settings as AnyObject?){
             
@@ -227,9 +259,9 @@ class StudySettings{
     }
 }
 
-// MARK:StudyAnchorDate
+// MARK: StudyAnchorDate
 class StudyAnchorDate{
-    //anchorDate Value
+    // anchorDate Value
     var date: Date?
     var anchorDateType: String?
     var anchorDateActivityId: String?
@@ -242,7 +274,7 @@ class StudyAnchorDate{
     /**
      Initializer with ditionary of properties
      */
-    init(detail: Dictionary<String,Any>) {
+    init(detail: Dictionary<String, Any>) {
         
         if Utilities.isValidObject(someObject: detail as AnyObject?){
             
@@ -252,7 +284,7 @@ class StudyAnchorDate{
             
             if Utilities.isValidObject(someObject: detail[kStudyAnchorDateQuestionInfo] as AnyObject?){
                 
-                let questionInfo = detail[kStudyAnchorDateQuestionInfo] as! Dictionary<String,Any>
+                let questionInfo = detail[kStudyAnchorDateQuestionInfo] as! Dictionary<String, Any>
                 
                 if Utilities.isValidValue(someObject: questionInfo[kStudyAnchorDateActivityId] as AnyObject ){
                     self.anchorDateActivityId = (questionInfo[kStudyAnchorDateActivityId] as? String)!
@@ -305,8 +337,8 @@ class StudyAnchorDate{
     }
 }
 
-// MARK:StudyWithdrawalConfigration
-class StudyWithdrawalConfigration {
+// MARK: StudyWithdrawalConfigration
+class StudyWithdrawalConfig {
     var message: String? = ""
     var type: StudyWithdrawalConfigrationType? = .notAvailable
     
@@ -316,7 +348,7 @@ class StudyWithdrawalConfigration {
     /**
      Initializer with dictionary of properties
      */
-    init(withdrawalConfigration: Dictionary<String,Any>) {
+    init(withdrawalConfigration: Dictionary<String, Any>) {
         if Utilities.isValidObject(someObject: withdrawalConfigration as AnyObject?) {
             
             if Utilities.isValidValue(someObject: withdrawalConfigration[kStudyWithdrawalMessage] as AnyObject ) {
@@ -329,32 +361,33 @@ class StudyWithdrawalConfigration {
                 self.type = StudyWithdrawalConfigrationType(rawValue:(withdrawalConfigration[kStudyWithdrawalType] as? String)!)
             }
             
-            
         }
         
     }
     
 }
-// MARK:StudyUpdates
+// MARK: StudyUpdates
 struct StudyUpdates {
     
     static var studyInfoUpdated = false
     static var studyConsentUpdated = false
     static var studyActivitiesUpdated = false
     static var studyResourcesUpdated = false
-    static var studyVersion: String? = nil
-    static var studyStatus: String? = nil
+    static var studyVersion: String?
+    static var studyStatus: String? 
+    static var studyLang: String? = ""
+    static var studyOldLang: String? = ""
     
     init() {
     }
     /**
      Initializer with dictionary of properties
      */
-    init(detail: Dictionary<String,Any>){
+    init(detail: Dictionary<String, Any>){
         
         if Utilities.isValidObject(someObject: detail[kStudyUpdates] as AnyObject?){
             
-            let updates =  detail[kStudyUpdates] as! Dictionary<String,Any>
+            let updates =  detail[kStudyUpdates] as! Dictionary<String, Any>
             
             if Utilities.isValidValue(someObject: updates[kStudyResources] as AnyObject ){
                 StudyUpdates.studyResourcesUpdated = (updates[kStudyResources] as? Bool)!
@@ -372,6 +405,15 @@ struct StudyUpdates {
                 StudyUpdates.studyStatus = updates["status"] as? String
             }
         }
+        if UserDefaults.standard.value(forKey: kUserDeviceLanguage) as? String ?? "" == StudyUpdates.studyLang ?? ""{
+            StudyUpdates.studyOldLang = StudyUpdates.studyLang
+        } else {
+            StudyUpdates.studyResourcesUpdated = true
+            StudyUpdates.studyInfoUpdated  = true
+            StudyUpdates.studyActivitiesUpdated = true
+           
+        }
+        StudyUpdates.studyLang = UserDefaults.standard.value(forKey: kUserDeviceLanguage) as? String ?? ""
         StudyUpdates.studyVersion = detail[kStudyCurrentVersion] as? String
     }
 }

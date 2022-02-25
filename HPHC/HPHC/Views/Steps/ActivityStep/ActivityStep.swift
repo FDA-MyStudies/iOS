@@ -36,15 +36,12 @@ let kActivityStepRepeatable = "repeatable"
 let kActivityStepRepeatableText = "repeatableText"
 let kActivityStepDestinations = "destinations"
 
-
-
-// MARK:Enum for ActivityStepType
+// MARK: Enum for ActivityStepType
 enum ActivityStepType:String{
     case form = "form"
     case instruction = "instruction"
     case question = "question"
     case active = "task" // active step
-    
     
     case taskSpatialSpanMemory = "spatialSpanMemory"
     case taskTowerOfHanoi = "towerOfHanoi"
@@ -56,19 +53,19 @@ enum ActivityStepType:String{
 */
 class ActivityStep {
     
-    var activityId: String? //Stores the uniqueId of activity
+    var activityId: String? // Stores the uniqueId of activity
     var type: ActivityStepType? // specifies different activitystep types like instruction, question
     
     var resultType: Any?
     var key: String? // Identifier
-    var title: String? //Title for ORKStep
+    var title: String? // Title for ORKStep
     var text: String? // Text for ORKStep
     var skippable: Bool?
     var groupName: String?
     var repeatable: Bool? // used for RepeatableFormStep
     var repeatableText: String? // used for RepeatableFormStep to add more form steps
     
-    var destinations: Array<Dictionary<String,Any>>? // stores the destination step for branching
+    var destinations: Array<Dictionary<String, Any>>? // stores the destination step for branching
     
     /* default Intalizer method */
     init() {
@@ -89,7 +86,17 @@ class ActivityStep {
     
     /* initializer method with all params
      */
-     init(activityId: String,type: ActivityStepType,resultType: String,key: String,title: String,text: String,skippable: Bool,groupName: String,repeatable: Bool,repeatableText: String, destinations: Array<Dictionary<String,Any>>) {
+     init(activityId: String,
+          type: ActivityStepType,
+          resultType: String,
+          key: String,
+          title: String,
+          text: String,
+          skippable: Bool,
+          groupName: String,
+          repeatable: Bool,
+          repeatableText: String,
+          destinations: Array<Dictionary<String, Any>>) {
         
         self.activityId = activityId
         self.type = type

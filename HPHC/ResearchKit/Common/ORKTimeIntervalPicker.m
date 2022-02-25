@@ -87,6 +87,7 @@
     if (_pickerView == nil) {
         _pickerView = [[ORKDatePicker alloc] init];
         _pickerView.datePickerMode = UIDatePickerModeCountDownTimer;
+        _pickerView.preferredDatePickerStyle = UIDatePickerStyleWheels;
         [_pickerView addTarget:self action:@selector(valueDidChange:) forControlEvents:UIControlEventValueChanged];
         [self setAnswerFormat:_answerFormat];
         [self setAnswer:_answer];

@@ -19,7 +19,7 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
-// MARK:- ActivitySchedules Class
+// MARK: - ActivitySchedules Class
 
 enum ActivityFilterType: Int {
     case all = 0
@@ -27,24 +27,22 @@ enum ActivityFilterType: Int {
     case tasks
 }
 
-
 protocol ActivityFilterViewDelegate {
     func setSelectedFilter(selectedIndex: ActivityFilterType)
 }
 
-
-class ActivityFilterView: UIView,UITableViewDelegate,UITableViewDataSource{
+class ActivityFilterView: UIView, UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet var tableview: UITableView?
     @IBOutlet var buttonCancel: UIButton!
     @IBOutlet var heightLayoutConstraint: NSLayoutConstraint!
     var delegate: ActivityFilterViewDelegate?
-    var filterArray = ["All","Surveys", "Tasks"]
+    var filterArray = ["All", "Surveys", "Tasks"]
     var selectedIndex: ActivityFilterType  = ActivityFilterType(rawValue: 0)!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        //fatalError("init(coder:) has not been implemented")
+        // fatalError("init(coder:) has not been implemented")
     }
     
     class func instanceFromNib(frame: CGRect , selectedIndex: ActivityFilterType) -> ActivityFilterView {
@@ -64,8 +62,7 @@ class ActivityFilterView: UIView,UITableViewDelegate,UITableViewDataSource{
         return view
     }
     
-    
-    // MARK:- Button Action
+    // MARK: - Button Action
     @IBAction func buttonCancelClicked(_: UIButton) {
         self.removeFromSuperview()
     }
@@ -83,7 +80,8 @@ class ActivityFilterView: UIView,UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 15)
        
-        cell.textLabel?.text = filterArray[indexPath.row]
+        let labelVal = NSLocalizedStrings(filterArray[indexPath.row], comment: "")
+        cell.textLabel?.text = labelVal
         
         if indexPath.row == self.selectedIndex.rawValue {
             cell.textLabel?.textColor = kBlueColor

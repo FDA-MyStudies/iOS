@@ -24,22 +24,26 @@ import SlideMenuControllerSwift
 let kLeftMenuSubtitle = "subTitle"
 let kLeftMenuTitle = "menuTitle"
 let kLeftMenuIconName = "iconName"
-let kLeftMenuCellTitleHome = "Home"
-let kLeftMenuCellTitleResources = "Resources"
-let kLeftMenuCellTitleProfile = "My Account"
-let kLeftMenuCellTitleSignIn = "Sign In"
-let kLeftMenuCellTitleNewUser = "New User?"
-let kLeftMenuCellSubTitleValue = "Sign up"
-let kAlertMessageReachoutText = "This feature will be available in the next sprint."
+let kLeftMenuCellTitleHome = NSLocalizedStrings("Home", comment: "")
+let kLeftMenuCellTitleResources = NSLocalizedStrings("Resources", comment: "")
+let kLeftMenuCellTitleProfile = NSLocalizedStrings("My Account", comment: "")
+let kLeftMenuCellTitleSignIn = NSLocalizedStrings("Sign In", comment: "")
+let kLeftMenuCellTitleNewUser = NSLocalizedStrings("New User?", comment: "")
+let kLeftMenuCellTitleReachOut = NSLocalizedStrings("Reach Out", comment: "")
+let kLeftMenuCellSubTitleValue = NSLocalizedStrings("Sign up", comment: "")
 
-let kAlertMessageForSignOut = "Are you sure you want to sign out?"
-let kAlertMessageSignOutSync = "Are you sure you want to sign out? Incomplete activities and activities completed while offline must be re-started when you next sign in."
+let kAlertMessageReachoutText = NSLocalizedStrings("This feature will be available in the next sprint.", comment: "")
 
-let kAlertSignOutLaterTitle = "Sign Out later"
+let kAlertMessageForSignOut = NSLocalizedStrings("Are you sure you want to sign out?", comment: "")
+let kAlertMessageSignOutSync =
+    NSLocalizedStrings(
+        "Are you sure you want to sign out? Incomplete activities and activities completed while offline must be re-started when you next sign in.",
+                       comment: "")
 
-// MARK:Segue Identifiers
+let kAlertSignOutLaterTitle = NSLocalizedStrings("Sign Out later", comment: "")
+
+// MARK: Segue Identifiers
 let kLoginStoryboardIdentifier = "Login"
-
 
 enum LeftMenu: Int {
     case studyList = 0
@@ -48,7 +52,6 @@ enum LeftMenu: Int {
     case reachOut_signIn
     case signup
 }
-
 
 protocol LeftMenuProtocol: class {
     func changeViewController(_ menu: LeftMenu)
@@ -64,11 +67,11 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
     @IBOutlet weak var tableFooterView: UIView!
     @IBOutlet weak var buttonSignOut: UIButton?
     
-    var menus: [[String: Any]] = [ ["menuTitle": "Home",
+    var menus: [[String: Any]] = [ ["menuTitle": kLeftMenuCellTitleHome,
                    "iconName": "home_menu1-1",
                    "menuType": LeftMenu.studyList],
                   
-                  ["menuTitle": "Resources",
+                  ["menuTitle": kLeftMenuCellTitleResources,
                    "iconName": "resources_menu1",
                    "menuType": LeftMenu.resources],
     ]
@@ -92,7 +95,7 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         super.init(coder: aDecoder)
     }
     
-// MARK:- ViewController Lifecycle
+// MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -123,47 +126,74 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         self.view.isHidden = false
     }
     
-    
     final private func setupGatewayMenu(){
         
         let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
-        self.studyListViewController = (storyboard.instantiateViewController(withIdentifier: String(describing: StudyListViewController.classForCoder())) as? UINavigationController)!
+        self.studyListViewController =
+        (storyboard.instantiateViewController(withIdentifier:
+                                                String(describing: StudyListViewController.classForCoder()))
+                                            as? UINavigationController)!
         
-        self.notificationController = (storyboard.instantiateViewController(withIdentifier:  String(describing: NotificationViewController.classForCoder())) as? UINavigationController)!
+        self.notificationController =
+        (storyboard.instantiateViewController(withIdentifier:
+                                                String(describing: NotificationViewController.classForCoder()))
+                                        as? UINavigationController)!
         
-        self.resourcesViewController = (storyboard.instantiateViewController(withIdentifier:  String(describing: GatewayResourcesListViewController.classForCoder())) as? UINavigationController)!
+        self.resourcesViewController =
+        (storyboard.instantiateViewController(withIdentifier:
+                                                String(describing: GatewayResourcesListViewController.classForCoder()))
+                                            as? UINavigationController)!
         
-        self.profileviewController = (storyboard.instantiateViewController(withIdentifier:  String(describing: ProfileViewController.classForCoder())) as? UINavigationController)!
+        self.profileviewController =
+        (storyboard.instantiateViewController(withIdentifier:
+                                                String(describing: ProfileViewController.classForCoder()))
+                                        as? UINavigationController)!
         
-        self.reachoutViewController = (storyboard.instantiateViewController(withIdentifier:  String(describing: ReachoutOptionsViewController.classForCoder())) as? UINavigationController)!
-        
+        self.reachoutViewController =
+        (storyboard.instantiateViewController(withIdentifier:
+                                                String(describing: ReachoutOptionsViewController.classForCoder()))
+                                        as? UINavigationController)!
     }
     
     final private func setupStandaloneMenu(){
         
         let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
         /*for standalone*/
-        self.studyTabBarController = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
+        self.studyTabBarController = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier)
+            as! StudyDashboardTabbarViewController
         
         let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
-        self.studyListViewController = storyboard.instantiateViewController(withIdentifier: String(describing: StudyListViewController.classForCoder())) as? UINavigationController
+        self.studyListViewController =
+        storyboard.instantiateViewController(withIdentifier:
+                                                String(describing: StudyListViewController.classForCoder()))
+            as? UINavigationController
         
+        self.studyHomeViewController =
+        studyStoryBoard.instantiateViewController(withIdentifier:
+                                                    String(describing: "StudyHomeNavigationController")) as?
+            UINavigationController // for standalone
         
-        self.studyHomeViewController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: "StudyHomeNavigationController")) as? UINavigationController //for standalone
+        self.notificationController =
+        storyboard.instantiateViewController(withIdentifier:
+                                                String(describing: NotificationViewController.classForCoder())) as?
+            UINavigationController
         
-        self.notificationController = storyboard.instantiateViewController(withIdentifier:  String(describing: NotificationViewController.classForCoder())) as? UINavigationController
+        self.resourcesViewController = storyboard.instantiateViewController(withIdentifier:
+                                                                    String(describing: GatewayResourcesListViewController.classForCoder()))
+            as? UINavigationController
         
-        self.resourcesViewController = storyboard.instantiateViewController(withIdentifier:  String(describing: GatewayResourcesListViewController.classForCoder())) as? UINavigationController
+        self.profileviewController = storyboard.instantiateViewController(withIdentifier:
+                                                                            String(describing: ProfileViewController.classForCoder()))
+            as? UINavigationController
         
-        self.profileviewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ProfileViewController.classForCoder())) as? UINavigationController
-        
-        self.reachoutViewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ReachoutOptionsViewController.classForCoder())) as? UINavigationController
+        self.reachoutViewController =
+        storyboard.instantiateViewController(withIdentifier:
+                                                String(describing: ReachoutOptionsViewController.classForCoder()))
+            as? UINavigationController
         
     }
-    
-    
     
     /**
      Used to create Login controller for new user using SignInViewController
@@ -172,18 +202,21 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
     func createControllersForAnonymousUser(){
         
         let loginStoryBoard = UIStoryboard(name: kLoginStoryboardIdentifier, bundle: nil)
-        let signInController = (loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as? SignInViewController)!
+        let signInController = (loginStoryBoard.instantiateViewController(withIdentifier:
+                                                                            String(describing: SignInViewController.classForCoder()))
+                                    as? SignInViewController)!
         self.signInViewController = UINavigationController(rootViewController: signInController)
         self.signInViewController.navigationBar.barStyle = .default
          self.signInViewController.navigationBar.isTranslucent = false
         
-        let signUpController = (loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignUpViewController.classForCoder())) as? SignUpViewController)!
+        let signUpController = (loginStoryBoard.instantiateViewController(withIdentifier:
+                                                                            String(describing: SignUpViewController.classForCoder()))
+                                    as? SignUpViewController)!
         self.signUpViewController = UINavigationController(rootViewController: signUpController)
         self.signUpViewController.navigationBar.barStyle = .default
         self.signUpViewController.navigationBar.isTranslucent = false
     }
     
-
     /**
      Used to create Left menu items
      */
@@ -193,47 +226,44 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         
         let user = User.currentUser
         
-        menus = [ ["menuTitle": "Home",
+        menus = [ ["menuTitle": kLeftMenuCellTitleHome,
                    "iconName": "home_menu1-1",
             "menuType": LeftMenu.studyList]
         ]
         
         if !Utilities.isStandaloneApp() && AppConfiguration.isShowMenuResourceButton {
             
-            menus.append(["menuTitle": "Resources",
+            menus.append(["menuTitle": kLeftMenuCellTitleResources,
              "iconName": "resources_menu1",
                 "menuType": LeftMenu.resources])
         }
         
         if user.userType == .FDAUser {
-            menus.append(["menuTitle": "My Account",
+            menus.append(["menuTitle": kLeftMenuCellTitleProfile,
                           "iconName": "profile_menu1",
                 "menuType": LeftMenu.profile_reachOut])
             
             if shouldAllowToGiveFeedback {
-                menus.append(["menuTitle": "Reach Out",
+                menus.append(["menuTitle": kLeftMenuCellTitleReachOut,
                           "iconName": "reachout_menu1",
                 "menuType": LeftMenu.reachOut_signIn])
             }
             
-           
             self.buttonSignOut?.isHidden = false
-        }
-        else{
+        } else {
             if shouldAllowToGiveFeedback {
-                menus.append(["menuTitle": "Reach Out",
+                menus.append(["menuTitle": kLeftMenuCellTitleReachOut,
                           "iconName": "reachout_menu1",
                 "menuType": LeftMenu.profile_reachOut])
             }
-            
-
-            menus.append(["menuTitle": "Sign In",
+        
+            menus.append(["menuTitle": kLeftMenuCellTitleSignIn,
                           "iconName": "signin_menu1",
                 "menuType": LeftMenu.reachOut_signIn])
             
-            menus.append(["menuTitle": "New User?",
+            menus.append(["menuTitle": kLeftMenuCellTitleNewUser,
                           "iconName":"newuser_menu1",
-                          "subTitle": "Sign up",
+                          "subTitle": kLeftMenuCellSubTitleValue,
                 "menuType": LeftMenu.signup])
              self.buttonSignOut?.isHidden = true
         }
@@ -247,6 +277,7 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         self.tableView.frame.size = CGSize(width: self.tableView.frame.width, height: UIScreen.main.bounds.size.height  )
         
         self.tableView.reloadData()
+        UIApplication.shared.keyWindow?.removeProgressIndicatorFromWindow()
         
     }
     
@@ -257,28 +288,27 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         
         let user = User.currentUser
         if user.userType == .FDAUser {
-            menus.append(["menuTitle": "My Account",
+            menus.append(["menuTitle": kLeftMenuCellTitleProfile,
                           "iconName": "profile_menu1"])
             self.tableView.tableFooterView?.isHidden = false
-        }
-        else{
-            menus.append(["menuTitle": "Sign In",
+        } else {
+            menus.append(["menuTitle": kLeftMenuCellTitleSignIn,
                           "iconName": "signin_menu1"])
             
-            menus.append(["menuTitle": "New User?",
+            menus.append(["menuTitle": kLeftMenuCellTitleNewUser,
                           "iconName": "newuser_menu1",
-                          "subTitle": "Sign up"])
+                          "subTitle": kLeftMenuCellSubTitleValue])
             self.tableView.tableFooterView?.isHidden = true
         }
         
         // Setting proportion height of the header and footer view
-        let height = UIScreen.main.bounds.size.height  * (220.0 / 667.0) //calculate new height
+        let height = UIScreen.main.bounds.size.height  * (220.0 / 667.0) // calculate new height
         self.tableView.tableHeaderView?.frame.size = CGSize(width: self.tableView.tableHeaderView!.frame.size.width, height: height)
         self.tableView.tableFooterView?.frame.size = CGSize(width: self.tableView.tableFooterView!.frame.size.width, height: height)
         self.tableView.frame.size = CGSize(width: self.tableView.frame.width, height: UIScreen.main.bounds.size.height)
         self.tableView.reloadData()
+        UIApplication.shared.keyWindow?.removeProgressIndicatorFromWindow()
     }
-    
     
     /**
      Used to change the view controller when clicked from the left menu
@@ -294,17 +324,14 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
             if isStandalone {
                 if Study.currentStudy?.userParticipateState.status == .inProgress {
                      self.slideMenuController()?.changeMainViewController(self.studyTabBarController, close: true)
-                }
-                else {
+                } else {
                     self.slideMenuController()?.changeMainViewController(self.studyHomeViewController, close: true)
                 }
                 
-               
             } else {
                 self.slideMenuController()?.changeMainViewController(self.studyListViewController, close: true)
             }
-            
-            
+                
         case .resources:
             self.slideMenuController()?.changeMainViewController(self.resourcesViewController, close: true)
             
@@ -313,7 +340,7 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
             if User.currentUser.userType == .FDAUser {
                 self.slideMenuController()?.changeMainViewController(self.profileviewController, close: true)
                 
-            }else {
+            } else {
                 // go to ReachOut screen
                 self.slideMenuController()?.changeMainViewController(self.reachoutViewController, close: true)
             }
@@ -323,20 +350,18 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
                 // go to reach out
                 self.slideMenuController()?.changeMainViewController(self.reachoutViewController, close: true)
                 
-            }else {
+            } else {
                 
                 // go sign in
                 self.slideMenuController()?.changeMainViewController(self.signInViewController, close: true)
             }
         case .signup:
             self.slideMenuController()?.changeMainViewController(self.signUpViewController, close: true)
-            
-            
+                
         }
     }
     
-    
-// MARK:- Button Action
+// MARK: - Button Action
     
     /**
      Signout button clicked
@@ -344,13 +369,14 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
      */
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
         
-     
-        
         DBHandler.isDataAvailableToSync { (available) in
-            if(available){
+            if available {
                 
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kSignOutText, comment: ""), errorMessage: NSLocalizedString(kAlertMessageSignOutSync, comment: ""), errorAlertActionTitle: NSLocalizedString(kSignOutText, comment: ""),
-                                                                     errorAlertActionTitle2: NSLocalizedString(kAlertSignOutLaterTitle, comment: ""), viewControllerUsed: self,
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(kSignOutText,
+                                                                     errorMessage: kAlertMessageSignOutSync,
+                                                                     errorAlertActionTitle: kSignOutText,
+                                                                     errorAlertActionTitle2: kAlertSignOutLaterTitle,
+                                                                     viewControllerUsed: self,
                                                                      action1: {
                                                                         
                                                                         self.sendRequestToSignOut()
@@ -358,15 +384,16 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
                 },
                                                                      action2: {
                 })
-            }
-            else {
+            } else {
                 
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kSignOutText, comment: ""), errorMessage: NSLocalizedString(kAlertMessageForSignOut, comment: ""), errorAlertActionTitle: NSLocalizedString(kSignOutText, comment: ""),
-                                                                     errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(kSignOutText,
+                                                                     errorMessage: kAlertMessageForSignOut,
+                                                                     errorAlertActionTitle: kSignOutText,
+                                                                     errorAlertActionTitle2: kTitleCancel,
+                                                                     viewControllerUsed: self,
                                                                      action1: {
                                                                         
                                                                         self.sendRequestToSignOut()
-                                                                        
                                                                         
                 },
                                                                      action2: {
@@ -374,23 +401,15 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
                 })
             }
         }
-        
-       
-        
     }
 
-    
     /**
      Send the webservice request to Signout
      */
     func sendRequestToSignOut() {
-        
-        
-        UserServices().logoutUser(self as NMWebServiceDelegate)
-        
-        
-    }
     
+        UserServices().logoutUser(self as NMWebServiceDelegate)
+    }
     
     /**
      As the user is Signed out Remove passcode from the keychain
@@ -411,26 +430,27 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         if !Utilities.isStandaloneApp() {
             self.changeViewController(.studyList)
             self.createLeftmenuItems()
-        }
-        else {
+        } else {
             UIApplication.shared.keyWindow?.removeProgressIndicatorFromWindow()
             self.navigationController?.popToRootViewController(animated: true)
         }
-        
-       
     }
 }
 
-
-// MARK:- UITableView Delegate
+// MARK: - UITableView Delegate
 extension LeftMenuViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+        let dict: Dictionary<String, Any>? = menus[indexPath.row]
         if let menu = LeftMenu(rawValue: indexPath.row) {
             switch menu {
-            case .studyList, .resources, .profile_reachOut,.reachOut_signIn, .signup:
+            case .studyList, .resources, .profile_reachOut, .reachOut_signIn, .signup:
+              
+              if dict?["subTitle"] != nil {
+                return 78.0
+              } else {
                 return 70.0
+              }
             }
         }
         return 0
@@ -452,8 +472,7 @@ extension LeftMenuViewController: UITableViewDelegate {
     }
 }
 
-
-// MARK:- UITableView DataSource
+// MARK: - UITableView DataSource
 extension LeftMenuViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -462,27 +481,26 @@ extension LeftMenuViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let dict: Dictionary<String,Any>? = menus[indexPath.row]
+        let dict: Dictionary<String, Any>? = menus[indexPath.row]
         
         if dict?["subTitle"] != nil {
             
             var cell: LeftMenuCell?
-            cell = tableView.dequeueReusableCell(withIdentifier: "cell" , for: indexPath) as? LeftMenuCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? LeftMenuCell
             cell?.populateCellData(data: menus[indexPath.row])
             return cell!
             
-        }else {
+        } else {
             var cell: LeftMenuResourceTableViewCell?
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "LeftMenuResourceCell" , for: indexPath) as? LeftMenuResourceTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "LeftMenuResourceCell", for: indexPath) as? LeftMenuResourceTableViewCell
             cell?.populateCellData(data: menus[indexPath.row])
             return cell!
         }
     }
 }
 
-
-// MARK:- UserService Response handler
+// MARK: - UserService Response handler
 extension LeftMenuViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -503,16 +521,21 @@ extension LeftMenuViewController: NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         UIApplication.shared.keyWindow?.addProgressIndicatorOnWindowFromTop()
         
-        if error.code == 403 { //unauthorized
-            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+        if error.code == 403 { // unauthorized
+            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
+                                                          message: error.localizedDescription,
+                                                          buttonTitle: kTitleOk,
+                                                          viewControllerUsed: self,
+                                                          action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
-        }else {
-            UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+        } else {
+            let errorMsg = base64DecodeError(error.localizedDescription)
+            UIUtilities.showAlertWithTitleAndMessage(title: kErrorTitle as NSString, message: errorMsg as NSString)
         }
     }
 }
 
-
-
-
+public func NSLocalizedStrings(_ key: String, comment: String) -> String {
+  return NSLocalizedString(key, tableName: nil, bundle: AppDelegate.selectedLocale() ?? Bundle.main, value: "", comment: "")
+}

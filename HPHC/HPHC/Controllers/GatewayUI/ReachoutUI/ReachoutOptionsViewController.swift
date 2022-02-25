@@ -23,13 +23,15 @@ import UIKit
 class ReachoutOptionsViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView?
+    let kReachOutTitle = NSLocalizedStrings("REACH OUT", comment: "")
+    let kLeaveAnonymousFeedbackTitle = NSLocalizedStrings("Leave Anonymous Feedback", comment: "")
+    let kNeedHelpContactUsTitle = NSLocalizedStrings("Need Help? Contact Us", comment: "")
     
-    
-// MARK:- Viewcontroller Lifecycle
+// MARK: - Viewcontroller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title =  NSLocalizedString("REACH OUT", comment: "")
+        self.navigationItem.title = kReachOutTitle
         
         // Do any additional setup after loading the view.
     }
@@ -41,7 +43,6 @@ class ReachoutOptionsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
     /*
      // MARK: - Navigation
@@ -55,7 +56,7 @@ class ReachoutOptionsViewController: UIViewController {
     
 }
 
-// MARK:- TableView Datasource
+// MARK: - TableView Datasource
 extension ReachoutOptionsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,26 +65,24 @@ extension ReachoutOptionsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        //let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
+        // let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "reachoutCell", for: indexPath) as! ReachoutOptionCell
         
-        
         switch indexPath.row {
         case 0:
-            cell.labelTitle?.text = NSLocalizedString("Leave Anonymous Feedback", comment: "")
+            cell.labelTitle?.text = kLeaveAnonymousFeedbackTitle
         case 1:
-            cell.labelTitle?.text = NSLocalizedString("Need Help? Contact Us", comment: "")
+            cell.labelTitle?.text = kNeedHelpContactUsTitle
         default:
-            cell.labelTitle?.text = NSLocalizedString("Need Help? Contact Us", comment: "")
+            cell.labelTitle?.text = kNeedHelpContactUsTitle
         }
-        
         
         return cell
     }
 }
 
-// MARK:- TableView Delegates
+// MARK: - TableView Delegates
 extension ReachoutOptionsViewController:  UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -94,11 +93,8 @@ extension ReachoutOptionsViewController:  UITableViewDelegate {
             self.performSegue(withIdentifier: "contactusSegue", sender: self)
         case 0:
             self.performSegue(withIdentifier: "feedbackSegue", sender: self)
-        default:
-            debugPrint("default")
+        default: break
+            
         }
     }
 }
-
-
-

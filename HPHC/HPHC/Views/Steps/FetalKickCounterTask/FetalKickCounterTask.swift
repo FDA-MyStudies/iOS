@@ -23,22 +23,20 @@ import ResearchKit
 
 
 let kFetalKickInstructionStepIdentifier = "Instruction"
-let kFetalKickInstructionStepTitle = "Fetal Kick Counter"
-let kFetalKickInstructionStepText = "This task needs you to record the number of times you experience fetal kicks in a given duration of time.Also called as the Fetal Kick Counter task, this will help assess the activity of the baby within."
-
+let kFetalKickInstructionStepTitle = NSLocalizedStrings("Fetal Kick Counter", comment: "")
+let kFetal1 = "This task needs you to record the number of times you experience fetal kicks in a given duration"
+let kFetal2 = " of time.Also called as the Fetal Kick Counter task, this will help assess the activity of the baby within."
+let kFetalKickInstructionStepText = NSLocalizedStrings("\(kFetal1)\(kFetal2)", comment: "")
 
 let kFetalKickIntroductionStepIdentifier = "FetalKickIntroduction"
 let kFetalKickIntroductionStepTitle = ""
-let kFetalKickIntroductionStepText = "This task needs you to record the number of times you experience fetal kicks in a given duration of time.Also called as the Fetal Kick Counter task, this will help assess the activity of the baby within."
-
 
 let kFetalKickCounterStepIdentifier = "FetalKickCounterStep"
 
-let kFetalKickCounterStepCompletionTitle = "CompletionStep"
+let kFetalKickCounterStepCompletionIdentifier = "CompletionStep"
 let kFetalKickCounterStepCompletionText = "Thank you for your time!"
 
 let kFetalKickCounterTaskIdentifier = "FetalKickCounterTask"
-
 
 class FetalKickCounterTask {
     
@@ -58,12 +56,11 @@ class FetalKickCounterTask {
         self.maxKickCounts = 0
     }
     
-    
     /*
      Initalizer method to create instance
      @param duration    is task run time in hours
      */
-    func initWithFormat(duration: Float,identifier: String,instructionText: String?)  {
+    func initWithFormat(duration: Float, identifier: String, instructionText: String?)  {
         
         self.identifier = identifier
         self.steps =  [ORKStep]()
@@ -90,29 +87,28 @@ class FetalKickCounterTask {
         self.maxKickCounts = maxKicks
     }
     
-    
     /*
      Getter method to create fetalKickTask
      @returns OrkorderedTask    containing steps
      */
     func getTask() -> ORKOrderedTask {
         
-        //create a Intro step
+        // create a Intro step
         let introStep = FetalKickIntroStep(identifier: kFetalKickIntroductionStepIdentifier)
-        introStep.introTitle =  NSLocalizedString(kFetalKickInstructionStepTitle, comment: "")
+        introStep.introTitle =  kFetalKickInstructionStepTitle
       
       if (self.instructionText?.count)! > 0 {
-        introStep.subTitle = NSLocalizedString(self.instructionText!, comment: "")
+        introStep.subTitle = NSLocalizedStrings(self.instructionText!, comment: "")
        
       } else {
-         introStep.subTitle = NSLocalizedString(kFetalKickInstructionStepText, comment: "")
+         introStep.subTitle = kFetalKickInstructionStepText
       }
       
         introStep.displayImage = #imageLiteral(resourceName: "task_img1")
         
         steps?.append(introStep)
       
-        //create a Fetal Kick Counter Step
+        // create a Fetal Kick Counter Step
         let kickStep = FetalKickCounterStep(identifier: self.identifier!)
         kickStep.counDownTimer = Int(self.duration! )
         
@@ -125,11 +121,15 @@ class FetalKickCounterTask {
         
         steps?.append(kickStep)
         
-        //create a Completion Step
-        let summaryStep = ORKCompletionStep(identifier: kFetalKickCounterStepCompletionTitle)
-        summaryStep.title = "Activity Completed"
+        // create a Completion Step
+        let summaryStep = ORKCompletionStep(identifier: kFetalKickCounterStepCompletionIdentifier)
+        let kActivityCompleted = NSLocalizedStrings("Activity Completed", comment: "")
+        let kThankYouForTime =
+            NSLocalizedStrings("Thank you for your time!\n\nTap Done to submit responses. Responses cannot be modified after submission.",
+                               comment: "")
+        summaryStep.title = kActivityCompleted
         summaryStep.image = #imageLiteral(resourceName: "successBlueBig")
-        summaryStep.detailText = "Thank you for your time!\n\nTap Done to submit responses. Responses cannot be modified after submission."
+        summaryStep.detailText = kThankYouForTime
        
         steps?.append(summaryStep)
         

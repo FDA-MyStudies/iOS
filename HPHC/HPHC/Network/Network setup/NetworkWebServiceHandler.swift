@@ -47,7 +47,8 @@ enum HTTPMethod : NSInteger {
 }
 
 struct DefaultHeaders {
-    static let DefaultHeaderKey = NSDictionary.init(object: HTTPHeaderValues.ContentTypeJson, forKey: HTTPHeaderKeys.ContentType as NSCopying)
+    static let DefaultHeaderKey = NSDictionary(object: HTTPHeaderValues.ContentTypeJson,
+                                               forKey: HTTPHeaderKeys.ContentType as NSCopying)
 }
 
 class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
@@ -56,11 +57,10 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
     var maxRequestRetryCount = NetworkConnectionConstants.NoOfRequestRetry
     var connectionTimeoutInterval : Double = NetworkConnectionConstants.ConnectionTimeoutInterval
    
+    var delegate: NMWebServiceDelegate?
+    var challengeDelegate: NMAuthChallengeDelegate?
     
-    var delegate: NMWebServiceDelegate? = nil
-    var challengeDelegate: NMAuthChallengeDelegate? = nil
-    
-    weak var networkManager: NetworkManager? = nil
+    weak var networkManager: NetworkManager?
     var configuration:NetworkConfiguration!
     
     init(delegate :  NMWebServiceDelegate, challengeDelegate:NMAuthChallengeDelegate?){
@@ -92,13 +92,13 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
 //        if requestName == "studyList" {
 //            serverPath = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
 //        }
-        return NSString.init(format: "%@%@", serverPath,requestName)
+        return NSString.init(format: "%@%@", serverPath, requestName)
     }
     
     fileprivate func getCombinedWithCommonParams(_ params : NSDictionary?) -> NSDictionary? {
         
         let commonParams  = self.configuration.getDefaultRequestParameters() as NSDictionary?
-        var mParams : NSMutableDictionary? = nil
+        var mParams : NSMutableDictionary?
         if commonParams != nil{
             mParams = NSMutableDictionary.init(dictionary: commonParams!)
         }
@@ -112,15 +112,14 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         return mParams!
     }
     
-    fileprivate func getCombinedHeaders(_ userHeaders : NSDictionary?, defaultHeaders : NSDictionary?)-> NSDictionary? {
+    fileprivate func getCombinedHeaders(_ userHeaders : NSDictionary?, defaultHeaders : NSDictionary?) -> NSDictionary? {
         
         let commonParams: NSDictionary? = self.configuration.getDefaultHeaders() as NSDictionary?
         
-        var mParams : NSMutableDictionary? = nil
+        var mParams : NSMutableDictionary?
         if commonParams != nil{
             mParams = NSMutableDictionary.init(dictionary: commonParams!)
         }
-        
         
         if  defaultHeaders != nil {
             if mParams != nil {
@@ -139,7 +138,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         return mParams
     }
     
-    func getRequestMethod(_ methods : HTTPMethod)-> NSString{
+    func getRequestMethod(_ methods : HTTPMethod) -> NSString{
         switch methods {
         case .httpMethodGet:
             return "GET"
@@ -152,40 +151,43 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         }
     }
     
-    fileprivate func getHttpRequest(_ requestName : NSString , parameters : NSDictionary?)-> NSString {
+    fileprivate func getHttpRequest(_ requestName : NSString, parameters : NSDictionary?) -> NSString {
         
         // get from uptiiq
         var url : String = ""
         if !(parameters == nil || parameters?.count == 0){
             let allKeys = parameters?.allKeys
             for key in allKeys! {
-                url = (url as String) + String(format: "%@=%@&",String(describing: key), parameters?[key as! String] as! CVarArg )
+                url = (url as String) + String(format: "%@=%@&", String(describing: key), parameters?[key as! String] as! CVarArg )
             }
             let length = url.count-1
             let index = url.index(url.startIndex, offsetBy: length)
-            url =  String(url[..<index])//url.substring(to: index) //url.substring(to: length)
+            url =  String(url[..<index])// url.substring(to: index) // url.substring(to: length)
         }
         return url as NSString
         
     }
     
-    func composeRequestFor(_ requestName: NSString, requestType : RequestType , method : HTTPMethod , params : NSDictionary?, headers : NSDictionary?){
+    func composeRequestFor(_ requestName: NSString,
+                           requestType : RequestType ,
+                           method : HTTPMethod ,
+                           params : NSDictionary?,
+                           headers : NSDictionary?){
         
-        if ((delegate?.startedRequest) != nil) {
+        if (delegate?.startedRequest) != nil {
             delegate?.startedRequest(networkManager!, requestName: requestName)
         }
         
-        var requestParams:NSDictionary? = nil
+        var requestParams: NSDictionary? 
         if params != nil{
             requestParams = self.getCombinedWithCommonParams(params)
         }
         switch requestType {
         case .requestTypeHTTP:
             self.generateHTTPRequest(requestName, method: method, params: requestParams, headers: headers!)
-            break
+            
         case .requestTypeJSON:
             self.generateJSONRequest(requestName, method: method, params: requestParams, headers: headers)
-            break
         }
     }
     
@@ -193,35 +195,34 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         
         self.configuration = configuration
         
-        if ((delegate?.startedRequest) != nil) {
+        if (delegate?.startedRequest) != nil {
             delegate?.startedRequest(networkManager!, requestName: method.methodName as NSString)
         }
         
-        var requestParams:NSDictionary? = nil
+        var requestParams:NSDictionary?
         if params != nil {
             requestParams = self.getCombinedWithCommonParams(params)
         }
         switch method.requestType {
         case .requestTypeHTTP:
             self.generateHTTPRequest(method.methodName as NSString, method: method.methodType, params: requestParams, headers: headers)
-            break
+            
         case .requestTypeJSON:
             self.generateJSONRequest(method.methodName as NSString, method: method.methodType, params: requestParams, headers: headers)
-            break
         }
     }
     
-    fileprivate func generateHTTPRequest(_ requestName : NSString ,method : HTTPMethod , params : NSDictionary?, headers : NSDictionary?){
+    fileprivate func generateHTTPRequest(_ requestName : NSString, method : HTTPMethod, params : NSDictionary?, headers : NSDictionary?) {
         
         let httpHeaders : NSDictionary? = self.getCombinedHeaders(headers, defaultHeaders: nil)
         let baseURLString  : NSString = self.getBaseURLString(requestName)
         let httpRequestString  : NSString? = self.getHttpRequest(requestName, parameters: params)
         var requestString  : NSString!
         
-        if (httpRequestString?.length == 0) {
+        if httpRequestString?.length == 0 {
             requestString = baseURLString
         } else {
-            requestString = String(format:"%@?%@",baseURLString,httpRequestString!) as NSString?
+            requestString = String(format:"%@?%@", baseURLString, httpRequestString!) as NSString?
         }
         
         if #available(iOS 9, *) {
@@ -231,16 +232,19 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         }
         
         let requestUrl = URL(string: requestString as String)!
-      print("Request URL:  \(requestUrl)")
-         var request = URLRequest.init(url: requestUrl, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: self.connectionTimeoutInterval)
+      
+         var request = URLRequest.init(url: requestUrl,
+                                       cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData,
+                                       timeoutInterval: self.connectionTimeoutInterval)
         request.httpMethod = self.getRequestMethod(method) as String
         if httpHeaders != nil && (httpHeaders?.count)! > 0{
             request.allHTTPHeaderFields = httpHeaders as? [String : String]
         }
+        
         self.fireRequest(request, requestName: requestName)
     }
     
-    fileprivate func generateJSONRequest(_ requestName : NSString , method : HTTPMethod , params : NSDictionary? , headers : NSDictionary?) {
+    fileprivate func generateJSONRequest(_ requestName: NSString, method: HTTPMethod, params: NSDictionary?, headers: NSDictionary?) {
         var defaultheaders : NSDictionary? = DefaultHeaders.DefaultHeaderKey
         if params == nil || params?.count == 0 {
             defaultheaders = nil
@@ -252,13 +256,15 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
 //
 //      } else {
          httpHeaders = self.getCombinedHeaders(headers, defaultHeaders: defaultheaders)
-      //}
-      
+      // }
+        
         let baseURLString : NSString = self.getBaseURLString(requestName)
         let requestUrl = URL(string: baseURLString as String)
         do{
             
-            var request = URLRequest.init(url: requestUrl!, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: self.connectionTimeoutInterval)
+            var request = URLRequest.init(url: requestUrl!,
+                                          cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData,
+                                          timeoutInterval: self.connectionTimeoutInterval)
           
             if params != nil && (params?.count)! > 0{
                 let data = try JSONSerialization.data(withJSONObject: params!, options: JSONSerialization.WritingOptions.prettyPrinted)
@@ -269,19 +275,20 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             if httpHeaders != nil {
                 request.allHTTPHeaderFields = httpHeaders! as? [String : String]
             }
+            
             self.fireRequest(request, requestName: requestName)
             
-        }catch {
-            print("Serilization error")
+        } catch {
+            
         }
     }
     
-    fileprivate func fireRequest (_ request : URLRequest? , requestName : NSString?) {
+    fileprivate func fireRequest (_ request : URLRequest?, requestName : NSString?) {
         
         if NetworkManager.isNetworkAvailable() {
 
             let config = URLSessionConfiguration.default
-            let session = Foundation.URLSession.init(configuration: config, delegate: self , delegateQueue: nil)
+            let session = Foundation.URLSession.init(configuration: config, delegate: self, delegateQueue: nil)
             
             session.dataTask(with: request!) {(data, response, error) -> Void in
                 if let data = data {
@@ -290,62 +297,67 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                     }
                 } else {
                     DispatchQueue.main.async {
-                        self.delegate?.failedRequest(self.networkManager!, requestName: requestName!,error: error! as NSError)
+                        self.delegate?.failedRequest(self.networkManager!, requestName: requestName!, error: error! as NSError)
                     }
                 }
                 }.resume()
             
         } else {
-            if ((delegate?.failedRequest) != nil) {
-        
-                let error1 = NSError(domain: NSURLErrorDomain, code:NoNetworkErrorCode,userInfo:[NSLocalizedDescriptionKey:"You seem to be offline. Please connect to a network to proceed with this action."])
-                delegate?.failedRequest(networkManager!, requestName: requestName!,error: error1)
+            if (delegate?.failedRequest) != nil {
+                let errorMsg = "You seem to be offline. Please connect to a network to proceed with this action."
+                let error1 = NSError(domain: NSURLErrorDomain,
+                                     code:NoNetworkErrorCode,
+                                     userInfo:[NSLocalizedDescriptionKey: NSLocalizedStrings(errorMsg,comment: "")])
+                delegate?.failedRequest(networkManager!, requestName: requestName!, error: error1)
             }
         }
     }
     
-     func handleResponse(_ data : Data? , response : URLResponse?, requestName : NSString?,error : NSError?){
+     func handleResponse(_ data: Data? ,response: URLResponse?, requestName: NSString?, error: NSError?) {
        
-        if (error != nil) {
+        if error != nil {
             if shouldRetryRequest && maxRequestRetryCount > 0  {
                 maxRequestRetryCount -= 1
             } else {
                 
-                if error?.code == -1001 { //Could not connect to the server.
+                if error?.code == -1001 { // Could not connect to the server.
                 }
-                if ((delegate?.failedRequest) != nil) {
-                    delegate?.failedRequest(networkManager!, requestName: requestName!,error: error!)
+                if (delegate?.failedRequest) != nil {
+                    delegate?.failedRequest(networkManager!, requestName: requestName!, error: error!)
                 }
 
             }
         } else {
           
-          print("response---\(response)")
+          
             let status = NetworkConstants.checkResponseHeaders(response!)
             let statusCode = status.0
             var error1 : NSError?
             if statusCode == 200 || statusCode == 0 {
-                var responseDict: NSDictionary? = nil
+                var responseDict: NSDictionary?
                 
                 do{
-                    //NSJSONReadingOptions.MutableContainers
+                    // NSJSONReadingOptions.MutableContainers
                     responseDict = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary
-
-                }catch {
-                    print("Serilization error")
+                    // print("response1---\(responseDict)---\(requestName)---\(error)")
+                    
+                } catch {
+                    // print("Serilization error")
                 }
                 
-                if ((delegate?.finishedRequest) != nil) {
+                if (delegate?.finishedRequest) != nil {
                     
-                    if (responseDict != nil) {
-                        delegate?.finishedRequest(networkManager!, requestName: requestName!,response: responseDict!)
+                    if responseDict != nil {
+                        delegate?.finishedRequest(networkManager!, requestName: requestName!, response: responseDict!)
                         
                     } else {
+                        let errorMsg = "Could not connect to server. Please try again later."
+                        error1 = NSError(domain: NSURLErrorDomain,
+                                         code: 300,
+                                         userInfo: [NSLocalizedDescriptionKey:NSLocalizedStrings(errorMsg, comment: "")])
                         
-                        error1 = NSError(domain: NSURLErrorDomain, code: 300,userInfo:[NSLocalizedDescriptionKey:"Could not connect to server. Please try again later."])
-                        
-                        if ((delegate?.failedRequest) != nil) {
-                            delegate?.failedRequest(networkManager!, requestName: requestName!,error:error1!)
+                        if (delegate?.failedRequest) != nil {
+                            delegate?.failedRequest(networkManager!, requestName: requestName!, error:error1!)
                         }
                     }
                 }
@@ -353,41 +365,45 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                 
                 if self.configuration.shouldParseErrorMessage() {
                   
-                    var responseDict: [String:Any]? = nil
+                    var responseDict: [String:Any]?
                     do {
                         
                       responseDict = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? [String:Any]
+                      // print("response1---\(responseDict)---\(requestName)---\(error)")
                         
-                    }catch {
-                        print("Serilization error")
+                    } catch {
+                        // print("Serilization error")
                     }
                   
                   error1 = self.configuration.parseError(errorResponse: responseDict ?? [:])
                 } else {
                     
-                    error1 = NSError(domain: NSURLErrorDomain, code:statusCode,userInfo:[NSLocalizedDescriptionKey: status.1])
+                    error1 = NSError(domain: NSURLErrorDomain, code: statusCode, userInfo: [NSLocalizedDescriptionKey: status.1])
                 }
 
-                if ((delegate?.failedRequest) != nil) {
+                if (delegate?.failedRequest) != nil {
                     delegate?.failedRequest(networkManager!, requestName: requestName!,error:error1!)
                 }
             }
         }
     }
     
-    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+    func urlSession(_ session: URLSession,
+                    didReceive challenge: URLAuthenticationChallenge,
+                    completionHandler: @escaping (URLSession.AuthChallengeDisposition,
+                                                  URLCredential?) -> Void) {
         var credential : URLCredential!
         
         if (challengeDelegate?.networkCredential) != nil {
             credential = challengeDelegate?.networkCredential(networkManager!, challenge: challenge)
         }
         
-        if (credential != nil) {
+        if credential != nil {
             var challengeDisposition : Foundation.URLSession.AuthChallengeDisposition!
             if (challengeDelegate?.networkChallengeDisposition) != nil {
                 challengeDisposition = challengeDelegate?.networkChallengeDisposition(networkManager!, challenge: challenge)
             }
-            completionHandler(challengeDisposition,credential)
+            completionHandler(challengeDisposition, credential)
         } else {
             completionHandler(.performDefaultHandling, nil)
         }

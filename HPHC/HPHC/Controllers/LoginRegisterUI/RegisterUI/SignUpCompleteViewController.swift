@@ -30,66 +30,63 @@ class SignUpCompleteViewController: UIViewController{
     @IBOutlet var buttonNext: UIButton?
     var shouldCreateMenu: Bool = true
     var viewLoadFrom: CompletionLoadFrom = .signup
+    let kPasscodeDoYouWish =
+        NSLocalizedStrings(
+            "Do you wish to set up Passcode or FaceID/TouchID protection for this app? (You can do this later in the My Account area).",
+            comment: "")
     
-    // MARK:- ViewController Lifecycle
+    // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Used to set border color for bottom view
+        // Used to set border color for bottom view
         buttonNext?.layer.borderColor = kUicolorForButtonBackground
-        self.title = NSLocalizedString("", comment: "")
-        
+        self.title = NSLocalizedStrings("", comment: "")
         
         let settings: Settings? = Settings.init()
         
         settings?.remoteNotifications = true
         settings?.localNotifications = true
-        //settings?.touchId = true
-        //settings?.passcode = true
+        // settings?.touchId = true
+        // settings?.passcode = true
         
         self.hideViews()
         
-        
         UIUtilities.showAlertMessageWithTwoActionsAndHandler("",
-                                                             errorMessage: "Do you wish to set up Passcode or FaceID/TouchID protection for this app? (You can do this later in the My Account area).",
-                                                             errorAlertActionTitle: "No",
-                                                             errorAlertActionTitle2: "Yes",
+                                                             errorMessage: kPasscodeDoYouWish,
+                                                             errorAlertActionTitle: kNo,
+                                                             errorAlertActionTitle2: kYes,
                                                              viewControllerUsed: self,
                                                              action1: {
-                                                                //No
+                                                                // No
                                                                 settings?.touchId = false
                                                                 settings?.passcode = false
                                                                 User.currentUser.settings = settings
                                                                 UserServices().updateUserProfile(self as NMWebServiceDelegate)
-                                                                
-                                                                
+                                                                                                                                
         }) {
-            //Yes
-            print("hello")
+            // Yes
+            
             settings?.touchId = true
             settings?.passcode = true
             User.currentUser.settings = settings
             UserServices().updateUserProfile(self as NMWebServiceDelegate)
-            
-            
+                
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        //hide navigationbar
+        // hide navigationbar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
@@ -105,7 +102,7 @@ class SignUpCompleteViewController: UIViewController{
         }
     }
     
-    // MARK:- button Actions
+    // MARK: - button Actions
     
     /**
      
@@ -116,11 +113,10 @@ class SignUpCompleteViewController: UIViewController{
      */
     @IBAction func nextButtonAction(_ sender: Any) {
         
-        //Updating Key & Vector
+        // Updating Key & Vector
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.updateKeyAndInitializationVector()
         
-       
         if self.viewLoadFrom == .joinStudy {
             let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
             leftController.createLeftmenuItems()
@@ -131,8 +127,7 @@ class SignUpCompleteViewController: UIViewController{
         
     }
     
-    
-    // MARK:- Utility Methods
+    // MARK: - Utility Methods
     
     /**
      
@@ -149,7 +144,6 @@ class SignUpCompleteViewController: UIViewController{
         }
     }
     
-    
     /**
      
      Method to Create Menu View after completion
@@ -164,9 +158,7 @@ class SignUpCompleteViewController: UIViewController{
     }
 }
 
-
-
-// MARK:- UserService Response handler
+// MARK: - UserService Response handler
 extension SignUpCompleteViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -187,21 +179,13 @@ extension SignUpCompleteViewController: NMWebServiceDelegate {
             ud.set(false, forKey: kShowNotification)
             ud.synchronize()
             
-            
-            
             if User.currentUser.settings!.passcode! {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.checkPasscode(viewController: self.navigationController!)
                 self.unUideViews()
-            }
-            else {
+            } else {
                 self.navigateToGatewayDashboard()
             }
-            
-            
-            
-            
-            
         }
     }
     
@@ -209,8 +193,9 @@ extension SignUpCompleteViewController: NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+        let errorMsg = base64DecodeError(error.localizedDescription)
+        UIUtilities.showAlertWithTitleAndMessage(
+            title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString,
+            message: errorMsg as NSString)
     }
 }
-
-

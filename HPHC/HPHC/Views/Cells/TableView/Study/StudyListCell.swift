@@ -23,7 +23,7 @@ import UIKit
 import SDWebImage
 
 protocol StudyListDelegates {
-    func studyBookmarked(_ cell: StudyListCell, bookmarked: Bool,forStudy study: Study)
+    func studyBookmarked(_ cell: StudyListCell, bookmarked: Bool, forStudy study: Study)
 }
 
 class StudyListCell: UITableViewCell {
@@ -36,6 +36,7 @@ class StudyListCell: UITableViewCell {
     @IBOutlet var labelCompletionValue: UILabel?
     @IBOutlet var labelAdherenceValue: UILabel?
     @IBOutlet var labelStudyStatus: UILabel?
+    @IBOutlet var labelStudylanguage: UILabel?
     @IBOutlet var buttonBookmark: UIButton?
     @IBOutlet var progressBarCompletion: UIProgressView?
     @IBOutlet var progressBarAdherence: UIProgressView?
@@ -45,7 +46,7 @@ class StudyListCell: UITableViewCell {
     @IBOutlet var categoryBG: UIView?
     
     var selectedStudy: Study!
-    var delegate: StudyListDelegates? = nil
+    var delegate: StudyListDelegates?
     
     /// Cell cleanup.
     override func prepareForReuse() {
@@ -59,12 +60,11 @@ class StudyListCell: UITableViewCell {
         let color2 = categoryBG?.backgroundColor
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
-        if(selected) {
+        if selected {
             studyStatusIndicator?.backgroundColor = color
             categoryBG?.backgroundColor = color2
         }
     }
-    
     
     /**
      
@@ -78,12 +78,11 @@ class StudyListCell: UITableViewCell {
         let color = studyStatusIndicator?.backgroundColor
         let color2 = categoryBG?.backgroundColor
         super.setHighlighted(highlighted, animated: animated)
-        if(highlighted) {
+        if highlighted {
             studyStatusIndicator?.backgroundColor = color
             categoryBG?.backgroundColor = color2
         }
     }
-    
     
     /**
      
@@ -102,7 +101,7 @@ class StudyListCell: UITableViewCell {
             labelStudySponserName?.text =  study.sponserName!
         }
         
-        labelStudyCategoryType?.text =  study.category!.uppercased()
+        labelStudyCategoryType?.text =  categoryReCorrection(study.category!).uppercased()
         
         progressBarCompletion?.layer.cornerRadius = 2
         progressBarCompletion?.layer.masksToBounds = true
@@ -113,18 +112,68 @@ class StudyListCell: UITableViewCell {
         attributedString.addAttributes([NSAttributedString.Key.font:UIFont(name: "HelveticaNeue-Bold", size: 12)!], range: foundRange)
         labelStudySponserName?.attributedText = attributedString
         
-        //study status
+        // study status
         self.setStudyStatus(study: study)
-        
+      
+        // study status
+        self.setStudyLanguage(study: study)
+    
         if User.currentUser.userType == .AnonymousUser {
             // do nothing
-        }
-        else {
-            //set participatedStudies
+        } else {
+            // set participatedStudies
             self.setUserStatusForStudy(study: study)
         }
     }
-    
+  
+    // Category correction for Spanish Language
+    func categoryReCorrection(_ category: String) -> String {
+      switch category {
+      case "1Biologics Safety":
+        return "Seguridad de los productos biológicos"
+      case "1Clinical Trials":
+        return "Ensayos clínicos"
+      case "1Cosmetics Safety":
+        return "Seguridad de los cosméticos"
+      case "1Drug Safety":
+        return "Seguridad de los medicamentos"
+      case "1Food Safety":
+        return "Seguridad alimenticia"
+      case "1Medical Device Safety":
+        return "Seguridad de dispositivos médicos"
+      case "1Observational Studies":
+        return "Estudios observacionales"
+      case "1Public Health":
+        return "Salud pública"
+      case "1Radiation-Emitting Products":
+        return "Productos de radiación"
+      case "1Tobacco Use":
+        return "El consumo de tabaco"
+      default:
+        return category // Category is in English OR category Not recognised
+      }
+    }
+  
+    /**
+     Used to set the Study Language
+     @param study    Access the data from Study Class
+     */
+    func setStudyLanguage(study: Study){
+        
+        let locale3 = getLanguageLocale()
+        
+        if (locale3.hasPrefix("es") &&
+             study.studyLanguage.containsIgnoringCase("spanish")) ||
+            (locale3.hasPrefix("en") && study.studyLanguage.containsIgnoringCase("english")) {
+            labelStudylanguage?.text = ""
+        } else {
+            if study.studyLanguage.containsIgnoringCase("english") {
+                labelStudylanguage?.text = NSLocalizedStrings("English", comment: "")
+            } else {
+                labelStudylanguage?.text = NSLocalizedStrings("Spanish", comment: "")
+            }
+        }
+    }
     
     /**
      Used to set the Study State
@@ -132,20 +181,19 @@ class StudyListCell: UITableViewCell {
      */
     func setStudyStatus(study: Study){
         
-        labelStudyStatus?.text = study.status.rawValue.uppercased()
+        labelStudyStatus?.text = NSLocalizedStrings("\(study.status.rawValue.uppercased())", comment: "")
         
         switch study.status {
         case .Active:
-            studyStatusIndicator?.backgroundColor = Utilities.getUIColorFromHex(0x4caf50) //green
+            studyStatusIndicator?.backgroundColor = Utilities.getUIColorFromHex(0x4caf50) // green
         case .Upcoming:
-            studyStatusIndicator?.backgroundColor = Utilities.getUIColorFromHex(0x007cba)  //app color
+            studyStatusIndicator?.backgroundColor = Utilities.getUIColorFromHex(0x007cba)  // app color
         case .Closed:
-            studyStatusIndicator?.backgroundColor = Utilities.getUIColorFromHex(0xFF0000)  //red color
+            studyStatusIndicator?.backgroundColor = Utilities.getUIColorFromHex(0xFF0000)  // red color
         case .Paused:
-            studyStatusIndicator?.backgroundColor = Utilities.getUIColorFromHex(0xf5af37)  //orange color
+            studyStatusIndicator?.backgroundColor = Utilities.getUIColorFromHex(0xf5af37)  // orange color
         }
     }
-    
     
     /**
      Used to set UserStatus ForStudy
@@ -155,25 +203,23 @@ class StudyListCell: UITableViewCell {
         let currentUser = User.currentUser
         if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == study.studyId}).first {
             
-            //assign to study
+            // assign to study
             study.userParticipateState = userStudyStatus
             
-            //user study status
+            // user study status
             
             switch study.status {
             case .Active:
-                labelStudyUserStatus?.text = userStudyStatus.status.description
+                labelStudyUserStatus?.text = NSLocalizedStrings("\(userStudyStatus.status.description)", comment: "")
             case .Closed:
-                labelStudyUserStatus?.text = userStudyStatus.status.closedStudyDescription
+                labelStudyUserStatus?.text = NSLocalizedStrings("\(userStudyStatus.status.closedStudyDescription)", comment: "")
             case .Upcoming:
-                labelStudyUserStatus?.text = userStudyStatus.status.upcomingStudyDescription
+                labelStudyUserStatus?.text = NSLocalizedStrings("\(userStudyStatus.status.upcomingStudyDescription)", comment: "")
             default:
-                labelStudyUserStatus?.text = userStudyStatus.status.description
+                labelStudyUserStatus?.text = NSLocalizedStrings("\(userStudyStatus.status.description)", comment: "")
             }
-            
-            
-            
-            //update completion %
+          
+            // update completion %
             self.labelCompletionValue?.text = String(userStudyStatus.completion) + "%"
             self.labelAdherenceValue?.text = String(userStudyStatus.adherence)  + "%"
             self.progressBarCompletion?.progress = Float(userStudyStatus.completion)/100
@@ -194,8 +240,7 @@ class StudyListCell: UITableViewCell {
             }
             // bookMarkStatus
             buttonBookmark?.isSelected = userStudyStatus.bookmarked
-        }
-        else {
+        } else {
             study.userParticipateState = UserStudyStatus()
             labelStudyUserStatus?.text = UserStudyStatus.StudyStatus.yetToJoin.description
             studyUserStatusIcon?.image = #imageLiteral(resourceName: "yet_to_join_icn")
@@ -203,8 +248,7 @@ class StudyListCell: UITableViewCell {
         }
     }
     
-    
-// MARK:- Button Actions
+// MARK: - Button Actions
     
   /// Updates the icon for `Study`
      /// - Parameter study: Instance of Study.
@@ -212,7 +256,10 @@ class StudyListCell: UITableViewCell {
          // Update study logo using SDWEBImage and cache it.
          if let logoURLString = study.logoURL,
              let url = URL(string: logoURLString) {
-             studyLogoImage?.sd_setImage(with: url, placeholderImage: nil, options: .progressiveLoad, completed: { [weak self] (image, error, _, _) in
+             studyLogoImage?.sd_setImage(with: url,
+                                         placeholderImage: nil,
+                                         options: .progressiveLoad,
+                                         completed: { [weak self] (image, _, _, _) in
                  if let image = image {
                      self?.studyLogoImage?.image = image
                  }
@@ -220,15 +267,14 @@ class StudyListCell: UITableViewCell {
          }
      }
   
-    // MARK:- Button Actions
+    // MARK: - Button Actions
     
     /// Button bookmark clicked and delegate it back to Study home and
     /// Study list View controller.
     @IBAction func buttonBookmardAction(_ sender: UIButton) {
         if sender.isSelected {
             sender.isSelected = false
-        }
-        else {
+        } else {
             sender.isSelected = true
         }
         delegate?.studyBookmarked(self, bookmarked: sender.isSelected, forStudy: self.selectedStudy)

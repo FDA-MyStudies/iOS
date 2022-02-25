@@ -46,15 +46,14 @@ class ResourcesTableViewCell: UITableViewCell {
             
             self.contentView.backgroundColor = UIColor.lightGray
             self.contentView.alpha = 0.6
-            UIView.animate(withDuration: 0.4, delay: 0, options: [.curveEaseInOut,.repeat,.autoreverse], animations: {
+            UIView.animate(withDuration: 0.4, delay: 0, options: [.curveEaseInOut, .repeat, .autoreverse], animations: {
                 self.contentView.alpha = 0.1
-            }) { (finished) in
+            }) { (_) in
                 self.contentView.backgroundColor = UIColor.white
                 self.contentView.alpha = 1.0
                 resource.availableToday = false
             }
-            
-            
+                
             DispatchQueue.main.asyncAfter(deadline: .now() + 1 ) {
                 self.contentView.layer.removeAllAnimations()
             }

@@ -23,8 +23,9 @@ import UIKit
 import IQKeyboardManagerSwift
 import SlideMenuControllerSwift
 
-let kVerifyMessageFromSignIn = "Your registered email is pending verification. Please type in the Verification Code received in the email to complete this step and proceed to using the app."
-
+let kVerify1 = "Your registered email is pending verification. Please type in the "
+let kVerify2 = "Verification Code received in the email to complete this step and proceed to using the app."
+let kVerifyMessageFromSignIn = NSLocalizedStrings("\(kVerify1)\(kVerify2)", comment: "")
 
 enum SignInLoadFrom: Int{
     case gatewayOverview
@@ -46,59 +47,90 @@ class SignInViewController: UIViewController{
         return .default
     }
     
-// MARK:- ViewController Lifecycle
+// MARK: - ViewController Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Used to set border color for bottom view
+        // Used to set border color for bottom view
         buttonSignIn?.layer.borderColor = kUicolorForButtonBackground
-        self.title = NSLocalizedString(kSignInTitleText, comment: "")
+        self.title = kSignInTitleText
         
-        //load plist info
-        let plistPath = Bundle.main.path(forResource: "SignInPlist", ofType: ".plist", inDirectory: nil)
+        // load plist info
+        var plistPath = Bundle.main.path(forResource: "SignInPlist", ofType: ".plist", inDirectory: nil)
+        let localeDefault = getLanguageLocale()
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "SignInPlist", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        } else if localeDefault.hasPrefix("en"){
+            plistPath = Bundle.main.path(forResource: "SignInPlist", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        } else if localeDefault.hasPrefix("es"){
+            plistPath = Bundle.main.path(forResource: "SignInPlist", ofType: ".plist", inDirectory: nil, forLocalization: "es")
+        }
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
-        //Automatically takes care  of text field become first responder and scroll of tableview
+        // Automatically takes care  of text field become first responder and scroll of tableview
         // IQKeyboardManager.sharedManager().enable = true
         
-        //Used for background tap dismiss keyboard
-        let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
+        // Used for background tap dismiss keyboard
+        let gestureRecognizer: UITapGestureRecognizer =
+            UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
         self.tableView?.addGestureRecognizer(gestureRecognizer)
         
+        // info button
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "info"),
+                                                                      style: .done,
+                                                                      target: self,
+                                                                      action: #selector(self.buttonInfoAction(_:)))
         
-        //info button
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "info"), style: .done, target: self, action: #selector(self.buttonInfoAction(_:)))
-        
-        
-        //unhide navigationbar
+        // unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        //WCPServices().getTermsPolicy(delegate: self)
+        // WCPServices().getTermsPolicy(delegate: self)
         
-        if let attributedTitle = buttonSignUp?.attributedTitle(for: .normal) {
-            let mutableAttributedTitle = NSMutableAttributedString(attributedString: attributedTitle)
-            
-            mutableAttributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: #colorLiteral(red: 0, green: 0.4862745098, blue: 0.7294117647, alpha: 1) , range: NSRange(location: 10,length: 7))
-            
-            buttonSignUp?.setAttributedTitle(mutableAttributedTitle, for: .normal)
-        }
+      if let _ = buttonSignUp?.attributedTitle(for: .normal) {
         
-        TermsAndPolicy.currentTermsAndPolicy =  TermsAndPolicy()
+        let attrs1 = [
+          NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 14.0)!,
+          NSAttributedString.Key.foregroundColor : UIColor.systemGray] as [NSAttributedString.Key : Any]
+        
+        let attrs2 = [
+          NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 14.0)!,
+          NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0, green: 0.4862745098, blue: 0.7294117647, alpha: 1)] as [NSAttributedString.Key : Any]
+        
+        let attributedString1 = NSMutableAttributedString(string:NSLocalizedStrings("New User?", comment: ""), attributes:attrs1)
+        
+        let attributedString2 = NSMutableAttributedString(string:" " + NSLocalizedStrings("Sign Up", comment: ""), attributes:attrs2)
+        
+        attributedString1.append(attributedString2)
+        
+        buttonSignUp?.setAttributedTitle(attributedString1, for: .normal)
+      }
       
-        let policyURL = Branding.PrivacyPolicyURL
-        let terms = Branding.TermsAndConditionURL
-        TermsAndPolicy.currentTermsAndPolicy?.initWith(terms: terms, policy: policyURL)
-        self.agreeToTermsAndConditions()
-        
-       
-       
+      let main_string = NSLocalizedStrings("By tapping Sign In, you agree to this app's Terms and Privacy Policy", comment: "")
+      
+      let stringAttributes = [
+        NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 14.0)!,
+        NSAttributedString.Key.foregroundColor : UIColor.systemGray] as [NSAttributedString.Key : Any]
+      let attributedString = NSMutableAttributedString(string: main_string, attributes: stringAttributes)
+      termsAndCondition?.attributedText = attributedString
+      termsAndCondition?.textAlignment = .center
+      
+      TermsAndPolicy.currentTermsAndPolicy =  TermsAndPolicy()
+      
+      let policyURL = Branding.PrivacyPolicyURL
+      let terms = Branding.TermsAndConditionURL
+      TermsAndPolicy.currentTermsAndPolicy?.initWith(terms: terms, policy: policyURL)
+      self.agreeToTermsAndConditions()
+      
+      
+//      let base64 = "RXN0ZSBjb3JyZW8gZWxlY3Ryw71uaWNvIHlhIGhhIHNpZG8gdXRpbGl6YWRvLiBJbnRlbnRlIGNvbiB1bmEgZGlyZWNjacO9biBkZSBjb3JyZW8gZWxlY3Ryw71uaWNvIGRpZmVyZW50ZS4KCg=="
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //unhide navigationbar
+        // unhide navigationbar
        
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
@@ -111,17 +143,15 @@ class SignInViewController: UIViewController{
             self.setNavigationBarItem()
         }
         
-        
         if termsPageOpened {
             termsPageOpened = false
         }
-        
         
        // self.perform(#selector(SignInViewController.setInitialDate), with: self, afterDelay: 1)
         
         self.tableView?.reloadData()
         
-        //UIApplication.shared.statusBarStyle = .default
+        // UIApplication.shared.statusBarStyle = .default
         setNeedsStatusBarAppearanceUpdate()
     }
     
@@ -131,14 +161,13 @@ class SignInViewController: UIViewController{
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        //hide navigationbar
+        // hide navigationbar
         if viewLoadFrom == .gatewayOverview || Utilities.isStandaloneApp(){
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
     }
     
-    
-// MARK:- Button Action
+// MARK: - Button Action
     
     /**
      
@@ -176,7 +205,6 @@ class SignInViewController: UIViewController{
         }
     }
     
-    
     /**
      
      To Display registration information
@@ -185,11 +213,10 @@ class SignInViewController: UIViewController{
 
      */
     @IBAction func buttonInfoAction(_ sender: Any){
-        UIUtilities.showAlertWithTitleAndMessage(title: "Why Register?", message: kRegistrationInfoMessage as NSString)
+      UIUtilities.showAlertWithTitleAndMessage(title: kWhyRegisterText as NSString, message: kRegistrationInfoMessage as NSString)
     }
     
-
-// MARK:-
+// MARK: -
     
     /**
      
@@ -207,7 +234,6 @@ class SignInViewController: UIViewController{
         
         let passwordTextFieldValue = selectedCell.textFieldValue?.text
         
-        
         if emailTextFieldValue?.isEmpty == false &&  (emailTextFieldValue?.count)! > 0{
             user.emailId = emailTextFieldValue
         }
@@ -217,7 +243,6 @@ class SignInViewController: UIViewController{
         self.tableView?.reloadData()
     }
     
-    
     /**
      
      Used to show the alert using Utility
@@ -226,9 +251,11 @@ class SignInViewController: UIViewController{
      
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
+        UIUtilities.showAlertMessage("",
+                                     errorMessage: NSLocalizedStrings(textMessage, comment: ""),
+                                     errorAlertActionTitle: kTitleOKCapital,
+                                     viewControllerUsed: self)
     }
-    
     
     /**
      
@@ -239,7 +266,6 @@ class SignInViewController: UIViewController{
         self.view.endEditing(true)
     }
     
-    
     /**
      
      creatingMenuView before Navigating to DashBoard
@@ -248,7 +274,6 @@ class SignInViewController: UIViewController{
     func navigateToGatewayDashboard(){
         self.createMenuView()
     }
-    
     
     /**
      
@@ -259,7 +284,8 @@ class SignInViewController: UIViewController{
         
         let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
-        let changePassword = (storyboard.instantiateViewController(withIdentifier: "ChangePasswordViewController") as? ChangePasswordViewController)!
+        let changePassword = (storyboard.instantiateViewController(
+            withIdentifier: "ChangePasswordViewController") as? ChangePasswordViewController)!
         if viewLoadFrom == .menu {
             changePassword.viewLoadFrom = .menu_login
         } else if viewLoadFrom == .joinStudy {
@@ -271,7 +297,6 @@ class SignInViewController: UIViewController{
         self.navigationController?.pushViewController(changePassword, animated: true)
     }
     
-    
     /**
      
      Used to navigate to Verification controller
@@ -280,7 +305,6 @@ class SignInViewController: UIViewController{
     func navigateToVerifyController(){
         self.performSegue(withIdentifier: "verificationSegue", sender: nil)
     }
-    
     
     /**
      
@@ -296,26 +320,30 @@ class SignInViewController: UIViewController{
         self.navigationController?.pushViewController(fda, animated: true)
     }
     
-    
     func agreeToTermsAndConditions(){
         
         self.termsAndCondition?.delegate = self
         let attributedString =  (termsAndCondition?.attributedText.mutableCopy() as? NSMutableAttributedString)!
         
-        var foundRange = attributedString.mutableString.range(of: "Terms")
-        attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
-        
-        foundRange = attributedString.mutableString.range(of: "Privacy Policy")
-        attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
+        var foundRange = attributedString.mutableString.range(of: NSLocalizedStrings("Terms", comment: ""))
+        attributedString.addAttribute(NSAttributedString.Key.link,
+                                      value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String,
+                                      range: foundRange)
+      
+        foundRange = attributedString.mutableString.range(of: NSLocalizedStrings("Privacy Policy", comment: ""))
+        attributedString.addAttribute(NSAttributedString.Key.link,
+                                      value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String,
+                                      range: foundRange)
         
         termsAndCondition?.attributedText = attributedString
         
-        termsAndCondition?.linkTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA)])
+        termsAndCondition?.linkTextAttributes =
+            convertToOptionalNSAttributedStringKeyDictionary(
+                [NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA)])
         
     }
     
-    
-// MARK:- Segue Methods
+// MARK: - Segue Methods
     
     @IBAction func unwindFromVerification(_ segue: UIStoryboardSegue){
         
@@ -326,7 +354,7 @@ class SignInViewController: UIViewController{
         if let signUpController = segue.destination as? SignUpViewController {
             if viewLoadFrom == .menu {
                 signUpController.viewLoadFrom = .menu_login
-            } else if(viewLoadFrom == .joinStudy) {
+            } else if viewLoadFrom == .joinStudy {
                 signUpController.viewLoadFrom = .joinStudy_login
             } else {
                 signUpController.viewLoadFrom = .login
@@ -352,8 +380,7 @@ class SignInViewController: UIViewController{
     }
 }
 
-
-// MARK:- TableView Data source
+// MARK: - TableView Data source
 extension SignInViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -380,8 +407,7 @@ extension SignInViewController : UITableViewDataSource {
     }
 }
 
-
-// MARK:- TableView Delegates
+// MARK: - TableView Delegates
 extension SignInViewController:  UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -390,13 +416,11 @@ extension SignInViewController:  UITableViewDelegate {
     }
 }
 
-
-// MARK:- Textfield Delegate
+// MARK: - Textfield Delegate
 extension SignInViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print(textField.tag)
-        
+                
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -410,7 +434,7 @@ extension SignInViewController: UITextFieldDelegate{
                 return true
             }
         } else {
-            if (range.location == textField.text?.count && string == " ") {
+            if range.location == textField.text?.count && string == " " {
                 
                 textField.text = textField.text?.appending("\u{00a0}")
                 return false
@@ -420,19 +444,16 @@ extension SignInViewController: UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print(textField.text!)
+        
         switch textField.tag {
         case SignInTableViewTags.EmailId.rawValue:
             user.emailId = textField.text
-            break
             
         case SignInTableViewTags.Password.rawValue:
             user.password = textField.text
-            break
             
-        default:
-            print("No Matching data Found")
-            break
+        default: break
+        
         }
     }
 }
@@ -448,19 +469,17 @@ extension SignInViewController: UIGestureRecognizerDelegate{
     }
 }
 
-
-
 extension SignInViewController: UITextViewDelegate{
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        
-        print(characterRange.description)
-        
-        var link: String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
+                
+        var link: String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! // kTermsAndConditionLink
         var title: String = kNavigationTitleTerms
-        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL && characterRange.length == String("Privacy Policy").count) {
-            //kPrivacyPolicyLink
-            print("terms")
+        if URL.absoluteString ==
+                TermsAndPolicy.currentTermsAndPolicy?.policyURL &&
+                characterRange.length == String(NSLocalizedStrings("Privacy Policy", comment: "")).count {
+            // kPrivacyPolicyLink
+            
             link =  (TermsAndPolicy.currentTermsAndPolicy?.policyURL)! // kPrivacyPolicyLink
             title = kNavigationTitlePrivacyPolicy
             
@@ -482,16 +501,13 @@ extension SignInViewController: UITextViewDelegate{
     }
     
     func textViewDidChangeSelection(_ textView: UITextView) {
-        if(!NSEqualRanges(textView.selectedRange, NSMakeRange(0, 0))) {
-            textView.selectedRange = NSMakeRange(0, 0);
+        if !NSEqualRanges(textView.selectedRange, NSMakeRange(0, 0)) {
+            textView.selectedRange = NSMakeRange(0, 0)
         }
     }
 }
 
-
-
-
-// MARK:- Webservices Delegate
+// MARK: - Webservices Delegate
 extension SignInViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -547,15 +563,57 @@ extension SignInViewController: NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.removeProgressIndicator()
-        
-        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+        let errorMsg = base64DecodeError(error.localizedDescription)
+        UIUtilities.showAlertWithTitleAndMessage(
+            title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString,
+            message: errorMsg as NSString)
     }
 }
 
-
-
 // Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+private func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
 	guard let input = input else { return nil }
 	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
+
+class CustomTextField: UITextField {
+
+    private func getKeyboardLanguage() -> String? {
+        return "en" // here you can choose keyboard any way you need
+    }
+
+    override var textInputMode: UITextInputMode? {
+        if let language = getKeyboardLanguage() {
+            for tim in UITextInputMode.activeInputModes {
+                if tim.primaryLanguage!.contains(language) {
+                    return tim
+                }
+            }
+        }
+        return super.textInputMode
+    }
+
+}
+
+extension String {
+    func urlSafeBase64Decoded() -> String? {
+        var st = self
+            .replacingOccurrences(of: "_", with: "/")
+            .replacingOccurrences(of: "-", with: "+")
+        let remainder = self.count % 4
+        if remainder > 0 {
+            st = self.padding(toLength: self.count + 4 - remainder,
+                              withPad: "=",
+                              startingAt: 0)
+        }
+        guard let d = Data(base64Encoded: st, options: .ignoreUnknownCharacters) else {
+            return nil
+        }
+        return String(data: d, encoding: .utf8)
+    }
+}
+
+func base64DecodeError (_ errorDesc : String) -> String {
+  let errorMsg = errorDesc.urlSafeBase64Decoded() ?? errorDesc
+  return errorMsg
 }

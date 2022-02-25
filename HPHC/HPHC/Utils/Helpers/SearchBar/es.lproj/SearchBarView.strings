@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "Search study by"; ObjectID = "7Rb-1u-tkt"; */
+"7Rb-1u-tkt.text" = "Buscar estudio por";
+
+/* Class = "UISegmentedControl"; Hr1-BD-AHJ.segmentTitles[0] = "token"; ObjectID = "Hr1-BD-AHJ"; */
+"Hr1-BD-AHJ.segmentTitles[0]" = "simbolo";
+
+/* Class = "UISegmentedControl"; Hr1-BD-AHJ.segmentTitles[1] = "keyword"; ObjectID = "Hr1-BD-AHJ"; */
+"Hr1-BD-AHJ.segmentTitles[1]" = "palabra clave";
+
+/* Class = "UITextField"; placeholder = "Enter a token"; ObjectID = "x0y-MY-FMc"; */
+"x0y-MY-FMc.placeholder" = "Ingrese un token";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "xyq-ug-M4x"; */
+"xyq-ug-M4x.normalTitle" = "Cancelar";

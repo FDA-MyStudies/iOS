@@ -10,8 +10,8 @@ stages:
 build_project:
   stage: build
   script:
-    - xcodebuild clean -workspace FDA/FDA.xcworkspace -scheme FDA | xcpretty
-    - xcodebuild  -workspace FDA/FDA.xcworkspace -scheme FDA -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.0' | xcpretty -s
+    - xcodebuild clean -workspace HPHC/HPHC.xcworkspace -scheme HPHC | xcpretty
+    - xcodebuild  -workspace HPHC/HPHC.xcworkspace -scheme HPHC -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.0' | xcpretty -s
   tags:
     - ios
 

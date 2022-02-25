@@ -11,19 +11,18 @@ import RealmSwift
 
 enum ActivityDiskService {
     
-    private static var realm: Realm = {
+    private static var realm: Realm? = {
         let key = FDAKeychain.shared[kRealmEncryptionKeychainKey]
         let data = Data.init(base64Encoded: key!)
         let encryptionConfig = Realm.Configuration(encryptionKey: data)
-        return try! Realm()
+        return try? Realm()
     }()
     
-    
     static func scheduleRunsFor(oneTime dbActivity: DBActivity,
-                                             anchorDate: Date ,
-                                             externalIdValue: String? = nil,
-                                             dateOfEntryValue: String? = nil,
-                                             frequency: Frequency) {
+                                anchorDate: Date,
+                                externalIdValue: String? = nil,
+                                dateOfEntryValue: String? = nil,
+                                frequency: Frequency) {
         
         guard frequency == .One_Time,
             let updatedAnchorDate = DateHelper.updateTime(of: anchorDate) else {
@@ -138,8 +137,8 @@ enum ActivityDiskService {
                 dbRun = dbActivityRun
             }
             
-            try? realm.write {
-                realm.delete(dbActivity.activityRuns) // Delete old scheduled runs
+          try? realm!.write {
+            realm!.delete(dbActivity.activityRuns) // Delete old scheduled runs
                 if let dbRun = dbRun {
                     dbActivity.activityRuns.append(dbRun)
                 }
@@ -152,10 +151,10 @@ enum ActivityDiskService {
     
     /// This will schedule runs for Daily, Weekly and Monthly frequency activities.
     static func scheduleRunsFor(other dbActivity: DBActivity,
-                                             anchorDate: Date ,
-                                             externalIdValue: String? = nil,
-                                             dateOfEntryValue: String? = nil,
-                                             frequency: Frequency) {
+                                anchorDate: Date ,
+                                externalIdValue: String? = nil,
+                                dateOfEntryValue: String? = nil,
+                                frequency: Frequency) {
         
         guard frequency == .Daily || frequency == .Weekly || frequency == .Monthly,
             let updatedAnchorDate = DateHelper.updateTime(of: anchorDate) else {
@@ -210,8 +209,8 @@ enum ActivityDiskService {
             }
         }
         
-        try? realm.write {
-            realm.delete(dbActivity.activityRuns) // Delete old scheduled runs
+      try? realm!.write {
+          realm!.delete(dbActivity.activityRuns) // Delete old scheduled runs
         }
         
         // Calcuate runs for activity
@@ -236,8 +235,8 @@ enum ActivityDiskService {
                 dbActivityRuns.append(dbActivityRun)
             }
             
-            try? realm.write {
-                realm.delete(dbActivity.activityRuns) // Delete old scheduled runs
+          try? realm!.write {
+            realm!.delete(dbActivity.activityRuns) // Delete old scheduled runs
                 dbActivity.activityRuns.append(objectsIn: dbActivityRuns)
                 dbActivity.startDate = activity.startDate
                 dbActivity.endDate = activity.endDate

@@ -27,13 +27,12 @@ class NotificationViewController: UIViewController {
     @IBOutlet var tableView: UITableView?
     var notificationArray: Array<Any> = []
     
-    
-// MARK:- ViewController LifeCycle
+// MARK: - ViewController LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = NSLocalizedString(kNotificationsTitleText, comment: "")
+        self.title = kNotificationsTitleText
         
         self.loadLocalNotification()
         WCPServices().getNotification(skip: 0, delegate: self)
@@ -53,14 +52,14 @@ class NotificationViewController: UIViewController {
         super.viewDidAppear(animated)
     }
 
-// MARK:- Helper Methods
+// MARK: - Helper Methods
     
     func handleNotificationListResponse() {
         if (Gateway.instance.notification?.count)! > 0{
             self.loadNotificationFromDatabase()
            // self.tableView?.isHidden = false
             
-        }else {
+        } else {
           // self.tableView?.isHidden = true
             self.tableView?.isHidden = false
             self.tableView?.reloadData()
@@ -76,7 +75,7 @@ class NotificationViewController: UIViewController {
                 
                 for notification in notificationList {
                     
-                    //filter notification
+                    // filter notification
                     if notification.type == AppNotification.NotificationType.Study {
                         
                         let study = Gateway.instance.studies?.filter({$0.studyId == notification.studyId}).last
@@ -84,12 +83,12 @@ class NotificationViewController: UIViewController {
                             self.notificationArray.append(notification)
                         }
                         
-                    }else {
+                    } else {
                          self.notificationArray.append(notification)
                     }
                 }
               
-                //Sort Notification according to sort date
+                // Sort Notification according to sort date
               let sorted = self.notificationArray.sorted(by: { (first, second) -> Bool in
                 
                 let date1: Date!
@@ -97,14 +96,14 @@ class NotificationViewController: UIViewController {
                 if first is AppLocalNotification {
                   date1 = (first as! AppLocalNotification).startDate
                   
-                }else {
+                } else {
                   date1 = (first as! AppNotification).date
                 }
                 
                 if second is AppLocalNotification {
                   date2 = (second as! AppLocalNotification).startDate
                     
-                }else {
+                } else {
                   date2 = (second as! AppNotification).date
                 }
                return date1 > date2
@@ -114,7 +113,7 @@ class NotificationViewController: UIViewController {
               self.tableView?.isHidden = false
               self.tableView?.reloadData()
                 
-            }else {
+            } else {
                 self.tableView?.isHidden = false
                 self.tableView?.reloadData()
             }
@@ -131,7 +130,6 @@ class NotificationViewController: UIViewController {
         
     }
 
-    
     /**
      Used to check the Study State
      @param study    Access the data from Study class
@@ -146,17 +144,20 @@ class NotificationViewController: UIViewController {
         case .Active:
             if participatedStatus == .inProgress {
                 return true
-            }else {
-                 UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString("Please join study to go forward.", comment: "") as NSString)
+            } else {
+                 UIUtilities.showAlertWithTitleAndMessage(
+                    title: "",
+                    message: NSLocalizedStrings("Please join study to go forward.",
+                                                comment: "") as NSString)
             }
         case .Upcoming:
-            UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyUpcomingState, comment: "") as NSString)
+            UIUtilities.showAlertWithTitleAndMessage(title: "", message: kMessageForStudyUpcomingState as NSString)
             
         case .Paused:
-            UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyPausedState, comment: "") as NSString)
+            UIUtilities.showAlertWithTitleAndMessage(title: "", message: kMessageForStudyPausedState as NSString)
             
         case .Closed:
-            UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyClosedState, comment: "") as NSString)
+            UIUtilities.showAlertWithTitleAndMessage(title: "", message: kMessageForStudyClosedState as NSString)
             
         }
         
@@ -173,7 +174,6 @@ class NotificationViewController: UIViewController {
         return false
     }
     
-    
     class func checkForStudyStateAndParticiapantState(study: Study) -> Bool {
         
         let currentStudy = study
@@ -183,7 +183,7 @@ class NotificationViewController: UIViewController {
         case .Active:
             if participatedStatus == .inProgress {
                 return true
-            }else {
+            } else {
                return false
             }
         case .Upcoming:
@@ -195,7 +195,7 @@ class NotificationViewController: UIViewController {
             
         }
         
-        //return false
+        // return false
     }
     
     /**
@@ -210,7 +210,8 @@ class NotificationViewController: UIViewController {
             
             self.navigationController?.setNavigationBarHidden(true, animated: true)
             
-            viewController = storyboard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as? StudyDashboardTabbarViewController
+            viewController = storyboard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier)
+                as? StudyDashboardTabbarViewController
             
             switch type! as  AppNotification.NotificationSubType{
             case .Study:
@@ -232,7 +233,7 @@ class NotificationViewController: UIViewController {
     }
 }
 
-// MARK:- TableView Datasource
+// MARK: - TableView Datasource
 extension NotificationViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -242,7 +243,8 @@ extension NotificationViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell: NotificationTableViewCell?
         
-        cell = tableView.dequeueReusableCell(withIdentifier: kNotificationTableViewCellIdentifier , for: indexPath) as? NotificationTableViewCell
+        cell = tableView.dequeueReusableCell(withIdentifier: kNotificationTableViewCellIdentifier,
+                                             for: indexPath) as? NotificationTableViewCell
         
         cell?.populateCellWith(notification: (notificationArray[indexPath.row]))
         cell?.backgroundColor = UIColor.clear
@@ -250,12 +252,11 @@ extension NotificationViewController: UITableViewDataSource {
     }
 }
 
-// MARK:- TableView Delegates
+// MARK: - TableView Delegates
 extension NotificationViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-      
       
         let appNotification = notificationArray[indexPath.row]
         let appNotif = appNotification as! AppNotification
@@ -275,8 +276,7 @@ extension NotificationViewController: UITableViewDelegate{
     }
 }
 
-
-// MARK:- WebService Delegate
+// MARK: - WebService Delegate
 extension NotificationViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -298,5 +298,3 @@ extension NotificationViewController: NMWebServiceDelegate {
         
     }
 }
-
-

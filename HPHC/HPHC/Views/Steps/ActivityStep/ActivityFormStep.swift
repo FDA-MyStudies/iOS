@@ -21,12 +21,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 import Foundation
 import ResearchKit
 
-
 let kStepFormSteps = "steps"
 
 class ActivityFormStep: ActivityStep {
     
-    var itemsArray: [Dictionary<String,Any>] //itemsArray stores the step details
+    var itemsArray: [Dictionary<String, Any>] // itemsArray stores the step details
     
     override init() {
         self.itemsArray = Array()
@@ -41,7 +40,7 @@ class ActivityFormStep: ActivityStep {
             
             super.initWithDict(stepDict: stepDict)
             if Utilities.isValidObject(someObject: stepDict[kStepFormSteps] as AnyObject ){
-                self.itemsArray = (stepDict[kStepFormSteps] as? [Dictionary<String,Any>])!
+                self.itemsArray = (stepDict[kStepFormSteps] as? [Dictionary<String, Any>])!
             }
         } else {
             Logger.sharedInstance.debug("Instruction Step Dictionary is null:\(stepDict)")
@@ -88,7 +87,9 @@ class ActivityFormStep: ActivityStep {
                     
                     let orkQuestionStep:ORKQuestionStep = (questionStep?.getQuestionStep())!
                     
-                    let formItem01 = ORKFormItem(identifier: orkQuestionStep.identifier, text: orkQuestionStep.question, answerFormat: orkQuestionStep.answerFormat)
+                    let formItem01 = ORKFormItem(identifier: orkQuestionStep.identifier,
+                                                 text: orkQuestionStep.question,
+                                                 answerFormat: orkQuestionStep.answerFormat)
                     formItem01.placeholder = orkQuestionStep.placeholder == nil ? "" :  orkQuestionStep.placeholder
                     formItem01.isOptional = (questionStep?.skippable)!
                     formItemsArray.append(formItem01)

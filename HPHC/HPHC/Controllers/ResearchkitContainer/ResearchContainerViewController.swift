@@ -52,8 +52,7 @@ class ResearchContainerViewController: UIViewController, HealthClientType {
         
         if ORKPasscodeViewController.isPasscodeStoredInKeychain() {
             toStudy()
-        }
-        else {
+        } else {
             toOnboarding()
         }
     }
@@ -94,10 +93,11 @@ class ResearchContainerViewController: UIViewController, HealthClientType {
     }
 }
 
-
 extension ResearchContainerViewController: ORKTaskViewControllerDelegate {
 
-    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+    public func taskViewController(_ taskViewController: ORKTaskViewController,
+                                   didFinishWith reason: ORKTaskViewControllerFinishReason,
+                                   error: Error?) {
         // Check if the user has finished the `WithdrawViewController`.
         
         /*

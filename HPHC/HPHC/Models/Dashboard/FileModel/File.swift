@@ -23,12 +23,12 @@ import MobileCoreServices
 
 enum MimeType: String{
     
-    case txt = "text" //text/plain
-    case html = "html" //text/html
+    case txt = "text" // text/plain
+    case html = "html" // text/html
     case css = "text/css"
     case xml = "text/xml"
     
-    case pdf = "pdf" //application/pdf
+    case pdf = "pdf" // application/pdf
     case json = "application/json"
     case docx = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     
@@ -62,7 +62,6 @@ class File{
     var name: String?
     var link: String?
     var localPath: String?
-    
     
     init() {
         self.mimeType = MimeType.txt
@@ -104,13 +103,10 @@ class File{
         self.name = dict[kFileTitleForStudy] as? String
         self.link = dict[kFileLinkForStudy] as? String ?? ""
         if (self.link?.contains("http"))! {
-            //Do Nothing
+            // Do Nothing
         } else {
             self.localPath = "BundlePath"
         }
     }
     
 }
-
-
-

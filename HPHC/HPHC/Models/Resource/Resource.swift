@@ -87,7 +87,6 @@ class ParticipantPropertyMetadata {
         static let dateOfEntryID = "dateOfEntryId"
     }
     
-    
 }
 
 // MARK: - Resource model stores the resource of any Study or Gateway. Each resource has a unique id and have file and anchor data.
@@ -107,7 +106,7 @@ class Resource {
     var title: String?
     var povAvailable: Bool = false
     
-    //AnchorDate Values
+    // AnchorDate Values
     var availabilityType : ResourceAvailabilityType = .regular
     var sourceType : AnchorDateSourceType?
     var sourceActivityId : String?
@@ -135,65 +134,67 @@ class Resource {
      */
     init(detail: Dictionary<String, Any>) {
         
-        if Utilities.isValidObject(someObject: detail as AnyObject?){
+        if Utilities.isValidObject(someObject: detail as AnyObject?) {
             
-            if (Utilities.isValidValue(someObject: (detail[kResourceId]) as AnyObject)) {
+            if Utilities.isValidValue(someObject: (detail[kResourceId]) as AnyObject) {
                 self.resourcesId = detail[kResourceId] as? String
             }
-            if (Utilities.isValidValue(someObject: (detail[kResourceAudience]) as AnyObject)) {
+            if Utilities.isValidValue(someObject: (detail[kResourceAudience]) as AnyObject) {
                 self.audience = Audience(rawValue:detail[kResourceAudience] as! String)
             }
-            if (Utilities.isValidValue(someObject: (detail[kResourceLevel]) as AnyObject)) {
+            if Utilities.isValidValue(someObject: (detail[kResourceLevel]) as AnyObject) {
                 self.level = detail[kResourceLevel] as? ResourceLevel
             }
-            if (Utilities.isValidValue(someObject: (detail[kResourceKey]) as AnyObject)){
+            if Utilities.isValidValue(someObject: (detail[kResourceKey]) as AnyObject){
                 self.key = detail[kResourceKey] as? String
             }
-            if (Utilities.isValidValue(someObject: (detail[kResourceType]) as AnyObject)) {
+            if Utilities.isValidValue(someObject: (detail[kResourceType]) as AnyObject) {
                 self.type = detail[kResourceType] as? String
             }
-            if (Utilities.isValidValue(someObject: (detail[kResourceFile]) as AnyObject)) {
+            if Utilities.isValidValue(someObject: (detail[kResourceFile]) as AnyObject) {
                 self.file?.setFile(dict: detail[kResourceFile] as? JSONDictionary ?? [:])
             }
-            if (Utilities.isValidValue(someObject: (detail["notificationText"]) as AnyObject)){
+            if Utilities.isValidValue(someObject: (detail["notificationText"]) as AnyObject) {
                 self.notificationMessage = detail["notificationText"] as? String
             }
             
-            //Setting the configuration if any
-            if (Utilities.isValidObject(someObject: detail[kResourceConfigration] as AnyObject)) {
-                let configuration = detail[kResourceConfigration] as! Dictionary<String,Any>
+            // Setting the configuration if any
+            if Utilities.isValidObject(someObject: detail[kResourceConfigration] as AnyObject) {
+                let configuration = detail[kResourceConfigration] as! Dictionary<String, Any>
                 self.povAvailable = true
                 
-                if (Utilities.isValidValue(someObject: (configuration["availableDate"]) as AnyObject)) {
-                    self.startDate = Utilities.getDateFromStringWithFormat("YYYY-MM-dd", resultDate: configuration["availableDate"] as! String)
+                if Utilities.isValidValue(someObject: (configuration["availableDate"]) as AnyObject) {
+                    self.startDate = Utilities.getDateFromStringWithFormat(
+                        "YYYY-MM-dd",
+                        resultDate: configuration["availableDate"] as! String)
                 }
-                if (Utilities.isValidValue(someObject: (configuration["expiryDate"]) as AnyObject)) {
+                if Utilities.isValidValue(someObject: (configuration["expiryDate"]) as AnyObject) {
                     self.endDate = Utilities.getDateFromStringWithFormat("YYYY-MM-dd", resultDate: configuration["expiryDate"] as! String)
                 }
                 
                 self.anchorDateStartDays = configuration["startDays"] as? Int
                 self.anchorDateEndDays = configuration["endDays"] as? Int
                 
-                if (Utilities.isValidValue(someObject: (configuration["availabilityType"]) as AnyObject)){
+                if Utilities.isValidValue(someObject: (configuration["availabilityType"]) as AnyObject) {
                     self.availabilityType =  ResourceAvailabilityType(rawValue: configuration["availabilityType"] as? String ?? "Regular")!
                 }
                 
-                if (Utilities.isValidValue(someObject: (configuration["sourceType"]) as AnyObject)){
+                if Utilities.isValidValue(someObject: (configuration["sourceType"]) as AnyObject) {
                     self.sourceType =  AnchorDateSourceType(rawValue: configuration["sourceType"] as? String ?? "EnrollmentDate")!
                 }
                 
-                if (Utilities.isValidValue(someObject: (configuration["sourceActivityId"]) as AnyObject)){
+                if Utilities.isValidValue(someObject: (configuration["sourceActivityId"]) as AnyObject) {
                     self.sourceActivityId = configuration["sourceActivityId"] as? String
                 }
                 
-                if (Utilities.isValidValue(someObject: (configuration["sourceKey"]) as AnyObject)){
+                if Utilities.isValidValue(someObject: (configuration["sourceKey"]) as AnyObject) {
                     self.sourceKey = configuration["sourceKey"] as? String
                 }
                 
-                if (Utilities.isValidValue(someObject: (configuration["startTime"]) as AnyObject)){
+                if Utilities.isValidValue(someObject: (configuration["startTime"]) as AnyObject) {
                     self.startTime = configuration["startTime"] as? String
                 }
-                if (Utilities.isValidValue(someObject: (configuration["endTime"]) as AnyObject)){
+                if Utilities.isValidValue(someObject: (configuration["endTime"]) as AnyObject) {
                     self.endTime = configuration["endTime"] as? String
                 }
 
@@ -201,7 +202,8 @@ class Resource {
                 self.povAvailable = false
             }
             
-            if (Utilities.isValidValue(someObject: (detail[kResourceTitle]) as AnyObject)) {
+            if Utilities.isValidValue(someObject: (detail[kResourceTitle]) as AnyObject) {
+                
                 self.title = detail[kResourceTitle] as? String
             }
             self.file = File()
@@ -264,28 +266,26 @@ class Resource {
         self.calculateAvailability() // When source type is enrollmentDate
     }
     
-    
     func calculateAvailability() {
         
         if self.sourceType == AnchorDateSourceType.enrollmentDate {
             var enrollmentDate = Study.currentStudy?.userParticipateState.joiningDate
             
-            //update start date
+            // update start date
             var startDateStringEnrollment =  Utilities.formatterShort?.string(from: enrollmentDate!)
             let startTimeEnrollment =  "00:00:00"
             startDateStringEnrollment = (startDateStringEnrollment ?? "") + " " + startTimeEnrollment
             enrollmentDate = Utilities.findDateFromString(dateString: startDateStringEnrollment ?? "")
             
-           
             let lifeTime = self.updateLifeTime(enrollmentDate!)
             
-            //update start date
+            // update start date
             var startDateString =  Utilities.formatterShort?.string(from: lifeTime.0!)
             let startTime =  (self.startTime == nil) ? "00:00:00" : (self.startTime)!
             startDateString = (startDateString ?? "") + " " + startTime
             let startdate = Utilities.findDateFromString(dateString: startDateString ?? "")
             
-            //update end date
+            // update end date
             var endDateString =  Utilities.formatterShort?.string(from: lifeTime.1!)
             let endTime =  (self.endTime == nil) ? "23:59:59" : (self.endTime)!
             endDateString = (endDateString ?? "") + " " + endTime
@@ -296,7 +296,7 @@ class Resource {
         }
     }
     
-    func updateLifeTime(_ date:Date) -> (Date?,Date?) {
+    func updateLifeTime(_ date:Date) -> (Date?, Date?) {
         
         var startDate:Date!
         var endDate:Date!
@@ -306,7 +306,7 @@ class Resource {
         
         startDate = date.addingTimeInterval(startDateInterval)
         endDate = date.addingTimeInterval(endDateInterval)
-        return (startDate,endDate)
+        return (startDate, endDate)
           
     }
 }

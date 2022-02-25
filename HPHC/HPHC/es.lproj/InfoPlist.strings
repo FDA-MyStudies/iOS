@@ -1,0 +1,18 @@
+/* 
+  InfoPlist.strings
+  HPHC
+
+  Created by admin on 12/2/21.
+  Copyright © 2021 BTC. All rights reserved.
+*/
+"NSCameraUsageDescription"="MyStudies COVID-19 quisiera acceder a su cámara para que la tarea dé un resultado más preciso.";
+"NSFaceIDUsageDescription"="MyStudies COVID-19 quisiera usar Face ID para un acceso rápido y seguro a la aplicación. ";
+"NSHealthShareUsageDescription"="MyStudies COVID-19 quisiera acceder a los datos de la aplicación de salud para leer datos de salud y responder preguntas.";
+"NSHealthUpdateUsageDescription"="MyStudies COVID-19 quisiera actualizar los datos de su aplicación de salud para guardar sus respuestas.";
+"NSLocationAlwaysAndWhenInUseUsageDescription"="MyStudies COVID-19 le gustaría acceder a su ubicación para responder preguntas basadas en la ubicación y no resultará en que su ubicación se envíe automáticamente como respuesta.";
+
+"NSLocationAlwaysUsageDescription"="MyStudies COVID-19 le gustaría acceder a su ubicación para responder preguntas basadas en la ubicación y no resultará en que su ubicación se envíe automáticamente como respuesta.";
+"NSLocationWhenInUseUsageDescription"="MyStudies COVID-19 le gustaría acceder a su ubicación para responder preguntas basadas en la ubicación y no resultará en que su ubicación se envíe automáticamente como respuesta.";
+"NSMicrophoneUsageDescription"="MyStudies COVID-19 quisiera acceder a su micrófono para que la tarea dé un resultado más preciso.";
+"NSMotionUsageDescription"="MyStudies COVID-19 quisiera usar datos de movimiento para que la tarea dé un resultado más preciso.";
+"NSSpeechRecognitionUsageDescription"="MyStudies COVID-19 quisiera utilizar el reconocimiento de voz para que la tarea dé un resultado más preciso.";

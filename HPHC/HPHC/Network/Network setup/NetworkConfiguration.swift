@@ -21,17 +21,17 @@ OTHER DEALINGS IN THE SOFTWARE.
 import Foundation
 
 protocol NetworkConfigurationProtocol {
-    func getDevelopmentURL()->String
-    func getProductionURL()->String
-    func getDefaultHeaders()->Dictionary<String, String>
-    func getDefaultRequestParameters()->Dictionary<String, Any>
+    func getDevelopmentURL() -> String
+    func getProductionURL() -> String
+    func getDefaultHeaders() -> Dictionary<String, String>
+    func getDefaultRequestParameters() -> Dictionary<String, Any>
 }
 class  Method {
     
     let methodName: String
     let methodType: HTTPMethod
     let requestType: RequestType
-    init(methodName: String,methodType: HTTPMethod,requestType: RequestType){
+    init(methodName: String, methodType: HTTPMethod, requestType: RequestType){
         self.methodName = methodName
         self.methodType = methodType
         self.requestType = requestType
@@ -57,20 +57,23 @@ class NetworkProtocols: NetworkConfigurationProtocol{
     internal func shouldParseErrorMessage() -> Bool {
         return false
     }
-    internal func parseError(errorResponse: Dictionary<String,Any>)->NSError{
+    internal func parseError(errorResponse: Dictionary<String, Any>) -> NSError {
       
       var errorCode = 0
       if let errResponse = errorResponse["error"] as? [String: Any] {
         if let errCD = errResponse["code"] as? Int {
+          let kSomethingError = NSLocalizedStrings("Something went wrong", comment: "")
           errorCode = errCD
-            let errorDesc = errResponse["message"] as? String ?? "Something went wrong"
+            let errorDesc = errResponse["message"] as? String ?? kSomethingError
           
           let error = NSError(domain: NSURLErrorDomain, code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorDesc])
           return  error
         }
       }
       
-      let error = NSError(domain: NSURLErrorDomain, code: 101, userInfo: [NSLocalizedDescriptionKey: "Your error localized description"])
+      let error = NSError(domain: NSURLErrorDomain,
+                          code: 101,
+                          userInfo: [NSLocalizedDescriptionKey: NSLocalizedStrings("Your error localized description", comment: "")])
       return  error
       
     }

@@ -40,7 +40,6 @@ enum OperatorType: String {
     case range = "range"
 }
 
-
 class ActivityBuilder {
     
     static var currentActivityBuilder = ActivityBuilder()
@@ -53,16 +52,13 @@ class ActivityBuilder {
         actvityResult = ActivityResult()
     }
     
-    func initActivityWithDict(dict:Dictionary<String,Any>) {
-        
+    func initActivityWithDict(dict: Dictionary<String, Any>) {
         
         if Utilities.isValidObject(someObject: dict as AnyObject) {
             self.activity?.setActivityMetaData(activityDict: dict)
         }
         self.actvityResult = ActivityResult()
         self.actvityResult?.setActivity(activity: self.activity!)
-        
-        
     }
     
     func initWithActivity(activity:Activity)  {
@@ -79,9 +75,9 @@ class ActivityBuilder {
         actvityResult?.initWithORKTaskResult(taskResult: taskResult)
     }
     
-    func createTask()->ORKTask? {
+    func createTask() -> ORKTask? {
         
-        if  ((activity?.type) != nil) {
+        if  (activity?.type) != nil {
             
             var orkStepArray: [ORKStep]?
             
@@ -96,7 +92,7 @@ class ActivityBuilder {
                 
                 // creating step array
                 
-                for var stepDict in (activity?.steps!)! {
+                for stepDict in (activity?.steps!)! {
                     
                     if Utilities.isValidObject(someObject: stepDict as AnyObject?) {
                         
@@ -133,7 +129,7 @@ class ActivityBuilder {
                         }
                     } else {
                         Logger.sharedInstance.debug("Activity:stepDict is null:\(stepDict)")
-                        break;
+                        break
                     }
                 }
                 
@@ -142,23 +138,25 @@ class ActivityBuilder {
                     self.activity?.setORKSteps(orkStepArray: orkStepArray!)
                     self.activity?.setActivityStepArray(stepArray: activityStepArray!)
                     
-                    //addding completion step
+                    // addding completion step
                     let completionStep = ORKCompletionStep(identifier: kCompletionStep)
-                    
-                    completionStep.title = "Activity Completed"
+                    let kActivityCompleted = NSLocalizedStrings("Activity Completed", comment: "")
+                    let msg = "Tap Done to submit responses. Responses cannot be modified after submission"
+                    let kTapDoneSubmit = NSLocalizedStrings(msg, comment: "")
+                    completionStep.title = kActivityCompleted
                     completionStep.image = #imageLiteral(resourceName: "successBlueBig")
-                    completionStep.detailText = "Tap Done to submit responses. Responses cannot be modified after submission"
+                    completionStep.detailText = kTapDoneSubmit
                     orkStepArray?.append(completionStep)
                     
-                    //Creating ordered or navigable task
+                    // Creating ordered or navigable task
                     if (orkStepArray?.count)! > 0 {
                         
                         task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
                         
-                        if self.activity?.branching == true { //For Branching/Navigable Task
+                        if self.activity?.branching == true { // For Branching/Navigable Task
                             task =  ORKNavigableOrderedTask(identifier: (activity?.actvityId)!, steps: orkStepArray)
                             
-                        } else { //For OrderedTask
+                        } else { // For OrderedTask
                             task =  ORKOrderedTask(identifier: (activity?.actvityId)!, steps: orkStepArray)
                         }
                     }
@@ -167,12 +165,18 @@ class ActivityBuilder {
                     if self.activity?.branching == true {
                         
                         for step in orkStepArray! {
-                            //Setting ActivityStep
-                            if step.isKind(of: ORKQuestionStep.self) || step is RepeatableFormStep || step is ORKFormStep || (step.isKind(of: ORKInstructionStep.self) && step.isKind(of: ORKCompletionStep.self) == false) {
+                            // Setting ActivityStep
+                            if step.isKind(of: ORKQuestionStep.self) ||
+                                step is RepeatableFormStep ||
+                                step is ORKFormStep ||
+                                (step.isKind(of: ORKInstructionStep.self) &&
+                                    step.isKind(of: ORKCompletionStep.self) == false) {
                                 
                                 let activityStep: ActivityStep?
                                 
-                                if step.isKind(of: ORKQuestionStep.self) || (step.isKind(of: ORKInstructionStep.self) == false && step.isKind(of: ORKCompletionStep.self) == false) {
+                                if step.isKind(of: ORKQuestionStep.self) ||
+                                    (step.isKind(of: ORKInstructionStep.self) == false &&
+                                     step.isKind(of: ORKCompletionStep.self) == false) {
                                     activityStep = activityStepArray?[(i!)] as?  ActivityQuestionStep
                                     
                                 } else if step.isKind(of: ORKFormStep.self) || step.isKind(of: RepeatableFormStep.self) {
@@ -186,11 +190,11 @@ class ActivityBuilder {
                                     
                                     var defaultStepIdentifier: String = ""
                                     
-                                    //Setting Next Step as Default destination
+                                    // Setting Next Step as Default destination
                                     if i! + 1 < (activityStepArray?.count)! {
                                         defaultStepIdentifier = (activityStepArray?[(i!+1)].key)!
                                         
-                                    } else { //Setting Completion Step as Default destination
+                                    } else { // Setting Completion Step as Default destination
                                         defaultStepIdentifier = kCompletionStep
                                     }
                                     
@@ -198,11 +202,11 @@ class ActivityBuilder {
                                     let resultSelector: ORKResultSelector?
                                     var predicateRule: ORKPredicateStepNavigationRule?
                                     
-                                    //Creating Result Selector
+                                    // Creating Result Selector
                                     resultSelector =  ORKResultSelector(stepIdentifier: step.identifier, resultIdentifier: step.identifier)
                                     let questionStep: ORKStep?
                                     
-                                    //Intializing Question Step
+                                    // Intializing Question Step
                                     if step.isKind(of: ORKQuestionStep.self) {
                                         questionStep = (step as? ORKQuestionStep)!
                                         
@@ -216,7 +220,7 @@ class ActivityBuilder {
                                         questionStep = (step as? ORKInstructionStep)!
                                     }
                                     
-                                    //choicearray and destination array will hold predicates & their respective destination
+                                    // choicearray and destination array will hold predicates & their respective destination
                                     var choicePredicate: [NSPredicate] = [NSPredicate]()
                                     var destination: Array<String>? = Array<String>()
                                     
@@ -224,18 +228,25 @@ class ActivityBuilder {
                                         
                                         var predicateQuestionChoiceA: NSPredicate = NSPredicate()
                                         
-                                        //Condition is not nil
+                                        // Condition is not nil
                                         if Utilities.isValidValue(someObject: dict[kCondtion] as AnyObject) {
                                             
                                             switch (questionStep as? ORKQuestionStep)!.answerFormat {
                                                 
-                                            case is ORKTextChoiceAnswerFormat, is ORKTextScaleAnswerFormat, is ORKImageChoiceAnswerFormat, is ORKValuePickerAnswerFormat:
+                                            case is ORKTextChoiceAnswerFormat,
+                                                 is ORKTextScaleAnswerFormat,
+                                                 is ORKImageChoiceAnswerFormat,
+                                                 is ORKValuePickerAnswerFormat:
                                                 
-                                                predicateQuestionChoiceA = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector! , expectedAnswerValue: dict[kCondtion] as! NSCoding & NSCopying & NSObjectProtocol)
+                                                predicateQuestionChoiceA = ORKResultPredicate.predicateForChoiceQuestionResult(
+                                                    with: resultSelector!,
+                                                    expectedAnswerValue: dict[kCondtion] as! NSCoding & NSCopying & NSObjectProtocol)
                                                 
                                                 choicePredicate.append(predicateQuestionChoiceA)
                                                 
-                                                if dict[kCondtion] != nil && dict[kDestination] != nil && (dict[kDestination] as? String)! == "" {
+                                                if dict[kCondtion] != nil &&
+                                                    dict[kDestination] != nil &&
+                                                    (dict[kDestination] as? String)! == "" {
                                                     // this means c = value & d = ""
                                                     destination?.append( kCompletionStep )
                                                     
@@ -244,47 +255,74 @@ class ActivityBuilder {
                                                     destination?.append( (dict[kDestination]! as? String)!)
                                                 }
                                             
-                                            case is ORKNumericAnswerFormat ,is ORKScaleAnswerFormat,is ORKTimeIntervalAnswerFormat,is ORKHeightAnswerFormat, is ORKContinuousScaleAnswerFormat,is ORKHealthKitQuantityTypeAnswerFormat:
+                                            case is ORKNumericAnswerFormat ,
+                                                 is ORKScaleAnswerFormat,
+                                                 is ORKTimeIntervalAnswerFormat,
+                                                 is ORKHeightAnswerFormat,
+                                                 is ORKContinuousScaleAnswerFormat,
+                                                 is ORKHealthKitQuantityTypeAnswerFormat:
                                                 
                                                 if let operatorValue = dict[kOperator] as? String {
                                                     
                                                     let condition: String = (dict[kCondtion] as? String)!
-                                                    let  conditionValue = condition.components(separatedBy: CharacterSet.init(charactersIn: ","))
+                                                    let conditionValue = condition.components(separatedBy: CharacterSet(charactersIn: ","))
                                                     
                                                     var lhs: Double? = 0.0
                                                     var rhs: Double? = 0.0
                                                     
                                                     lhs = Double(conditionValue.first!)
-                                                    if conditionValue.count == 2 { //multiple conditions exists
+                                                    if conditionValue.count == 2 { // multiple conditions exists
                                                         rhs = Double(conditionValue.last!)
                                                     }
                                                     let operatorType:OperatorType = OperatorType(rawValue: operatorValue)!
                                                     
-                                                    switch((questionStep as? ORKQuestionStep)!.answerFormat) {
-                                                    case is ORKNumericAnswerFormat,is ORKHeightAnswerFormat,is ORKHealthKitQuantityTypeAnswerFormat: //Height & Numeric Question
+                                                    switch (questionStep as? ORKQuestionStep)!.answerFormat {
+                                                    case is ORKNumericAnswerFormat,
+                                                         is ORKHeightAnswerFormat,
+                                                         is ORKHealthKitQuantityTypeAnswerFormat: // Height & Numeric Question
                                                         
-                                                        var minimumValue = (activityStep as? ActivityQuestionStep)!.formatDict![kMinimumValue] as? Float
+                                                        var minimumValue = (activityStep
+                                                                            as? ActivityQuestionStep)!.formatDict![kMinimumValue]
+                                                        as? Float
                                                         
                                                         var style = ""
                                                         
-                                                        if ((questionStep as? ORKQuestionStep)!.answerFormat! is ORKHeightAnswerFormat ) {
+                                                        if (questionStep as? ORKQuestionStep)!.answerFormat! is ORKHeightAnswerFormat {
                                                             minimumValue = 0
-                                                            
                                                         } else {
-                                                            style = ((activityStep as? ActivityQuestionStep)!.formatDict![kStepQuestionNumericStyle] as? String)!
+                                                            style = ((activityStep
+                                                                      as? ActivityQuestionStep)?.formatDict?[kStepQuestionNumericStyle]
+                                                                     as? String)!
                                                         }
                                                         
-                                                        predicateQuestionChoiceA = self.getPredicateForNumeric(resultSelector: resultSelector!, lhs: lhs!, minimumValue: minimumValue!, operatorType: operatorType,answerFormat: (questionStep as? ORKQuestionStep)!.answerFormat!,style: style)
+                                                        predicateQuestionChoiceA = self.getPredicateForNumeric(
+                                                            resultSelector: resultSelector!,
+                                                            lhs: lhs!,
+                                                            minimumValue: minimumValue!,
+                                                            operatorType: operatorType,
+                                                            answerFormat: (questionStep as? ORKQuestionStep)!.answerFormat!,
+                                                            style: style)
                                                         
-                                                    case is ORKTimeIntervalAnswerFormat: //TimeInterval
+                                                    case is ORKTimeIntervalAnswerFormat: // TimeInterval
                                                         
-                                                        predicateQuestionChoiceA = self.getPredicateForTimeInterval(resultSelector: resultSelector!, lhs: lhs!, minimumValue: 0.0, operatorType: operatorType)
+                                                        predicateQuestionChoiceA = self.getPredicateForTimeInterval(
+                                                            resultSelector: resultSelector!,
+                                                            lhs: lhs!,
+                                                            minimumValue: 0.0,
+                                                            operatorType: operatorType)
                                                         
-                                                    case is ORKScaleAnswerFormat, is ORKContinuousScaleAnswerFormat: //Scale & Continuos Scale
+                                                    case is ORKScaleAnswerFormat, is ORKContinuousScaleAnswerFormat: // Scale & Continuos Scale
                                                         
-                                                        let minimumValue = (activityStep as? ActivityQuestionStep)!.formatDict![kMinimumValue] as? Float
+                                                        let minimumValue = (activityStep
+                                                                            as? ActivityQuestionStep)!.formatDict![kMinimumValue] as? Float
                                                         
-                                                        predicateQuestionChoiceA = self.getPredicateForScale(resultSelector: resultSelector!, lhs: lhs!, minimumValue: minimumValue!, operatorType: operatorType,rhs: rhs!, resultType: ((questionStep as? ORKQuestionStep)!.answerFormat)!,activityStep:activityStep!)
+                                                        predicateQuestionChoiceA = self.getPredicateForScale(resultSelector: resultSelector!,
+                                                                                         lhs: lhs!, minimumValue: minimumValue!,
+                                                                                         operatorType: operatorType,
+                                                                                         rhs: rhs!,
+                                                                                         resultType: ((questionStep as?
+                                                                                                        ORKQuestionStep)!.answerFormat)!,
+                                                                                         activityStep:activityStep!)
                                                         
                                                     case .none: break
                                                         
@@ -293,7 +331,9 @@ class ActivityBuilder {
                                                     }
                                                     choicePredicate.append(predicateQuestionChoiceA)
                                                     
-                                                    if dict[kCondtion] != nil && dict[kDestination] != nil && (dict[kDestination] as? String)! == "" {
+                                                    if dict[kCondtion] != nil &&
+                                                        dict[kDestination] != nil &&
+                                                        (dict[kDestination] as? String)! == "" {
                                                         // this means c = value & d = ""
                                                         destination?.append( kCompletionStep )
                                                         
@@ -312,7 +352,7 @@ class ActivityBuilder {
                                                     boolValue = true
                                                     
                                                 } else {
-                                                    if (dict[kCondtion] as? String)!.caseInsensitiveCompare("false") ==  ComparisonResult.orderedSame {
+                                                    if (dict[kCondtion] as? String)!.caseInsensitiveCompare("false")==ComparisonResult.orderedSame {
                                                         boolValue = false
                                                         
                                                     } else if (dict[kCondtion] as? String)! == "" {
@@ -326,11 +366,15 @@ class ActivityBuilder {
                                                 
                                                 if  boolValue != nil {
                                                     
-                                                    predicateQuestionChoiceA = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector!, expectedAnswer: boolValue!)
+                                                    predicateQuestionChoiceA =
+                                                        ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector!,
+                                                                                                        expectedAnswer: boolValue!)
                                                 }
                                                 choicePredicate.append(predicateQuestionChoiceA)
                                                 
-                                                if dict[kCondtion] != nil && dict[kDestination] != nil && (dict[kDestination] as? String)! == "" {
+                                                if dict[kCondtion] != nil &&
+                                                    dict[kDestination] != nil &&
+                                                    (dict[kDestination] as? String)! == "" {
                                                     // this means c = value & d = ""
                                                     destination?.append( kCompletionStep )
                                                     
@@ -370,7 +414,8 @@ class ActivityBuilder {
                                                     
                                                     let  directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: destinationId)
                                                     
-                                                    (task as? ORKNavigableOrderedTask)!.setNavigationRule(directRule, forTriggerStepIdentifier: step.identifier)
+                                                    (task as? ORKNavigableOrderedTask)!.setNavigationRule(directRule,
+                                                                                                          forTriggerStepIdentifier: step.identifier)
                                                 }
                                             }
                                         } else {
@@ -383,19 +428,24 @@ class ActivityBuilder {
                                                 directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: defaultStepIdentifier)
                                             }
                                             
-                                            (task as? ORKNavigableOrderedTask)!.setNavigationRule(directRule!, forTriggerStepIdentifier:step.identifier)
+                                            (task as? ORKNavigableOrderedTask)!.setNavigationRule(directRule!,
+                                                                                                  forTriggerStepIdentifier:step.identifier)
                                         }
                                     } else {
                                         
-                                        predicateRule = ORKPredicateStepNavigationRule(resultPredicates: choicePredicate, destinationStepIdentifiers: destination!, defaultStepIdentifier: defaultStepIdentifier, validateArrays: true)
+                                        predicateRule = ORKPredicateStepNavigationRule(resultPredicates: choicePredicate,
+                                                                                       destinationStepIdentifiers: destination!,
+                                                                                       defaultStepIdentifier: defaultStepIdentifier,
+                                                                                       validateArrays: true)
                                         
-                                        (task as? ORKNavigableOrderedTask)!.setNavigationRule(predicateRule!, forTriggerStepIdentifier:step.identifier)
+                                        (task as? ORKNavigableOrderedTask)!.setNavigationRule(predicateRule!,
+                                                                                              forTriggerStepIdentifier:step.identifier)
                                     }
                                 } else {
-                                    //destination array is empty - Do Nothing
+                                    // destination array is empty - Do Nothing
                                 }
                             } else {
-                                //this is not question step
+                                // this is not question step
                             }
                             i = i! + 1
                         }
@@ -414,7 +464,7 @@ class ActivityBuilder {
             // MARK: Active Task
             case .activeTask:
                 
-                for var stepDict in (activity?.steps!)! {
+                for stepDict in (activity?.steps!)! {
                     
                     if Utilities.isValidObject(someObject: stepDict as AnyObject?) {
                         
@@ -434,7 +484,7 @@ class ActivityBuilder {
                                 questionStep?.initWithDict(stepDict: stepDict)
                                 orkStepArray?.append((questionStep?.getQuestionStep())!)
                                 
-                            case   .active , .taskSpatialSpanMemory , .taskTowerOfHanoi :
+                            case .active, .taskSpatialSpanMemory, .taskTowerOfHanoi:
                                 
                                 var localTask: ORKOrderedTask?
                                 
@@ -455,7 +505,7 @@ class ActivityBuilder {
                         
                     } else {
                         Logger.sharedInstance.debug("Activity:stepDict is null:\(stepDict)")
-                        break;
+                        break
                     }
                 }
                 
@@ -480,7 +530,7 @@ class ActivityBuilder {
             Logger.sharedInstance.debug("activity is null")
         }
         return nil
-        //self.actvityResult?.setActivity(activity: self.activity!)
+        // self.actvityResult?.setActivity(activity: self.activity!)
     }
     // MARK: Predicates For QuestionTypes
     
@@ -492,13 +542,18 @@ class ActivityBuilder {
      
      */
     
-    func getPredicateForNumeric(resultSelector: ORKResultSelector, lhs: Double,minimumValue: Float, operatorType: OperatorType,answerFormat: ORKAnswerFormat,style: String) ->NSPredicate {
+    func getPredicateForNumeric(resultSelector: ORKResultSelector,
+                                lhs: Double,
+                                minimumValue: Float,
+                                operatorType: OperatorType,
+                                answerFormat: ORKAnswerFormat,
+                                style: String) -> NSPredicate {
         
         var predicate:NSPredicate = NSPredicate()
         
-        switch(operatorType) {
+        switch operatorType {
             
-        case .equal: //Equal
+        case .equal: // Equal
             
             if answerFormat is ORKNumericAnswerFormat || answerFormat is ORKHealthKitQuantityTypeAnswerFormat {
                 
@@ -512,7 +567,7 @@ class ActivityBuilder {
                 predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
             }
             
-        case .notEqual : //NotEqual
+        case .notEqual : // NotEqual
             let equalPredicate: NSPredicate!
             
             if answerFormat is ORKNumericAnswerFormat {
@@ -528,18 +583,25 @@ class ActivityBuilder {
             
             predicate = NSCompoundPredicate.init(notPredicateWithSubpredicate: equalPredicate)
             
-        case .greaterThan : //GreaterThan
+        case .greaterThan : // GreaterThan
             
-            predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, minimumExpectedAnswerValue: lhs + 1  , maximumExpectedAnswerValue: Double.infinity )
-        case .lessThan : //LessThan
+            predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector,
+                                                                             minimumExpectedAnswerValue: lhs + 1,
+                                                                             maximumExpectedAnswerValue: Double.infinity )
+        case .lessThan : // LessThan
             
-            predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, minimumExpectedAnswerValue: Double(minimumValue ), maximumExpectedAnswerValue: lhs - 1 )
+            predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector,
+                                                                             minimumExpectedAnswerValue: Double(minimumValue ),
+                                                                             maximumExpectedAnswerValue: lhs - 1 )
             
-        case .greaterThanOrEqual : //GreaterThanOrEqual
+        case .greaterThanOrEqual : // GreaterThanOrEqual
             
-            predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, minimumExpectedAnswerValue: lhs)
-        case .lessThanOrEqual : //LessThanOrEqual
-            predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, maximumExpectedAnswerValue: lhs)                                                        case .range :break //Range
+            predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector,
+                                                                             minimumExpectedAnswerValue: lhs)
+        case .lessThanOrEqual : // LessThanOrEqual
+            predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector,
+                                                                             maximumExpectedAnswerValue: lhs)
+        case .range :break // Range
             
        // default: break
             
@@ -555,33 +617,39 @@ class ActivityBuilder {
      
      */
     
-    func getPredicateForTimeInterval(resultSelector: ORKResultSelector, lhs: Double,minimumValue: Float, operatorType: OperatorType) ->NSPredicate {
+    func getPredicateForTimeInterval(resultSelector: ORKResultSelector, lhs: Double, minimumValue: Float, operatorType: OperatorType) -> NSPredicate {
         
         var predicate:NSPredicate = NSPredicate()
         
-        switch(operatorType) {
+        switch operatorType {
             
-        case .equal: //Equal
+        case .equal: // Equal
             predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
-        case .notEqual: //NotEqual
+        case .notEqual: // NotEqual
             let equalPredicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
             predicate = NSCompoundPredicate.init(notPredicateWithSubpredicate: equalPredicate)
             
-        case .greaterThan : //GreaterThan
-            predicate = ORKResultPredicate.predicateForTimeIntervalQuestionResult(with: resultSelector, minimumExpectedAnswerValue: lhs + 1, maximumExpectedAnswerValue: Double.infinity)
+        case .greaterThan : // GreaterThan
+            predicate = ORKResultPredicate.predicateForTimeIntervalQuestionResult(with: resultSelector,
+                                                                                  minimumExpectedAnswerValue: lhs + 1,
+                                                                                  maximumExpectedAnswerValue: Double.infinity)
             
-        case .lessThan : //LessThan
-            predicate = ORKResultPredicate.predicateForTimeIntervalQuestionResult(with: resultSelector, minimumExpectedAnswerValue: 0.0, maximumExpectedAnswerValue: lhs - 1 )
+        case .lessThan : // LessThan
+            predicate = ORKResultPredicate.predicateForTimeIntervalQuestionResult(with: resultSelector,
+                                                                                  minimumExpectedAnswerValue: 0.0,
+                                                                                  maximumExpectedAnswerValue: lhs - 1 )
             
-        case .greaterThanOrEqual : //GreaterThanOrEqual
-            predicate = ORKResultPredicate.predicateForTimeIntervalQuestionResult(with: resultSelector, minimumExpectedAnswerValue: lhs)
+        case .greaterThanOrEqual : // GreaterThanOrEqual
+            predicate = ORKResultPredicate.predicateForTimeIntervalQuestionResult(with: resultSelector,
+                                                                                  minimumExpectedAnswerValue: lhs)
             
-        case .lessThanOrEqual : //LessThanOrEqual
-            predicate = ORKResultPredicate.predicateForTimeIntervalQuestionResult(with: resultSelector, maximumExpectedAnswerValue: lhs)
+        case .lessThanOrEqual : // LessThanOrEqual
+            predicate = ORKResultPredicate.predicateForTimeIntervalQuestionResult(with: resultSelector,
+                                                                                  maximumExpectedAnswerValue: lhs)
             
         case .range : break
             
-        //default: break
+        // default: break
             
         }
         return predicate
@@ -595,13 +663,18 @@ class ActivityBuilder {
      
      */
     
-    func getPredicateForScale(resultSelector: ORKResultSelector, lhs: Double,minimumValue: Float, operatorType: OperatorType,rhs: Double,resultType: ORKAnswerFormat,activityStep: ActivityStep) ->NSPredicate {
+    func getPredicateForScale(resultSelector: ORKResultSelector,
+                              lhs: Double, minimumValue: Float,
+                              operatorType: OperatorType,
+                              rhs: Double,
+                              resultType: ORKAnswerFormat,
+                              activityStep: ActivityStep) -> NSPredicate {
         
         var predicate: NSPredicate = NSPredicate()
         
-        switch(operatorType) {
+        switch operatorType {
             
-        case .equal: //Equal
+        case .equal: // Equal
             //
             
             if resultType is ORKScaleAnswerFormat {
@@ -611,10 +684,10 @@ class ActivityBuilder {
                 var offset: Double? = 0.0
                 let maxFraction = (activityStep as? ActivityQuestionStep)!.formatDict![kStepQuestionContinuosScaleMaxFractionDigits] as? Int
                 
-                switch(maxFraction) {
+                switch maxFraction {
                 case 0?:
                     offset = -0.25
-                case 1?,2?,3?:
+                case 1?, 2?, 3?:
                     offset = 0.0
                 case .none: break
                 case .some(_): break
@@ -623,27 +696,33 @@ class ActivityBuilder {
                 predicate =  NSPredicate.init(format: "SUBQUERY(SELF, $x, $x.identifier == $ORK_TASK_IDENTIFIER AND SUBQUERY($x.results, $y, $y.identifier == \"\(resultSelector.resultIdentifier)\" AND $y.isPreviousResult == 0 AND SUBQUERY($y.results, $z, $z.identifier == \"\(resultSelector.resultIdentifier)\" AND $z.answer >= \(lhs + offset!) AND $z.answer < \(lhs + 0.1)).@count > 0).@count > 0).@count > 0" , argumentArray: [])
             }
             
-        case .notEqual: //Not Equal
+        case .notEqual: // Not Equal
             
             let equalPredicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
             predicate = NSCompoundPredicate.init(notPredicateWithSubpredicate: equalPredicate)
             
-        case .greaterThan: //GreaterThan
-            predicate = ORKResultPredicate.predicateForScaleQuestionResult(with: resultSelector, minimumExpectedAnswerValue: lhs + 1, maximumExpectedAnswerValue: Double.infinity)
+        case .greaterThan: // GreaterThan
+            predicate = ORKResultPredicate.predicateForScaleQuestionResult(with: resultSelector,
+                                                                           minimumExpectedAnswerValue: lhs + 1,
+                                                                           maximumExpectedAnswerValue: Double.infinity)
             
-        case .lessThan: //LessThan
-            predicate = ORKResultPredicate.predicateForScaleQuestionResult(with: resultSelector, minimumExpectedAnswerValue: Double(minimumValue), maximumExpectedAnswerValue: lhs - 1 )
+        case .lessThan: // LessThan
+            predicate = ORKResultPredicate.predicateForScaleQuestionResult(with: resultSelector,
+                                                                           minimumExpectedAnswerValue: Double(minimumValue),
+                                                                           maximumExpectedAnswerValue: lhs - 1 )
             
-        case .greaterThanOrEqual: //GreaterThanOrEqual
+        case .greaterThanOrEqual: // GreaterThanOrEqual
             predicate = ORKResultPredicate.predicateForScaleQuestionResult(with: resultSelector, minimumExpectedAnswerValue: lhs)
             
-        case .lessThanOrEqual: //LessThanOrEqual
+        case .lessThanOrEqual: // LessThanOrEqual
             predicate = ORKResultPredicate.predicateForScaleQuestionResult(with: resultSelector, maximumExpectedAnswerValue: lhs)
             
         case .range:
-            predicate = ORKResultPredicate.predicateForScaleQuestionResult(with: resultSelector, minimumExpectedAnswerValue: lhs, maximumExpectedAnswerValue: rhs  )
+            predicate = ORKResultPredicate.predicateForScaleQuestionResult(with: resultSelector,
+                                                                           minimumExpectedAnswerValue: lhs,
+                                                                           maximumExpectedAnswerValue: rhs  )
             
-        //default: break
+        // default: break
             
         }
         return predicate

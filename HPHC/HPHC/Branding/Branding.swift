@@ -42,7 +42,20 @@ enum Branding {
   
   private static var brandConfig: JSONDictionary {
       var nsDictionary: NSDictionary?
-      if let path = Bundle.main.path(forResource: "Branding", ofType: "plist") {
+    
+      var plistPath = Bundle.main.path(forResource: "Branding", ofType: ".plist", inDirectory: nil)
+      let localeDefault = getLanguageLocale()
+      
+      if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+        plistPath = Bundle.main.path(forResource: "Branding", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+      
+      } else if localeDefault.hasPrefix("en"){
+        plistPath = Bundle.main.path(forResource: "Branding", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+      } else if localeDefault.hasPrefix("es"){
+        plistPath = Bundle.main.path(forResource: "Branding", ofType: ".plist", inDirectory: nil, forLocalization: "es")
+      }
+      
+      if let path = plistPath {
          nsDictionary = NSDictionary(contentsOfFile: path)
       }
       return nsDictionary as? JSONDictionary ?? [:]
@@ -89,7 +102,7 @@ enum Branding {
   }
   
   static var ValidatedTitle:String {
-      return brandConfig[JSONKey.ValidatedTitle] as? String ?? "Validated!"
+      return brandConfig[JSONKey.ValidatedTitle] as? String ?? kEligibilityValidationTitle
   }
   
   static var AllowFeedback:Bool {

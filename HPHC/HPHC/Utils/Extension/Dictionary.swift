@@ -23,7 +23,8 @@ import UIKit
 extension Dictionary {
     
     func preetyJSON() -> String {
-        let jsonData = try! JSONSerialization.data(withJSONObject: self, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonData1 = try? JSONSerialization.data(withJSONObject: self, options: JSONSerialization.WritingOptions.prettyPrinted)
+      let jsonData = jsonData1!
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         return jsonString
     }

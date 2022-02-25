@@ -32,7 +32,7 @@ class HomeViewController: UIViewController{
     @IBOutlet var buttonGetStarted: UIButton?
     var websiteName:String!
     
-// MARK:- ViewController Lifecycle
+// MARK: - ViewController Lifecycle
     
     override func loadView() {
         super.loadView()
@@ -44,7 +44,7 @@ class HomeViewController: UIViewController{
         
         // self.loadTestData()
         self.automaticallyAdjustsScrollViewInsets = false
-        //Added to change next screen
+        // Added to change next screen
         pageControlView?.addTarget(self, action: #selector(HomeViewController.didChangePageControlValue), for: .valueChanged)
         
         websiteName = Branding.WebsiteLink
@@ -57,24 +57,22 @@ class HomeViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //hide navigationbar
+        // hide navigationbar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         // Ask for network configuration in Debug mode
         #if DEBUG
-            //HPHCSettings().setupDefaultURLs()
-            //HPHCSettings().showSettings(self){}
+            // HPHCSettings().setupDefaultURLs()
+            // HPHCSettings().showSettings(self){}
         #endif
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
     }
     
-// MARK:- 
+// MARK: - 
     
     /**
  
@@ -82,11 +80,18 @@ class HomeViewController: UIViewController{
     
      */
     
-    
     func loadGatewayUI(){
        
-        //load plist info
-        let plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil)
+        // load plist info
+        var plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil)
+        let localeDefault = getLanguageLocale()
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        } else if localeDefault.hasPrefix("en"){
+            plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        } else if localeDefault.hasPrefix("es"){
+            plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil, forLocalization: "es")
+        }
         let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
         
         do {
@@ -97,21 +102,20 @@ class HomeViewController: UIViewController{
                 listOfOverviews.append(overviewObj)
             }
             
-            //create new Overview object
+            // create new Overview object
             let overview = Overview()
             overview.type = .gateway
             overview.sections = listOfOverviews
             
-            //assgin to Gateway
+            // assgin to Gateway
             Gateway.instance.overview = overview
             
-        } catch let error{
-            print("json error: \(error.localizedDescription)")
+        } catch _ {
+            
         }
     }
     
-    
-// MARK:- Segue Methods
+// MARK: - Segue Methods
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let pageViewController = segue.destination as? PageViewController {
@@ -130,7 +134,6 @@ class HomeViewController: UIViewController{
         }
     }
     
-    
     /**
  
      This method is triggered when the user taps on the pageControl to 
@@ -138,11 +141,10 @@ class HomeViewController: UIViewController{
  
      */
     @objc func didChangePageControlValue() {
-        //pageViewController?.scrollToViewController(index: (pageControlView?.currentPage)!)
+        // pageViewController?.scrollToViewController(index: (pageControlView?.currentPage)!)
     }
     
-    
-// MARK:- Button Actions
+// MARK: - Button Actions
     
     /**
      
@@ -154,7 +156,6 @@ class HomeViewController: UIViewController{
     @IBAction func getStartedButtonClicked(_ sender: UIButton){
         self.createMenuView()
     }
-    
     
     /**
      
@@ -168,7 +169,6 @@ class HomeViewController: UIViewController{
         fda.automaticallyAdjustsScrollViewInsets = true
         self.navigationController?.pushViewController(fda, animated: true)
     }
-    
     
     /**
      
@@ -188,7 +188,6 @@ class HomeViewController: UIViewController{
         self.navigationController?.present(webViewController, animated: true, completion: nil)
     }
     
-    
     /**
      
      This method is used to perform unwind operation
@@ -198,9 +197,7 @@ class HomeViewController: UIViewController{
      */
     @IBAction func unwindForLogout(_ segue: UIStoryboardSegue){
         
-        
     }
-    
     
     /**
      
@@ -215,7 +212,6 @@ class HomeViewController: UIViewController{
             self.buttonRegister.sendActions(for: .touchUpInside)
         }
     }
-    
     
     /**
      
@@ -233,8 +229,7 @@ class HomeViewController: UIViewController{
     }
 }
 
-
-// MARK:- Page Control Delegates for handling Counts
+// MARK: - Page Control Delegates for handling Counts
 extension HomeViewController: PageViewControllerDelegate {
     
     func pageViewController(pageViewController: PageViewController, didUpdatePageCount count: Int){
@@ -262,4 +257,3 @@ extension HomeViewController: PageViewControllerDelegate {
         }
     }
 }
-

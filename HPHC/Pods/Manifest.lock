@@ -24,19 +24,19 @@ PODS:
     - SDWebImage/Core (= 5.8.0)
   - SDWebImage/Core (5.8.0)
   - SlideMenuControllerSwift (5.0.0)
-  - URITemplate (3.0.0)
+  - URITemplate (3.0.1)
 
 DEPENDENCIES:
-  - ActionSheetPicker-3.0
-  - Crashlytics
-  - CryptoSwift
+  - ActionSheetPicker-3.0 (= 2.5.0)
+  - Crashlytics (= 3.14.0)
+  - CryptoSwift (= 1.3.1)
   - Embassy
   - EnvoyAmbassador
-  - Fabric
-  - IQKeyboardManagerSwift
+  - Fabric (= 1.10.2)
+  - IQKeyboardManagerSwift (= 6.5.5)
   - Mockingjay (= 3.0.0-alpha.1)
-  - RealmSwift
-  - SDWebImage
+  - RealmSwift (= 5.0.0)
+  - SDWebImage (= 5.8.0)
   - SlideMenuControllerSwift (from `https://github.com/AtomicSLLC/SlideMenuControllerSwift.git`, branch `swift5`)
 
 SPEC REPOS:
@@ -77,8 +77,8 @@ SPEC CHECKSUMS:
   RealmSwift: c1bdff09b422569dc6881410d9ccf712bcdb79b0
   SDWebImage: 84000f962cbfa70c07f19d2234cbfcf5d779b5dc
   SlideMenuControllerSwift: d740ea24105a658fe6a8c256f2bf5832fee7c047
-  URITemplate: 58e0d47f967006c5d59888af5356c4a8ed3b197d
+  URITemplate: 5f5a79f3e384884102c4e6b3325d159c20a8035a
 
-PODFILE CHECKSUM: 02eb0855b9dc57d0d1ae96107de5dad9f00d6fb6
+PODFILE CHECKSUM: dcab40180fa15d8c63f4b1655176d79b990f3d37
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.2

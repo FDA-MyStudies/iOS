@@ -39,7 +39,6 @@ class DBActivity: Object {
     @objc dynamic var branching: Bool = false
     @objc dynamic var randomization: Bool = false
     
-    
     @objc dynamic var frequencyRunsData: Data?
     @objc dynamic var anchorRunsData: Data?
     @objc dynamic var frequencyType: String?
@@ -70,7 +69,8 @@ class DBActivity: Object {
     @objc dynamic var anchorDateValue:Date?
     @objc dynamic var addNewCustomRuns: Bool = false
     @objc dynamic var taskSubType: String?
-  
+    @objc dynamic var activityLang: String?
+   
     var activityRuns = List<DBActivityRun>()
     
     var hasAnchorDate: Bool {
@@ -103,5 +103,3 @@ class DBActivityRun: Object {
     @objc dynamic  var responseData: Data?
  
 }
-
-

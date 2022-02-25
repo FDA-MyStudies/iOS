@@ -15,7 +15,6 @@ let kRealmEncryptionDefaultKey = "tatu8uopi8qwec7"
 let kEncryptionKey = "EncryptionKey"
 let kEncryptionIV =  "EncryptionIV"
 
-
 open class FDAKeychain {
     
     open var loggingEnabled = false
@@ -40,16 +39,16 @@ open class FDAKeychain {
         if SecItemCopyMatching(query, nil) == noErr {
             if let dictData = objectData {
                 let status = SecItemUpdate(query, NSDictionary(dictionary: [kSecValueData: dictData]))
-                logPrint("Update status: ", status)
+                // logPrint("Update status: ", status)
             } else {
                 let status = SecItemDelete(query)
-                logPrint("Delete status: ", status)
+                // logPrint("Delete status: ", status)
             }
         } else {
             if let dictData = objectData {
                 query.setValue(dictData, forKey: kSecValueData as String)
                 let status = SecItemAdd(query, nil)
-                logPrint("Update status: ", status)
+                // logPrint("Update status: ", status)
             }
         }
     }
@@ -67,7 +66,7 @@ open class FDAKeychain {
             let resultsData = resultsDict.value(forKey: kSecValueData as String) as? Data,
             status == noErr
             else {
-                logPrint("Load status: ", status)
+                // logPrint("Load status: ", status)
                 return nil
         }
         return String(data: resultsData, encoding: .utf8)
@@ -83,7 +82,7 @@ open class FDAKeychain {
     
     private func logPrint(_ items: Any...) {
         if loggingEnabled {
-            print(items)
+            // print(items)
         }
     }
 }

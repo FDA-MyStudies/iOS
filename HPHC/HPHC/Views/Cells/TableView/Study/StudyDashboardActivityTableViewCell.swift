@@ -22,7 +22,7 @@ import UIKit
 
 class StudyDashboardActivityTableViewCell: UITableViewCell {
     
-    //Fourth cell Outlets
+    // Fourth cell Outlets
     @IBOutlet var activityCollectionView: UICollectionView?
     
     var activityArrayData = NSMutableArray()
@@ -37,8 +37,8 @@ class StudyDashboardActivityTableViewCell: UITableViewCell {
 }
 
 
-// MARK:- Collection Datasource and Delegates
-extension StudyDashboardActivityTableViewCell: UICollectionViewDelegate , UICollectionViewDataSource {
+// MARK: - Collection Datasource and Delegates
+extension StudyDashboardActivityTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return activityArrayData.count
@@ -48,7 +48,8 @@ extension StudyDashboardActivityTableViewCell: UICollectionViewDelegate , UIColl
         
         let activityCellData = activityArrayData.object(at: indexPath.row) as! NSDictionary
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kActivityCollectionViewCell, for: indexPath) as! StudyDashboardActivityCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kActivityCollectionViewCell, for: indexPath)
+            as! StudyDashboardActivityCollectionViewCell
         cell.displayTodaysActivities(data: activityCellData)
         
         return cell
@@ -57,7 +58,3 @@ extension StudyDashboardActivityTableViewCell: UICollectionViewDelegate , UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     }
 }
-
-
-
-

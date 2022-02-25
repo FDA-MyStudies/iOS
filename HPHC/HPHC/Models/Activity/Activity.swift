@@ -33,8 +33,6 @@ let kActivityStudyId = "studyId"
 let kActivityActivityId = "qId"
 let kActivityName = "name"
 
-
-
 let kActivityConfiguration = "configuration"
 
 let kActivityFrequency = "frequency"
@@ -53,11 +51,9 @@ let kActivitySteps = "steps"
 let kActivityLifetime = "lifetime"
 let kActivityRunLifetime = "runLifetime"
 
-
-//questionnaireConfiguration
+// questionnaireConfiguration
 let kActivityBranching = "branching"
 let kActivityRandomization = "randomization"
-
 
 let kActivityLastModified = "lastModified"
 let kActivityTaskSubType = "taskSubType"
@@ -78,17 +74,17 @@ enum Frequency: String {
     var description: String {
         switch self {
         case .One_Time:
-            return "One Time"
+            return NSLocalizedStrings("One Time", comment: "")
         case .Daily:
-            return "Daily"
+            return NSLocalizedStrings("Daily", comment: "")
         case .Weekly:
-            return "Weekly"
+            return NSLocalizedStrings("Weekly", comment: "")
         case .Monthly:
-            return "Monthly"
+            return NSLocalizedStrings("Monthly", comment: "")
         case .Scheduled:
-            return "As Scheduled"
+            return NSLocalizedStrings("As Scheduled", comment: "")
         case .Ongoing:
-            return "Ongoing"
+            return NSLocalizedStrings("Ongoing", comment: "")
         }
     }
     
@@ -118,8 +114,8 @@ class Activity {
     var actvityId: String? // Unique id of each activity
     
     var studyId: String?
-    var name: String? //this will come in activity list used to display
-    var shortName: String? //this will come in meta data
+    var name: String? // this will come in activity list used to display
+    var shortName: String? // this will come in meta data
     var version: String?
     var state: String?
     var lastModified: Date?
@@ -130,8 +126,8 @@ class Activity {
     var randomization: Bool?
     
     var schedule: Schedule?
-    var steps: Array<Dictionary<String,Any>>? = []
-    var orkSteps: Array<ORKStep>? = [] //array of ORKSteps stores each step involved in Questionary
+    var steps: Array<Dictionary<String, Any>>? = []
+    var orkSteps: Array<ORKStep>? = [] // array of ORKSteps stores each step involved in Questionary
     var activitySteps: Array<ActivityStep>? = []
     
     var frequencyRuns: Array<Dictionary<String, Any>>? = []
@@ -140,7 +136,7 @@ class Activity {
     var addNewCustomRuns:Bool = false
     var result: ActivityResult?
 
-    var restortionData: Data? //stores the restortionData for current activity
+    var restortionData: Data? // stores the restortionData for current activity
     var totalRuns = 0
     var currentRunId = 1
     var compeltedRuns = 0
@@ -148,11 +144,11 @@ class Activity {
     var activityRuns: Array<ActivityRun>! = []
     var currentRun: ActivityRun! = nil
     var userParticipationStatus: UserActivityStatus! = nil
-    var taskSubType: String? = "" //used for active tasks
-    var anchorDate: AnchorDate? = nil
+    var taskSubType: String? = "" // used for active tasks
+    var anchorDate: AnchorDate?
     var schedulingType:ActivityScheduleType = .regular
-    
-     //Default Initializer
+    var activityLang: String? = ""
+     // Default Initializer
     init() {
        
         self.type = .Questionnaire
@@ -161,7 +157,7 @@ class Activity {
         // info
         self.studyId = ""
         self.name = ""
-        //self.version = "0"
+        // self.version = "0"
         self.lastModified = nil
         self.userStatus = .yetToJoin
         self.startDate = nil
@@ -186,14 +182,15 @@ class Activity {
         
         self.frequencyRuns = Array<Dictionary<String, Any>>() // contains the runs of Activity
         self.frequencyType = .One_Time
+        self.activityLang = ""
     }
     
-    // MARK:Initializer Methods
-    init(studyId: String,infoDict: Dictionary<String,Any>) {
+    // MARK: Initializer Methods
+    init(studyId: String, infoDict: Dictionary<String, Any>) {
         
         self.studyId = studyId
         
-        //Need to reCheck with actual dictionary when passed
+        // Need to reCheck with actual dictionary when passed
         if Utilities.isValidObject(someObject: infoDict as AnyObject?) {
             
             if Utilities.isValidValue(someObject: infoDict[kActivityId] as AnyObject) {
@@ -217,6 +214,7 @@ class Activity {
             if Utilities.isValidValue(someObject: infoDict[kActivityBranching] as AnyObject ) {
                 self.branching = (infoDict[kActivityBranching] as? Bool)!
             }
+            
             if Utilities.isValidValue(someObject: infoDict[kActivityType] as AnyObject) {
                 self.type = ActivityType(rawValue: (infoDict[kActivityType] as? String)!)
             }
@@ -237,10 +235,10 @@ class Activity {
                 let frequencyDict: Dictionary = (infoDict[kActivityFrequency] as? Dictionary<String, Any>)!
                 
                 if Utilities.isValidObject(someObject: frequencyDict[kActivityFrequencyRuns] as AnyObject ) {
-                    self.frequencyRuns =  frequencyDict[kActivityFrequencyRuns] as? Array<Dictionary<String,Any>>
+                    self.frequencyRuns =  frequencyDict[kActivityFrequencyRuns] as? Array<Dictionary<String, Any>>
                 }
                 if Utilities.isValidObject(someObject: frequencyDict[kActivityManualAnchorRuns] as AnyObject ) {
-                    self.anchorRuns =  frequencyDict[kActivityManualAnchorRuns] as? Array<Dictionary<String,Any>>
+                    self.anchorRuns =  frequencyDict[kActivityManualAnchorRuns] as? Array<Dictionary<String, Any>>
                 }
                 
                 if Utilities.isValidValue(someObject: frequencyDict[kActivityFrequencyType] as AnyObject ){
@@ -252,14 +250,15 @@ class Activity {
                     
             }
             
-            //AnchorDate
+            // AnchorDate
             let anchorDateDetail = infoDict["anchorDate"] as? JSONDictionary
-            if (anchorDateDetail != nil && self.schedulingType == .anchorDate) {
+            if anchorDateDetail != nil && self.schedulingType == .anchorDate {
                 setActivityAvailability(anchorDateDetail ?? [:])
             }
             
             let currentUser = User.currentUser
-            if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == self.actvityId && $0.studyId == self.studyId}).first {
+            if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == self.actvityId &&
+                                                                                    $0.studyId == self.studyId}).first {
                 self.userParticipationStatus = userActivityStatus
                 
             } else {
@@ -282,13 +281,13 @@ class Activity {
         } else {
             Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
         }
-        
+        self.activityLang = getLanguageLocale()
     }
     
     // MARK: Setter Methods
     
     // method to set  ActivityMetaData
-    func setActivityMetaData(activityDict: Dictionary<String,Any>) {
+    func setActivityMetaData(activityDict: Dictionary<String, Any>) {
         
         if Utilities.isValidObject(someObject: activityDict as AnyObject?) {
             
@@ -296,7 +295,7 @@ class Activity {
                 self.type? =  ActivityType(rawValue: (activityDict[kActivityType] as? String)!)!
                
             }
-            self.setInfo(infoDict: (activityDict[kActivityInfoMetaData] as? Dictionary<String,Any>)!)
+            self.setInfo(infoDict: (activityDict[kActivityInfoMetaData] as? Dictionary<String, Any>)!)
             
             if Utilities.isValidObject(someObject: activityDict[kActivitySteps] as AnyObject?) {
                  self.setStepArray(stepArray: (activityDict[kActivitySteps] as? Array)! )
@@ -309,9 +308,8 @@ class Activity {
         }
     }
     
-    
     // method to set info part of activity from ActivityMetaData
-    func setInfo(infoDict: Dictionary<String,Any>) {
+    func setInfo(infoDict: Dictionary<String, Any>) {
         
         if Utilities.isValidObject(someObject: infoDict as AnyObject?) {
          
@@ -323,22 +321,22 @@ class Activity {
                 self.version =  infoDict[kActivityVersion] as? String
             }
             if Utilities.isValidValue(someObject: infoDict[kActivityStartTime] as AnyObject ) {
-                //self.startDate =  Utilities.getDateFromString(dateString: (infoDict[kActivityStartTime] as! String?)!)
+                // self.startDate =  Utilities.getDateFromString(dateString: (infoDict[kActivityStartTime] as! String?)!)
             }
             if Utilities.isValidValue(someObject: infoDict[kActivityEndTime] as AnyObject ) {
-                //self.endDate =   Utilities.getDateFromString(dateString: (infoDict[kActivityEndTime] as! String?)!)
+                // self.endDate =   Utilities.getDateFromString(dateString: (infoDict[kActivityEndTime] as! String?)!)
             }
             if let lastModified = infoDict[kActivityLastModified] as? String {
                 self.lastModified =  Utilities.getDateFromString(dateString: lastModified)
             }
-            
+          //  self.activityLang = getLanguageLocale()
         } else {
             Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
         }
     }
     
     // method to set Configration
-    func setConfiguration(configurationDict: Dictionary<String,Any>)  {
+    func setConfiguration(configurationDict: Dictionary<String, Any>)  {
         
         if Utilities.isValidObject(someObject: configurationDict as AnyObject?) {
             if Utilities.isValidValue(someObject: configurationDict[kActivityBranching] as AnyObject) {
@@ -359,7 +357,7 @@ class Activity {
         if self.anchorDate?.sourceType == "EnrollmentDate" {
             var enrollmentDate = Study.currentStudy?.userParticipateState.joiningDate
             
-            //update start date
+            // update start date
             var startDateStringEnrollment =  Utilities.formatterShort?.string(from: enrollmentDate!)
             let startTimeEnrollment =  "00:00:00"
             startDateStringEnrollment = (startDateStringEnrollment ?? "") + " " + startTimeEnrollment
@@ -368,13 +366,13 @@ class Activity {
             self.anchorDate?.anchorDateValue = enrollmentDate
             let lifeTime = self.updateLifeTime(self.anchorDate!, frequency: self.frequencyType)
            
-            //update start date
+            // update start date
             var startDateString =  Utilities.formatterShort?.string(from: lifeTime.0!)
             let startTime =  (self.anchorDate?.startTime == nil) ? "00:00:00" : (self.anchorDate?.startTime)!
             startDateString = (startDateString ?? "") + " " + startTime
             let startdate = Utilities.findDateFromString(dateString: startDateString ?? "")
             
-            //update end date
+            // update end date
             var endDateString =  Utilities.formatterShort?.string(from: lifeTime.1!)
             let endTime =  (self.anchorDate?.endTime == nil) ? "00:00:00" : (self.anchorDate?.endTime)!
             endDateString = (endDateString ?? "") + " " + endTime
@@ -386,8 +384,8 @@ class Activity {
         
     }
     
-     //method to set step array
-    func setStepArray(stepArray: Array<Dictionary<String,Any>>) {
+     // method to set step array
+    func setStepArray(stepArray: Array<Dictionary<String, Any>>) {
        
         if Utilities.isValidObject(someObject: stepArray as AnyObject?){
             self.steps? = stepArray
@@ -405,7 +403,7 @@ class Activity {
         
     }
     
-    //method to set step array
+    // method to set step array
     func setActivityStepArray(stepArray: Array<ActivityStep>) {
         
         if Utilities.isValidObject(someObject: stepArray as AnyObject?) {
@@ -431,16 +429,16 @@ class Activity {
         self.restortionData = restortionData
     }
     
-    func updateLifeTime(_ anchorDate:AnchorDate, frequency:Frequency) -> (Date?,Date?){
+    func updateLifeTime(_ anchorDate: AnchorDate, frequency: Frequency) -> (Date?, Date?){
         guard let date = anchorDate.anchorDateValue else {
-            return (nil,nil)
+            return (nil, nil)
         }
         
         return updateLifeTime(date, frequency: frequency)
         
     }
     
-    func updateLifeTime(_ date:Date, frequency:Frequency) -> (Date?,Date?) {
+    func updateLifeTime(_ date:Date, frequency:Frequency) -> (Date?, Date?) {
         
         var startDate:Date!
         var endDate:Date!
@@ -470,11 +468,11 @@ class Activity {
         case .Monthly:
             
             let startDateInterval = TimeInterval(60*60*24*(self.anchorDate?.startDays)!)
-            //let endDateInterval = TimeInterval(-1)
+            // let endDateInterval = TimeInterval(-1)
             startDate = date.addingTimeInterval(startDateInterval)
             let calender = Calendar.current
             endDate = calender.date(byAdding: .month, value: (self.anchorDate?.repeatInterval)!, to: startDate)
-            //endDate = endDate.addingTimeInterval(endDateInterval)
+            // endDate = endDate.addingTimeInterval(endDateInterval)
         case .Scheduled:
             
             let startDateInterval = TimeInterval(60*60*24*(self.anchorDate?.startDays)!)
@@ -487,11 +485,10 @@ class Activity {
             return (nil, nil)
         }
         
-        return (startDate,endDate)
+        return (startDate, endDate)
     }
     
 }
-
 
 class AnchorDate {
     
@@ -558,13 +555,11 @@ class AnchorDate {
             
         }
         
-    
     }
     
     func updateUserResponseAnchorDate(_ response:[String:Any]) {
-        //let results = response["results"] as! Array<Dictionary<String,Any>> //[[String : Any]]
-        //"studyId == %@",studyId
-        //let anchorDateResult = results.filter("key == %@","self.sourceKey")
+        // let results = response["results"] as! Array<Dictionary<String, Any>> //[[String : Any]]
+        // "studyId == %@",studyId
+        // let anchorDateResult = results.filter("key == %@","self.sourceKey")
     }
 }		
-

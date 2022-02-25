@@ -39,8 +39,8 @@ class SyncUpdate {
      */
     func syncDataToServer() {
         
-        let realm = try! Realm()
-        guard let toBeSyncedData = realm.objects(DBDataOfflineSync.self)
+        let realm = try? Realm()
+        guard let toBeSyncedData = realm?.objects(DBDataOfflineSync.self)
             .sorted(byKeyPath: "date", ascending: true).first
             else { return }
         
@@ -83,15 +83,15 @@ class SyncUpdate {
         }
         
         // Delete current database object
-        try! realm.write {
-            realm.delete(toBeSyncedData)
+        try? realm?.write {
+            realm?.delete(toBeSyncedData)
         }
         
     }
     
 }
 
-// MARK:- Webservices Delegates
+// MARK: - Webservices Delegates
 extension SyncUpdate: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {

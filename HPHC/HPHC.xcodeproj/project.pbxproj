@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0AC749DEEBB80752CF6DA249 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
-		37F19856010496916F51BEAB /* Pods_MyStudies_COVID_19.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E99EF4C4C9BC14DB219CE1D /* Pods_MyStudies_COVID_19.framework */; };
+		0AC749DEEBB80752CF6DA249 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		481DFA4C1E6EEB70004C39EF /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481DFA4B1E6EEB70004C39EF /* WebViewController.swift */; };
 		482062521E68532300C7A7AF /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482062511E68532300C7A7AF /* UIUtilities.swift */; };
 		482CC61E1EC5F52E00BFE8C6 /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482CC61D1EC5F52E00BFE8C6 /* KDCircularProgress.swift */; };
@@ -144,239 +143,9 @@
 		7878B31D2216C6E20052FC23 /* HPHCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878B31C2216C6E20052FC23 /* HPHCTests.swift */; };
 		83E41E58CE40BA32BA0F019B /* Pods_HPHCUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4CF7BB238C017BF7E2A6346 /* Pods_HPHCUITests.framework */; };
 		842CEF4A25F0C47C00D146A6 /* Study.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842CEF4D25F0C47C00D146A6 /* Study.storyboard */; };
-		842CEF4B25F0C47C00D146A6 /* Study.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842CEF4D25F0C47C00D146A6 /* Study.storyboard */; };
-		842ECD2D25D5B07600A612DA /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F861E70055A00755444 /* UIApplication.swift */; };
-		842ECD2E25D5B07600A612DA /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F851E70055A00755444 /* UIViewController.swift */; };
-		842ECD2F25D5B07600A612DA /* SignUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD361E6ED8E500327AE5 /* SignUpTableViewCell.swift */; };
-		842ECD3025D5B07600A612DA /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDEFDB123F67E7E0067534C /* Data+Extensions.swift */; };
-		842ECD3125D5B07600A612DA /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD191E6ED8E500327AE5 /* NotificationViewController.swift */; };
-		842ECD3225D5B07600A612DA /* LeftMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F891E7005BF00755444 /* LeftMenuCell.swift */; };
-		842ECD3325D5B07600A612DA /* StringEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946CA5E81E728C2300CC8535 /* StringEncoder.swift */; };
-		842ECD3425D5B07600A612DA /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4CECB51F31B41C005E0832 /* PinterestLayout.swift */; };
-		842ECD3525D5B07600A612DA /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C27225F416C00420A7B /* Cell.swift */; };
-		842ECD3625D5B07600A612DA /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA4F58C23FC295600195A72 /* DateHelper.swift */; };
-		842ECD3725D5B07600A612DA /* DBActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D20E9E1E9DFFE7005C3531 /* DBActivity.swift */; };
-		842ECD3825D5B07600A612DA /* ContactUsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884E3591E827E6A002DA0B9 /* ContactUsTableViewCell.swift */; };
-		842ECD3925D5B07600A612DA /* ConsentSharePdfStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93D8F1E93B5700027A5DC /* ConsentSharePdfStepViewController.swift */; };
-		842ECD3A25D5B07600A612DA /* FRHyperLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD261E6ED8E500327AE5 /* FRHyperLabel.m */; };
-		842ECD3B25D5B07600A612DA /* StepProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA927E1E499F8C00DA6287 /* StepProvider.swift */; };
-		842ECD3C25D5B07600A612DA /* ActivityInstructionStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B22D1E54256700BF463F /* ActivityInstructionStep.swift */; };
-		842ECD3D25D5B07600A612DA /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD0A1E6EC47700327AE5 /* SplashViewController.swift */; };
-		842ECD3E25D5B07600A612DA /* ResearchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B25F21EAE3F1D00E2DFB2 /* ResearchContainerViewController.swift */; };
-		842ECD3F25D5B07600A612DA /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F90AB4924693DD200F4D1BE /* UIView+Extensions.swift */; };
-		842ECD4025D5B07600A612DA /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED8A2E51E447AA2004DEC01 /* Logger.swift */; };
-		842ECD4125D5B07600A612DA /* EligibilityBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B321E65421D002C1FA3 /* EligibilityBuilder.swift */; };
-		842ECD4225D5B07600A612DA /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96E41E4AF61800946477 /* NetworkConstants.swift */; };
-		842ECD4325D5B07600A612DA /* RepeatableFormStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED86F601EA6498D00365AF0 /* RepeatableFormStep.m */; };
-		842ECD4425D5B07600A612DA /* StudyDashboardTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E7D1E94FB5300828CA1 /* StudyDashboardTabbarViewController.swift */; };
-		842ECD4525D5B07600A612DA /* ConfirmationOptionalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA889BF1E6FD22800F160A1 /* ConfirmationOptionalTableViewCell.swift */; };
-		842ECD4625D5B07600A612DA /* StudyDashboardStudyPercentageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E7C1E94FB5300828CA1 /* StudyDashboardStudyPercentageTableViewCell.swift */; };
-		842ECD4725D5B07600A612DA /* DBStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C49B1E83CEEF00EB419C /* DBStudy.swift */; };
-		842ECD4825D5B07600A612DA /* FeedBackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884E3531E82665C002DA0B9 /* FeedBackTableViewCell.swift */; };
-		842ECD4925D5B07600A612DA /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8926D7E92383F25C00558F4E /* KeyChain.swift */; };
-		842ECD4A25D5B07600A612DA /* ResourcesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DBD1E93C8850027A5DC /* ResourcesViewController.swift */; };
-		842ECD4B25D5B07600A612DA /* HealthClientType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECE8BFA1EAF0E3A00A025F5 /* HealthClientType.swift */; };
-		842ECD4C25D5B07600A612DA /* StudyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD211E6ED8E500327AE5 /* StudyListCell.swift */; };
-		842ECD4D25D5B07600A612DA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD371E6ED8E500327AE5 /* SignUpViewController.swift */; };
-		842ECD4E25D5B07600A612DA /* TextChoiceQuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C1A225F40EA00420A7B /* TextChoiceQuestionController.swift */; };
-		842ECD4F25D5B07600A612DA /* RepeatableFormStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED86F621EA6498D00365AF0 /* RepeatableFormStepViewController.m */; };
-		842ECD5025D5B07600A612DA /* DBHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9491F7F71E825F5D0018C15E /* DBHandler.swift */; };
-		842ECD5125D5B07600A612DA /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F58A84424D177F4009322B3 /* APIConfiguration.swift */; };
-		842ECD5225D5B07600A612DA /* ConsentStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED134351E5EB0370090C976 /* ConsentStep.swift */; };
-		842ECD5325D5B07600A612DA /* ActivitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DB81E93C8850027A5DC /* ActivitiesTableViewCell.swift */; };
-		842ECD5425D5B07600A612DA /* SecondGatewayOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD2B1E6ED8E500327AE5 /* SecondGatewayOverviewViewController.swift */; };
-		842ECD5525D5B07600A612DA /* HPHCSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8948349C22BB9C59000B7BFA /* HPHCSettings.swift */; };
-		842ECD5625D5B07600A612DA /* LeftMenuResourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FCEE1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift */; };
-		842ECD5725D5B07600A612DA /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8D61624D161B6008C38D5 /* PDFCreator.swift */; };
-		842ECD5825D5B07600A612DA /* Gateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909B71E5310D6001B01C5 /* Gateway.swift */; };
-		842ECD5925D5B07600A612DA /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD1C1E6ED8E500327AE5 /* ProfileTableViewCell.swift */; };
-		842ECD5A25D5B07600A612DA /* FetalKickCounterStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B381E6574FE002C1FA3 /* FetalKickCounterStep.swift */; };
-		842ECD5B25D5B07600A612DA /* ChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C13DBB1EC1988600E3AEBF /* ChartsViewController.swift */; };
-		842ECD5C25D5B07600A612DA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC8019A1E67EF3400CC5966 /* Constants.swift */; };
-		842ECD5D25D5B07600A612DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D2D5B1E433E8800763D4C /* ViewController.swift */; };
-		842ECD5E25D5B07600A612DA /* UITestingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905592923016852005FB284 /* UITestingHelpers.swift */; };
-		842ECD5F25D5B07600A612DA /* AppDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C695C25A83F8A002B9F42 /* AppDetails.swift */; };
-		842ECD6025D5B07600A612DA /* SignUpCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD341E6ED8E500327AE5 /* SignUpCompleteViewController.swift */; };
-		842ECD6125D5B07600A612DA /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD2F1E6ED8E500327AE5 /* ForgotPasswordViewController.swift */; };
-		842ECD6225D5B07600A612DA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96E51E4AF61800946477 /* NetworkManager.swift */; };
-		842ECD6325D5B07600A612DA /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EAA623F289280026DA0B /* UIImage+Gif.swift */; };
-		842ECD6425D5B07600A612DA /* FDASlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F7F1E6FE65600755444 /* FDASlideMenuViewController.swift */; };
-		842ECD6525D5B07600A612DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D2D591E433E8800763D4C /* AppDelegate.swift */; };
-		842ECD6625D5B07600A612DA /* StudyHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4833E9DE1E7126900032D244 /* StudyHomeViewController.swift */; };
-		842ECD6725D5B07600A612DA /* DBParticipantPropertyMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDEFDA823F5A0F50067534C /* DBParticipantPropertyMetadata.swift */; };
-		842ECD6825D5B07600A612DA /* ConsentPdfViewerStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1D06E1EA884BD00E5A794 /* ConsentPdfViewerStepViewController.swift */; };
-		842ECD6925D5B07600A612DA /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D910C223B9FD800C082C9 /* Dictionary.swift */; };
-		842ECD6A25D5B07600A612DA /* StudyDashboardStatisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E7A1E94FB5300828CA1 /* StudyDashboardStatisticsTableViewCell.swift */; };
-		842ECD6B25D5B07600A612DA /* ConsentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED134331E5EB0280090C976 /* ConsentBuilder.swift */; };
-		842ECD6C25D5B07600A612DA /* JailbrokeBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E91D6801ECD662E0012F49F /* JailbrokeBlocker.swift */; };
-		842ECD6D25D5B07600A612DA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD291E6ED8E500327AE5 /* HomeViewController.swift */; };
-		842ECD6E25D5B07600A612DA /* FileDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E183AB01E966230005D7A27 /* FileDownloadManager.swift */; };
-		842ECD6F25D5B07600A612DA /* AppNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948710291E546C3800246109 /* AppNotification.swift */; };
-		842ECD7025D5B07600A612DA /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD181E6ED8E500327AE5 /* NotificationTableViewCell.swift */; };
-		842ECD7125D5B07600A612DA /* SurveyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C1C225F40F400420A7B /* SurveyTask.swift */; };
-		842ECD7225D5B07600A612DA /* FilterListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484ACBF51F2896A500BCC819 /* FilterListCollectionViewCell.swift */; };
-		842ECD7325D5B07600A612DA /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED8A2E31E447AA2004DEC01 /* Formatter.swift */; };
-		842ECD7425D5B07600A612DA /* NavigationBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F8B1E701EB700755444 /* NavigationBackButton.swift */; };
-		842ECD7525D5B07600A612DA /* StudyDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E751E94FB5300828CA1 /* StudyDashboardViewController.swift */; };
-		842ECD7625D5B07600A612DA /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909B41E52FA9B001B01C5 /* Study.swift */; };
-		842ECD7725D5B07600A612DA /* ResourcesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD1E1E6ED8E500327AE5 /* ResourcesListCell.swift */; };
-		842ECD7825D5B07600A612DA /* AnchorDateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89903061224A502C00B3A85C /* AnchorDateHandler.swift */; };
-		842ECD7925D5B07600A612DA /* StandaloneStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878B30E221574D80052FC23 /* StandaloneStudy.swift */; };
-		842ECD7A25D5B07600A612DA /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B5F2F31ECA354800BC0336 /* LocalNotification.swift */; };
-		842ECD7B25D5B07600A612DA /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA889BB1E6FD16B00F160A1 /* ConfirmationViewController.swift */; };
-		842ECD7C25D5B07600A612DA /* FetalKickCounterTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3C1E65752C002C1FA3 /* FetalKickCounterTask.swift */; };
-		842ECD7D25D5B07600A612DA /* OtherTextChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C20225F410500420A7B /* OtherTextChoiceCell.swift */; };
-		842ECD7E25D5B07600A612DA /* AKUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E183AB21E966230005D7A27 /* AKUtility.swift */; };
-		842ECD7F25D5B07600A612DA /* ConfirmationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA889BD1E6FD20000F160A1 /* ConfirmationTableViewCell.swift */; };
-		842ECD8025D5B07600A612DA /* ActivityBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B39BF1E55DFF10037D09D /* ActivityBuilder.swift */; };
-		842ECD8125D5B07600A612DA /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA92841E49B5CF00DA6287 /* File.swift */; };
-		842ECD8225D5B07600A612DA /* StudyDashboardActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E771E94FB5300828CA1 /* StudyDashboardActivityCollectionViewCell.swift */; };
-		842ECD8325D5B07600A612DA /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD321E6ED8E500327AE5 /* SignInViewController.swift */; };
-		842ECD8425D5B07600A612DA /* StudyDashboardTrendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E7E1E94FB5300828CA1 /* StudyDashboardTrendsTableViewCell.swift */; };
-		842ECD8525D5B07600A612DA /* ResponseServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C2F81E4C4993005984EC /* ResponseServerConfiguration.swift */; };
-		842ECD8625D5B07600A612DA /* ResourcesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E183AA81E962AA4005D7A27 /* ResourcesDetailViewController.swift */; };
-		842ECD8725D5B07600A612DA /* NetworkWebServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96E61E4AF61800946477 /* NetworkWebServiceHandler.swift */; };
-		842ECD8825D5B07600A612DA /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F41B86123AC937200D4F624 /* AppConfiguration.swift */; };
-		842ECD8925D5B07600A612DA /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7187B1E77C01900E293EF /* Encoder.swift */; };
-		842ECD8A25D5B07600A612DA /* ActivityActiveStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B22B1E54256700BF463F /* ActivityActiveStep.swift */; };
-		842ECD8B25D5B07600A612DA /* LineChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C13DBD1EC19E4700E3AEBF /* LineChartCell.swift */; };
-		842ECD8C25D5B07600A612DA /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481DFA4B1E6EEB70004C39EF /* WebViewController.swift */; };
-		842ECD8D25D5B07600A612DA /* ActivityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B2231E54254900BF463F /* ActivityResult.swift */; };
-		842ECD8E25D5B07600A612DA /* StudyFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48567FE01F14FB3C00857193 /* StudyFilterViewController.swift */; };
-		842ECD8F25D5B07600A612DA /* UserServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C2FA1E4C9EF8005984EC /* UserServices.swift */; };
-		842ECD9025D5B07600A612DA /* ReachoutOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FF031E1E952B0A009F191B /* ReachoutOptionCell.swift */; };
-		842ECD9125D5B07600A612DA /* FeedBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884E3511E825E7D002DA0B9 /* FeedBackViewController.swift */; };
-		842ECD9225D5B07600A612DA /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD2A1E6ED8E500327AE5 /* PageViewController.swift */; };
-		842ECD9325D5B07600A612DA /* ResourcesDetailViewControllerCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90D23F1EF40D2100F5140F /* ResourcesDetailViewControllerCopy.swift */; };
-		842ECD9425D5B07600A612DA /* ReachoutOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FF031A1E95275D009F191B /* ReachoutOptionsViewController.swift */; };
-		842ECD9525D5B07600A612DA /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA92871E49F0CD00DA6287 /* Utilities.swift */; };
-		842ECD9625D5B07600A612DA /* SyncUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9E81D51ECEDA770007B492 /* SyncUpdate.swift */; };
-		842ECD9725D5B07600A612DA /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F7B1E6FE60900755444 /* LeftMenuViewController.swift */; };
-		842ECD9825D5B07600A612DA /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482062511E68532300C7A7AF /* UIUtilities.swift */; };
-		842ECD9925D5B07600A612DA /* TextChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C21225F410500420A7B /* TextChoiceCell.swift */; };
-		842ECD9A25D5B07600A612DA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D2D891E43400100763D4C /* User.swift */; };
-		842ECD9B25D5B07600A612DA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD1D1E6ED8E500327AE5 /* ProfileViewController.swift */; };
-		842ECD9C25D5B07600A612DA /* StudyOverviewPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD3D1E6ED8E500327AE5 /* StudyOverviewPageViewController.swift */; };
-		842ECD9D25D5B07600A612DA /* Branding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8973F76C23F6B657008F5B22 /* Branding.swift */; };
-		842ECD9E25D5B07600A612DA /* InEligibilityStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E31DC681F17AF9C00C3E1DB /* InEligibilityStepViewController.swift */; };
-		842ECD9F25D5B07600A612DA /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B21D1E54252500BF463F /* Schedule.swift */; };
-		842ECDA025D5B07600A612DA /* GatewayResourcesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD1F1E6ED8E500327AE5 /* GatewayResourcesListViewController.swift */; };
-		842ECDA125D5B07600A612DA /* ActivityQuestionStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B22E1E54256700BF463F /* ActivityQuestionStep.swift */; };
-		842ECDA225D5B07600A612DA /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482CC61D1EC5F52E00BFE8C6 /* KDCircularProgress.swift */; };
-		842ECDA325D5B07600A612DA /* DBNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF0466A1ED1C943008098BB /* DBNotification.swift */; };
-		842ECDA425D5B07600A612DA /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DB91E93C8850027A5DC /* ActivitiesViewController.swift */; };
-		842ECDA525D5B07600A612DA /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B2201E54253800BF463F /* Activity.swift */; };
-		842ECDA625D5B07600A612DA /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4D86DF1F38A740003DBDD8 /* SearchBarView.swift */; };
-		842ECDA725D5B07600A612DA /* AppUpdateBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C6BD431EB8513300D4AA72 /* AppUpdateBlocker.swift */; };
-		842ECDA825D5B07600A612DA /* FetalKickIntroStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB740251E9D028000A4C773 /* FetalKickIntroStepViewController.swift */; };
-		842ECDA925D5B07600A612DA /* DBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9491F7F91E825FA80018C15E /* DBUser.swift */; };
-		842ECDAA25D5B07600A612DA /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1E2FA824DADA7900BA1798 /* LocalizableString.swift */; };
-		842ECDAB25D5B07600A612DA /* ActivityStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B22F1E54256700BF463F /* ActivityStep.swift */; };
-		842ECDAC25D5B07600A612DA /* FilterListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484ACBFF1F28BC8800BCC819 /* FilterListTableViewCell.swift */; };
-		842ECDAD25D5B07600A612DA /* StudyDashboardActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E781E94FB5300828CA1 /* StudyDashboardActivityTableViewCell.swift */; };
-		842ECDAE25D5B07600A612DA /* ConsentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC1291E1E64241200B90167 /* ConsentResult.swift */; };
-		842ECDAF25D5B07600A612DA /* WCPConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96EE1E4B16D900946477 /* WCPConfiguration.swift */; };
-		842ECDB025D5B07600A612DA /* StudyOverviewPageViewControllerFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD3E1E6ED8E500327AE5 /* StudyOverviewPageViewControllerFirst.swift */; };
-		842ECDB125D5B07600A612DA /* Overview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909BA1E533AA9001B01C5 /* Overview.swift */; };
-		842ECDB225D5B07600A612DA /* StudyDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C5504F1EBA153F007740D0 /* StudyDashboard.swift */; };
-		842ECDB325D5B07600A612DA /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940577A71E767AC60043215C /* ChangePasswordViewController.swift */; };
-		842ECDB425D5B07600A612DA /* ComprehensionFailure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61BCC51F27271000C156B9 /* ComprehensionFailure.swift */; };
-		842ECDB525D5B07600A612DA /* ActivityFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7DC76B1F69479C001A05B6 /* ActivityFilterView.swift */; };
-		842ECDB625D5B07600A612DA /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD381E6ED8E500327AE5 /* VerificationViewController.swift */; };
-		842ECDB725D5B07600A612DA /* FirstGatewayOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD281E6ED8E500327AE5 /* FirstGatewayOverviewViewController.swift */; };
-		842ECDB825D5B07600A612DA /* ResearchContainerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B25F11EAE3F1D00E2DFB2 /* ResearchContainerSegue.swift */; };
-		842ECDB925D5B07600A612DA /* WCPServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C602301E51C7D500CB72F7 /* WCPServices.swift */; };
-		842ECDBA25D5B07600A612DA /* LabKeyServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9487102B1E54870000246109 /* LabKeyServices.swift */; };
-		842ECDBB25D5B07600A612DA /* FileDownloadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E183AB11E966230005D7A27 /* FileDownloadModel.swift */; };
-		842ECDBC25D5B07600A612DA /* StudyDashboardStatisticsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E791E94FB5300828CA1 /* StudyDashboardStatisticsCollectionViewCell.swift */; };
-		842ECDBD25D5B07600A612DA /* ActivityStepResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B2271E54255900BF463F /* ActivityStepResult.swift */; };
-		842ECDBE25D5B07600A612DA /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96EC1E4AFAFF00946477 /* NetworkConfiguration.swift */; };
-		842ECDBF25D5B07600A612DA /* RegistrationServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C2F61E4C483D005984EC /* RegistrationServerConfiguration.swift */; };
-		842ECDC025D5B07600A612DA /* EligibilityStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC8A2A1E8113110020F9E6 /* EligibilityStepViewController.swift */; };
-		842ECDC125D5B07600A612DA /* ResourcesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DBC1E93C8850027A5DC /* ResourcesTableViewCell.swift */; };
-		842ECDC225D5B07600A612DA /* StudyOverviewViewControllerSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD3F1E6ED8E500327AE5 /* StudyOverviewViewControllerSecond.swift */; };
-		842ECDC325D5B07600A612DA /* ActivityFormStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B22C1E54256700BF463F /* ActivityFormStep.swift */; };
-		842ECDC425D5B07600A612DA /* StudyDashboardStudyActivitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E7B1E94FB5300828CA1 /* StudyDashboardStudyActivitiesTableViewCell.swift */; };
-		842ECDC525D5B07600A612DA /* SignInTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD311E6ED8E500327AE5 /* SignInTableViewCell.swift */; };
-		842ECDC625D5B07600A612DA /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA92811E49B3BB00DA6287 /* Resource.swift */; };
-		842ECDC725D5B07600A612DA /* ContactUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884E3571E827E5B002DA0B9 /* ContactUsViewController.swift */; };
-		842ECDC825D5B07600A612DA /* ActivityDiskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F211944240CF27E008AF0BD /* ActivityDiskService.swift */; };
-		842ECDC925D5B07600A612DA /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96E71E4AF61800946477 /* Reachability.swift */; };
-		842ECDCA25D5B07600A612DA /* StudyDashboardWelcomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E7F1E94FB5300828CA1 /* StudyDashboardWelcomeTableViewCell.swift */; };
-		842ECDCB25D5B07600A612DA /* StudyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD221E6ED8E500327AE5 /* StudyListViewController.swift */; };
-		842ECDCC25D5B07600A612DA /* FetalKickCounterStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3A1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift */; };
-		842ECDCE25D5B07600A612DA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEBA4791F25FAA100FB0258 /* HealthKit.framework */; };
-		842ECDCF25D5B07600A612DA /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; };
-		842ECDD425D5B07600A612DA /* Labkey_Activity_Latest4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED5B05C1FCDBD7C00925352 /* Labkey_Activity_Latest4.json */; };
-		842ECDD525D5B07600A612DA /* LoginAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2D1E6ED8E500327AE5 /* LoginAssets.xcassets */; };
-		842ECDD625D5B07600A612DA /* ConsentLatest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E93C7E01EE2EC26006788B1 /* ConsentLatest.json */; };
-		842ECDD725D5B07600A612DA /* TaskSchema.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EABD0321E56FE2000623D94 /* TaskSchema.json */; };
-		842ECDD825D5B07600A612DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D601E433E8800763D4C /* Assets.xcassets */; };
-		842ECDD925D5B07600A612DA /* Labkey_Activity_Latest2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E80BC011FB04340008C9B8C /* Labkey_Activity_Latest2.json */; };
-		842ECDDA25D5B07600A612DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D621E433E8800763D4C /* LaunchScreen.storyboard */; };
-		842ECDDB25D5B07600A612DA /* UserPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6ACE25C810C30022B5E9 /* UserPreferences.plist */; };
-		842ECDDC25D5B07600A612DA /* AppGlossary.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9450598E1F29FA2C007906A7 /* AppGlossary.pdf */; };
-		842ECDDD25D5B07600A612DA /* Verdana Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6ED593721F011D5B00AC3636 /* Verdana Italic.ttf */; };
-		842ECDDE25D5B07600A612DA /* SignUpPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6AAA25C80A4A0022B5E9 /* SignUpPlist.plist */; };
-		842ECDDF25D5B07600A612DA /* ActiveTask.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED9D5DA1E5B2D5100A0719D /* ActiveTask.json */; };
-		842ECDE025D5B07600A612DA /* ActivityMetadata TEST1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F52327D23D9883800995A78 /* ActivityMetadata TEST1.json */; };
-		842ECDE325D5B07600A612DA /* Gateway.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE5756B1E891440009BAA25 /* Gateway.xcassets */; };
-		842ECDE425D5B07600A612DA /* ActivityFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E7DC76C1F69479C001A05B6 /* ActivityFilterView.xib */; };
-		842ECDE525D5B07600A612DA /* Labkey_Activity11.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */; };
-		842ECDE625D5B07600A612DA /* Study.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD3B1E6ED8E500327AE5 /* Study.xcassets */; };
-		842ECDE725D5B07600A612DA /* Units.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED5B0581FCD550F00925352 /* Units.json */; };
-		842ECDE825D5B07600A612DA /* ResourcesUI.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6ABA25C80AF40022B5E9 /* ResourcesUI.plist */; };
-		842ECDE925D5B07600A612DA /* StudyDashboard.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC2E761E94FB5300828CA1 /* StudyDashboard.plist */; };
-		842ECDEA25D5B07600A612DA /* ResourceList.json in Resources */ = {isa = PBXBuildFile; fileRef = 89831392224399FC0000BEB5 /* ResourceList.json */; };
-		842ECDEB25D5B07600A612DA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 846C698C25A872D8002B9F42 /* Localizable.strings */; };
-		842ECDEC25D5B07600A612DA /* OtherTextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221782264729E00A2DBC8 /* OtherTextChoiceCell.xib */; };
-		842ECDED25D5B07600A612DA /* LatestActive_Taskdocument.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */; };
-		842ECDEE25D5B07600A612DA /* Labkey_Activity_Latest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */; };
-		842ECDF025D5B07600A612DA /* Resources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84AFCF0525C6E4D7000A9712 /* Resources.plist */; };
-		842ECDF225D5B07600A612DA /* Activitylist.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF51C9422324E3700BF8D4E /* Activitylist.json */; };
-		842ECDF325D5B07600A612DA /* StepProvider.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EF05A981E4DC36400CD7661 /* StepProvider.plist */; };
-		842ECDF425D5B07600A612DA /* ProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946CA5EC1E72DCA300CC8535 /* ProgressView.xib */; };
-		842ECDF725D5B07600A612DA /* ChangePasswordData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A9225C809910022B5E9 /* ChangePasswordData.plist */; };
-		842ECDF825D5B07600A612DA /* Labkey_Activity.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EDABCCD1EBA41EE005F3AA6 /* Labkey_Activity.json */; };
-		842ECDF925D5B07600A612DA /* Consent.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED134371E5F1B110090C976 /* Consent.json */; };
-		842ECDFA25D5B07600A612DA /* SignInPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6AA425C80A170022B5E9 /* SignInPlist.plist */; };
-		842ECDFB25D5B07600A612DA /* NewProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6591EE05E4C00C79337 /* NewProgressView.xib */; };
-		842ECDFC25D5B07600A612DA /* fda_preload.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6601EE05FDC00C79337 /* fda_preload.gif */; };
-		842ECDFD25D5B07600A612DA /* StudyOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6AB025C80AAF0022B5E9 /* StudyOverview.plist */; };
-		842ECDFF25D5B07600A612DA /* ActivitySchedules.xib in Resources */ = {isa = PBXBuildFile; fileRef = 942591C31EA8A2650010D892 /* ActivitySchedules.xib */; };
-		842ECE0025D5B07600A612DA /* Activity_New_Other_Form.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F10BB18234DE45D006388E2 /* Activity_New_Other_Form.json */; };
-		842ECE0125D5B07600A612DA /* StudyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD201E6ED8E500327AE5 /* StudyList.json */; };
-		842ECE0225D5B07600A612DA /* Confirmation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6AD825C814840022B5E9 /* Confirmation.plist */; };
-		842ECE0325D5B07600A612DA /* Notification.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E14F2021F0224AD00EA8D1E /* Notification.json */; };
-		842ECE0425D5B07600A612DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D5D1E433E8800763D4C /* Main.storyboard */; };
-		842ECE0525D5B07600A612DA /* TextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221772264729D00A2DBC8 /* TextChoiceCell.xib */; };
-		842ECE0625D5B07600A612DA /* FilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A8425C8095B0022B5E9 /* FilterData.plist */; };
-		842ECE0725D5B07600A612DA /* Activities.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93DB71E93C8850027A5DC /* Activities.plist */; };
-		842ECE0825D5B07600A612DA /* FetalKickCounter.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6ECF75D11E6EF1E7008C935E /* FetalKickCounter.xcassets */; };
-		842ECE0925D5B07600A612DA /* ContactUs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A7A25C808E00022B5E9 /* ContactUs.plist */; };
-		842ECE0A25D5B07600A612DA /* FetalKickTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EB740171E9CD38100A4C773 /* FetalKickTest.json */; };
-		842ECE0C25D5B07600A612DA /* Acivity_Question.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC129231E64624F00B90167 /* Acivity_Question.json */; };
-		842ECE0E25D5B07600A612DA /* LatestActive_1B.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EED31A21F1CD7B300A7AF56 /* LatestActive_1B.json */; };
-		842ECE0F25D5B07600A612DA /* Labkey_Activity_Latest3.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEB0AF91FD2811100136EAA /* Labkey_Activity_Latest3.json */; };
-		842ECE1025D5B07600A612DA /* Eligibility_1B.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E4D81F17459200028853 /* Eligibility_1B.json */; };
-		842ECE1225D5B07600A612DA /* Profile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A7425C808CA0022B5E9 /* Profile.plist */; };
-		842ECE1325D5B07600A612DA /* HPHCSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8948349E22BB9D56000B7BFA /* HPHCSettings.xib */; };
-		842ECE1425D5B07600A612DA /* AnanomousFilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A8A25C8097D0022B5E9 /* AnanomousFilterData.plist */; };
-		842ECE1525D5B07600A612DA /* UserProfile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8B1E4340B200763D4C /* UserProfile.plist */; };
-		842ECE1625D5B07600A612DA /* Register.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6AC825C810520022B5E9 /* Register.plist */; };
-		842ECE1725D5B07600A612DA /* Activity_Metadata_Other.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */; };
-		842ECE1A25D5B07600A612DA /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		842ECE2F25D5B0D700A612DA /* COVID-19.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 842ECE2925D5B0D700A612DA /* COVID-19.xcassets */; };
-		842ECE3225D5B0D700A612DA /* COVID-19.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842ECE2C25D5B0D700A612DA /* COVID-19.storyboard */; };
 		842ECE7C25D5BB9B00A612DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 842ECE7F25D5BB9B00A612DA /* InfoPlist.strings */; };
-		842ECE7D25D5BB9B00A612DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 842ECE7F25D5BB9B00A612DA /* InfoPlist.strings */; };
-		842ECE8525D5BC6100A612DA /* GatewayOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 842ECE8725D5BC6100A612DA /* GatewayOverview.plist */; };
-		842ECEA325D5C01500A612DA /* AppConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 842ECEA525D5C01500A612DA /* AppConfiguration.plist */; };
-		842ECEA925D5C05A00A612DA /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = 842ECEAB25D5C05A00A612DA /* Branding.plist */; };
 		842ECED525D952D500A612DA /* Gateway.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842ECED825D952D600A612DA /* Gateway.storyboard */; };
-		842ECED625D952D600A612DA /* Gateway.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842ECED825D952D600A612DA /* Gateway.storyboard */; };
 		8432EBA825DF7FF00088854F /* AppUpdateBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8432EBAB25DF7FF10088854F /* AppUpdateBlocker.xib */; };
-		8432EBA925DF7FF10088854F /* AppUpdateBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8432EBAB25DF7FF10088854F /* AppUpdateBlocker.xib */; };
 		843B6A5C25C7E1950022B5E9 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A5E25C7E1950022B5E9 /* Branding.plist */; };
 		843B6A7225C808CA0022B5E9 /* Profile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A7425C808CA0022B5E9 /* Profile.plist */; };
 		843B6A7825C808E00022B5E9 /* ContactUs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A7A25C808E00022B5E9 /* ContactUs.plist */; };
@@ -392,18 +161,13 @@
 		843B6ACC25C810C30022B5E9 /* UserPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6ACE25C810C30022B5E9 /* UserPreferences.plist */; };
 		843B6AD625C814840022B5E9 /* Confirmation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6AD825C814840022B5E9 /* Confirmation.plist */; };
 		846A274E25D96CBF00224B46 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846A275125D96CBF00224B46 /* Login.storyboard */; };
-		846A274F25D96CBF00224B46 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846A275125D96CBF00224B46 /* Login.storyboard */; };
 		846A276825DAA72D00224B46 /* FetalKickCounter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846A276B25DAA72E00224B46 /* FetalKickCounter.storyboard */; };
-		846A276925DAA72E00224B46 /* FetalKickCounter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846A276B25DAA72E00224B46 /* FetalKickCounter.storyboard */; };
 		846A277825DADD4300224B46 /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846A277B25DADD4300224B46 /* SearchBarView.xib */; };
-		846A277925DADD4300224B46 /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846A277B25DADD4300224B46 /* SearchBarView.xib */; };
 		846C695D25A83F8A002B9F42 /* AppDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C695C25A83F8A002B9F42 /* AppDetails.swift */; };
 		846C698A25A872D8002B9F42 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 846C698C25A872D8002B9F42 /* Localizable.strings */; };
 		84AFCF0325C6E4D7000A9712 /* Resources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84AFCF0525C6E4D7000A9712 /* Resources.plist */; };
 		84D3B26325E43B0900780211 /* ComprehensionFailure.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D3B26625E43B0A00780211 /* ComprehensionFailure.xib */; };
-		84D3B26425E43B0A00780211 /* ComprehensionFailure.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D3B26625E43B0A00780211 /* ComprehensionFailure.xib */; };
 		84D3B27125E43B9C00780211 /* JailbrokeBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D3B27425E43B9C00780211 /* JailbrokeBlocker.xib */; };
-		84D3B27225E43B9C00780211 /* JailbrokeBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D3B27425E43B9C00780211 /* JailbrokeBlocker.xib */; };
 		84DD0DA926400D560013D8FF /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0DA826400D560013D8FF /* Bundle+Extensions.swift */; };
 		84E8D61724D161B6008C38D5 /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8D61624D161B6008C38D5 /* PDFCreator.swift */; };
 		8905591B230149AD005FB284 /* HPHCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905591A230149AD005FB284 /* HPHCUITests.swift */; };
@@ -514,13 +278,6 @@
 			remoteGlobalIDString = 6E7D2D551E433E8700763D4C;
 			remoteInfo = HPHC;
 		};
-		842ECD2A25D5B07600A612DA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6EF0BC352223D1D5004F2357 /* ResearchKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = B183A4731A8535D100C76870;
-			remoteInfo = ResearchKit;
-		};
 		8905591D230149AD005FB284 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6E7D2D4E1E433E8700763D4C /* Project object */;
@@ -538,17 +295,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		842ECE1925D5B07600A612DA /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				842ECE1A25D5B07600A612DA /* ResearchKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		89EDB4702271EFE00070F16C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -725,26 +471,10 @@
 		842CEF5325F0C49600D146A6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Study.strings; sourceTree = "<group>"; };
 		842CEF5525F0C4ED00D146A6 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Study.strings"; sourceTree = "<group>"; };
 		842CEF5B25F0C59200D146A6 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es_MX; path = es_MX.lproj/Study.strings; sourceTree = "<group>"; };
-		842ECE1E25D5B07600A612DA /* MyStudies COVID-19.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MyStudies COVID-19.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		842ECE2925D5B0D700A612DA /* COVID-19.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "COVID-19.xcassets"; sourceTree = "<group>"; };
-		842ECE2C25D5B0D700A612DA /* COVID-19.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "COVID-19.storyboard"; sourceTree = "<group>"; };
-		842ECE2D25D5B0D700A612DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		842ECE7E25D5BB9B00A612DA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		842ECE8025D5BBA200A612DA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		842ECE8325D5BC4500A612DA /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		842ECE8425D5BC4700A612DA /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es_MX; path = es_MX.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		842ECE8625D5BC6100A612DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/GatewayOverview.plist; sourceTree = "<group>"; };
-		842ECEA025D5BFCC00A612DA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/GatewayOverview.plist; sourceTree = "<group>"; };
-		842ECEA125D5BFD800A612DA /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/GatewayOverview.plist"; sourceTree = "<group>"; };
-		842ECEA225D5BFDA00A612DA /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/GatewayOverview.plist; sourceTree = "<group>"; };
-		842ECEA425D5C01500A612DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/AppConfiguration.plist; sourceTree = "<group>"; };
-		842ECEA625D5C02000A612DA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/AppConfiguration.plist; sourceTree = "<group>"; };
-		842ECEA725D5C02200A612DA /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/AppConfiguration.plist"; sourceTree = "<group>"; };
-		842ECEA825D5C02400A612DA /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/AppConfiguration.plist; sourceTree = "<group>"; };
-		842ECEAA25D5C05A00A612DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Branding.plist; sourceTree = "<group>"; };
-		842ECEAE25D5C06200A612DA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/Branding.plist; sourceTree = "<group>"; };
-		842ECEAF25D5C06500A612DA /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/Branding.plist"; sourceTree = "<group>"; };
-		842ECEB025D5C06700A612DA /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/Branding.plist; sourceTree = "<group>"; };
 		842ECED725D952D600A612DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Gateway.storyboard; sourceTree = "<group>"; };
 		842ECEDC25D952E500A612DA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Gateway.strings; sourceTree = "<group>"; };
 		842ECEDE25D9531E00A612DA /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Gateway.strings"; sourceTree = "<group>"; };
@@ -952,7 +682,7 @@
 			files = (
 				6EEBA47A1F25FAA100FB0258 /* HealthKit.framework in Frameworks */,
 				89EDB46C2271EFDF0070F16C /* ResearchKit.framework in Frameworks */,
-				0AC749DEEBB80752CF6DA249 /* BuildFile in Frameworks */,
+				0AC749DEEBB80752CF6DA249 /* (null) in Frameworks */,
 				4FA10541EF036A40BB15F338 /* Pods_HPHC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -962,16 +692,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				951EC5B5601293CE0771D248 /* libPods-HPHCTests.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		842ECDCD25D5B07600A612DA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				842ECDCE25D5B07600A612DA /* HealthKit.framework in Frameworks */,
-				842ECDCF25D5B07600A612DA /* ResearchKit.framework in Frameworks */,
-				37F19856010496916F51BEAB /* Pods_MyStudies_COVID_19.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1106,7 +826,6 @@
 				6E7D2D561E433E8700763D4C /* HPHC.app */,
 				7878B31A2216C6E10052FC23 /* HPHCTests.xctest */,
 				89055918230149AD005FB284 /* HPHCUITests.xctest */,
-				842ECE1E25D5B07600A612DA /* MyStudies COVID-19.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1450,7 +1169,6 @@
 				846C695C25A83F8A002B9F42 /* AppDetails.swift */,
 				6F41B86123AC937200D4F624 /* AppConfiguration.swift */,
 				8973F76C23F6B657008F5B22 /* Branding.swift */,
-				842ECE2825D5B0D700A612DA /* COVID-19 */,
 				8905590F230148E4005FB284 /* FDA */,
 			);
 			path = Branding;
@@ -1884,19 +1602,6 @@
 			path = PDFCreator;
 			sourceTree = "<group>";
 		};
-		842ECE2825D5B0D700A612DA /* COVID-19 */ = {
-			isa = PBXGroup;
-			children = (
-				842ECE2925D5B0D700A612DA /* COVID-19.xcassets */,
-				842ECEA525D5C01500A612DA /* AppConfiguration.plist */,
-				842ECE8725D5BC6100A612DA /* GatewayOverview.plist */,
-				842ECE2C25D5B0D700A612DA /* COVID-19.storyboard */,
-				842ECE2D25D5B0D700A612DA /* Info.plist */,
-				842ECEAB25D5C05A00A612DA /* Branding.plist */,
-			);
-			path = "COVID-19";
-			sourceTree = "<group>";
-		};
 		844F37E224F3F5A9003B724F /* StudyUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -2282,27 +1987,6 @@
 			productReference = 7878B31A2216C6E10052FC23 /* HPHCTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		842ECD2825D5B07600A612DA /* MyStudies COVID-19 */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 842ECE1B25D5B07600A612DA /* Build configuration list for PBXNativeTarget "MyStudies COVID-19" */;
-			buildPhases = (
-				842ECD2B25D5B07600A612DA /* [CP] Check Pods Manifest.lock */,
-				842ECD2C25D5B07600A612DA /* Sources */,
-				842ECDCD25D5B07600A612DA /* Frameworks */,
-				842ECDD125D5B07600A612DA /* Resources */,
-				842ECE1825D5B07600A612DA /* [CP] Embed Pods Frameworks */,
-				842ECE1925D5B07600A612DA /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				842ECD2925D5B07600A612DA /* PBXTargetDependency */,
-			);
-			name = "MyStudies COVID-19";
-			productName = FDA;
-			productReference = 842ECE1E25D5B07600A612DA /* MyStudies COVID-19.app */;
-			productType = "com.apple.product-type.application";
-		};
 		89055917230149AD005FB284 /* HPHCUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8905591F230149AD005FB284 /* Build configuration list for PBXNativeTarget "HPHCUITests" */;
@@ -2355,10 +2039,6 @@
 						DevelopmentTeam = FWLLYUH7XR;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 6E7D2D551E433E8700763D4C;
-					};
-					842ECD2825D5B07600A612DA = {
-						DevelopmentTeam = FWLLYUH7XR;
-						ProvisioningStyle = Automatic;
 					};
 					89055917230149AD005FB284 = {
 						CreatedOnToolsVersion = 10.2;
@@ -2429,7 +2109,6 @@
 				6E7D2D551E433E8700763D4C /* HPHC */,
 				7878B3192216C6E10052FC23 /* HPHCTests */,
 				89055917230149AD005FB284 /* HPHCUITests */,
-				842ECD2825D5B07600A612DA /* MyStudies COVID-19 */,
 			);
 		};
 /* End PBXProject section */
@@ -2537,85 +2216,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		842ECDD125D5B07600A612DA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				842CEF4B25F0C47C00D146A6 /* Study.storyboard in Resources */,
-				846A277925DADD4300224B46 /* SearchBarView.xib in Resources */,
-				842ECDD425D5B07600A612DA /* Labkey_Activity_Latest4.json in Resources */,
-				842ECDD525D5B07600A612DA /* LoginAssets.xcassets in Resources */,
-				842ECDD625D5B07600A612DA /* ConsentLatest.json in Resources */,
-				842ECDD725D5B07600A612DA /* TaskSchema.json in Resources */,
-				842ECDD825D5B07600A612DA /* Assets.xcassets in Resources */,
-				842ECDD925D5B07600A612DA /* Labkey_Activity_Latest2.json in Resources */,
-				842ECDDA25D5B07600A612DA /* LaunchScreen.storyboard in Resources */,
-				842ECDDB25D5B07600A612DA /* UserPreferences.plist in Resources */,
-				842ECDDC25D5B07600A612DA /* AppGlossary.pdf in Resources */,
-				842ECDDD25D5B07600A612DA /* Verdana Italic.ttf in Resources */,
-				842ECDDE25D5B07600A612DA /* SignUpPlist.plist in Resources */,
-				842ECDDF25D5B07600A612DA /* ActiveTask.json in Resources */,
-				842ECDE025D5B07600A612DA /* ActivityMetadata TEST1.json in Resources */,
-				8432EBA925DF7FF10088854F /* AppUpdateBlocker.xib in Resources */,
-				842ECEA325D5C01500A612DA /* AppConfiguration.plist in Resources */,
-				842ECDE325D5B07600A612DA /* Gateway.xcassets in Resources */,
-				842ECDE425D5B07600A612DA /* ActivityFilterView.xib in Resources */,
-				842ECDE525D5B07600A612DA /* Labkey_Activity11.json in Resources */,
-				842ECDE625D5B07600A612DA /* Study.xcassets in Resources */,
-				842ECE3225D5B0D700A612DA /* COVID-19.storyboard in Resources */,
-				842ECDE725D5B07600A612DA /* Units.json in Resources */,
-				842ECEA925D5C05A00A612DA /* Branding.plist in Resources */,
-				842ECDE825D5B07600A612DA /* ResourcesUI.plist in Resources */,
-				842ECE7D25D5BB9B00A612DA /* InfoPlist.strings in Resources */,
-				842ECDE925D5B07600A612DA /* StudyDashboard.plist in Resources */,
-				842ECDEA25D5B07600A612DA /* ResourceList.json in Resources */,
-				842ECDEB25D5B07600A612DA /* Localizable.strings in Resources */,
-				842ECDEC25D5B07600A612DA /* OtherTextChoiceCell.xib in Resources */,
-				842ECDED25D5B07600A612DA /* LatestActive_Taskdocument.json in Resources */,
-				842ECDEE25D5B07600A612DA /* Labkey_Activity_Latest.json in Resources */,
-				842ECDF025D5B07600A612DA /* Resources.plist in Resources */,
-				84D3B27225E43B9C00780211 /* JailbrokeBlocker.xib in Resources */,
-				842ECDF225D5B07600A612DA /* Activitylist.json in Resources */,
-				842ECDF325D5B07600A612DA /* StepProvider.plist in Resources */,
-				842ECDF425D5B07600A612DA /* ProgressView.xib in Resources */,
-				846A276925DAA72E00224B46 /* FetalKickCounter.storyboard in Resources */,
-				842ECDF725D5B07600A612DA /* ChangePasswordData.plist in Resources */,
-				842ECDF825D5B07600A612DA /* Labkey_Activity.json in Resources */,
-				842ECDF925D5B07600A612DA /* Consent.json in Resources */,
-				842ECDFA25D5B07600A612DA /* SignInPlist.plist in Resources */,
-				842ECE2F25D5B0D700A612DA /* COVID-19.xcassets in Resources */,
-				842ECDFB25D5B07600A612DA /* NewProgressView.xib in Resources */,
-				842ECDFC25D5B07600A612DA /* fda_preload.gif in Resources */,
-				842ECDFD25D5B07600A612DA /* StudyOverview.plist in Resources */,
-				846A274F25D96CBF00224B46 /* Login.storyboard in Resources */,
-				842ECDFF25D5B07600A612DA /* ActivitySchedules.xib in Resources */,
-				842ECE0025D5B07600A612DA /* Activity_New_Other_Form.json in Resources */,
-				842ECE0125D5B07600A612DA /* StudyList.json in Resources */,
-				842ECE0225D5B07600A612DA /* Confirmation.plist in Resources */,
-				842ECE0325D5B07600A612DA /* Notification.json in Resources */,
-				842ECE0425D5B07600A612DA /* Main.storyboard in Resources */,
-				842ECE0525D5B07600A612DA /* TextChoiceCell.xib in Resources */,
-				842ECE0625D5B07600A612DA /* FilterData.plist in Resources */,
-				842ECE0725D5B07600A612DA /* Activities.plist in Resources */,
-				842ECE0825D5B07600A612DA /* FetalKickCounter.xcassets in Resources */,
-				842ECE0925D5B07600A612DA /* ContactUs.plist in Resources */,
-				842ECE0A25D5B07600A612DA /* FetalKickTest.json in Resources */,
-				842ECED625D952D600A612DA /* Gateway.storyboard in Resources */,
-				842ECE0C25D5B07600A612DA /* Acivity_Question.json in Resources */,
-				84D3B26425E43B0A00780211 /* ComprehensionFailure.xib in Resources */,
-				842ECE0E25D5B07600A612DA /* LatestActive_1B.json in Resources */,
-				842ECE0F25D5B07600A612DA /* Labkey_Activity_Latest3.json in Resources */,
-				842ECE8525D5BC6100A612DA /* GatewayOverview.plist in Resources */,
-				842ECE1025D5B07600A612DA /* Eligibility_1B.json in Resources */,
-				842ECE1225D5B07600A612DA /* Profile.plist in Resources */,
-				842ECE1325D5B07600A612DA /* HPHCSettings.xib in Resources */,
-				842ECE1425D5B07600A612DA /* AnanomousFilterData.plist in Resources */,
-				842ECE1525D5B07600A612DA /* UserProfile.plist in Resources */,
-				842ECE1625D5B07600A612DA /* Register.plist in Resources */,
-				842ECE1725D5B07600A612DA /* Activity_Metadata_Other.json in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		89055916230149AD005FB284 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2674,54 +2274,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HPHC/Pods-HPHC-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		842ECD2B25D5B07600A612DA /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MyStudies COVID-19-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		842ECE1825D5B07600A612DA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MyStudies COVID-19/Pods-MyStudies COVID-19-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
-				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SlideMenuControllerSwift/SlideMenuControllerSwift.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlideMenuControllerSwift.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyStudies COVID-19/Pods-MyStudies COVID-19-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8D2C5B3AD544C453A00EC3BB /* [CP] Check Pods Manifest.lock */ = {
@@ -2968,173 +2520,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		842ECD2C25D5B07600A612DA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				842ECD2D25D5B07600A612DA /* UIApplication.swift in Sources */,
-				842ECD2E25D5B07600A612DA /* UIViewController.swift in Sources */,
-				842ECD2F25D5B07600A612DA /* SignUpTableViewCell.swift in Sources */,
-				842ECD3025D5B07600A612DA /* Data+Extensions.swift in Sources */,
-				842ECD3125D5B07600A612DA /* NotificationViewController.swift in Sources */,
-				842ECD3225D5B07600A612DA /* LeftMenuCell.swift in Sources */,
-				842ECD3325D5B07600A612DA /* StringEncoder.swift in Sources */,
-				842ECD3425D5B07600A612DA /* PinterestLayout.swift in Sources */,
-				842ECD3525D5B07600A612DA /* Cell.swift in Sources */,
-				842ECD3625D5B07600A612DA /* DateHelper.swift in Sources */,
-				842ECD3725D5B07600A612DA /* DBActivity.swift in Sources */,
-				842ECD3825D5B07600A612DA /* ContactUsTableViewCell.swift in Sources */,
-				842ECD3925D5B07600A612DA /* ConsentSharePdfStepViewController.swift in Sources */,
-				842ECD3A25D5B07600A612DA /* FRHyperLabel.m in Sources */,
-				842ECD3B25D5B07600A612DA /* StepProvider.swift in Sources */,
-				842ECD3C25D5B07600A612DA /* ActivityInstructionStep.swift in Sources */,
-				842ECD3D25D5B07600A612DA /* SplashViewController.swift in Sources */,
-				842ECD3E25D5B07600A612DA /* ResearchContainerViewController.swift in Sources */,
-				842ECD3F25D5B07600A612DA /* UIView+Extensions.swift in Sources */,
-				842ECD4025D5B07600A612DA /* Logger.swift in Sources */,
-				842ECD4125D5B07600A612DA /* EligibilityBuilder.swift in Sources */,
-				842ECD4225D5B07600A612DA /* NetworkConstants.swift in Sources */,
-				842ECD4325D5B07600A612DA /* RepeatableFormStep.m in Sources */,
-				842ECD4425D5B07600A612DA /* StudyDashboardTabbarViewController.swift in Sources */,
-				842ECD4525D5B07600A612DA /* ConfirmationOptionalTableViewCell.swift in Sources */,
-				842ECD4625D5B07600A612DA /* StudyDashboardStudyPercentageTableViewCell.swift in Sources */,
-				842ECD4725D5B07600A612DA /* DBStudy.swift in Sources */,
-				842ECD4825D5B07600A612DA /* FeedBackTableViewCell.swift in Sources */,
-				842ECD4925D5B07600A612DA /* KeyChain.swift in Sources */,
-				842ECD4A25D5B07600A612DA /* ResourcesViewController.swift in Sources */,
-				842ECD4B25D5B07600A612DA /* HealthClientType.swift in Sources */,
-				842ECD4C25D5B07600A612DA /* StudyListCell.swift in Sources */,
-				842ECD4D25D5B07600A612DA /* SignUpViewController.swift in Sources */,
-				842ECD4E25D5B07600A612DA /* TextChoiceQuestionController.swift in Sources */,
-				842ECD4F25D5B07600A612DA /* RepeatableFormStepViewController.m in Sources */,
-				842ECD5025D5B07600A612DA /* DBHandler.swift in Sources */,
-				842ECD5125D5B07600A612DA /* APIConfiguration.swift in Sources */,
-				842ECD5225D5B07600A612DA /* ConsentStep.swift in Sources */,
-				842ECD5325D5B07600A612DA /* ActivitiesTableViewCell.swift in Sources */,
-				842ECD5425D5B07600A612DA /* SecondGatewayOverviewViewController.swift in Sources */,
-				842ECD5525D5B07600A612DA /* HPHCSettings.swift in Sources */,
-				842ECD5625D5B07600A612DA /* LeftMenuResourceTableViewCell.swift in Sources */,
-				842ECD5725D5B07600A612DA /* PDFCreator.swift in Sources */,
-				842ECD5825D5B07600A612DA /* Gateway.swift in Sources */,
-				842ECD5925D5B07600A612DA /* ProfileTableViewCell.swift in Sources */,
-				842ECD5A25D5B07600A612DA /* FetalKickCounterStep.swift in Sources */,
-				842ECD5B25D5B07600A612DA /* ChartsViewController.swift in Sources */,
-				842ECD5C25D5B07600A612DA /* Constants.swift in Sources */,
-				842ECD5D25D5B07600A612DA /* ViewController.swift in Sources */,
-				842ECD5E25D5B07600A612DA /* UITestingHelpers.swift in Sources */,
-				842ECD5F25D5B07600A612DA /* AppDetails.swift in Sources */,
-				842ECD6025D5B07600A612DA /* SignUpCompleteViewController.swift in Sources */,
-				842ECD6125D5B07600A612DA /* ForgotPasswordViewController.swift in Sources */,
-				842ECD6225D5B07600A612DA /* NetworkManager.swift in Sources */,
-				842ECD6325D5B07600A612DA /* UIImage+Gif.swift in Sources */,
-				842ECD6425D5B07600A612DA /* FDASlideMenuViewController.swift in Sources */,
-				842ECD6525D5B07600A612DA /* AppDelegate.swift in Sources */,
-				842ECD6625D5B07600A612DA /* StudyHomeViewController.swift in Sources */,
-				842ECD6725D5B07600A612DA /* DBParticipantPropertyMetadata.swift in Sources */,
-				842ECD6825D5B07600A612DA /* ConsentPdfViewerStepViewController.swift in Sources */,
-				842ECD6925D5B07600A612DA /* Dictionary.swift in Sources */,
-				842ECD6A25D5B07600A612DA /* StudyDashboardStatisticsTableViewCell.swift in Sources */,
-				842ECD6B25D5B07600A612DA /* ConsentBuilder.swift in Sources */,
-				842ECD6C25D5B07600A612DA /* JailbrokeBlocker.swift in Sources */,
-				842ECD6D25D5B07600A612DA /* HomeViewController.swift in Sources */,
-				842ECD6E25D5B07600A612DA /* FileDownloadManager.swift in Sources */,
-				842ECD6F25D5B07600A612DA /* AppNotification.swift in Sources */,
-				842ECD7025D5B07600A612DA /* NotificationTableViewCell.swift in Sources */,
-				842ECD7125D5B07600A612DA /* SurveyTask.swift in Sources */,
-				842ECD7225D5B07600A612DA /* FilterListCollectionViewCell.swift in Sources */,
-				842ECD7325D5B07600A612DA /* Formatter.swift in Sources */,
-				842ECD7425D5B07600A612DA /* NavigationBackButton.swift in Sources */,
-				842ECD7525D5B07600A612DA /* StudyDashboardViewController.swift in Sources */,
-				842ECD7625D5B07600A612DA /* Study.swift in Sources */,
-				842ECD7725D5B07600A612DA /* ResourcesListCell.swift in Sources */,
-				842ECD7825D5B07600A612DA /* AnchorDateHandler.swift in Sources */,
-				842ECD7925D5B07600A612DA /* StandaloneStudy.swift in Sources */,
-				842ECD7A25D5B07600A612DA /* LocalNotification.swift in Sources */,
-				842ECD7B25D5B07600A612DA /* ConfirmationViewController.swift in Sources */,
-				842ECD7C25D5B07600A612DA /* FetalKickCounterTask.swift in Sources */,
-				842ECD7D25D5B07600A612DA /* OtherTextChoiceCell.swift in Sources */,
-				842ECD7E25D5B07600A612DA /* AKUtility.swift in Sources */,
-				842ECD7F25D5B07600A612DA /* ConfirmationTableViewCell.swift in Sources */,
-				842ECD8025D5B07600A612DA /* ActivityBuilder.swift in Sources */,
-				842ECD8125D5B07600A612DA /* File.swift in Sources */,
-				842ECD8225D5B07600A612DA /* StudyDashboardActivityCollectionViewCell.swift in Sources */,
-				842ECD8325D5B07600A612DA /* SignInViewController.swift in Sources */,
-				842ECD8425D5B07600A612DA /* StudyDashboardTrendsTableViewCell.swift in Sources */,
-				842ECD8525D5B07600A612DA /* ResponseServerConfiguration.swift in Sources */,
-				842ECD8625D5B07600A612DA /* ResourcesDetailViewController.swift in Sources */,
-				842ECD8725D5B07600A612DA /* NetworkWebServiceHandler.swift in Sources */,
-				842ECD8825D5B07600A612DA /* AppConfiguration.swift in Sources */,
-				842ECD8925D5B07600A612DA /* Encoder.swift in Sources */,
-				842ECD8A25D5B07600A612DA /* ActivityActiveStep.swift in Sources */,
-				842ECD8B25D5B07600A612DA /* LineChartCell.swift in Sources */,
-				842ECD8C25D5B07600A612DA /* WebViewController.swift in Sources */,
-				842ECD8D25D5B07600A612DA /* ActivityResult.swift in Sources */,
-				842ECD8E25D5B07600A612DA /* StudyFilterViewController.swift in Sources */,
-				842ECD8F25D5B07600A612DA /* UserServices.swift in Sources */,
-				842ECD9025D5B07600A612DA /* ReachoutOptionCell.swift in Sources */,
-				842ECD9125D5B07600A612DA /* FeedBackViewController.swift in Sources */,
-				842ECD9225D5B07600A612DA /* PageViewController.swift in Sources */,
-				842ECD9325D5B07600A612DA /* ResourcesDetailViewControllerCopy.swift in Sources */,
-				842ECD9425D5B07600A612DA /* ReachoutOptionsViewController.swift in Sources */,
-				842ECD9525D5B07600A612DA /* Utilities.swift in Sources */,
-				842ECD9625D5B07600A612DA /* SyncUpdate.swift in Sources */,
-				842ECD9725D5B07600A612DA /* LeftMenuViewController.swift in Sources */,
-				842ECD9825D5B07600A612DA /* UIUtilities.swift in Sources */,
-				842ECD9925D5B07600A612DA /* TextChoiceCell.swift in Sources */,
-				842ECD9A25D5B07600A612DA /* User.swift in Sources */,
-				842ECD9B25D5B07600A612DA /* ProfileViewController.swift in Sources */,
-				842ECD9C25D5B07600A612DA /* StudyOverviewPageViewController.swift in Sources */,
-				842ECD9D25D5B07600A612DA /* Branding.swift in Sources */,
-				842ECD9E25D5B07600A612DA /* InEligibilityStepViewController.swift in Sources */,
-				842ECD9F25D5B07600A612DA /* Schedule.swift in Sources */,
-				842ECDA025D5B07600A612DA /* GatewayResourcesListViewController.swift in Sources */,
-				842ECDA125D5B07600A612DA /* ActivityQuestionStep.swift in Sources */,
-				842ECDA225D5B07600A612DA /* KDCircularProgress.swift in Sources */,
-				842ECDA325D5B07600A612DA /* DBNotification.swift in Sources */,
-				842ECDA425D5B07600A612DA /* ActivitiesViewController.swift in Sources */,
-				842ECDA525D5B07600A612DA /* Activity.swift in Sources */,
-				842ECDA625D5B07600A612DA /* SearchBarView.swift in Sources */,
-				842ECDA725D5B07600A612DA /* AppUpdateBlocker.swift in Sources */,
-				842ECDA825D5B07600A612DA /* FetalKickIntroStepViewController.swift in Sources */,
-				842ECDA925D5B07600A612DA /* DBUser.swift in Sources */,
-				842ECDAA25D5B07600A612DA /* LocalizableString.swift in Sources */,
-				842ECDAB25D5B07600A612DA /* ActivityStep.swift in Sources */,
-				842ECDAC25D5B07600A612DA /* FilterListTableViewCell.swift in Sources */,
-				842ECDAD25D5B07600A612DA /* StudyDashboardActivityTableViewCell.swift in Sources */,
-				842ECDAE25D5B07600A612DA /* ConsentResult.swift in Sources */,
-				842ECDAF25D5B07600A612DA /* WCPConfiguration.swift in Sources */,
-				842ECDB025D5B07600A612DA /* StudyOverviewPageViewControllerFirst.swift in Sources */,
-				842ECDB125D5B07600A612DA /* Overview.swift in Sources */,
-				842ECDB225D5B07600A612DA /* StudyDashboard.swift in Sources */,
-				842ECDB325D5B07600A612DA /* ChangePasswordViewController.swift in Sources */,
-				842ECDB425D5B07600A612DA /* ComprehensionFailure.swift in Sources */,
-				842ECDB525D5B07600A612DA /* ActivityFilterView.swift in Sources */,
-				842ECDB625D5B07600A612DA /* VerificationViewController.swift in Sources */,
-				842ECDB725D5B07600A612DA /* FirstGatewayOverviewViewController.swift in Sources */,
-				842ECDB825D5B07600A612DA /* ResearchContainerSegue.swift in Sources */,
-				842ECDB925D5B07600A612DA /* WCPServices.swift in Sources */,
-				842ECDBA25D5B07600A612DA /* LabKeyServices.swift in Sources */,
-				842ECDBB25D5B07600A612DA /* FileDownloadModel.swift in Sources */,
-				842ECDBC25D5B07600A612DA /* StudyDashboardStatisticsCollectionViewCell.swift in Sources */,
-				842ECDBD25D5B07600A612DA /* ActivityStepResult.swift in Sources */,
-				842ECDBE25D5B07600A612DA /* NetworkConfiguration.swift in Sources */,
-				842ECDBF25D5B07600A612DA /* RegistrationServerConfiguration.swift in Sources */,
-				842ECDC025D5B07600A612DA /* EligibilityStepViewController.swift in Sources */,
-				842ECDC125D5B07600A612DA /* ResourcesTableViewCell.swift in Sources */,
-				842ECDC225D5B07600A612DA /* StudyOverviewViewControllerSecond.swift in Sources */,
-				842ECDC325D5B07600A612DA /* ActivityFormStep.swift in Sources */,
-				842ECDC425D5B07600A612DA /* StudyDashboardStudyActivitiesTableViewCell.swift in Sources */,
-				842ECDC525D5B07600A612DA /* SignInTableViewCell.swift in Sources */,
-				842ECDC625D5B07600A612DA /* Resource.swift in Sources */,
-				842ECDC725D5B07600A612DA /* ContactUsViewController.swift in Sources */,
-				842ECDC825D5B07600A612DA /* ActivityDiskService.swift in Sources */,
-				842ECDC925D5B07600A612DA /* Reachability.swift in Sources */,
-				842ECDCA25D5B07600A612DA /* StudyDashboardWelcomeTableViewCell.swift in Sources */,
-				842ECDCB25D5B07600A612DA /* StudyListViewController.swift in Sources */,
-				842ECDCC25D5B07600A612DA /* FetalKickCounterStepViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		89055914230149AD005FB284 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3153,11 +2538,6 @@
 			isa = PBXTargetDependency;
 			target = 6E7D2D551E433E8700763D4C /* HPHC */;
 			targetProxy = 7878B31F2216C6E20052FC23 /* PBXContainerItemProxy */;
-		};
-		842ECD2925D5B07600A612DA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ResearchKit;
-			targetProxy = 842ECD2A25D5B07600A612DA /* PBXContainerItemProxy */;
 		};
 		8905591E230149AD005FB284 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3212,39 +2592,6 @@
 				842ECE8425D5BC4700A612DA /* es_MX */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		842ECE8725D5BC6100A612DA /* GatewayOverview.plist */ = {
-			isa = PBXVariantGroup;
-			children = (
-				842ECE8625D5BC6100A612DA /* Base */,
-				842ECEA025D5BFCC00A612DA /* es */,
-				842ECEA125D5BFD800A612DA /* es-419 */,
-				842ECEA225D5BFDA00A612DA /* es_MX */,
-			);
-			name = GatewayOverview.plist;
-			sourceTree = "<group>";
-		};
-		842ECEA525D5C01500A612DA /* AppConfiguration.plist */ = {
-			isa = PBXVariantGroup;
-			children = (
-				842ECEA425D5C01500A612DA /* Base */,
-				842ECEA625D5C02000A612DA /* es */,
-				842ECEA725D5C02200A612DA /* es-419 */,
-				842ECEA825D5C02400A612DA /* es_MX */,
-			);
-			name = AppConfiguration.plist;
-			sourceTree = "<group>";
-		};
-		842ECEAB25D5C05A00A612DA /* Branding.plist */ = {
-			isa = PBXVariantGroup;
-			children = (
-				842ECEAA25D5C05A00A612DA /* Base */,
-				842ECEAE25D5C06200A612DA /* es */,
-				842ECEAF25D5C06500A612DA /* es-419 */,
-				842ECEB025D5C06700A612DA /* es_MX */,
-			);
-			name = Branding.plist;
 			sourceTree = "<group>";
 		};
 		842ECED825D952D600A612DA /* Gateway.storyboard */ = {
@@ -3735,72 +3082,6 @@
 			};
 			name = Release;
 		};
-		842ECE1C25D5B07600A612DA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9973A5DBDE7C181889DFEC54 /* Pods-MyStudies COVID-19.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = HPHC/FDA.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = FWLLYUH7XR;
-				ENABLE_BITCODE = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				INFOPLIST_FILE = "$(SRCROOT)/HPHC/Branding/COVID-19/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				IS_STANDALONE_STUDY = false;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies.covid19;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		842ECE1D25D5B07600A612DA /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 448C934AFFAA8C70697714AE /* Pods-MyStudies COVID-19.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = HPHC/FDA.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = FWLLYUH7XR;
-				ENABLE_BITCODE = NO;
-				GCC_OPTIMIZATION_LEVEL = s;
-				INFOPLIST_FILE = "$(SRCROOT)/HPHC/Branding/COVID-19/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				IS_STANDALONE_STUDY = false;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies.covid19;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		89055920230149AD005FB284 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 06214F04AE75328F0A3780E6 /* Pods-HPHCUITests.debug.xcconfig */;
@@ -3878,15 +3159,6 @@
 			buildConfigurations = (
 				7878B3212216C6E20052FC23 /* Debug */,
 				7878B3222216C6E20052FC23 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		842ECE1B25D5B07600A612DA /* Build configuration list for PBXNativeTarget "MyStudies COVID-19" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				842ECE1C25D5B07600A612DA /* Debug */,
-				842ECE1D25D5B07600A612DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -127,8 +127,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        print("Profile View will disapper")
-        
+                
         if isProfileEdited {
             isProfileEdited = false
             UserServices().updateUserProfile(self)
@@ -136,7 +135,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
     }
     
     func leftDidClose() {
-        print("Left menu is closed")
+        
     }
     
 // MARK: - Button Actions
@@ -344,8 +343,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      
      */
     func handleSignoutResponse(){
-        debugPrint("singout")
-        
+                
         if ORKPasscodeViewController.isPasscodeStoredInKeychain(){
             ORKPasscodeViewController.removePasscodeFromKeychain()
         }
@@ -489,12 +487,12 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
                 
                 if (user.settings?.localNotifications)! {
                     // on
-                    print("on")
+                    
                   self.addProgressIndicator()
                       
                   self.perform(#selector(self.registerLocalNotification), with: self, afterDelay: 1.0)
                 } else {
-                    print("false")
+                    
                    self.addProgressIndicator()
                   self.perform(#selector(self.cancelAllLocalNotifications), with: self, afterDelay: 1.0)
                   
@@ -511,9 +509,9 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
     UIApplication.shared.cancelAllLocalNotifications()
     let application = UIApplication.shared
     let scheduledNotifications = application.scheduledLocalNotifications!
-    print("notification  \(scheduledNotifications)")
     
-     self.removeProgressIndicator()
+    
+      self.removeProgressIndicator()
   }
   
   @objc func registerLocalNotification(){
@@ -734,7 +732,7 @@ extension ProfileViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // print(indexPath.row)
+        
     }
 }
 
@@ -742,8 +740,7 @@ extension ProfileViewController: UITableViewDelegate{
 extension ProfileViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print(textField.tag)
-         
+                 
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -766,8 +763,7 @@ extension ProfileViewController: UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print(textField.text!)
-        
+                
         // trimming white spaces
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
@@ -780,8 +776,8 @@ extension ProfileViewController: UITextFieldDelegate{
             
             user.password! = textField.text!
                         
-        default:
-            print("No Matching data Found")
+        default: break
+            
         }
         
     }
@@ -866,7 +862,7 @@ extension ProfileViewController: ORKPasscodeDelegate {
         
     }
     func passcodeViewControllerDidCancel(_ viewController: UIViewController){
-        print("Cancel---\(valPasscodeRow)---\(valPasscodeSection)")
+        
 //      if valPasscodeRow < 99 && valPasscodeSection < 99 {
 //        let indexPath = IndexPath(row: valPasscodeRow, section: valPasscodeSection)
 //        let cell = tableViewProfile?.cellForRow(at: indexPath)  as? ProfileTableViewCell
@@ -910,7 +906,7 @@ extension ProfileViewController: ORKTaskViewControllerDelegate{
         switch reason {
             
         case ORKTaskViewControllerFinishReason.completed:
-            print("completed")
+            
             // taskResult = taskViewController.result
             
          //   let passcodeDict:NSDictionary? =  ORKKeychainWrapper.object(forKey: "ORKPasscode", error:nil) as? NSDictionary
@@ -928,19 +924,19 @@ extension ProfileViewController: ORKTaskViewControllerDelegate{
             ud.set(false, forKey: kPasscodeIsPending)
             ud.synchronize()
             
-        case ORKTaskViewControllerFinishReason.failed:
-            print("failed")
+        case ORKTaskViewControllerFinishReason.failed: break
+            
             // taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.discarded:
-            print("discarded")
+            
             
             if taskViewController.task?.identifier != "ChangePassCodeTask"{
                 user.settings?.passcode = user.settings?.passcode == true ? false: true
             }
             
             // taskResult = taskViewController.result
-        case ORKTaskViewControllerFinishReason.saved:
-            print("saved")
+        case ORKTaskViewControllerFinishReason.saved: break
+            
             // taskResult = taskViewController.restorationData
             
         }

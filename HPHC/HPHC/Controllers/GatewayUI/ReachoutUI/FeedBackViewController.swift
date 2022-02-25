@@ -87,7 +87,7 @@ class FeedBackViewController: UIViewController{
      
      */
     @IBAction func buttonSubmitAciton(_ sender: UIButton){
-        // print("\(ContactUsFeilds.firstName)")
+        
         if FeedbackDetail.subject.isEmpty && FeedbackDetail.feedback.isEmpty {
             UIUtilities.showAlertWithMessage(alertMessage: kMessageAllFieldsAreEmpty)
         } else if FeedbackDetail.subject.isEmpty {
@@ -167,7 +167,7 @@ extension FeedBackViewController: UITextViewDelegate {
         tableView?.setContentOffset(currentOffset!, animated: false)
     }
     func textViewDidEndEditing(_ textView: UITextView) {
-        print("textViewDidEndEditing")
+        
         if textView.tag == 101 && textView.text.count == 0 {
             textView.text = kEnterFeedback
             textView.textColor = UIColor.lightGray
@@ -178,8 +178,7 @@ extension FeedBackViewController: UITextViewDelegate {
         }
     }
     func textViewDidBeginEditing(_ textView: UITextView) {
-        print("textViewDidBeginEditing")
-        
+                
         if textView.tag == 100 {
             textView.text = ""
             textView.textColor = UIColor.black
@@ -203,11 +202,10 @@ extension FeedBackViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        print("Krishna Editing text \(textField.text!)")
     }
    
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print("Krishna Editing text \(textField.text!)")
+        
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         FeedbackDetail.subject = textField.text!
     }

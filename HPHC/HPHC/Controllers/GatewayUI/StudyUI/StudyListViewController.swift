@@ -248,9 +248,9 @@ class StudyListViewController: UIViewController {
         // checking the app settings
         let notificationType = UIApplication.shared.currentUserNotificationSettings!.types
         if notificationType == [] {
-            print("notifications are NOT enabled")
+            
         } else {
-            print("notifications are enabled")
+            
             notificationEnabledFromAppSettings = true
         }
 
@@ -298,7 +298,7 @@ class StudyListViewController: UIViewController {
             Gateway.instance.studies = listOfStudies
 
         } catch {
-            print("json error: \(error.localizedDescription)")
+            
         }
     }
 
@@ -535,9 +535,9 @@ class StudyListViewController: UIViewController {
                         self.searchView?.delegate = self
                         
                         let titleTextAttributesSelected = [NSAttributedString.Key.foregroundColor: UIColor.white]
-                        print("Krishna attributed titleTextAttributesSelected String \(titleTextAttributesSelected)")
+                        
                         let titleTextAttributesUnSelected = [NSAttributedString.Key.foregroundColor: UIColor.gray]
-                        print("Krishna attributed String titleTextAttributesUnSelected \( self.searchView?.segementToken?.titleForSegment(at: 0) ?? "")")
+                        
                         self.searchView?.segementToken?.setTitleTextAttributes(titleTextAttributesUnSelected, for: .normal)
                         self.searchView?.segementToken?.setTitleTextAttributes(titleTextAttributesSelected, for: .selected)
                         self.searchView?.segementToken?.layer.borderWidth = 2
@@ -708,7 +708,7 @@ class StudyListViewController: UIViewController {
      navigateBasedOnUserStatus method navigates to StudyDashBoard or StudyHome based on UserParticipationStatus.
      */
     func navigateBasedOnUserStatus() {
-        // print("current user type = \(User.currentUser.userType)")
+        
         if User.currentUser.userType == UserType.FDAUser {
             if Study.currentStudy?.status == .Active {
                 // handle accoring to UserStatus
@@ -1020,7 +1020,7 @@ extension StudyListViewController: UITableViewDelegate {
             
             if UIApplication.shared.canOpenURL(settingsUrl) {
               UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                print("Settings opened: \(success)") // Prints true
+                
               })
             }
             
@@ -1213,9 +1213,9 @@ extension StudyListViewController: searchBarDelegate {
     }
     
     func handleResolveEnrollmentToken(response: Dictionary<String, Any>){
-        print(response)
+        
         if let studyId = response["studyId"] as? String {
-            print("rows \(studyId)")
+        
             if !studyId.isEmpty {
                 tokenSearch(studyId: studyId)
             }
@@ -1350,26 +1350,26 @@ extension StudyListViewController: ORKTaskViewControllerDelegate {
     public func taskViewController(_ taskViewController: ORKTaskViewController,
                                    didFinishWith reason: ORKTaskViewControllerFinishReason,
                                    error _: Error?) {
-        var taskResult: Any?
+        // var taskResult: Any?
         switch reason {
         case ORKTaskViewControllerFinishReason.completed:
-            print("completed")
-            taskResult = taskViewController.result
+            
+            // taskResult = taskViewController.result
             let ud = UserDefaults.standard
             ud.set(false, forKey: kPasscodeIsPending)
             ud.synchronize()
 
-        case ORKTaskViewControllerFinishReason.failed:
-            print("failed")
-            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.failed: break
+            
+            // taskResult = taskViewController.result
 
-        case ORKTaskViewControllerFinishReason.discarded:
-            print("discarded")
-            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.discarded: break
+            
+            // taskResult = taskViewController.result
 
-        case ORKTaskViewControllerFinishReason.saved:
-            print("saved")
-            taskResult = taskViewController.restorationData
+        case ORKTaskViewControllerFinishReason.saved: break
+            
+            // taskResult = taskViewController.restorationData
         }
 
         perform(#selector(dismisscontroller), with: self, afterDelay: 1.5)

@@ -120,7 +120,7 @@ class ForgotPasswordViewController: UIViewController{
             self.showAlertMessages(textMessage: kMessageValidEmail)
             
         } else {
-            print("Call the Webservice")
+            
             // User.currentUser.emailId = textFieldEmail?.text!
             UserServices().forgotPassword(email: (textFieldEmail?.text)!, delegate: self)
         }

@@ -125,8 +125,6 @@ class SignInViewController: UIViewController{
       
 //      let base64 = "RXN0ZSBjb3JyZW8gZWxlY3Ryw71uaWNvIHlhIGhhIHNpZG8gdXRpbGl6YWRvLiBJbnRlbnRlIGNvbiB1bmEgZGlyZWNjacO9biBkZSBjb3JyZW8gZWxlY3Ryw71uaWNvIGRpZmVyZW50ZS4KCg=="
 
-//      print("Base64---\(base64.urlSafeBase64Decoded() ?? "* decoding failed*")")
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -422,8 +420,7 @@ extension SignInViewController:  UITableViewDelegate {
 extension SignInViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print(textField.tag)
-        
+                
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -447,7 +444,7 @@ extension SignInViewController: UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print(textField.text!)
+        
         switch textField.tag {
         case SignInTableViewTags.EmailId.rawValue:
             user.emailId = textField.text
@@ -455,8 +452,8 @@ extension SignInViewController: UITextFieldDelegate{
         case SignInTableViewTags.Password.rawValue:
             user.password = textField.text
             
-        default:
-            print("No Matching data Found")
+        default: break
+        
         }
     }
 }
@@ -475,16 +472,14 @@ extension SignInViewController: UIGestureRecognizerDelegate{
 extension SignInViewController: UITextViewDelegate{
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        
-        print(characterRange.description)
-        
+                
         var link: String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! // kTermsAndConditionLink
         var title: String = kNavigationTitleTerms
         if URL.absoluteString ==
                 TermsAndPolicy.currentTermsAndPolicy?.policyURL &&
                 characterRange.length == String(NSLocalizedStrings("Privacy Policy", comment: "")).count {
             // kPrivacyPolicyLink
-            print("terms")
+            
             link =  (TermsAndPolicy.currentTermsAndPolicy?.policyURL)! // kPrivacyPolicyLink
             title = kNavigationTitlePrivacyPolicy
             

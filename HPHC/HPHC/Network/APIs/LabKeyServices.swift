@@ -110,7 +110,6 @@ class LabKeyServices: NSObject {
                       kActivityResponseData: responseData
             ] as [String : Any]
         
-        print("processresponse \(params.preetyJSON())")
         self.sendRequestWith(method:method, params: params, headers: nil)
         
     }
@@ -144,7 +143,6 @@ class LabKeyServices: NSObject {
                           kActivityResponseData: responseData
                 ] as [String: Any]
             
-            print("processresponse : \(params.preetyJSON())")
             self.sendRequestWith(method: method, params: params, headers: nil)
         }
     }
@@ -199,7 +197,7 @@ class LabKeyServices: NSObject {
     }
     
     func handleGetParticipantResponse1(response: Dictionary<String, Any>) {
-        print(response)
+        
     }
   
     func handleGetParticipantResponse(response: Dictionary<String, Any>) {
@@ -219,8 +217,7 @@ class LabKeyServices: NSObject {
         }
         
         if let rows = response["rows"] as? Array<Dictionary<String, Any>> {
-            print("rows \(rows)")
-            
+                        
             for rowDetail in rows {
                 if let data =  rowDetail["data"] as? Dictionary<String, Any>{
                     // created date
@@ -339,8 +336,8 @@ extension LabKeyServices: NMWebServiceDelegate{
             self.handleGetParticipantResponse(response: response as! Dictionary<String, Any>)
         case ResponseMethods.processResponse.description as String: break
         case ResponseMethods.withdrawFromStudy.description as String: break
-        default:
-            print("Request was not sent with proper method name")
+        default: break
+            
         }
             
         delegate?.finishedRequest(manager, requestName: requestName, response: response)

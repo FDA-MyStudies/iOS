@@ -225,7 +225,7 @@ class Study: Hashable {
     
     class  func updateCurrentStudy(study: Study) {
         Study.currentStudy = study
-      print("Study.currentStudy---\(Study.currentStudy)")
+      
     }
 }
 

@@ -104,7 +104,7 @@ class LineChartCell: GraphChartTableViewCell {
     }
     
     func setupLineChart(chart: DashboardCharts){
-        print("Krishna line chart \(chart.displayName ?? "")")
+        
         currentChart = chart
 
         self.graphView.tintColor = UIColor.gray
@@ -166,9 +166,6 @@ class LineChartCell: GraphChartTableViewCell {
             self.handleDaysOfMonthForDate(date: Date())
             
         case .days_of_week:
-            
-            print("start of Week \(String(describing: Date().startOfWeek))")
-            print("end of Week \(String(describing: Date().endOfWeek))")
             
             startDateOfWeek = Date().startOfWeek
             endDateOfWeek = Date().endOfWeek
@@ -497,8 +494,7 @@ class LineChartCell: GraphChartTableViewCell {
         let calendar = Calendar.current
         let range = calendar.range(of: .day, in: .month, for: date)!
         let numDays = range.count
-        print("days \(numDays)") // 31
-        
+                
         for i in 1...numDays{
             
             if i == 1 || i == 5 || i == 10 || i == 15 || i == 20 || i == 25 || i == numDays {
@@ -517,7 +513,7 @@ class LineChartCell: GraphChartTableViewCell {
                 let responseDate = data.startDate
                 let fk = data.fkDuration
                 let day = LineChartCell.shortDateFormatter.string(from: responseDate!)
-                print("day \(day)")
+                
                 let value = data.data
                 
                 points[Int(day)! - 1] = ORKValueRange(value: Double(value))
@@ -553,13 +549,11 @@ class LineChartCell: GraphChartTableViewCell {
                 let responseDate = data.startDate
                 let fk = data.fkDuration
                 let day = LineChartCell.shortDayFormatter.string(from: responseDate!)
-                // print("day \(day)")
+                
                 let value = data.data
                 
                 let currentDay = DayValue(rawValue: day)!
-                
-                // print("index \(currentDay.dayIndex)")
-                
+                                
                 points[currentDay.dayIndex - 1] = ORKValueRange(value: Double(value))
                  self.replaceXTitleForActiveTask(value: fk, atIndex: (currentDay.dayIndex - 1))
                 
@@ -593,7 +587,7 @@ class LineChartCell: GraphChartTableViewCell {
                 let responseDate = data.startDate
                 let fk = data.fkDuration
                 let month = LineChartCell.shortMonthFormatter.string(from: responseDate!)
-                // print("month \(month)")
+                
                 let value = data.data
                 // points.insert(ORKValueRange(value:Double(value)), at: Int(month)!)
                 points[Int(month)! - 1] = ORKValueRange(value: Double(value))
@@ -635,7 +629,7 @@ class LineChartCell: GraphChartTableViewCell {
                 let fk = data.fkDuration
                 let responseDate = data.startDate
                 let week = self.getWeekNumber(date: responseDate!)
-                // print("month \(month)")
+                
                 let value = data.data
                 // points.insert(ORKValueRange(value:Double(value)), at: Int(month)!)
                 points[week - 1] = ORKValueRange(value:Double(value))

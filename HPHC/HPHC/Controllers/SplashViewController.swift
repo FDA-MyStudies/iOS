@@ -145,7 +145,6 @@ class SplashViewController: UIViewController {
             self.navigateToStudyHomeController()
             
         } catch {
-            print("json error: \(error.localizedDescription)")
         }
     }
     
@@ -170,7 +169,7 @@ class SplashViewController: UIViewController {
     }
     
     @objc func studySetupComplete(){
-        print("studySetupComplete")
+        
         // self.navigateToGatewayDashboard()
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue:"StudySetupCompleted"), object: nil)
         
@@ -238,17 +237,13 @@ extension SplashViewController:ORKTaskViewControllerDelegate{
         
         switch reason {
             
-        case ORKTaskViewControllerFinishReason.completed:
-            print("completed")
+        case ORKTaskViewControllerFinishReason.completed: break
            
-        case ORKTaskViewControllerFinishReason.failed:
-            print("failed")
+        case ORKTaskViewControllerFinishReason.failed: break
         
-        case ORKTaskViewControllerFinishReason.discarded:
-            print("discarded")
+        case ORKTaskViewControllerFinishReason.discarded: break
             
-        case ORKTaskViewControllerFinishReason.saved:
-            print("saved")
+        case ORKTaskViewControllerFinishReason.saved: break
             
         }
         taskViewController.dismiss(animated: true, completion: nil)

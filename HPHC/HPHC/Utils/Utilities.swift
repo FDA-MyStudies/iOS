@@ -631,8 +631,8 @@ extension FileManager {
             do {
                 try FileManager.default.createDirectory(atPath: fullPath, withIntermediateDirectories: false, attributes: nil)
                 return fullPath
-            } catch let error as NSError {
-                print(error.localizedDescription)
+            } catch _ as NSError {
+                
                 return ""
             }
         }

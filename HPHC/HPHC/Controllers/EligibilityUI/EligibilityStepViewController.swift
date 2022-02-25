@@ -215,9 +215,7 @@ extension EligibilityStepViewController: NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.removeProgressIndicator()
-        print("token in textfield \(tokenTextField.text!)")
-        print("Token response check with error \(error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)))")
-        
+                
         if error.localizedDescription.localizedCaseInsensitiveContains(
             tokenTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)) {
             

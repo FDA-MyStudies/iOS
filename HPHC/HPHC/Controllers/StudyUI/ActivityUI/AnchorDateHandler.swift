@@ -106,8 +106,6 @@ class AnchorDateHandler {
     
     func queryAnchorDateForActivityResponseActivities(_ completionHandler: @escaping AnchordDateFetchCompletionHandler) {
         
-        print("Log Started - \(Date().timeIntervalSince1970)")
-        
         handler = completionHandler
         
         // Get activities from database for anchor date is not present
@@ -329,7 +327,7 @@ class AnchorDateHandler {
         let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
             
             if error != nil {
-                print(error as Any)
+                
                 completion()
             } else if let response = response, let data = data {
                 
@@ -387,7 +385,7 @@ class AnchorDateHandler {
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             
             if error != nil {
-                print(error as Any)
+                
                 completion()
             } else if let response = response, let data = data {
                 
@@ -422,10 +420,9 @@ class AnchorDateHandler {
     
     func saveAnchorDateInDatabase() {
         
-        print("Log DB Started - \(Date().timeIntervalSince1970)")
         let listItems = anchorDateMetaDataList.filter({$0.anchorDate != nil})
         for item in listItems {
-            print("DB")
+            
             if item.fetchAnchorDateFor == .activity,
                 let dbActivity = item.activity,
                 let anchorDate = item.anchorDate {
@@ -440,7 +437,6 @@ class AnchorDateHandler {
                 DBHandler.saveLifeTimeFor(resource: dbResource, anchorDate: anchorDate!)
             }
         }
-        print("Log DB Finished - \(Date().timeIntervalSince1970)")
     }
     
     func saveParticipantPropertyAnchorDateInDB() {
@@ -474,7 +470,7 @@ class AnchorDateHandler {
     
             } else if item.fetchAnchorDateFor == .resource, let dbResource = item.resource {
                 // Handle for resource
-                print("Handle response here")
+                
                 var startDateStringEnrollment =  Utilities.formatterShort?.string(from: item.anchorDate!)
                 let startTimeEnrollment =  "00:00:00"
                 startDateStringEnrollment = (startDateStringEnrollment ?? "") + " " + startTimeEnrollment

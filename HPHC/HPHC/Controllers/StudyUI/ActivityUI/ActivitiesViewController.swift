@@ -76,20 +76,17 @@ class ActivitiesViewController : UIViewController{
         self.tableView?.rowHeight = UITableView.automaticDimension
         
         self.tabBarController?.delegate = self
-        print("Krishna tabbar total items \(self.tabBarController?.tabBar.items?.count ?? 0)")
-        if let activititesTitle = self.tabBarController?.tabBar.items
-                {
-            activititesTitle[0].title = NSLocalizedStrings("Activities", comment: "")
-                }
         
-        if let dashboardTitle = self.tabBarController?.tabBar.items
-                {
+        if let activititesTitle = self.tabBarController?.tabBar.items {
+            activititesTitle[0].title = NSLocalizedStrings("Activities", comment: "")
+        }
+        
+        if let dashboardTitle = self.tabBarController?.tabBar.items {
             dashboardTitle[1].title = NSLocalizedStrings("Dashboard", comment: "")
-                }
-        if let resourcesTitle = self.tabBarController?.tabBar.items
-                {
+        }
+        if let resourcesTitle = self.tabBarController?.tabBar.items {
             resourcesTitle[2].title = NSLocalizedStrings("Resources", comment: "")
-                }
+        }
         
         self.navigationItem.title = NSLocalizedStrings("STUDY ACTIVITIES", comment: "")
         self.navigationController?.navigationBar.titleTextAttributes =
@@ -116,7 +113,7 @@ class ActivitiesViewController : UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("ActivitiesViewController - viewWillAppear")
+        
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
        
         if Utilities.isStandaloneApp() {
@@ -961,7 +958,7 @@ extension ActivitiesViewController: UITableViewDelegate{
                         DBHandler.loadActivityMetaData(
                             activity: activities[indexPath.row],
                             completionHandler: { (_) in
-                                print("1 actlang -- \(getLanguageLocale()) -- activity language \(Study.currentActivity?.activityLang ?? "")")
+                                
 //                            if found {
 //
 //                                self.createActivity()
@@ -985,12 +982,12 @@ extension ActivitiesViewController: UITableViewDelegate{
                         self.selectedIndexPath = indexPath
                         
                     } else {
-                        debugPrint("run is completed")
+                        
                     }
                 }
                 
             } else if activity.userParticipationStatus?.status == .abandoned {
-                debugPrint("run not available")
+                
                 UIUtilities.showAlertWithMessage(alertMessage: kActivityAbondonedAlertMessage)
             }
             
@@ -1117,10 +1114,10 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             self.removeProgressIndicator()
             self.handleStudyUpdatesResponse()
             if Study.currentStudy?.version == StudyUpdates.studyVersion {
-                print("study version update if")
+                
                 self.checkForActivitiesUpdates()
             } else {
-                print("study version update else")
+                
                 self.handleStudyUpdatesResponse()
             }
             
@@ -1219,8 +1216,8 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         
         switch reason {
             
-        case ORKTaskViewControllerFinishReason.completed:
-            print("completed")
+        case ORKTaskViewControllerFinishReason.completed: break
+            
             // taskResult = taskViewController.result
             //            let ud = UserDefaults.standard
             //            if ud.bool(forKey: "FKC") {
@@ -1238,12 +1235,11 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             //                self.updateRunStatusToComplete()
             //            }
             
-        case ORKTaskViewControllerFinishReason.failed:
-            print("failed")
+        case ORKTaskViewControllerFinishReason.failed: break
+            
             // taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.discarded:
-            print("discarded")
-            
+                        
             let study = Study.currentStudy
             let activity = Study.currentActivity
             activity?.currentRun.restortionData = nil
@@ -1261,7 +1257,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             self.checkForActivitiesUpdates()
             
         case ORKTaskViewControllerFinishReason.saved:
-            print("saved")
+            
             // taskResult = taskViewController.restorationData
             
             if taskViewController.task?.identifier == "ConsentTask" {
@@ -1590,8 +1586,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
 extension ActivitiesViewController:UITabBarControllerDelegate{
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        print("Krishna tab item title \(tabBarController.tabBarItem.title ?? "")")
-        
+                
         let tabBarIndex = tabBarController.selectedIndex
         if tabBarIndex == 0 {
             // do your stuff
@@ -1736,11 +1731,10 @@ class ResponseDataFetch: NMWebServiceDelegate {
     func getDataKeysForCurrentStudy(){
         
         DBHandler.getDataSourceKeyForActivity(studyId: Study.currentStudy?.studyId ?? "") { (activityKeys) in
-            print(activityKeys)
+            
             if activityKeys.count > 0 {
                 self.dataSourceKeysForLabkey = activityKeys
-                print("dashboardResponse Called: ")
-                
+                            
                 // GetDashboardResponse from server
                 self.sendRequestToGetDashboardResponse()
             }

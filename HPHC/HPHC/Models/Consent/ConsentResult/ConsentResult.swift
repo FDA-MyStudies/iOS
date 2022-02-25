@@ -74,17 +74,14 @@ class ConsentResult {
                         
                         var fullPath: String!
                         self.consentDocument?.makePDF(completionHandler: { data, _ in
-                            // print("data: \(String(describing: data))    \n  error: \(String(describing: error))")
-                            
+                                                        
                             let path =  AKUtility.baseFilePath + "/study"
                             let fileName: String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
                             
                             self.consentPath = fileName
                             
                             fullPath = path + "/" + fileName
-                          
-                            print("fullPath---\(fullPath ?? "")")
-                            
+                                                      
                             if !FileManager.default.fileExists(atPath: path) {
                                 try? FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
                             }
@@ -154,8 +151,7 @@ class ConsentResult {
                                 FileManager.default.createFile(atPath: LARSignedPDFPath, contents: pdfData, attributes: [:])
                                 
                                 LARSignedPDFPath = "file://" + "\(LARSignedPDFPath)"
-                                print("LARSignedPDFPath---\(LARSignedPDFPath)")
-                                
+                                                                
                                 if let updatedPDFData = self.mergePdfFiles(rkPDFPath: fullPath,
                                                                            LARPdfPath: LARSignedPDFPath) {
                                     try? updatedPDFData.write(to:  URL(string:fullPath!)!)
@@ -196,8 +192,8 @@ class ConsentResult {
                             try data?.write(to:  URL(string: fullPath!)!)
                             FileDownloadManager.encyptFile(pathURL: URL(string: fullPath!)!)
                             
-                        } catch let error as NSError {
-                            print(error.localizedDescription)
+                        } catch _ as NSError {
+                            
                         }
                     }
                 } else if let tokenStepResult: EligibilityTokenTaskResult? =

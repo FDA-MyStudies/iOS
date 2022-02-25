@@ -74,8 +74,8 @@ class DBHandler: NSObject {
                     dbUser?.refreshToken = user.refreshToken
                     
                 })
-            } catch let error {
-                print(error)
+            } catch _ {
+                
             }
             
             //            try? realm.write({
@@ -94,7 +94,6 @@ class DBHandler: NSObject {
             
         }
         
-        //        print("DBPath : varealm.configuration.fileURL)")
         //        try? realm.write({
         //            realm.add(dbUser!, update: true)
         //
@@ -320,9 +319,7 @@ class DBHandler: NSObject {
             participatedStatus.joiningDate = dbStudy.joiningDate
             
             study.userParticipateState = participatedStatus
-            
-            print("status \(dbStudy.participatedStatus)")
-            
+                        
             // append to user class participatesStudies also
             User.currentUser.participatedStudies.append(participatedStatus)
             
@@ -375,7 +372,7 @@ class DBHandler: NSObject {
             dbOverviewSection.type = section.type
             dbOverviewSection.studyId = studyId
             dbOverviewSection.sectionId = studyId + "screen\(sectionIndex)"
-            print("Dbhandl overviewlang \(dbOverviewSection.overviewlang ?? "") and UDDLang \(UserDefaults.standard.value(forKey: kUserDeviceLanguage) ?? "")")
+            
             dbStudies.append(dbOverviewSection)
         }
         
@@ -463,9 +460,9 @@ class DBHandler: NSObject {
             for dbSection in studies {
                
                 let section = OverviewSection()
-                print("overviwe language2 \(dbSection.overviewlang ?? "") and kuserdevicelanguage \(UserDefaults.standard.value(forKey: kUserDeviceLanguage) ?? "")")
+                
                 if dbSection.overviewlang != UserDefaults.standard.value(forKey: kUserDeviceLanguage) as? String ?? ""{
-                    print("overviwe language1 \(dbSection.overviewlang ?? "")")
+                
                     // completionHandler(nil)
                     secempty = false
                     break
@@ -512,13 +509,13 @@ class DBHandler: NSObject {
             dbStudy?.updateConsent =  StudyUpdates.studyConsentUpdated
             dbStudy?.updateActivities = StudyUpdates.studyActivitiesUpdated
             dbStudy?.updateInfo = StudyUpdates.studyInfoUpdated
-            print("Db1 metadata dbversion \(dbStudy?.version ?? "") updated version \(dbStudy?.updatedVersion ?? "") and study update studyversion \(StudyUpdates.studyVersion ?? "")")
+            
             if StudyUpdates.studyVersion != nil {
                 dbStudy?.version = StudyUpdates.studyVersion
             } else {
                 dbStudy?.version = dbStudy?.updatedVersion
             }
-            print("Db2 metadata dbversion \(dbStudy?.version ?? "") updated version \(dbStudy?.updatedVersion ?? "") and study update studyversion \(StudyUpdates.studyVersion ?? "")")
+            
         })
     }
     
@@ -528,7 +525,7 @@ class DBHandler: NSObject {
     class func updateStudyParticipationStatus(study: Study) {
         
         let realm = DBHandler.getRealmObject()!
-        let studies =  realm.objects(DBStudy.self).filter("studyId == %@", study.studyId)
+        let studies =  realm.objects(DBStudy.self).filter("studyId == %@", study.studyId ?? "")
         let dbStudy = studies.last
         
         try? realm.write({
@@ -605,11 +602,10 @@ class DBHandler: NSObject {
         for activity in activityies {
             
             var dbActivity: DBActivity?
-            print("StudyUpdates.studyLang != StudyUpdates.studyOldLang \(StudyUpdates.studyLang != StudyUpdates.studyOldLang) studylang \(StudyUpdates.studyLang) studyoldlang \(StudyUpdates.studyOldLang ?? "")")
+                        
             
-            print("2 save activites actlang -- \(getLanguageLocale()) -- activity language \(Study.currentActivity?.activityLang ?? "")")
             if dbActivityArray.count != 0, StudyUpdates.studyLang == StudyUpdates.studyOldLang {
-                print("studyUpdate if studyLang  \(StudyUpdates.studyLang ?? "") and studlyold lang \(StudyUpdates.studyOldLang ?? "")")
+            
                 dbActivity = dbActivityArray.filter({$0.actvityId == activity.actvityId!}).last
                 
                 if dbActivity == nil { // newly added activity
@@ -645,8 +641,7 @@ class DBHandler: NSObject {
                 }
                 
             } else {
-                print("studyUpdate else studyLang  \(StudyUpdates.studyLang) and studlyold lang \(StudyUpdates.studyOldLang)")
-                
+                                
                 dbActivity = DBHandler.getDBActivity(activity: activity)
                 dbActivities.append(dbActivity!)
                 activityUpdated = true
@@ -1360,8 +1355,7 @@ class DBHandler: NSObject {
         let adherence = ceil(Double(self.divide(lhs: (completedRuns.count)*100, rhs: (completedRuns.count + incompleteRuns))))
         
         completionHandler(Int(completion), Int(adherence))
-        print("complete: \(completedRuns.count) , incomplete: \(incompleteRuns)")
-        
+                
     }
     static func divide(lhs: Int, rhs: Int) -> Int {
         if rhs == 0 {
@@ -1623,7 +1617,7 @@ class DBHandler: NSObject {
         
         let realm = DBHandler.getRealmObject()!
         let dbMetaDataList = realm.objects(DBActivityMetaData.self).filter({$0.actvityId == activity.actvityId && $0.studyId == activity.studyId})
-        print("2 actlang -- \(getLanguageLocale()) -- activity language \(Study.currentActivity?.activityLang ?? "")")
+        
         if dbMetaDataList.count != 0 {
             let metaData = dbMetaDataList.last
             
@@ -1637,7 +1631,7 @@ class DBHandler: NSObject {
                     ActivityBuilder.currentActivityBuilder = ActivityBuilder()
                     ActivityBuilder.currentActivityBuilder.initWithActivity(activity: Study.currentActivity! )
                 }
-                print("3 actlang -- \(getLanguageLocale()) -- activity language \(Study.currentActivity?.activityLang) -- \(metaData)")
+                
                 completionHandler(true)
                 
             } catch {
@@ -2214,7 +2208,7 @@ class DBHandler: NSObject {
                                                                    questionKey: activity.sourceKey,
                                                                    anchorDateValue: activity.anchorDateValue!)
         }
-        print("Completed")
+        
         completionHandler(anchorDateAvailable)
     }
     

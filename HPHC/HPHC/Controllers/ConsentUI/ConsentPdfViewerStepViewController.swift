@@ -80,7 +80,7 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
     // MARK: View controller delegates
     
     override func viewDidLoad() {
-        print("Krishna consentPDFViewer button title \(self.buttonNext?.titleLabel?.text ?? "")")
+        
         super.viewDidLoad()
         webView.contentScaleFactor = 1.0
         webView.navigationDelegate = self

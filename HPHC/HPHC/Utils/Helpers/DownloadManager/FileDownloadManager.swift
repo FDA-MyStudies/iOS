@@ -75,8 +75,6 @@ class FileDownloadManager: NSObject, URLSessionDelegate, URLSessionDownloadDeleg
     }
     func urlSession(_ session: Foundation.URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         
-        debugPrint("didFinishDownloadingToURL location \(location)")
-        
         for (_, downloadModel) in downloadingArray.enumerated() {
             if downloadTask.isEqual(downloadModel.task) {
                 let fileName = downloadModel.fileName as NSString
@@ -88,7 +86,6 @@ class FileDownloadManager: NSObject, URLSessionDelegate, URLSessionDownloadDeleg
                 // If all set just move downloaded file to the destination
                 // if fileManager.fileExists(atPath: basePath) {
                 let fileURL = URL(fileURLWithPath: destinationPath as String)
-                debugPrint("directory path = \(destinationPath)")
                 
                 do {
                     try fileManager.moveItem(at: location, to: fileURL)
@@ -99,7 +96,7 @@ class FileDownloadManager: NSObject, URLSessionDelegate, URLSessionDownloadDeleg
                     
                     self.delegate?.download(manager: self, didFinishDownloadingAtPath: fileName as String)
                 } catch let error as NSError {
-                    debugPrint("Error while moving downloaded file to destination path:\(error)")
+                    
                     DispatchQueue.main.async(execute: { () -> Void in
                         self.delegate?.download(manager: self, didFailedWithError: error)
                     })
@@ -109,9 +106,8 @@ class FileDownloadManager: NSObject, URLSessionDelegate, URLSessionDownloadDeleg
             }
         }
     }
+    
     func URLSession(_ session: Foundation.URLSession, task: URLSessionTask, didCompleteWithError error: NSError?) {
-       // debugPrint("task id: \(task.taskIdentifier)")
-       // debugPrint("Completed with error \(error?.localizedDescription)")
         if error != nil {
             self.delegate?.download(manager: self, didFailedWithError: error!)
         }
@@ -159,10 +155,7 @@ class FileDownloadManager: NSObject, URLSessionDelegate, URLSessionDownloadDeleg
             let deCryptedData = Data(deCipherText)
             return deCryptedData
             
-        } catch let error as NSError {
-            
-             debugPrint("Decrypting data failed \(error.localizedDescription)")
-            print(error)
+        } catch let _ as NSError {
             
             return nil
         }
@@ -211,13 +204,11 @@ class FileDownloadManager: NSObject, URLSessionDelegate, URLSessionDownloadDeleg
                 do{
                     try encryptedData.write(to: URL.init(string: pathString)!, options: Data.WritingOptions.atomic)
                     
-                } catch let error as NSError{
-                    print(error)
-                    debugPrint("Writing encrypted data to path failed \(error.localizedDescription)")
+                } catch _ as NSError{
+                    
                 }
-            } catch let error as NSError {
-                print(error)
-                debugPrint("Encryting data failed \(error.localizedDescription)")
+            } catch _ as NSError {
+
             }
         }
     }

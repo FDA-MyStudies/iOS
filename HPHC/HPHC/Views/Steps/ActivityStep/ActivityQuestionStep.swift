@@ -947,8 +947,8 @@ class ActivityQuestionStep: ActivityStep {
         do {
             resultDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String, Any>
             
-        } catch let error as NSError {
-            print("\(error)")
+        } catch let _ as NSError {
+            
         }
         
         let categoryDict = (resultDict!["Category"] as? Dictionary<String, String>)!

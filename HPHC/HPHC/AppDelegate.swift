@@ -184,7 +184,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /*
                 let locale3 = getLanguageLocale()
-                print("onLaunch language \(locale3)")
+                
                 if locale3.hasPrefix("es") {
                     ud1.set("es", forKey: kUserDeviceLanguage)
                 } else {
@@ -196,7 +196,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Check if Database needs migration
         self.checkForRealmMigration()
-        print("UserLanguage \(ud1.value(forKey: kUserDeviceLanguage) ?? "")")
+        
         return true
     }
     
@@ -215,8 +215,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /*
                 let locale3 = getLanguageLocale()
                 if NetworkManager.isNetworkAvailable() {
-                    print("network available applicationWillEnterForeground  \(NetworkManager.isNetworkAvailable()) and locale3 is \(locale3)")
-                    
+                                        
                     if locale3.hasPrefix("es") {
                         ud.set("es", forKey: kUserDeviceLanguage)
                     } else {
@@ -226,7 +225,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     ud.synchronize()
                     self.updateLocale(locale3: locale3)
                 } else {
-                    print("network available applicationWillEnterForeground  \(NetworkManager.isNetworkAvailable()) and ud.value is \(ud.value(forKey: kUserDeviceLanguage))")
+                    
                     self.updateLocale(locale3: ud.value(forKey: kUserDeviceLanguage)! as! String)
                 }
                  */
@@ -377,7 +376,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
       (granted, _) in
       
-      // print("Permission granted: \(granted)")
       // 1. Check if permission granted
       guard granted else { return }
       // 2. Attempt registration for remote notifications on the main thread
@@ -490,8 +488,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if result == errSecSuccess {
                 realmKey = key.base64EncodedString()
             } else {
-                print("Problem generating random bytes")
-                
+                                
             }
             FDAKeychain.shared[kRealmEncryptionKeychainKey] = realmKey
         }
@@ -518,7 +515,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Tell Realm to use this new configuration object for the default Realm
         Realm.Configuration.defaultConfiguration = config
-        print(config)
+        
         // Now that we've told Realm how to handle the schema change, opening the file
         // will automatically perform the migration
 
@@ -545,7 +542,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Token Registration failed  \(error)")
+        
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
@@ -665,7 +662,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let center = UNUserNotificationCenter.current()
             center.getPendingNotificationRequests(
                 completionHandler: { requests in
-                    print(requests)
+                    
                     if requests.count < 50 {
                         DispatchQueue.main.async {
                              LocalNotification.refreshAllLocalNotification()
@@ -687,8 +684,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.selectedController = controller
         
         if StudyUpdates.studyConsentUpdated {
-            print("Study consent is updated: Please Present Consent UI")
-            
+                        
             let navigationController =  (self.window?.rootViewController as? UINavigationController)!
             
             var topController: UIViewController = navigationController
@@ -709,7 +705,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                  action2: {
             })
         } else {
-            print("Study consent not updated")
+            
         }
     }
     
@@ -1450,8 +1446,7 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
         switch reason {
             
         case ORKTaskViewControllerFinishReason.completed:
-            print("completed")
-            
+                        
             if taskViewController.task?.identifier == kConsentTaskIdentifier {
                 
                 // Saving Consent Document
@@ -1484,14 +1479,14 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                 self.appIsResignedButDidNotEnteredBackground = false
             }
         case ORKTaskViewControllerFinishReason.failed:
-            print("failed")
+            
             taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.discarded:
             
             if  taskViewController.task?.identifier == kConsentTaskIdentifier {
                 self.popViewControllerAfterConsentDisagree()
             }
-            print("discarded")
+            
             taskResult = taskViewController.result
             
             if self.isComprehensionFailed! {
@@ -1499,7 +1494,7 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
             }
                 
         case ORKTaskViewControllerFinishReason.saved:
-            print("saved")
+            
             taskResult = taskViewController.restorationData
             
             if  taskViewController.task?.identifier == kConsentTaskIdentifier {
@@ -1910,7 +1905,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         let userInfo = response.notification.request.content.userInfo
         
-        print("application state \(UIApplication.shared.applicationState.rawValue)")
         UIApplication.shared.applicationIconBadgeNumber = 0
         
         if UIApplication.shared.applicationState == UIApplication.State.background ||
@@ -1936,38 +1930,32 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 extension AppDelegate {
     
     static func selectedLocale () -> Bundle? {
-            let locale3 = getLanguageLocale()
-            print("network available  \(NetworkManager.isNetworkAvailable()) and locale3 is \(locale3)")
-            if !(locale3.hasPrefix("es") || locale3.hasPrefix("en")) {
-                Bundle.setLanguage("en")
-                
-                let path = Bundle.main.path(forResource: "en", ofType: "lproj")
-                
-                if let path = path {
-                    localeBundle = Bundle(path: path)
-                } else {
-                    let path = Bundle.main.path(forResource: "en", ofType: "lproj") ?? ""
-                    localeBundle = Bundle(path: path)
-                }
-                print("Krishna Setting locale in if condition identifier \(localeBundle?.bundleIdentifier ?? "")")
-                print("Krishna Setting locale in if condition path \(localeBundle?.bundlePath ?? "")")
-                
-            } else if locale3.hasPrefix("es") {
-                let path = Bundle.main.path(forResource: "es", ofType: "lproj") ?? ""
+        let locale3 = getLanguageLocale()
+        
+        if !(locale3.hasPrefix("es") || locale3.hasPrefix("en")) {
+            Bundle.setLanguage("en")
+            
+            let path = Bundle.main.path(forResource: "en", ofType: "lproj")
+            
+            if let path = path {
                 localeBundle = Bundle(path: path)
-                print("Krishna Setting locale in elseif es condition identifier \(localeBundle?.bundleIdentifier ?? "")")
-                print("Krishna Setting locale in elseif es condition path \(localeBundle?.bundlePath ?? "")")
-                
-            } else if locale3.hasPrefix("en") {
+            } else {
                 let path = Bundle.main.path(forResource: "en", ofType: "lproj") ?? ""
                 localeBundle = Bundle(path: path)
-                print("Krishna Setting locale in elseif en condition identifier \(localeBundle?.bundleIdentifier ?? "")")
-                print("Krishna Setting locale in elseif en condition path \(localeBundle?.bundlePath ?? "")")
             }
-        print("Krishna Setting locale before return \(localeBundle?.bundleIdentifier ?? "")")
-        print("Krishna Setting locale before return \(localeBundle?.bundlePath ?? "")")
-            return localeBundle
+            
+        } else if locale3.hasPrefix("es") {
+            let path = Bundle.main.path(forResource: "es", ofType: "lproj") ?? ""
+            localeBundle = Bundle(path: path)
+            
+        } else if locale3.hasPrefix("en") {
+            let path = Bundle.main.path(forResource: "en", ofType: "lproj") ?? ""
+            localeBundle = Bundle(path: path)
+            
         }
+        
+        return localeBundle
+    }
 }
 
 extension UIWindow {

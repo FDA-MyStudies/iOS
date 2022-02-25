@@ -149,8 +149,6 @@ class ConsentBuilder {
         consentStatus = .pending
         consentHasVisualStep = false
       
-      print("metaDataDict---\(metaDataDict)")
-
         if Utilities.isValidObject(someObject: metaDataDict as AnyObject?) {
             if Utilities.isValidValue(someObject: metaDataDict[kConsentVersion] as AnyObject?) {
                 version = (metaDataDict[kConsentVersion] as? String)!

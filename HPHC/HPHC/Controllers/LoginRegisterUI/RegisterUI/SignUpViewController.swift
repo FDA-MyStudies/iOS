@@ -295,7 +295,7 @@ class SignUpViewController: UIViewController{
 //      UIUtilities.showAlertWithTitleAndMessage(title: kWhyRegisterText as NSString, message: kRegistrationInfoMessage as NSString)
         
         let consOk = kTitleOk1.dropLast()
-               print("\(consOk)")
+               
         var rootViewController = UIApplication.shared.keyWindow?.rootViewController
         if let navigationController = rootViewController as? UINavigationController {
             rootViewController = navigationController.viewControllers.first
@@ -380,7 +380,7 @@ extension SignUpViewController: UITextViewDelegate{
         if URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL  &&
                 characterRange.length == String(NSLocalizedStrings("Privacy Policy", comment: "")).count {
             // kPrivacyPolicyLink
-            print("terms")
+            
             link =  (TermsAndPolicy.currentTermsAndPolicy?.policyURL)! // kPrivacyPolicyLink
             title = kNavigationTitlePrivacyPolicy
             
@@ -462,7 +462,7 @@ extension SignUpViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // print(indexPath.row)
+        
     }
 }
 
@@ -470,7 +470,7 @@ extension SignUpViewController: UITableViewDelegate{
 extension SignUpViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print(textField.tag)
+        
         if textField.tag == TextFieldTags.EmailId.rawValue{
             textField.keyboardType = .emailAddress
             textField.isSecureTextEntry = false
@@ -510,8 +510,7 @@ extension SignUpViewController: UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print(textField.text!)
-        
+                
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         let tag: TextFieldTags = TextFieldTags(rawValue: textField.tag)!
@@ -539,7 +538,6 @@ extension SignUpViewController: UITextFieldDelegate{
             textField.isSecureTextEntry = true
                         
 //        default:
-//            print("No Matching data Found")
 //            break
         }
     }

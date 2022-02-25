@@ -33,7 +33,6 @@ open class Logger {
             column: column
         )
 
-        print(Date(), result, separator: "", terminator: "")
     }
     
     public init() {

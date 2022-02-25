@@ -74,7 +74,7 @@ class OverviewSection {
                 self.link = detail[kOverviewMediaLink] as? String
             }
             self.overviewlang = UserDefaults.standard.value(forKey: kUserDeviceLanguage) as? String ?? ""
-            print("Overview overviewlang \(self.overviewlang ?? "") and UDDLang \(UserDefaults.standard.value(forKey: kUserDeviceLanguage))")
+            
             /* Checks the WebsiteLink value (Null, Nil, empty etc) is valid or not */
             if Utilities.isValidValue(someObject: detail[kOverviewWebsiteLink] as AnyObject ) {
                 self.websiteLink = detail[kOverviewWebsiteLink] as? String

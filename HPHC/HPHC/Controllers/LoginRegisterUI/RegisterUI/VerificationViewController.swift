@@ -108,8 +108,7 @@ class VerificationViewController: UIViewController{
             self.showAlertMessages(textMessage: kMessageVerificationCodeEmpty)
             
         } else {
-            print("Call the webservice")
-            
+                        
             UserServices().verifyEmail(emailId: self.emailId!,
                                        verificationCode:(self.textFieldVerificationCode?.text)!,
                                        delegate: self)
@@ -232,8 +231,7 @@ extension VerificationViewController:UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print(textField.text!)
-       
+               
         if textField == textFieldEmail {
              User.currentUser.emailId = textField.text
             
@@ -323,20 +321,18 @@ extension VerificationViewController: ORKTaskViewControllerDelegate{
         
         switch reason {
             
-        case ORKTaskViewControllerFinishReason.completed:
-            print("completed")
-            // taskResult = taskViewController.result
-        case ORKTaskViewControllerFinishReason.failed:
-            print("failed")
-            // taskResult = taskViewController.result
-        case ORKTaskViewControllerFinishReason.discarded:
-            print("discarded")
+        case ORKTaskViewControllerFinishReason.completed: break
             
             // taskResult = taskViewController.result
-        case ORKTaskViewControllerFinishReason.saved:
-            print("saved")
+        case ORKTaskViewControllerFinishReason.failed: break
+            
+            // taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.discarded: break
+                        
+            // taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.saved: break
+            
             // taskResult = taskViewController.restorationData
-            
         }
         taskViewController.dismiss(animated: true, completion: nil)
     }

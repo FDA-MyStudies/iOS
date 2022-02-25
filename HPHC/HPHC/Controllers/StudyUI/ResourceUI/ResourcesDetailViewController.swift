@@ -118,8 +118,7 @@ class ResourcesDetailViewController: UIViewController {
         if !FileManager.default.fileExists(atPath: resourcesDownloadPath) {
             try? FileManager.default.createDirectory(atPath: resourcesDownloadPath, withIntermediateDirectories: true, attributes: nil)
         }
-        debugPrint("custom download path: \(resourcesDownloadPath)")
-        
+                
         let fileURL =  (self.resource?.file?.link)!
         
         let url = URL(string: fileURL)
@@ -208,8 +207,8 @@ extension ResourcesDetailViewController: MFMailComposeViewControllerDelegate{
                     let data = FileDownloadManager.decrytFile(pathURL: URL.init(string: fullPath))
                     
                     composeVC.addAttachmentData(data!, mimeType: "application/pdf", fileName: (resource?.file?.name)!)
-                } catch let error as NSError{
-                    print("error \(error)")
+                } catch _ as NSError{
+                    
                 }
             }
             

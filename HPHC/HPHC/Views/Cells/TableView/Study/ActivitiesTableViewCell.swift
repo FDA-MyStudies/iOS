@@ -229,25 +229,23 @@ class ActivitiesTableViewCell: UITableViewCell {
         var startDate = activity.startDate // ?.utcDate()
         var endDate   = activity.endDate // ?.utcDate()
         
-        // print("Krishna Startdate \(startDate) and enddate \(endDate)")
-        
         var difference = UserDefaults.standard.value(forKey: "offset") as? Int
-        // print("Krishna Startdate difference \(difference)")
+        
         if difference != nil {
             difference = difference! * -1
             startDate = startDate?.addingTimeInterval(TimeInterval(difference!))
             endDate = endDate?.addingTimeInterval(TimeInterval(difference!))
-            // print("Krishna Startdate if difference !=nil \(startDate) and enddate \(endDate)")
+            
         }
         
         let frequency = activity.frequencyType
         
         let startDateString = ActivitiesTableViewCell.oneTimeFormatter.string(from: startDate!)
-        // print("Krishna Startdate \(startDate) and startDateString \(startDateString)")
+        
         var endDateString = ""
         if endDate != nil {
             endDateString = ActivitiesTableViewCell.oneTimeFormatter.string(from: endDate!)
-            // print("Krishna Enddate \(endDate) and endDateString \(endDateString)")
+        
         }
         
         if activity.type == ActivityType.activeTask{
@@ -257,7 +255,7 @@ class ActivitiesTableViewCell: UITableViewCell {
             imageIcon?.image = UIImage.init(named: "surveyIcon")
         }
         labelStatusTopConstraint?.constant = 7
-        print("Krishna Startime \(startDateString) end time \(endDateString)")
+        
         switch frequency {
         case .One_Time: // Handle for One Time Frequency
             
@@ -360,7 +358,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en")
         formatter.dateFormat = "hh:mma, MMM dd YYYY"
-        // print("Krishna Start oneTimeFormatter formatter \(formatter) and locale \(formatter.locale)")
+        
         return formatter
     }()
     

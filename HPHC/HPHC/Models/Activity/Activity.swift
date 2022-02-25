@@ -282,7 +282,6 @@ class Activity {
             Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
         }
         self.activityLang = getLanguageLocale()
-        print("0 actlang -- \(getLanguageLocale()) activity langague stu \(Study.currentActivity?.activityLang ?? "")")
     }
     
     // MARK: Setter Methods

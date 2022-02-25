@@ -260,8 +260,7 @@ class ResourcesViewController: UIViewController{
                         startDateResult == .orderedSame) &&
                         (endDateResult == .orderedDescending ||
                             endDateResult == .orderedSame) {
-                    print("current")
-                    
+                                        
                     tableViewRowDetails?.append(resource)
                     
                     // compare for today
@@ -476,8 +475,7 @@ class ResourcesViewController: UIViewController{
         let consentPath = Study.currentStudy?.signedConsentFilePath
         
         let fullPath = path + "/" + consentPath!
-      print("fullPath---2\(fullPath)")
-        
+              
         guard let pdfData = FileDownloadManager.decrytFile(pathURL: URL(string: fullPath))
             else {return}
         
@@ -494,10 +492,10 @@ class ResourcesViewController: UIViewController{
             if foundRange != nil && (foundRange?.count)! > 0
             {
                 isPDF = true
-                print("pdf")
+                
             } else {
+                
                 isPDF = false
-                print("not pdf")
                 UserServices().getConsentPDFForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
             }
         }
@@ -541,9 +539,8 @@ class ResourcesViewController: UIViewController{
             DBHandler.saveConsentInformation(study: Study.currentStudy!)
             
             self.pushToResourceDetails()
-        } catch let error as NSError {
-            print("error writing to url \(String(describing: fullPath))")
-            print(error.localizedDescription)
+        } catch _ as NSError {
+            
         }
         
     }
@@ -837,7 +834,7 @@ public extension String {
                                                           documentAttributes: nil)
             return attributedString.string
         } catch {
-            print("Error: \(error)")
+            
             return ""
         }
     }

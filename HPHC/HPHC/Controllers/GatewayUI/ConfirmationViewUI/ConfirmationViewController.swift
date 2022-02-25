@@ -132,8 +132,7 @@ class ConfirmationViewController: UIViewController {
                 joinedStudies.removeFirst()
                 
                 let studiesIds = studiesToDisplay.map({$0.studyId!})
-                print("studies to display \(studiesIds)")
-                
+                                
                 self.checkWithdrawlConfigurationForNextSuty()
             }
         } else {
@@ -294,7 +293,6 @@ extension ConfirmationViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // print(indexPath.row)
     }
 }
 

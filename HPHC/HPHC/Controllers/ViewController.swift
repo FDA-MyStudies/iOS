@@ -46,9 +46,7 @@ class ViewController: UIViewController {
         // user.updateStudyStatus(studyId: "121", status:.yetToJoin)
         
        // user.bookmarkActivity(studyId: "121", activityId: "151")
-        
-       // print(user.getStudyStatus(studyId: "121").description)
-        
+                
         // not available
 //        let start = "2017-03-01"
 //        let end = "2017-03-05"
@@ -148,7 +146,6 @@ class ViewController: UIViewController {
             
             // use anyObj here
         } catch {
-            print("json error: \(error.localizedDescription)")
         }
     }
      
@@ -262,17 +259,14 @@ extension ViewController:ORKTaskViewControllerDelegate{
         
         switch reason {
             
-        case ORKTaskViewControllerFinishReason.completed:
-            print("completed")
+        case ORKTaskViewControllerFinishReason.completed: break
+            
             // taskResult = taskViewController.result
-        case ORKTaskViewControllerFinishReason.failed:
-            print("failed")
+        case ORKTaskViewControllerFinishReason.failed: break
             // taskResult = taskViewController.result
-        case ORKTaskViewControllerFinishReason.discarded:
-            print("discarded")
+        case ORKTaskViewControllerFinishReason.discarded: break
             // taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.saved:
-            print("saved")
             // taskResult = taskViewController.restorationData
             
             if taskViewController.task?.identifier == "ConsentTask"{

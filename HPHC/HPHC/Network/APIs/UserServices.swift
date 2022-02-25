@@ -745,7 +745,7 @@ class UserServices: NSObject {
 //            }
 //        }
 //        catch {
-//            print("json error: \(error.localizedDescription)")
+//
 //        }
         
         // Acutal Code : activities
@@ -981,7 +981,6 @@ extension UserServices: NMWebServiceDelegate{
             self.failedRequestServices.requestParams = self.requestParams
             self.failedRequestServices.method = self.method
             
-            print("Failed: Refresh token Expired")
             
             if User.currentUser.refreshToken == "" && requestName as String != RegistrationMethods.login.description {
                 // Unauthorized Access
@@ -1028,7 +1027,7 @@ extension UserServices: NMWebServiceDelegate{
                 
                 if error.code == NoNetworkErrorCode {
                     // save in database
-                    print("save in database")
+                    
                     DBHandler.saveRequestInformation(params: self.requestParams,
                                                      headers: self.headerParams,
                                                      method: requestName as String,

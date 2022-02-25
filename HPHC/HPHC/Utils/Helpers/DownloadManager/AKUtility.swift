@@ -101,7 +101,7 @@ open class AKUtility: NSObject {
                 try (url as NSURL).setResourceValue(NSNumber(value: true as Bool), forKey: URLResourceKey.isExcludedFromBackupKey)
                 return true
             } catch let error as NSError {
-                print("Error excluding \(url.lastPathComponent) from backup \(error)")
+                
                 return false
             }
 
@@ -118,7 +118,7 @@ open class AKUtility: NSObject {
             let freeSize = systemAttributes?[FileAttributeKey.systemFreeSize] as? NSNumber
             return freeSize?.int64Value
         } catch let error as NSError {
-            print("Error Obtaining System Memory Info: Domain = \(error.domain), Code = \(error.code)")
+            
             return nil
         }
     }

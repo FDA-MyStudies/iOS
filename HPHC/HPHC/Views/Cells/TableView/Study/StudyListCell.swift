@@ -162,7 +162,6 @@ class StudyListCell: UITableViewCell {
         
         let locale3 = getLanguageLocale()
         
-        print("studyId \(study.studyId ?? "") study name is \(study.name ?? "")study Language \(study.studyLanguage) and locale is \(locale3)")
         if (locale3.hasPrefix("es") &&
              study.studyLanguage.containsIgnoringCase("spanish")) ||
             (locale3.hasPrefix("en") && study.studyLanguage.containsIgnoringCase("english")) {

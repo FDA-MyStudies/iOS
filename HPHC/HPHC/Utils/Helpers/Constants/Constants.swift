@@ -252,7 +252,7 @@ func setLanguageLocale() {
     
     /*
     let locale3 = Locale.preferredLanguages.first ?? "en"
-    // debugPrint("onLaunch language \(locale3)")
+    
     if (locale3.hasPrefix("es")){
         ud1.set("es", forKey: kUserDeviceLanguage)
     } else {
@@ -261,29 +261,26 @@ func setLanguageLocale() {
     
     var languageLocale = Locale.preferredLanguages.first ?? "en"
     
+    /*
     for lang in Locale.preferredLanguages {
-        print("Krishna language as prioriy \(lang)")
+        
         if lang.hasPrefix("es") {
             
         }
-    }
-    // debugPrint("Krishna languageLocale in setLanguageLocale  \(languageLocale)")
-    // debugPrint("Krishna languageLocale in setLanguageLocale current language code  \(Locale.autoupdatingCurrent.languageCode)")
-    // debugPrint("Krishna preferredLanguage \(Locale.preferredLanguages.first) and other options size \(Locale.preferredLanguages.count)")
-    
+    } */
+        
     if !NetworkManager.isNetworkAvailable() {
         
         let defaultLanguage = ud.value(forKey: kUserDeviceLanguage)
-        print("Krishna languageLocale in setLanguageLocale  defaultLanguage outside condition userstandard locale is en \(languageLocale)")
+        
         if defaultLanguage != nil {
             
             if (defaultLanguage as! String).hasPrefix("es") {
                 languageLocale = "es"
-                print("Krishna languageLocale in setLanguageLocale if locale is es \(languageLocale)")
+        
             } else {
                 
                 languageLocale = "en"
-                print("Krishna languageLocale in setLanguageLocale else locale is en \(languageLocale)")
             }
         }
     } else {
@@ -297,8 +294,7 @@ func setLanguageLocale() {
         ud1.set("en", forKey: kUserDeviceLanguage)
     }
     ud1.synchronize()
-    // debugPrint("Krishna languageLocale in setLanguageLocale user defined language is \(ud1.value(forKey: kUserDeviceLanguage))")
-    
+        
     // set language local for storyboards
     // AppDelegate.selectedLocale()
 }
@@ -307,7 +303,7 @@ func setLanguageLocale() {
 func getLanguageLocale() -> String {
     
     let defaultLanguage = ud.value(forKey: kUserDeviceLanguage)
-    // debugPrint("Krishna defaultLanguage in getLanguageLocale  \(defaultLanguage)")
+    
     if defaultLanguage != nil {
         if (defaultLanguage as! String).hasPrefix("es") {
             return "es"
@@ -317,7 +313,7 @@ func getLanguageLocale() -> String {
     } else {
         
         let languageLocale = Locale.preferredLanguages.first ?? "en"
-        print("Krishna defaultLanguage in getLanguageLocale else condition  \(languageLocale)")
+        
         if languageLocale.hasPrefix("es") {
             return "es"
         } else {

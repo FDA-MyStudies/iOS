@@ -86,7 +86,7 @@ class NetworkManager {
     init() {
     
         reachability =  try? Reachability()
-        // debugPrint("network available init() and reachability \(reachability)")
+        
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)),
                                                name: Notification.Name.reachabilityChanged, object: nil)
         try? reachability?.startNotifier()
@@ -100,8 +100,7 @@ class NetworkManager {
     @objc func reachabilityChanged(_ notification: Notification) {
             
             let oldLocale = getLanguageLocale()
-            print("Krishna oldLocale in rechabilityChanged \(oldLocale)")
-          
+                      
             if self.reachability!.connection == .wifi
                 || self.reachability!.connection == .cellular {
                 networkAvailability = true
@@ -117,7 +116,6 @@ class NetworkManager {
                 setLanguageLocale()
             }
             
-            print("Krishna reachabilityChanged networkAvailability set to \(networkAvailability) \n\n")
             SyncUpdate.currentSyncUpdate.updateData(isReachable: networkAvailability)
         }
 
@@ -127,9 +125,7 @@ class NetworkManager {
             
             // if let name = UIApplication.shared.topMostViewController()?.storyboard?.value(forKey: "name") {
             if let name = UIApplication.shared.topMostViewController()?.visibViewController?.storyboard?.value(forKey: "name") {
-                
-                print("storyboard in view is \(name)")
-                
+                                
                 // Bundle(path: Bundle.main.path(forResource: "es", ofType: "lproj") ?? "en")
                 let sb = UIStoryboard(name: name as! String, bundle:nil)
                 let vc = sb.instantiateInitialViewController()

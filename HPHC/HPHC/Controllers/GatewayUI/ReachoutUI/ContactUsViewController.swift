@@ -124,8 +124,7 @@ class ContactUsViewController: UIViewController{
      
      */
     @IBAction func buttonSubmitAciton(_ sender: UIButton){
-        print("\(ContactUsFeilds.firstName)")
-        
+                
         if ContactUsFeilds.firstName.isEmpty &&
             ContactUsFeilds.email.isEmpty &&
             ContactUsFeilds.subject.isEmpty &&
@@ -213,7 +212,7 @@ extension ContactUsViewController: UITextViewDelegate {
         tableView?.setContentOffset(currentOffset!, animated: false)
     }
     func textViewDidEndEditing(_ textView: UITextView) {
-        print("textViewDidEndEditing")
+        
         if textView.tag == 101 && textView.text.count == 0 {
             textView.text = kMessageTextViewPlaceHolder
             textView.textColor = UIColor.lightGray
@@ -223,8 +222,7 @@ extension ContactUsViewController: UITextViewDelegate {
         }
     }
     func textViewDidBeginEditing(_ textView: UITextView) {
-         print("textViewDidBeginEditing")
-        
+                 
         if textView.tag == 100 {
             textView.text = ""
             textView.textColor = UIColor.black
@@ -244,42 +242,38 @@ extension ContactUsViewController: UITextFieldDelegate{
         
         let tag: ContactTextFieldTags = ContactTextFieldTags(rawValue: textField.tag)!
         let finalString = textField.text! + string
-      
+        
         if tag != .Email{
-        if var text = textField.text, range.location == text.count, string == " " {
-            print("Krishna Editing text replace string  \(text)only text")
+            if var text = textField.text, range.location == text.count, string == " " {
+                
                 let noBreakSpace: Character = " "
                 text.append(noBreakSpace)
                 textField.text = text
-            
-            print("Krishna Editing text replace string  \(textField.text!)textField.text and break is \(noBreakSpace) is here")
+                
                 return false
             }
         }
         
         if string == " " {
-            print("Krishna Editing text replace string is empty \(textField.text!) return false ")
+            
             return false
         }
         
         if  tag == .Email {
             if string == " " || finalString.count > 255{
-                print("Krishna Editing text replace tag is email and string is empty \(textField.text!) return false ")
+            
                 return false
-               
+                
             } else {
-                print("Krishna Editing text replace tag is email and string is not empty \(textField.text!) return false ")
+            
                 return true
             }
         }
         
-        print("Krishna Editing text last return true \(textField.text!) ")
-          
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print(textField.text!)
         
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
        
@@ -294,11 +288,10 @@ extension ContactUsViewController: UITextFieldDelegate{
             ContactUsFeilds.firstName = textField.text!
                         
         case .Subject:
-            print("Krishna TextFieldDidEndEditing \(textField.text!)")
+            
             ContactUsFeilds.subject = textField.text!
                         
 //        default:
-//            print("No Matching data Found")
 //            break
         }
     }

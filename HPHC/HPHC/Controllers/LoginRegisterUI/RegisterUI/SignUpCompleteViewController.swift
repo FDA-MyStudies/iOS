@@ -66,7 +66,7 @@ class SignUpCompleteViewController: UIViewController{
                                                                                                                                 
         }) {
             // Yes
-            print("hello")
+            
             settings?.touchId = true
             settings?.passcode = true
             User.currentUser.settings = settings

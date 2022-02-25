@@ -50,8 +50,6 @@ class PageViewController: UIPageViewController{
             scrollToViewController(viewController: initialViewController)
         }
         
-        print("\(orderedViewControllers)")
-        
         pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageCount: orderedViewControllers.count)
         
         let scrollView = (self.view.subviews.filter { $0 is UIScrollView }.first as? UIScrollView)!
@@ -223,10 +221,10 @@ class PageViewController: UIPageViewController{
 // MARK: - UIPageViewController DataSource
 extension PageViewController: UIPageViewControllerDataSource {
     
-    func pageViewController(_ pageViewController: UIPageViewController,
-                            viewControllerAfter viewController: UIViewController) -> UIViewController? {
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        // print("pageViewController viewControllerAfter")
         guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else {
             return nil
         }
@@ -241,10 +239,10 @@ extension PageViewController: UIPageViewControllerDataSource {
         return orderedViewControllers[nextIndex]
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController,
-                            viewControllerBefore viewController: UIViewController) -> UIViewController? {
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        // print("pageViewController viewControllerBefore")
         guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else {
             return nil
         }
@@ -265,12 +263,9 @@ extension PageViewController: UIPageViewControllerDelegate {
                             didFinishAnimating finished: Bool,
                             previousViewControllers: [UIViewController],
                             transitionCompleted completed: Bool) {
-        
-      //  print("transition \(finished) \(previousViewControllers)")
 
         if completed {
-            // print("transitionCompleted \(previousViewControllers)")
-            
+                        
             self.notifyTutorialDelegateOfNewIndex(prevViewController: nil)
         } else {
             self.notifyTutorialDelegateOfNewIndex(prevViewController: previousViewControllers.last!)
@@ -283,12 +278,11 @@ extension PageViewController: UIPageViewControllerDelegate {
 extension PageViewController: UIScrollViewDelegate{
    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-       print(currentIndex)
-        
+               
         pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageIndex: currentIndex)
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        print(currentIndex)
+        
         // pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageIndex: currentIndex)
     }
 }

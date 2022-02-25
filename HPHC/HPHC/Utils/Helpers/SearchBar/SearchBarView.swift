@@ -101,8 +101,7 @@ class SearchBarView: UIView {
 extension SearchBarView: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print(textField.tag)
-        
+               
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -124,7 +123,7 @@ extension SearchBarView: UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print(textField.text!)
+        
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         textField.resignFirstResponder()

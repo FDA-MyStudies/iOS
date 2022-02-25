@@ -121,7 +121,6 @@ class WCPServices: NSObject {
     }
     func getStudyList(_ delegate: NMWebServiceDelegate){
         
-        print("StudyList Start \(Date())")
         self.delegate = delegate
         
         let method = WCPMethods.studyList.method
@@ -249,8 +248,7 @@ class WCPServices: NSObject {
     
     // MARK: - Parsers
     func handleStudyBasicInfo(response: Dictionary<String, Any>){
-        print("handleStudyBasicInfo")
-        
+                
         let studies = response[kStudies] as! Array<Dictionary<String, Any>>
         var listOfStudies: Array<Study> = []
         for study in studies{
@@ -267,7 +265,6 @@ class WCPServices: NSObject {
     }
     func handleStudyList(response: Dictionary<String, Any>){
         
-        print("StudyList Parsing Start \(Date().timeIntervalSince1970)")
         Logger.sharedInstance.info("Studies Parsing Start")
         
         let studies = response[kStudies] as! Array<Dictionary<String, Any>>
@@ -325,7 +322,7 @@ class WCPServices: NSObject {
 //            resources = res?[kResources] as! Array<Dictionary<String, Any>>
 //        }
 //        catch {
-//            print("json error: \(error.localizedDescription)")
+//
 //        }
         
         // Actual
@@ -467,7 +464,7 @@ class WCPServices: NSObject {
 //            activities = res?[kActivites] as! Array<Dictionary<String, Any>>
 //        }
 //        catch {
-//            print("json error: \(error.localizedDescription)")
+//
 //        }
         
         // Actual
@@ -507,10 +504,10 @@ class WCPServices: NSObject {
 //            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String, Any>
 //
 //            activities = res?[kActivity] as! [String: Any]
-//            print("1---\(activities)")
+//
 //        }
 //        catch {
-//            print("json error: \(error.localizedDescription)")
+//
 //        }
 //
 //        Study.currentActivity?.setActivityMetaData(activityDict: activities)
@@ -551,7 +548,7 @@ class WCPServices: NSObject {
     func handleStudyUpdates(response: Dictionary<String, Any>){
         
         if Utilities.isValidObject(someObject: response as AnyObject?){
-          print("response---\(response)")
+          
             _ = StudyUpdates(detail: response)
         }
     }
@@ -575,7 +572,6 @@ extension WCPServices:NMWebServiceDelegate{
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
        
-        print("StudyList Finished \(Date())")
         Logger.sharedInstance.info("WCP Received Data: \(requestName)")
         let methodName = WCPMethods(rawValue: requestName as String)!
         

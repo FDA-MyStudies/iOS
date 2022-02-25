@@ -241,7 +241,7 @@ class LocalNotification: NSObject {
     class func scheduleNotificationOn(date: Date, message: String, userInfo: Dictionary<String, Any>, id:String?) {
 
         if date > Date() {
-            print("NotificationMessage\(message) ** date \(date.description(with: Locale.current))" )
+            
             let content = UNMutableNotificationContent()
             content.body = message
             content.userInfo = userInfo
@@ -249,7 +249,7 @@ class LocalNotification: NSObject {
             content.badge = 1
             
             let timeInterval = date.timeIntervalSinceNow
-            print("Time \(timeInterval)")
+            
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
             let id = id ?? Utilities.randomString(length: 10)
             let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
@@ -391,8 +391,7 @@ class LocalNotification: NSObject {
     class func scheduledNotificaiton() {
         let center = UNUserNotificationCenter.current()
         center.getPendingNotificationRequests(completionHandler: { requests in
-            print(requests)
-            
+                        
         })
     }
     

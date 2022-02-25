@@ -93,8 +93,8 @@ extension ReachoutOptionsViewController:  UITableViewDelegate {
             self.performSegue(withIdentifier: "contactusSegue", sender: self)
         case 0:
             self.performSegue(withIdentifier: "feedbackSegue", sender: self)
-        default:
-            debugPrint("default")
+        default: break
+            
         }
     }
 }

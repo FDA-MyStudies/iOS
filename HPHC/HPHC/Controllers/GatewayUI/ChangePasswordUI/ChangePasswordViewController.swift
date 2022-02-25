@@ -230,8 +230,7 @@ extension ChangePasswordViewController:  UITableViewDelegate {
 extension ChangePasswordViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print(textField.tag)
-        
+                
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -262,7 +261,7 @@ extension ChangePasswordViewController: UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print(textField.text!)
+        
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         let tag = CPTextFeildTags(rawValue: textField.tag)!

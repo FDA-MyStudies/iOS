@@ -232,7 +232,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         }
         
         let requestUrl = URL(string: requestString as String)!
-      print("Request URL:  \(requestUrl)")
+      
          var request = URLRequest.init(url: requestUrl,
                                        cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData,
                                        timeoutInterval: self.connectionTimeoutInterval)
@@ -240,7 +240,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         if httpHeaders != nil && (httpHeaders?.count)! > 0{
             request.allHTTPHeaderFields = httpHeaders as? [String : String]
         }
-        // debugPrint("Header \(httpHeaders) params \(params)")
+        
         self.fireRequest(request, requestName: requestName)
     }
     
@@ -275,11 +275,11 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             if httpHeaders != nil {
                 request.allHTTPHeaderFields = httpHeaders! as? [String : String]
             }
-            // debugPrint("Header \(httpHeaders) params \(params)")
+            
             self.fireRequest(request, requestName: requestName)
             
         } catch {
-            // debugPrint("Serilization error")
+            
         }
     }
     
@@ -329,7 +329,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             }
         } else {
           
-          // debugPrint("response2---\(response)")
+          
             let status = NetworkConstants.checkResponseHeaders(response!)
             let statusCode = status.0
             var error1 : NSError?
@@ -339,10 +339,10 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                 do{
                     // NSJSONReadingOptions.MutableContainers
                     responseDict = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary
-                    print("response1---\(responseDict)---\(requestName)---\(error)")
+                    // print("response1---\(responseDict)---\(requestName)---\(error)")
                     
                 } catch {
-                    print("Serilization error")
+                    // print("Serilization error")
                 }
                 
                 if (delegate?.finishedRequest) != nil {
@@ -369,10 +369,10 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                     do {
                         
                       responseDict = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? [String:Any]
-                      print("response1---\(responseDict)---\(requestName)---\(error)")
+                      // print("response1---\(responseDict)---\(requestName)---\(error)")
                         
                     } catch {
-                        print("Serilization error")
+                        // print("Serilization error")
                     }
                   
                   error1 = self.configuration.parseError(errorResponse: responseDict ?? [:])

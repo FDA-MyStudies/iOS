@@ -110,8 +110,8 @@ class HomeViewController: UIViewController{
             // assgin to Gateway
             Gateway.instance.overview = overview
             
-        } catch let error{
-            print("json error: \(error.localizedDescription)")
+        } catch _ {
+            
         }
     }
     

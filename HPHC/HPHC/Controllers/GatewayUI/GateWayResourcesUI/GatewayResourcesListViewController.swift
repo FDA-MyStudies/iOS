@@ -28,7 +28,7 @@ class GatewayResourcesListViewController: UIViewController {
         
         var plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil)
         let localeDefault = getLanguageLocale()
-        print("Krishna gatewaystring resource list \(localeDefault)")
+        
         if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
           plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
         } else if localeDefault.hasPrefix("en"){
@@ -52,7 +52,7 @@ class GatewayResourcesListViewController: UIViewController {
                 
             self.tableView?.reloadData()
         } catch {
-            print("json error: \(error.localizedDescription)")
+            
         }
 
     }

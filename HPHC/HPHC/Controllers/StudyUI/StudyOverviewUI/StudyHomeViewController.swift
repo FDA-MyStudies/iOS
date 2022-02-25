@@ -324,7 +324,7 @@ class StudyHomeViewController: UIViewController {
             Gateway.instance.overview = overview
 
         } catch {
-            print("json error: \(error.localizedDescription)")
+            
         }
     }
 
@@ -344,7 +344,7 @@ class StudyHomeViewController: UIViewController {
             let index = consentTask?.index(of: ORKStep(identifier: kLARConsentStep)) ?? 0
             let val : Int = Int(index) + 2
             let LARNextStep = consentTask?.steps[val].identifier ?? ""
-            print("LARNextStep---\(LARNextStep)")
+            
             // LARIdentifier1 = LARNextStep
         }
         for stepDict in (consentTask?.steps)! {
@@ -445,7 +445,7 @@ class StudyHomeViewController: UIViewController {
                     }
                     
                     if choicePredicate.count > 0, (destination?.count)! > 0 {
-                        print("choices in eligibility \(choicePredicate) ")
+                        
                         predicateRule = ORKPredicateStepNavigationRule(resultPredicates: choicePredicate,
                                                                        destinationStepIdentifiers: destination!,
                                                                        defaultStepIdentifier: defaultStepIdentifier,
@@ -802,12 +802,12 @@ class StudyHomeViewController: UIViewController {
 
 extension StudyHomeViewController: ComprehensionFailureDelegate {
     func didTapOnRetry() {
-      print("createEligibilityConsentTask---")
+      
         createEligibilityConsentTask()
     }
 
     func didTapOnCancel() {
-      print("didTapOnCancel---")
+      
         consentRestorationData = nil
     }
 }
@@ -1006,17 +1006,17 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
         
         // var taskResult: Any?
         switch reason {
-        case ORKTaskViewControllerFinishReason.completed:
-            print("completed")
+        case ORKTaskViewControllerFinishReason.completed: break
+            
             // taskResult = taskViewController.result
-        case ORKTaskViewControllerFinishReason.failed:
-            print("failed1---")
+        case ORKTaskViewControllerFinishReason.failed: break
+            
             // taskResult = taskViewController.result
-        case ORKTaskViewControllerFinishReason.discarded:
-            print("discarded")
+        case ORKTaskViewControllerFinishReason.discarded: break
+            
             // taskResult = taskViewController.result
-        case ORKTaskViewControllerFinishReason.saved:
-            print("saved")
+        case ORKTaskViewControllerFinishReason.saved: break
+            
             // taskResult = taskViewController.restorationData
         }
 
@@ -1100,7 +1100,7 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
                     messageVal = messageVal?.replacingOccurrences(of: " ", with: "")
                     
                     messageVal = NSLocalizedStrings("Study with StudyId", comment: "") + " \(messageVal ?? "") " + NSLocalizedStrings("does not exist", comment: "")
-                      print("messageVal---\(messageVal ?? "")")
+                      
                   }
                   
                     UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString,
@@ -1189,24 +1189,23 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
     }
 
     // MARK: - StepViewController Delegate
-
+    
     public func stepViewController(_: ORKStepViewController, didFinishWith _: ORKStepViewControllerNavigationDirection) {
-      print("1---")
-  }
-
+        
+    }
+    
     public func stepViewControllerResultDidChange(_: ORKStepViewController) {
-      print("2---")
-  }
-
+        
+    }
+    
     public func stepViewControllerDidFail(_: ORKStepViewController, withError _: Error?) {
-      
-      print("3---")
-  }
+        
+    }
 
     func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
         
         // CurrentStep is TokenStep
-print("6---\(step.identifier)")
+
         if step.identifier == kEligibilityTokenStep {
             let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
 
@@ -1446,11 +1445,10 @@ print("6---\(step.identifier)")
   func taskViewController(_ taskViewController: ORKTaskViewController,
                           stepViewControllerWillDisappear stepViewController: ORKStepViewController,
                           navigationDirection direction: ORKStepViewControllerNavigationDirection) {
-    print("5---")
-    
+        
 //    let step = stepViewController.step!
 //    if step.identifier == kLARConsentStep {
-//        print("5---\(step.identifier)")
+//        
 //        taskViewController.delegate?.taskViewController?(taskViewController, shouldPresent: ORKStep(identifier: "ConsentSharingStep")) // sharing MobileTesting
 //    }
   }

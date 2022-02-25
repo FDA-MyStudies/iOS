@@ -137,7 +137,7 @@ class StudyDashboardViewController: UIViewController{
     func getDataKeysForCurrentStudy() {
         
         DBHandler.getDataSourceKeyForActivity(studyId: Study.currentStudy?.studyId ?? "") { (activityKeys) in
-            print(activityKeys)
+            
             if activityKeys.count > 0 {
                 self.dataSourceKeysForLabkey = activityKeys
                 self.sendRequestToGetDashboardResponse()
@@ -443,22 +443,22 @@ extension StudyDashboardViewController: ORKTaskViewControllerDelegate{
         switch reason {
             
         case ORKTaskViewControllerFinishReason.completed:
-            print("completed")
+            
             // taskResult = taskViewController.result
             
             ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
             ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult: taskViewController.result )
             
-        case ORKTaskViewControllerFinishReason.failed:
-            print("failed")
+        case ORKTaskViewControllerFinishReason.failed: break
+            
             // taskResult = taskViewController.result
             
-        case ORKTaskViewControllerFinishReason.discarded:
-            print("discarded")
+        case ORKTaskViewControllerFinishReason.discarded: break
+            
             // taskResult = taskViewController.result
             
-        case ORKTaskViewControllerFinishReason.saved:
-            print("saved")
+        case ORKTaskViewControllerFinishReason.saved: break
+            
             // taskResult = taskViewController.restorationData
         }
         taskViewController.dismiss(animated: true, completion: nil)

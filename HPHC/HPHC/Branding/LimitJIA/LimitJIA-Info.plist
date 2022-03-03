@@ -109,6 +109,6 @@
 	<key>WCP_URL</key>
 	<string>$(WCP_URL)</string>
 	<key>WebsiteLink</key>
-	<string>www.fda.gov</string>
+	<string>www.carragroup.org</string>
 </dict>
 </plist>

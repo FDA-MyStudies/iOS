@@ -450,7 +450,7 @@ class DBHandler: NSObject {
     class func loadStudyOverview(studyId: String, completionHandler: @escaping (Overview?) -> ()){
         
         let realm = DBHandler.getRealmObject()!
-        let studies =  realm.objects(DBOverviewSection.self).filter("studyId == %@", studyId)
+        let studies =  realm.objects(DBOverviewSection.self).filter("studyId == %@", studyId).sorted(byKeyPath: "sectionId", ascending: true)
         let study =  realm.objects(DBStudy.self).filter("studyId == %@", studyId).last
        
         if studies.count > 0 {

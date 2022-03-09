@@ -67,8 +67,9 @@ class ResourcesDetailViewController: UIViewController {
                         
                         if self.resource?.file?.localPath == "BundlePath" {
                             
-                            let path = Bundle.main.path(forResource: self.resource?.file?.link!, ofType: ".pdf")
-                            self.loadWebViewWithPath(path: path!)
+                            if let path = Bundle.main.path(forResource: self.resource?.file?.link!, ofType: ".pdf") {
+                                self.loadWebViewWithPath(path: path)
+                            }
                         } else {
                             let path = resourcesDownloadPath + "/" + (self.resource?.file?.localPath)!
                             let pdfData = FileDownloadManager.decrytFile(pathURL: URL(string: path))
@@ -192,9 +193,10 @@ extension ResourcesDetailViewController: MFMailComposeViewControllerDelegate{
             if self.resource?.file?.localPath == "BundlePath"{
                 
                 do {
-                    let file = Bundle.main.url(forResource: self.resource?.file?.link!, withExtension: "pdf")
-                    let data = try Data(contentsOf: file!)
-                    composeVC.addAttachmentData(data, mimeType: "application/pdf", fileName: (resource?.file?.name)!)
+                    if let file = Bundle.main.url(forResource: self.resource?.file?.link!, withExtension: "pdf") {
+                        let data = try Data(contentsOf: file)
+                        composeVC.addAttachmentData(data, mimeType: "application/pdf", fileName: (resource?.file?.name)!)
+                    }
                 } catch {
                     
                 }

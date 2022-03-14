@@ -89,7 +89,7 @@ class ActivityStepResult {
         self.startTime = Date.init(timeIntervalSinceNow: 0)
         self.endTime = Date.init(timeIntervalSinceNow: 0)
         self.skipped = false
-        self.value = 0
+        // self.value = 0
         self.questionStep = nil
         self.subTypeForForm = ""
         
@@ -537,7 +537,8 @@ class ActivityStepResult {
                         self.value = (stepTypeResult.scaleAnswer as? Double)!
                     }
                 } else {
-                    self.value = 0.0
+                    // self.value = 0.0
+                    self.skipped = true  // Result is not avaiable because the Step was skippable and skipped.
                 }
             } else {
                 let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
@@ -547,7 +548,8 @@ class ActivityStepResult {
                         self.value = stepTypeResult.choiceAnswers?.first
                         
                     } else {
-                        self.value = ""
+                        // self.value = ""
+                        self.skipped = true  // Choice count should be greater than 0 unless user skipped the Step.
                     }
                 } else {
                     self.value = ""
@@ -596,7 +598,8 @@ class ActivityStepResult {
                         self.value = ""
                         
                     } else {
-                        self.value = []
+                        // self.value = []
+                        self.skipped = true
                     }
                 }
             } else {
@@ -604,7 +607,8 @@ class ActivityStepResult {
                     self.value = ""
                     
                 } else {
-                    self.value = []
+                    // self.value = []
+                    self.skipped = true
                 }
             }
         case ORKQuestionType.multipleChoice.rawValue: // textchoice + imageChoice
@@ -629,7 +633,8 @@ class ActivityStepResult {
                 self.value = resultArray
                 
             } else {
-                self.value = []
+                // self.value = []
+                self.skipped = true
             }
             
             /*
@@ -658,7 +663,8 @@ class ActivityStepResult {
                 self.value =  stepTypeResult.booleanAnswer! == 1 ? true : false
                 
             } else {
-                self.value = false
+                // self.value = false
+                self.skipped = true
             }
             
         case ORKQuestionType.integer.rawValue: // numeric type
@@ -668,7 +674,8 @@ class ActivityStepResult {
                 self.value =  Double(truncating:stepTypeResult.numericAnswer!)
                 
             } else {
-                self.value = 0.0
+                // self.value = 0.0
+                self.skipped = true
             }
             
         case ORKQuestionType.decimal.rawValue: // numeric type
@@ -678,7 +685,8 @@ class ActivityStepResult {
                 self.value = Double(truncating:stepTypeResult.numericAnswer!)
                 
             } else {
-                self.value = 0.0
+                // self.value = 0.0
+                self.skipped = true
             }
             
         case  ORKQuestionType.timeOfDay.rawValue:
@@ -693,7 +701,8 @@ class ActivityStepResult {
                 self.value = (( hour! < 10 ? ("0" + "\(hour!)") : "\(hour!)") + ":" + ( minute! < 10 ? ("0" + "\(minute!)") : "\(minute!)") + ":" + ( seconds! < 10 ? ("0" + "\(seconds!)") : "\(seconds!)"))
                 
             } else {
-                self.value = "00:00:00"
+                // self.value = "00:00:00"
+                self.skipped = true
             }
             
         case ORKQuestionType.date.rawValue:
@@ -702,7 +711,8 @@ class ActivityStepResult {
             if Utilities.isValidValue(someObject: stepTypeResult.dateAnswer as AnyObject?) {
                 self.value =  Utilities.getStringFromDate(date: stepTypeResult.dateAnswer!)
             } else {
-                self.value = "0000-00-00'T'00:00:00"
+                // self.value = "0000-00-00'T'00:00:00"
+                self.skipped = true
             }
         case ORKQuestionType.dateAndTime.rawValue:
             let stepTypeResult = (questionstepResult as? ORKDateQuestionResult)!
@@ -711,7 +721,8 @@ class ActivityStepResult {
                 self.value =  Utilities.getStringFromDate(date: stepTypeResult.dateAnswer! )
                 
             } else {
-                self.value = "0000-00-00'T'00:00:00"
+                // self.value = "0000-00-00'T'00:00:00"
+                self.skipped = true
             }
         case ORKQuestionType.text.rawValue: // text + email
             
@@ -721,7 +732,8 @@ class ActivityStepResult {
                 self.value = (stepTypeResult.answer as? String)!
                 
             } else {
-                self.value = ""
+                // self.value = ""
+                self.skipped = true
             }
             
         case ORKQuestionType.timeInterval.rawValue:
@@ -732,7 +744,8 @@ class ActivityStepResult {
                 self.value = Double(truncating:stepTypeResult.intervalAnswer!)/3600
                 
             } else {
-                self.value = 0.0
+                // self.value = 0.0
+                self.skipped = true
             }
             
         case ORKQuestionType.height.rawValue:
@@ -742,12 +755,13 @@ class ActivityStepResult {
                 self.value = Double(truncating:stepTypeResult.numericAnswer!)
                 
             } else {
-                self.value = 0.0
+                // self.value = 0.0
+                self.skipped = true
             }
             
         case ORKQuestionType.location.rawValue:
             let stepTypeResult = (questionstepResult as? ORKLocationQuestionResult)!
-            
+            /*
             if stepTypeResult.locationAnswer != nil && CLLocationCoordinate2DIsValid((stepTypeResult.locationAnswer?.coordinate)!) {
                 
                 let lat = stepTypeResult.locationAnswer?.coordinate.latitude
@@ -757,6 +771,17 @@ class ActivityStepResult {
                 
             } else {
                 self.value = "0.0,0.0"
+            }*/
+            if let locationAnswer = stepTypeResult.locationAnswer {
+                if CLLocationCoordinate2DIsValid(locationAnswer.coordinate) {
+                    let lat = locationAnswer.coordinate.latitude
+                    let long = locationAnswer.coordinate.longitude
+                    self.value = "\(lat)" + "," + "\(long)"
+                } else {
+                    self.value = "0.0,0.0"
+                }
+            } else {
+                self.skipped = true
             }
         default:break
         }

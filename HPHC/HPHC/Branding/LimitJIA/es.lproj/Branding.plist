@@ -15,19 +15,19 @@
 	<key>LeaveStudyConfirmationText</key>
 	<string>If you tap “Proceed” you will no longer be able to use this app for eye doctor appointments and medication tracking</string>
 	<key>WebsiteLink</key>
-	<string>www.fda.gov</string>
+	<string>www.carragroup.org</string>
 	<key>WebsiteButtonTitle</key>
-	<string>www.fda.gov</string>
+	<string>www.carragroup.org</string>
 	<key>TermsAndConditionURL</key>
-	<string>https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/</string>
+	<string>https://carragroup.org/privacy-policy</string>
 	<key>PrivacyPolicyURL</key>
-	<string>https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/#privacy</string>
+	<string>https://carragroup.org/privacy-policy</string>
 	<key>ValidatedTitle</key>
 	<string>Estás dentro</string>
 	<key>AllowFeedback</key>
-	<true/>
+	<false/>
 	<key>NavigationTitleName</key>
-	<string>FDA MyStudies</string>
+	<string>CARRA Registry</string>
 	<key>PoweredByTitleName</key>
 	<string>Desarrollado por FDA MyStudies</string>
 </dict>

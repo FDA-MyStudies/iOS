@@ -55,6 +55,7 @@
 "Use Passcode to access app"="Use Passcode to access app";
 "Save"="Save";
 "Change Passcode"="Change Passcode";
+"Change Password"="Change Password";
 "Edit"="Edit";
 
 "LEAVE US YOUR FEEDBACK"="LEAVE US YOUR FEEDBACK";
@@ -175,7 +176,9 @@
 "Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Continue to proceed to the Consent section."="Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Continue to proceed to the Consent section.";
 
 "You are Eligible!"="You are Eligible!";
-
+"Enter enrollment token"="Enter enrollment token";
+"Eligibility"="Eligibility";
+"Submit"="Submit";
 
 "Your token has been validated. You are eligible to join the study. Please tap Get Started to proceed to the consent section."="Your token has been validated. You are eligible to join the study. Please tap Get Started to proceed to the consent section.";
 
@@ -380,6 +383,10 @@
 " missed"=" missed";
 "Run(s):"="Run(s):";
 "more"="more";
+"every"="every";
+"to"="to";
+"month"="month";
+"on"="on";
 
 "Tap Done to submit responses. Responses cannot be modified after submission."="Tap Done to submit responses. Responses cannot be modified after submission.";
 
@@ -568,7 +575,8 @@
 
 "AA0-le-tSn.text.value"="Watch Video";
 "AW7-ks-icb.text.value"="About the Study";
-"MKo-wh-p4O.normalTitle.value"="Join Study";
+//"MKo-wh-p4O.normalTitle.value"="Join Study";
+"MKo-wh-p4O.normalTitle.value"="Get Started!";
 "5NQ-r5-mSz.normalTitle.value"="Join Study";
 "gz3-j6-s6W.normalTitle.value"="View Consent";
 "bc7-W1-fmy.normalTitle.value"="Visit Website";

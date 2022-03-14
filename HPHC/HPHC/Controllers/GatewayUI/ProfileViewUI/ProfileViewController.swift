@@ -46,6 +46,7 @@ let kUseFaceIdOrPasscode = NSLocalizedStrings("Use Passcode or Face ID to access
 let kUsePasscodeToAccessApp = NSLocalizedStrings("Use Passcode to access app", comment: "")
 let kSaveText = NSLocalizedStrings("Save", comment: "")
 let kChangePasscodeText = NSLocalizedStrings("Change Passcode", comment: "")
+let kChangePasswordText = NSLocalizedStrings("Change Password", comment: "")
 let kEditText = NSLocalizedStrings("Edit", comment: "")
 
 let ktouchid = "touchIdEnabled"
@@ -90,8 +91,9 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         // Load plist info
         var plistPath = Bundle.main.path(forResource: "Profile", ofType: ".plist", inDirectory: nil)
         let localeDefault = getLanguageLocale()
-        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
-          plistPath = Bundle.main.path(forResource: "Profile", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        plistPath = Bundle.main.path(forResource: "Profile", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        if localeDefault.hasPrefix("es"){
+            plistPath = Bundle.main.path(forResource: "Profile", ofType: ".plist", inDirectory: nil, forLocalization: "es")
         }
         
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
@@ -654,7 +656,8 @@ extension ProfileViewController: UITableViewDataSource {
                 cell.buttonChangePassword?.isUserInteractionEnabled =  true
                 cell.buttonChangePassword?.isHidden =  false
                 cell.buttonChangePassword?.addTarget(self, action:#selector(pushToChangePassword), for: .touchUpInside)
-                 cell.buttonChangePassword?.setTitleColor(kUIColorForSubmitButtonBackground, for: .normal)
+                cell.buttonChangePassword?.setTitleColor(kUIColorForSubmitButtonBackground, for: .normal)
+                cell.buttonChangePassword?.setTitle(kChangePasswordText, for: .normal)
                 cell.textFieldValue?.isHidden = true
                 cell.isUserInteractionEnabled = true
                 

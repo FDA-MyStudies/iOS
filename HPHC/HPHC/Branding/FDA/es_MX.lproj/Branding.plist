@@ -3,15 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>JoinStudyButtonTitle</key>
-	<string>Join Study</string>
+	<string>Comenzar</string>
 	<key>ViewConsentButtonTitle</key>
-	<string>View Consent</string>
+	<string>Ver consentimiento</string>
 	<key>VisitWebsiteButtonTitle</key>
-	<string>Visit Website</string>
+	<string>Visita el sito web</string>
 	<key>ConsentPDF</key>
-	<string>PDF de consentimiento</string>
+	<string>Consentimiento PDF</string>
 	<key>LeaveStudy</key>
-	<string>Abandonar el estudio</string>
+	<string>Deja el estudio</string>
 	<key>LeaveStudyConfirmationText</key>
 	<string>If you tap “Proceed” you will no longer be able to use this app for eye doctor appointments and medication tracking</string>
 	<key>WebsiteLink</key>
@@ -23,12 +23,12 @@
 	<key>PrivacyPolicyURL</key>
 	<string>https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/#privacy</string>
 	<key>ValidatedTitle</key>
-	<string>Validated!</string>
+	<string>Estás dentro</string>
 	<key>AllowFeedback</key>
 	<true/>
 	<key>NavigationTitleName</key>
 	<string>FDA MyStudies</string>
 	<key>PoweredByTitleName</key>
-	<string>Powered by FDA MyStudies</string>
+	<string>Desarrollado por FDA MyStudies</string>
 </dict>
 </plist>

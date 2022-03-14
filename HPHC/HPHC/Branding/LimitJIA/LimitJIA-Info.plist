@@ -4,6 +4,8 @@
 <dict>
 	<key>ApplicationID</key>
 	<string>$(APPLICATION_ID)</string>
+	<key>CFBundleAllowMixedLocalizations</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

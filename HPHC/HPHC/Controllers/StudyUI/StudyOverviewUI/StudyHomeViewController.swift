@@ -175,11 +175,11 @@ class StudyHomeViewController: UIViewController {
             }
         }
 
-      let joinStudyTitle =  NSLocalizedStrings("Join Study", comment: "")
-      buttonJoinStudy?.setTitle(joinStudyTitle, for: .normal)
+        // let joinStudyTitle =  NSLocalizedStrings("Join Study", comment: "")
+        // buttonJoinStudy?.setTitle(joinStudyTitle, for: .normal)
       
-      let visitWebsite = NSLocalizedStrings("Visit Website", comment: "")
-      buttonVisitWebsite?.setTitle(visitWebsite, for: .normal)
+      // let visitWebsite = NSLocalizedStrings("Visit Website", comment: "")
+      // buttonVisitWebsite?.setTitle(visitWebsite, for: .normal)
       
       let viewConsent = NSLocalizedStrings("View Consent", comment: "")
       buttonViewConsent?.setTitle(viewConsent, for: .normal)

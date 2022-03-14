@@ -75,6 +75,14 @@
         _pickerView = [[UIDatePicker alloc] init];
         _pickerView.preferredDatePickerStyle = UIDatePickerStyleWheels;
         [_pickerView addTarget:self action:@selector(valueDidChange:) forControlEvents:UIControlEventValueChanged];
+         
+        NSString * localestr = @"en";
+        NSString * localeVal = [[NSUserDefaults standardUserDefaults] valueForKey: @"userDeviceLanguage"];
+        if ([localeVal containsString:@"es"]) {
+            localestr = @"es";
+        }
+        _pickerView.locale = [[NSLocale alloc] initWithLocaleIdentifier:localestr];
+        
         self.answerFormat = _answerFormat;
         self.answer = _answer;
     }

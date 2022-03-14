@@ -431,7 +431,6 @@
 		9456C4B927CFADC20054AA8E /* LatestActive_1B.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EED31A21F1CD7B300A7AF56 /* LatestActive_1B.json */; };
 		9456C4BA27CFADC20054AA8E /* Labkey_Activity_Latest3.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEB0AF91FD2811100136EAA /* Labkey_Activity_Latest3.json */; };
 		9456C4BB27CFADC20054AA8E /* Eligibility_1B.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E4D81F17459200028853 /* Eligibility_1B.json */; };
-		9456C4BC27CFADC20054AA8E /* GatewayOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A9A25C809E20022B5E9 /* GatewayOverview.plist */; };
 		9456C4BD27CFADC20054AA8E /* Profile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A7425C808CA0022B5E9 /* Profile.plist */; };
 		9456C4BE27CFADC20054AA8E /* HPHCSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8948349E22BB9D56000B7BFA /* HPHCSettings.xib */; };
 		9456C4BF27CFADC20054AA8E /* AnanomousFilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A8A25C8097D0022B5E9 /* AnanomousFilterData.plist */; };
@@ -441,9 +440,11 @@
 		9456C4C527CFADC20054AA8E /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9456C4D227CFAE1D0054AA8E /* AppConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9456C4CD27CFAE1D0054AA8E /* AppConfiguration.plist */; };
 		9456C4D327CFAE1D0054AA8E /* LimitJIA.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9456C4CE27CFAE1D0054AA8E /* LimitJIA.xcassets */; };
-		9456C4D427CFAE1D0054AA8E /* GatewayOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9456C4CF27CFAE1D0054AA8E /* GatewayOverview.plist */; };
-		9456C4D627CFAE1D0054AA8E /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9456C4D127CFAE1D0054AA8E /* Branding.plist */; };
 		9456C4D827CFAE590054AA8E /* LimitJIA-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9456C4D727CFAE590054AA8E /* LimitJIA-Info.plist */; };
+		945BADE427D8FB690034B240 /* GatewayOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 945BADDB27D8F8280034B240 /* GatewayOverview.plist */; };
+		945BADE827D8FF6A0034B240 /* AppGlossaryS.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 945BADE727D8FF6A0034B240 /* AppGlossaryS.pdf */; };
+		945BADE927D8FF6A0034B240 /* AppGlossaryS.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 945BADE727D8FF6A0034B240 /* AppGlossaryS.pdf */; };
+		945BADEA27D901A40034B240 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = 945BADEC27D901A40034B240 /* Branding.plist */; };
 		946CA5E91E728C2300CC8535 /* StringEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946CA5E81E728C2300CC8535 /* StringEncoder.swift */; };
 		946CA5ED1E72DCA300CC8535 /* ProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946CA5EC1E72DCA300CC8535 /* ProgressView.xib */; };
 		9487102A1E546C3800246109 /* AppNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948710291E546C3800246109 /* AppNotification.swift */; };
@@ -873,9 +874,16 @@
 		9456C4C927CFADC20054AA8E /* LimitJIA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LimitJIA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9456C4CD27CFAE1D0054AA8E /* AppConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfiguration.plist; sourceTree = "<group>"; };
 		9456C4CE27CFAE1D0054AA8E /* LimitJIA.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LimitJIA.xcassets; sourceTree = "<group>"; };
-		9456C4CF27CFAE1D0054AA8E /* GatewayOverview.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GatewayOverview.plist; sourceTree = "<group>"; };
-		9456C4D127CFAE1D0054AA8E /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		9456C4D727CFAE590054AA8E /* LimitJIA-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "LimitJIA-Info.plist"; sourceTree = "<group>"; };
+		945BADDA27D8F8280034B240 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/GatewayOverview.plist; sourceTree = "<group>"; };
+		945BADE127D8F84E0034B240 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/GatewayOverview.plist; sourceTree = "<group>"; };
+		945BADE227D8F8550034B240 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/GatewayOverview.plist"; sourceTree = "<group>"; };
+		945BADE327D8F8580034B240 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/GatewayOverview.plist; sourceTree = "<group>"; };
+		945BADE727D8FF6A0034B240 /* AppGlossaryS.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AppGlossaryS.pdf; sourceTree = "<group>"; };
+		945BADEB27D901A40034B240 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Branding.plist; sourceTree = "<group>"; };
+		945BADED27D901A90034B240 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/Branding.plist; sourceTree = "<group>"; };
+		945BADEE27D901AB0034B240 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/Branding.plist"; sourceTree = "<group>"; };
+		945BADEF27D901AD0034B240 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/Branding.plist; sourceTree = "<group>"; };
 		946CA5E81E728C2300CC8535 /* StringEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringEncoder.swift; sourceTree = "<group>"; };
 		946CA5EC1E72DCA300CC8535 /* ProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressView.xib; sourceTree = "<group>"; };
 		948710291E546C3800246109 /* AppNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNotification.swift; sourceTree = "<group>"; };
@@ -1344,6 +1352,7 @@
 			isa = PBXGroup;
 			children = (
 				9450598E1F29FA2C007906A7 /* AppGlossary.pdf */,
+				945BADE727D8FF6A0034B240 /* AppGlossaryS.pdf */,
 				6EDDB6601EE05FDC00C79337 /* fda_preload.gif */,
 			);
 			path = OtherAssets;
@@ -2054,8 +2063,8 @@
 				9456C4D727CFAE590054AA8E /* LimitJIA-Info.plist */,
 				9456C4CD27CFAE1D0054AA8E /* AppConfiguration.plist */,
 				9456C4CE27CFAE1D0054AA8E /* LimitJIA.xcassets */,
-				9456C4CF27CFAE1D0054AA8E /* GatewayOverview.plist */,
-				9456C4D127CFAE1D0054AA8E /* Branding.plist */,
+				945BADDB27D8F8280034B240 /* GatewayOverview.plist */,
+				945BADEC27D901A40034B240 /* Branding.plist */,
 			);
 			path = LimitJIA;
 			sourceTree = "<group>";
@@ -2489,6 +2498,7 @@
 				846A276825DAA72D00224B46 /* FetalKickCounter.storyboard in Resources */,
 				843B6A5C25C7E1950022B5E9 /* Branding.plist in Resources */,
 				843B6A9025C809910022B5E9 /* ChangePasswordData.plist in Resources */,
+				945BADE827D8FF6A0034B240 /* AppGlossaryS.pdf in Resources */,
 				6EDABCCE1EBA41EE005F3AA6 /* Labkey_Activity.json in Resources */,
 				6ED134381E5F1B110090C976 /* Consent.json in Resources */,
 				843B6AA225C80A170022B5E9 /* SignInPlist.plist in Resources */,
@@ -2572,6 +2582,7 @@
 				9456C49727CFADC20054AA8E /* OtherTextChoiceCell.xib in Resources */,
 				9456C49827CFADC20054AA8E /* LatestActive_Taskdocument.json in Resources */,
 				9456C49927CFADC20054AA8E /* Labkey_Activity_Latest.json in Resources */,
+				945BADE927D8FF6A0034B240 /* AppGlossaryS.pdf in Resources */,
 				9456C49A27CFADC20054AA8E /* InfoPlist.strings in Resources */,
 				9456C49B27CFADC20054AA8E /* Resources.plist in Resources */,
 				9456C49C27CFADC20054AA8E /* JailbrokeBlocker.xib in Resources */,
@@ -2579,7 +2590,7 @@
 				9456C49E27CFADC20054AA8E /* StepProvider.plist in Resources */,
 				9456C49F27CFADC20054AA8E /* ProgressView.xib in Resources */,
 				9456C4A027CFADC20054AA8E /* FetalKickCounter.storyboard in Resources */,
-				9456C4D627CFAE1D0054AA8E /* Branding.plist in Resources */,
+				945BADEA27D901A40034B240 /* Branding.plist in Resources */,
 				9456C4A227CFADC20054AA8E /* ChangePasswordData.plist in Resources */,
 				9456C4A327CFADC20054AA8E /* Labkey_Activity.json in Resources */,
 				9456C4A427CFADC20054AA8E /* Consent.json in Resources */,
@@ -2607,9 +2618,8 @@
 				9456C4B827CFADC20054AA8E /* ComprehensionFailure.xib in Resources */,
 				9456C4B927CFADC20054AA8E /* LatestActive_1B.json in Resources */,
 				9456C4BA27CFADC20054AA8E /* Labkey_Activity_Latest3.json in Resources */,
-				9456C4D427CFAE1D0054AA8E /* GatewayOverview.plist in Resources */,
+				945BADE427D8FB690034B240 /* GatewayOverview.plist in Resources */,
 				9456C4BB27CFADC20054AA8E /* Eligibility_1B.json in Resources */,
-				9456C4BC27CFADC20054AA8E /* GatewayOverview.plist in Resources */,
 				9456C4BD27CFADC20054AA8E /* Profile.plist in Resources */,
 				9456C4BE27CFADC20054AA8E /* HPHCSettings.xib in Resources */,
 				9456C4BF27CFADC20054AA8E /* AnanomousFilterData.plist in Resources */,
@@ -3464,6 +3474,28 @@
 			name = JailbrokeBlocker.xib;
 			sourceTree = "<group>";
 		};
+		945BADDB27D8F8280034B240 /* GatewayOverview.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				945BADDA27D8F8280034B240 /* Base */,
+				945BADE127D8F84E0034B240 /* es */,
+				945BADE227D8F8550034B240 /* es-419 */,
+				945BADE327D8F8580034B240 /* es_MX */,
+			);
+			name = GatewayOverview.plist;
+			sourceTree = "<group>";
+		};
+		945BADEC27D901A40034B240 /* Branding.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				945BADEB27D901A40034B240 /* Base */,
+				945BADED27D901A90034B240 /* es */,
+				945BADEE27D901AB0034B240 /* es-419 */,
+				945BADEF27D901AD0034B240 /* es_MX */,
+			);
+			name = Branding.plist;
+			sourceTree = "<group>";
+		};
 		94AF6F2527CFB25B005F1A5E /* LimitJIA.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -3770,7 +3802,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 18;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = LC58YCKU3U;
 				ENABLE_BITCODE = NO;
@@ -3803,7 +3835,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 18;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LC58YCKU3U;
 				ENABLE_BITCODE = NO;

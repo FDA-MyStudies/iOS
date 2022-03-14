@@ -115,7 +115,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.isAppLaunched = true
         IQKeyboardManager.shared.enable = true
-     
+        IQKeyboardManager.shared.toolbarDoneBarButtonItemText = NSLocalizedStrings("Done", comment: "")
+        
         self.customizeNavigationBar()
         Fabric.with([Crashlytics.self])
         

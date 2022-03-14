@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>¡Bienvenido!</string>
+		<key>text</key>
+		<string>CARRA se complace en ofrecer la aplicación del estudio LIMIT-JIA como herramienta para recopilar datos sobre el uso de medicamentos y otros problemas de salud a los que se enfrentan las personas a las que atendemos.</string>
+		<key>type</key>
+		<string>video</string>
+		<key>image</key>
+		<string>welcomeBg</string>
+		<key>videoLink</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Utilización de dispositivos móviles para mejorar la investigación</string>
+		<key>text</key>
+		<string>Esta aplicación contendrá estudios realizados por CARRA y otras instituciones para LIMIT-JIA. Les permitirá a los investigadores relacionarse de forma más directa con las personas para recopilar datos a través de cuestionarios.</string>
+		<key>type</key>
+		<string></string>
+		<key>image</key>
+		<string>img_01</string>
+		<key>videoLink</key>
+		<string></string>
+	</dict>
+</array>
+</plist>

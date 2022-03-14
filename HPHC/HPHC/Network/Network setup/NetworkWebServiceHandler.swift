@@ -339,10 +339,10 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                 do{
                     // NSJSONReadingOptions.MutableContainers
                     responseDict = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary
-                    // print("response1---\(responseDict)---\(requestName)---\(error)")
+                     print("response1---\(responseDict)---\(requestName)---\(error)")
                     
                 } catch {
-                    // print("Serilization error")
+                     print("Serilization error")
                 }
                 
                 if (delegate?.finishedRequest) != nil {
@@ -369,10 +369,10 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                     do {
                         
                       responseDict = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? [String:Any]
-                      // print("response1---\(responseDict)---\(requestName)---\(error)")
+                       print("response1---\(responseDict)---\(requestName)---\(error)")
                         
                     } catch {
-                        // print("Serilization error")
+                        print("Serilization error")
                     }
                   
                   error1 = self.configuration.parseError(errorResponse: responseDict ?? [:])

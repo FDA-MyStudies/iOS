@@ -682,8 +682,12 @@ class UserServices: NSObject {
             
             DBHandler().saveCurrentUser(user: user)
             
+            FDAKeychain.shared[kUserAuthTokenKeychainKey] = user.authToken
+            FDAKeychain.shared[kUserRefreshTokenKeychainKey] = user.refreshToken
+            
             // TEMP : Need to save these values in Realm
             let ud = UserDefaults.standard
+            ud.set(true, forKey: kPasscodeIsPending)
             ud.set(user.userId!, forKey: kUserId)
             ud.synchronize()
         }

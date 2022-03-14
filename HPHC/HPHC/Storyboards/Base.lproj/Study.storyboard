@@ -680,7 +680,7 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gvo-He-ly7">
                                 <rect key="frame" x="0.0" y="44" width="375" height="64"/>
-                                <color key="backgroundColor" red="0.2196078431372549" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="32Z-jW-Phf"/>
                                 </constraints>
@@ -1332,7 +1332,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.2196078431372549" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="NhB-Vh-kS4"/>
                                     <constraint firstItem="7PI-ZW-p9g" firstAttribute="centerY" secondItem="QOL-qH-fRm" secondAttribute="centerY" constant="10" id="pOt-uT-Hie"/>
@@ -1465,7 +1465,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2Sb-7v-izI"/>
-                        <color key="backgroundColor" red="0.2196078431372549" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="2Sb-7v-izI" firstAttribute="trailing" secondItem="QOL-qH-fRm" secondAttribute="trailing" id="0HU-Hc-87r"/>
                             <constraint firstItem="2Sb-7v-izI" firstAttribute="bottom" secondItem="EWq-lN-WeA" secondAttribute="bottom" id="0vG-OR-dHG"/>

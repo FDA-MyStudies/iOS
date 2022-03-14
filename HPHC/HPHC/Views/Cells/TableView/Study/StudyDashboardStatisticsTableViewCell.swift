@@ -280,18 +280,21 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd, MMM YYYY"
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.timeZone = TimeZone.init(abbreviation: "GMT")
         return formatter
     }()
     private static let yearFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY"
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.timeZone = TimeZone.init(abbreviation: "GMT")
         return formatter
     }()
     private static let monthFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM YYYY"
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.timeZone = TimeZone.init(abbreviation: "GMT")
         return formatter
     }()

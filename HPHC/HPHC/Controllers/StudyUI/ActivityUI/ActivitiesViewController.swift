@@ -1660,6 +1660,7 @@ class ActivitySchedules: UIView, UITableViewDelegate, UITableViewDataSource {
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mma, MMM dd YYYY"
+        formatter.locale = Locale(identifier: getLanguageLocale())
         // formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
@@ -1674,7 +1675,7 @@ class ResponseDataFetch: NMWebServiceDelegate {
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.init(identifier: "America/New_York")
         formatter.dateFormat = "YYYY-MM-dd HH:mm:ss.SSS"
-        
+        formatter.locale = Locale(identifier: getLanguageLocale())
         return formatter
     }()
     
@@ -1683,7 +1684,7 @@ class ResponseDataFetch: NMWebServiceDelegate {
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.current
         formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
-        
+        formatter.locale = Locale(identifier: getLanguageLocale())
         return formatter
     }()
     

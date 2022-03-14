@@ -30,5 +30,7 @@
 	<string>CARRA Registry</string>
 	<key>PoweredByTitleName</key>
 	<string>Desarrollado por FDA MyStudies</string>
+	<key>ProductTitleName</key>
+	<string>CARRA Registry</string>
 </dict>
 </plist>

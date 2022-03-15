@@ -247,6 +247,10 @@ class ResourcesViewController: UIViewController{
         
         let todayDate = Date()
         
+        if let idx = Study.currentStudy?.resources?.firstIndex(where: { $0.title ==  "Study Protocol"}) {
+            Study.currentStudy?.resources?[idx].title = NSLocalizedString("Study Protocol", comment: "")
+        }
+        
         for  resource in (Study.currentStudy?.resources)!{
             
             if resource.startDate != nil && resource.endDate != nil {

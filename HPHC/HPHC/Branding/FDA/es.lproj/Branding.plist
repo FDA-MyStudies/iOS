@@ -13,7 +13,7 @@
 	<key>LeaveStudy</key>
 	<string>Deja el estudio</string>
 	<key>LeaveStudyConfirmationText</key>
-	<string>If you tap “Proceed” you will no longer be able to use this app for eye doctor appointments and medication tracking</string>
+	<string>Si toca “Continuar” ya no podrá utilizar esta aplicación para las citas con el oftalmólogo y el seguimiento de la medicación</string>
 	<key>WebsiteLink</key>
 	<string>www.fda.gov</string>
 	<key>WebsiteButtonTitle</key>
@@ -23,7 +23,7 @@
 	<key>PrivacyPolicyURL</key>
 	<string>https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/#privacy</string>
 	<key>ValidatedTitle</key>
-	<string>Estás dentro</string>
+	<string>Validado</string>
 	<key>AllowFeedback</key>
 	<true/>
 	<key>NavigationTitleName</key>

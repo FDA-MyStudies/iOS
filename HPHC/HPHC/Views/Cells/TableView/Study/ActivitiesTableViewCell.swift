@@ -293,7 +293,7 @@ class ActivitiesTableViewCell: UITableViewCell {
             var monthlyStartTime = ActivitiesTableViewCell.monthlyformatter.string(from: startDate!)
             monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ",", with: NSLocalizedStrings("on", comment: ""))
             // monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ";", with: "every month\n")
-            monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ";", with: NSLocalizedStrings("every", comment: "") + " " + NSLocalizedStrings("month", comment: "") + "\n")
+            monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ";", with: NSLocalizedStrings("every month", comment: "") + "\n")
 
             let endDate = ActivitiesTableViewCell.formatter.string(from: endDate!)
             labelTime?.text = monthlyStartTime + " " + NSLocalizedStrings("to", comment: "") + " " + endDate

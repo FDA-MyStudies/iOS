@@ -164,7 +164,7 @@
 "Continue"="Continuar";
 
 
-"Validated!"="¡Validado!";
+"Validated!"="Validado";
 "OK"="Ok";
 "Ok1"="Aceptar1";
 "Enter a token"="Ingrese un token";
@@ -380,9 +380,10 @@
 " missed"=" perdido";
 "Run(s):"="Ejecución(s):";
 "more"="más";
-"every"="every";
+"every"="cada";
 "to"="para";
 "month"="mes";
+"every month"="todos los meses";
 "on"="el";
 
 "Tap Done to submit responses. Responses cannot be modified after submission."="Toque Listo para enviar respuestas. Las respuestas no se pueden modificar después del envío.";

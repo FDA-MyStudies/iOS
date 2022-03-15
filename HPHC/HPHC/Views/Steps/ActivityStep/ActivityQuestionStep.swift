@@ -627,6 +627,7 @@ class ActivityQuestionStep: ActivityStep {
                 if  Utilities.isValidValue(someObject: formatDict?[kStepQuestionDateStyle] as AnyObject?) {
                     
                     let dateFormatter = DateFormatter()
+                    dateFormatter.locale = Locale(identifier: getLanguageLocale())
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                     
                     var dateRange:DateRange? = DateRange.defaultValue

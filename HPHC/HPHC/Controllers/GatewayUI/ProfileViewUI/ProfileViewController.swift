@@ -202,6 +202,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         datePickerView?.datePickerMode = .countDownTimer
         
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: getLanguageLocale())
         dateFormatter.dateFormat = "HH:mm"
         
         datePickerView?.date = dateFormatter.date(from: "00:00")!

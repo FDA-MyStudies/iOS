@@ -64,7 +64,9 @@ class ResourcesViewController: UIViewController{
             let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
             appDelegate.checkConsentStatus(controller: self)
         }
-
+        
+        setNavigationBarColor()
+        
         // Branding
         leaveStudy = Branding.LeaveStudy
         consentPDF = Branding.ConsentPDF

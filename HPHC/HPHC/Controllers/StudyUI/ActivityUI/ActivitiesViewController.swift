@@ -109,13 +109,18 @@ class ActivitiesViewController : UIViewController{
         refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
         tableView?.addSubview(refreshControl!)
         self.addProgressIndicator()
+        
+        if #available(iOS 15, *) {
+            UITableView.appearance().sectionHeaderTopPadding = CGFloat(0)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-       
+        setNavigationBarColor()
+        
         if Utilities.isStandaloneApp() {
             self.setNavigationBarItem()
         } else {

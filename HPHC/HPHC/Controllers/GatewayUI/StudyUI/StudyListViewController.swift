@@ -62,6 +62,10 @@ class StudyListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if #available(iOS 15, *) {
+            UITableView.appearance().sectionHeaderTopPadding = CGFloat(0)
+        }
+        
       let navTitle = Branding.NavigationTitleName
         let titleLabel = UILabel()
         titleLabel.text = NSLocalizedStrings(navTitle, comment: "")
@@ -97,6 +101,7 @@ class StudyListViewController: UIViewController {
             isComingFromFilterScreen = false
             return
         }
+        setNavigationBarColor()
 //        if !isComingFromFilterScreen {
 //              self.addProgressIndicator()
 //            }

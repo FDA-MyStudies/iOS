@@ -41,7 +41,7 @@ class ResourcesDetailViewController: UIViewController {
         self.addBackBarButton()
         self.isEmailComposerPresented = false
         self.title = resource?.title
-        
+        setNavigationBarColor()
     }
     
     override func viewWillAppear(_ animated: Bool) {

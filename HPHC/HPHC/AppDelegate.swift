@@ -120,18 +120,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.customizeNavigationBar()
         Fabric.with([Crashlytics.self])
         
-        if #available(iOS 15, *) {
-              let appearance = UINavigationBarAppearance()
-              let navigationBar = UINavigationBar()
-
-              appearance.configureWithOpaqueBackground()
-              appearance.backgroundColor = .white
-              navigationBar.standardAppearance = appearance
-              UINavigationBar.appearance().standardAppearance.backgroundColor = .white
-              UINavigationBar.appearance().standardAppearance.shadowColor = .white
-              UINavigationBar.appearance().scrollEdgeAppearance = appearance
-              UINavigationBar.appearance().standardAppearance = appearance
-            }
+//        if #available(iOS 15, *) {
+//            let appearance = UINavigationBarAppearance()
+//            let navigationBar = UINavigationBar()
+//            
+//            appearance.configureWithOpaqueBackground()
+//            appearance.backgroundColor = .white
+//            navigationBar.standardAppearance = appearance
+//            UINavigationBar.appearance().standardAppearance.backgroundColor = .white
+//            UINavigationBar.appearance().standardAppearance.shadowColor = .white
+//            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+//            UINavigationBar.appearance().standardAppearance = appearance
+//        }
         
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
         

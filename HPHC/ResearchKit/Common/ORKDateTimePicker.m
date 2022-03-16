@@ -51,6 +51,7 @@
     NSInteger _minuteInterval;
     __weak id<ORKPickerDelegate> _pickerDelegate;
     id _answer;
+    NSLocale *_currentLocale;
 }
 
 @synthesize pickerDelegate = _pickerDelegate;
@@ -81,7 +82,8 @@
         if ([localeVal containsString:@"es"]) {
             localestr = @"es";
         }
-        _pickerView.locale = [[NSLocale alloc] initWithLocaleIdentifier:localestr];
+        _currentLocale = [[NSLocale alloc] initWithLocaleIdentifier:localestr];
+        _pickerView.locale = _currentLocale;
         
         self.answerFormat = _answerFormat;
         self.answer = _answer;
@@ -171,21 +173,30 @@
 }
 
 - (NSDateFormatter *)labelFormatter {
+
+    NSString * localestr = @"en";
+    NSString * localeVal = [[NSUserDefaults standardUserDefaults] valueForKey: @"userDeviceLanguage"];
+    if ([localeVal containsString:@"es"]) {
+        localestr = @"es";
+    }
+    _currentLocale = [[NSLocale alloc] initWithLocaleIdentifier:localestr];
+
     if (_labelFormatter) {
         _labelFormatter.calendar = self.calendar;
+        _labelFormatter.locale = _currentLocale;
         return _labelFormatter;
     }
     
     NSString *dateFormat = nil;
     switch ([self questionType]) {
         case ORKQuestionTypeDate:
-            dateFormat = [NSDateFormatter dateFormatFromTemplate:@"Mdy" options:0 locale:[NSLocale currentLocale]];
+            dateFormat = [NSDateFormatter dateFormatFromTemplate:@"Mdy" options:0 locale:_currentLocale];
             break;
         case ORKQuestionTypeDateAndTime:
-            dateFormat = [NSDateFormatter dateFormatFromTemplate:@"yEMdhma" options:0 locale:[NSLocale currentLocale]];
+            dateFormat = [NSDateFormatter dateFormatFromTemplate:@"yEMdhma" options:0 locale:_currentLocale];
             break;
         case ORKQuestionTypeTimeOfDay:
-            dateFormat = [NSDateFormatter dateFormatFromTemplate:@"hma" options:0 locale:[NSLocale currentLocale]];
+            dateFormat = [NSDateFormatter dateFormatFromTemplate:@"hma" options:0 locale:_currentLocale];
             break;
         default:
             break;
@@ -195,7 +206,7 @@
         NSDateFormatter *dfm = [NSDateFormatter new];
         dfm.dateFormat = dateFormat;
         dfm.calendar = self.calendar;
-        
+        dfm.locale = _currentLocale;
         _labelFormatter = dfm;
     }
     

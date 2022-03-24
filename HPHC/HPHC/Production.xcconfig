@@ -37,5 +37,14 @@ RESPONSE_URL = hpresp.lkcompliant.net/mobileappstudy-
 // e.g. mystudiesdeployment.com/myStudiesUserMgmtWS/
 REGISTRATION_URL = hpreg.lkcompliant.net/fdahpUserRegWS/
 
+/// App ID from Study builder.
+APPLICATION_ID = LIMITJP001
+
+/// Org ID from Study builder.
+ORGANIZATION_ID = CARREG
+
+/// Standalone Study ID from Study builder.
+STANDALONE_STUDY_ID = demo1
+
 
 

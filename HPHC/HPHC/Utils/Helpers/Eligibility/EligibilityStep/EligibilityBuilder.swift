@@ -151,7 +151,7 @@ class EligibilityBuilder{
                 
                 for stepDict in self.testArray!{
                     let questionStep: ActivityQuestionStep? = ActivityQuestionStep()
-                    questionStep?.initWithDict(stepDict: stepDict as! Dictionary<String, Any>)
+                  questionStep?.initWithDict(stepDict: stepDict as! Dictionary<String, Any>, allSteps: self.testArray! as? Array<Dictionary<String, Any>>)
                     stepsArray?.append((questionStep?.getQuestionStep())!)
                 }
                 
@@ -184,7 +184,7 @@ class EligibilityBuilder{
                 for stepDict in self.testArray!{
                     
                     let questionStep: ActivityQuestionStep? = ActivityQuestionStep()
-                    questionStep?.initWithDict(stepDict: stepDict as! Dictionary<String, Any>)
+                  questionStep?.initWithDict(stepDict: stepDict as! Dictionary<String, Any>, allSteps: self.testArray! as? Array<Dictionary<String, Any>>)
                     // Questions are mandatory not skippable
                     questionStep?.skippable = false
                     stepsArray?.append((questionStep?.getQuestionStep())!)

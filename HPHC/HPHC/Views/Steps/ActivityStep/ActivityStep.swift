@@ -61,6 +61,21 @@ class ActivityStep {
     var title: String? // Title for ORKStep
     var text: String? // Text for ORKStep
     var skippable: Bool?
+  
+  var pipingsourceQuestionKey: String?
+  var pipingSnippet: String?
+  var sourcePreLogicQuestionKey: String?
+  var isPiping: Bool?
+  
+  var preactivityVersion: String?
+  var preactivityid: String?
+  var predestinationFalseStepKey: String?
+  var predestinationTrueStepKey: String?
+  var predestinationFalseStepIndex: String?
+  var predestinationTrueStepIndex: String?
+  var preoperator: String?
+  var prevalue: String?
+  
     var groupName: String?
     var repeatable: Bool? // used for RepeatableFormStep
     var repeatableText: String? // used for RepeatableFormStep to add more form steps
@@ -77,6 +92,21 @@ class ActivityStep {
         self.title = ""
         self.text = ""
         self.skippable = false
+      
+      self.pipingsourceQuestionKey = ""
+      self.pipingSnippet = ""
+      self.sourcePreLogicQuestionKey = ""
+      self.isPiping = false
+      
+      self.preactivityVersion = ""
+      self.preactivityid = ""
+      self.predestinationFalseStepKey = ""
+      self.predestinationTrueStepKey = ""
+      self.predestinationFalseStepIndex = ""
+      self.predestinationTrueStepIndex = ""
+      self.preoperator = ""
+      self.prevalue = ""
+      
         self.groupName = ""
         self.repeatable = false
         self.repeatableText = ""
@@ -93,6 +123,21 @@ class ActivityStep {
           title: String,
           text: String,
           skippable: Bool,
+          
+          pipingsourceQuestionKey: String,
+          pipingSnippet: String,
+          sourcePreLogicQuestionKey: String,
+          isPiping: Bool,
+          
+          preactivityVersion: String,
+          preactivityid: String,
+          predestinationFalseStepKey: String,
+          predestinationTrueStepKey: String,
+          predestinationFalseStepIndex: String,
+          predestinationTrueStepIndex: String,
+          preoperator: String,
+          prevalue: String,
+          
           groupName: String,
           repeatable: Bool,
           repeatableText: String,
@@ -105,6 +150,21 @@ class ActivityStep {
         self.title = title
         self.text = text
         self.skippable = skippable
+       
+       self.pipingsourceQuestionKey = pipingsourceQuestionKey
+       self.pipingSnippet = pipingSnippet
+       self.sourcePreLogicQuestionKey = sourcePreLogicQuestionKey
+       self.isPiping = isPiping
+       
+       self.preactivityVersion = preactivityVersion
+       self.preactivityid = preactivityid
+       self.predestinationFalseStepKey = predestinationFalseStepKey
+       self.predestinationTrueStepKey = predestinationTrueStepKey
+       self.predestinationFalseStepIndex = predestinationFalseStepIndex
+       self.predestinationTrueStepIndex = predestinationTrueStepIndex
+       self.preoperator = preoperator
+       self.prevalue = prevalue
+       
         self.groupName = groupName
         self.repeatable = repeatable
         self.repeatableText = repeatableText
@@ -114,7 +174,7 @@ class ActivityStep {
     /* setter method which initializes all params
      @stepDict:contains as key:Value pair for all the properties of ActiveStep
      */
-    func initWithDict(stepDict: Dictionary<String, Any>){
+  func initWithDict(stepDict: Dictionary<String, Any>, allSteps: Array<Dictionary<String, Any>>?) {
         
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
             
@@ -140,6 +200,43 @@ class ActivityStep {
             if Utilities.isValidValue(someObject: stepDict[kActivityStepSkippable] as AnyObject )  {
                 self.skippable = stepDict[kActivityStepSkippable] as? Bool
             }
+          
+          
+//          if Utilities.isValidValue(someObject: stepDict["piping"] as AnyObject )  {
+            print("piping---\(stepDict["piping"])")
+            let val1 = stepDict["piping"] as? [String: String]
+          pipingSnippet = val1?["pipingSnippet"] ?? ""
+          pipingsourceQuestionKey = val1?["sourceQuestionKey"] ?? ""
+//          }
+          sourcePreLogicQuestionKey = stepDict["sourceQuestionKey"] as? String
+          
+          let val2 = stepDict["preLoadLogic"] as? [String: String]
+          preactivityVersion = val2?["activityVersion"] ?? ""
+          preactivityid = val2?["activityid"] ?? ""
+          predestinationFalseStepKey = val2?["destinationFalseStepKey"] ?? ""
+          predestinationTrueStepKey = val2?["destinationTrueStepKey"] ?? ""
+          
+          if predestinationFalseStepKey != "" {
+          predestinationFalseStepIndex = getIndexByIdentifier(identifier1: predestinationFalseStepKey ?? "", allSteps: allSteps)
+          } else {
+            predestinationFalseStepIndex = ""
+          }
+          if predestinationTrueStepKey != "" {
+          predestinationTrueStepIndex = getIndexByIdentifier(identifier1: predestinationTrueStepKey ?? "", allSteps: allSteps)
+          } else {
+            predestinationTrueStepIndex = ""
+          }
+          
+          
+          preoperator = val2?["operator"] ?? ""
+          prevalue = val2?["value"] ?? ""
+          
+          isPiping = stepDict["isPiping"] as? Bool
+          
+//          let val7 = activity?.steps
+          
+          
+          
             if Utilities.isValidValue(someObject: stepDict[kActivityStepGroupName] as AnyObject )  {
                 self.groupName = stepDict[kActivityStepGroupName] as? String
             }
@@ -156,6 +253,25 @@ class ActivityStep {
             Logger.sharedInstance.debug("Step Dictionary is null:\(stepDict)")
         }
     }
+  
+  func getIndexByIdentifier(identifier1: String, allSteps: Array<Dictionary<String, Any>>?) -> String {
+    
+//    let activityStepArray = allSteps?.filter({$0.[kActivityStepKey] == identifier
+//    })
+    var count = 0
+    for stepDict in allSteps! {
+      if Utilities.isValidValue(someObject: stepDict[kActivityStepKey] as AnyObject ){
+          let valKey = stepDict[kActivityStepKey] as? String ?? ""
+        if valKey == identifier1 {
+          print("count---\(count)")
+          return "\(count)"
+        }
+        count+=1
+      }
+    }
+    return ""
+    
+  }
     
     /* method the create ORKStep
      returns ORKstep

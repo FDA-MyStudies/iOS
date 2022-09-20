@@ -272,7 +272,7 @@ class ConsentBuilder {
             for stepDict in (comprehension?.questions!)! {
                 // create questionSteps
                 let questionStep: ActivityQuestionStep? = ActivityQuestionStep()
-                questionStep?.initWithDict(stepDict: stepDict)
+              questionStep?.initWithDict(stepDict: stepDict, allSteps: (comprehension?.questions!)!)
 
                 questionStep?.skippable = false
                 stepsArray?.append((questionStep?.getQuestionStep())!)

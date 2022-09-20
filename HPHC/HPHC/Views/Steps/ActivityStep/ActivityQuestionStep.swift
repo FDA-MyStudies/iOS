@@ -257,11 +257,11 @@ class ActivityQuestionStep: ActivityStep {
     }
     
     // Setter method with Step Dictionary
-    override func initWithDict(stepDict: Dictionary<String, Any>) {
+    override func initWithDict(stepDict: Dictionary<String, Any>, allSteps: Array<Dictionary<String, Any>>?) {
         
         if Utilities.isValidObject(someObject: stepDict as AnyObject?) {
             
-            super.initWithDict(stepDict: stepDict)
+          super.initWithDict(stepDict: stepDict, allSteps: allSteps)
             
             if Utilities.isValidObject(someObject: stepDict[kStepQuestionFormat] as AnyObject ) {
                 self.formatDict = (stepDict[kStepQuestionFormat] as? Dictionary)!
@@ -291,6 +291,7 @@ class ActivityQuestionStep: ActivityStep {
             
             // Assigning the answerFormat for the questionStep based on questionStep
             switch   QuestionStepType(rawValue: (resultType as? String)!)! as QuestionStepType {
+              
             case .scale:
                 
                 if  Utilities.isValidValue(someObject: formatDict?[kStepQuestionScaleMaxValue] as AnyObject?)
@@ -524,6 +525,17 @@ class ActivityQuestionStep: ActivityStep {
                         questionStep?.placeholder = placeholderText
                     }
                     questionStep?.text = text
+                  
+                  
+                  questionStep?.steppredestinationTrueStepKey = predestinationTrueStepKey
+                  questionStep?.steppredestinationFalseStepKey = predestinationFalseStepKey
+                  questionStep?.steppredestinationTrueStepIndex = predestinationTrueStepIndex
+                  questionStep?.steppredestinationFalseStepIndex = predestinationFalseStepIndex
+                  questionStep?.stepresultType = resultType as? String ?? ""
+                  questionStep?.steppreoperator = preoperator
+                  questionStep?.stepprevalue = prevalue
+                  
+                  
                     return questionStep
                     
                 } else {
@@ -794,6 +806,15 @@ class ActivityQuestionStep: ActivityStep {
                 questionStep?.placeholder = placeholderText
             }
             questionStep?.text = text
+          
+          questionStep?.steppredestinationTrueStepKey = predestinationTrueStepKey
+          questionStep?.steppredestinationFalseStepKey = predestinationFalseStepKey
+          questionStep?.steppredestinationTrueStepIndex = predestinationTrueStepIndex
+          questionStep?.steppredestinationFalseStepIndex = predestinationFalseStepIndex
+          questionStep?.stepresultType = resultType as? String ?? ""
+          questionStep?.steppreoperator = preoperator
+          questionStep?.stepprevalue = prevalue
+          
             return questionStep!
         } else {
             Logger.sharedInstance.debug("FormatDict has null values:\(String(describing: formatDict))")

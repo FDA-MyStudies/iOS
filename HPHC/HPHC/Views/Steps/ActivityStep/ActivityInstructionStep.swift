@@ -35,10 +35,10 @@ class ActivityInstructionStep: ActivityStep {
         
     }
     // Initializer with Dictionary
-    override func initWithDict(stepDict: Dictionary<String, Any>) {
+    override func initWithDict(stepDict: Dictionary<String, Any>, allSteps: Array<Dictionary<String, Any>>?) {
         
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
-            super.initWithDict(stepDict: stepDict)
+          super.initWithDict(stepDict: stepDict, allSteps: allSteps)
             
         } else {
             Logger.sharedInstance.debug("Instruction Step Dictionary is null:\(stepDict)")

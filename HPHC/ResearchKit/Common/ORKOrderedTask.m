@@ -36,7 +36,30 @@
 #import "ORKStep_Private.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
+//#import "ResearchKit.Private.h"
+#import <ResearchKit/ORKResult.h>
+#import "ORKCollectionResult.h"
 
+#import "ORKCollectionResult_Private.h"
+#import "ORKPageStep.h"
+#import "ORKQuestionResult_Private.h"
+#import "ORKResult_Private.h"
+#import "ORKStep.h"
+#import "ORKTask.h"
+
+#import "ORKHelpers_Internal.h"
+
+//#import "ResearchKit-ImageClass.h"
+//#import <UIImage+ResearchKit.h>
+
+//#if __has_include("ActivityHelper-Swift.h")
+//    #import "ActivityHelper-Swift.h"
+//#endif
+
+#import <ResearchKit/ResearchKit-Swift.h>
+//#import <ResearchKit/ResearchKit-HelperUtilities.Swift.h>
+//@class ActivityHelper;
+//@class ImageClass;
 
 @implementation ORKOrderedTask {
     NSString *_identifier;
@@ -115,6 +138,42 @@
 }
 
 - (ORKStep *)stepAfterStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
+  printf("resultresult---%@---", result);
+
+
+  ORKStepResult *stepResult = [result stepResultForStepIdentifier:step.identifier];
+//  ORKQuestionResult *result1 = (ORKQuestionResult *)(stepResult.results.count > 0 ? stepResult.results.firstObject : nil);
+//  if (result1.answer != nil) {
+//      if ([((NSArray *)result1.answer).firstObject isEqualToString:@"2"])
+//      {
+////          return self.step3a;
+//      } else {
+////          return self.step3b;
+//      }
+//  }
+  
+//  let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+//     print("1valval---\(val)")
+  
+//  NSString *val = [ActivityHelper setResultValue];
+  
+  
+//  [health1KitBiological ]
+//  [health ]
+  
+//  [health1KitBiologicalSex]
+  
+  ImageClass *imgObject = [[ImageClass alloc] init];
+  [imgObject imageFromStringWithName:@"asd"];
+  
+  ActivityHelper *activityHelper1 = [[ActivityHelper alloc] init];
+  NSString *val3 =  [activityHelper1 setResultValueWithStepResult:stepResult activityType:@"questionnaire" resultType:step.stepresultType];
+  printf("val3---%@----", val3);
+  
+//  ActivityHelper* myScript = [[ActivityHelper alloc] init];
+//
+//  [ActivityHelper isValidObject]
+  
     NSArray *steps = _steps;
     
     if (steps.count <= 0) {
@@ -130,7 +189,14 @@
         NSUInteger index = [self indexOfStep:step];
         
         if (NSNotFound != index && index != (steps.count - 1)) {
+          if ([step.steppredestinationTrueStepIndex  isEqual: @"6"]) {
+            nextStep = steps[6];
+          } else if ([step.steppredestinationTrueStepIndex  isEqual: @"8"]) {
+            nextStep = steps[13];
+          }
+          else {
             nextStep = steps[index + 1];
+          }
         }
     }
     return nextStep;

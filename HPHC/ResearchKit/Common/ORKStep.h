@@ -148,6 +148,20 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, nullable) NSString *text;
 
+@property (nonatomic, copy, nullable) NSString *steppredestinationTrueStepKey;
+
+@property (nonatomic, copy, nullable) NSString *steppredestinationFalseStepKey;
+
+@property (nonatomic, copy, nullable) NSString *steppredestinationTrueStepIndex;
+
+@property (nonatomic, copy, nullable) NSString *steppredestinationFalseStepIndex;
+
+@property (nonatomic, copy, nullable) NSString *steppreoperator;
+
+@property (nonatomic, copy, nullable) NSString *stepprevalue;
+
+@property (nonatomic, copy, nullable) NSString *stepresultType;
+
 /**
  The task that contains the step.
  

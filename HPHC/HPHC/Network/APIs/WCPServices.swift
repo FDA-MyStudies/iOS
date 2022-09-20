@@ -494,6 +494,45 @@ class WCPServices: NSObject {
     }
     
     func handleGetStudyActivityMetadata(response: Dictionary<String, Any>){
+      print("1responseresponse---\(response)")
+      
+      
+      
+      let val1 = UserDefaults.standard.value(forKey: "changeActivity") as? Bool ?? true
+      if val1 {
+        UserDefaults.standard.set(false, forKey: "changeActivity")
+        UserDefaults.standard.synchronize()
+      } else {
+        UserDefaults.standard.set(true, forKey: "changeActivity")
+        UserDefaults.standard.synchronize()
+      }
+      
+      let jsonName = val1 ? "iOSActivity2" : "iOSActivity2"
+      var response2: Dictionary<String, Any> = [:]
+      // Comment out when done
+             let filePath  = Bundle.main.path(forResource: jsonName, ofType: "json")
+             let data = NSData(contentsOfFile: filePath!)
+
+             do {
+                  response2 = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String, Any> ?? [:]
+
+               print("2responseresponse---\(response2)")
+
+//               self.handleGetStudyActivityMetadata(response: res as! Dictionary<String, Any>)
+
+//                 if let activites = res![kActivites]  as? Array<Dictionary<String, Any>> {
+//                     if Study.currentStudy != nil {
+//                         for activity in activites {
+//                             let participatedActivity = UserActivityStatus(detail: activity,studyId:(Study.currentStudy?.studyId)!)
+//                             user.participatedActivites.append(participatedActivity)
+//                         }
+//                     }
+//                 }
+             }
+             catch {
+
+             }
+      
         
 //        let filePath  = Bundle.main.path(forResource: "ActivityMetadata TEST1", ofType: "json") // Activity_Metadata_Other
 //        let data = NSData(contentsOfFile: filePath!)
@@ -512,7 +551,7 @@ class WCPServices: NSObject {
 //
 //        Study.currentActivity?.setActivityMetaData(activityDict: activities)
         
-        Study.currentActivity?.setActivityMetaData(activityDict: response[kActivity] as! Dictionary<String, Any>)
+        Study.currentActivity?.setActivityMetaData(activityDict: response2[kActivity] as! Dictionary<String, Any>)
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
             
@@ -521,7 +560,7 @@ class WCPServices: NSObject {
         }
         
         // Save and Update activity meta data
-        DBHandler.saveActivityMetaData(activity: Study.currentActivity!, data: response)
+        DBHandler.saveActivityMetaData(activity: Study.currentActivity!, data: response2)
         DBHandler.updateActivityMetaData(activity: Study.currentActivity!)
         
     }
@@ -593,6 +632,8 @@ extension WCPServices:NMWebServiceDelegate{
         case .activityList:
             self.handleStudyActivityList(response: response as! Dictionary<String, Any>)
         case .activity:
+          print("1responseresponse---\(response)")
+         
             self.handleGetStudyActivityMetadata(response: response as! Dictionary<String, Any>)
         case .studyDashboard:
             self.handleStudyDashboard(response: response as! Dictionary<String, Any>)

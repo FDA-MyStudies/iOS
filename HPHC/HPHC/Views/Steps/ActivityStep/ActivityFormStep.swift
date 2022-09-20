@@ -35,10 +35,10 @@ class ActivityFormStep: ActivityStep {
     /**
      initializer with step dictiionary containing form items
      */
-    override func initWithDict(stepDict: Dictionary<String, Any>) {
+    override func initWithDict(stepDict: Dictionary<String, Any>, allSteps: Array<Dictionary<String, Any>>?) {
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
             
-            super.initWithDict(stepDict: stepDict)
+          super.initWithDict(stepDict: stepDict, allSteps: allSteps)
             if Utilities.isValidObject(someObject: stepDict[kStepFormSteps] as AnyObject ){
                 self.itemsArray = (stepDict[kStepFormSteps] as? [Dictionary<String, Any>])!
             }
@@ -83,7 +83,7 @@ class ActivityFormStep: ActivityStep {
                 if  Utilities.isValidObject(someObject: dict  as AnyObject?){
                     
                     let questionStep: ActivityQuestionStep? = ActivityQuestionStep()
-                    questionStep?.initWithDict(stepDict: dict)
+                  questionStep?.initWithDict(stepDict: dict, allSteps: self.itemsArray)
                     
                     let orkQuestionStep:ORKQuestionStep = (questionStep?.getQuestionStep())!
                     

@@ -64,7 +64,7 @@ class ActivityStep {
   
   var pipingsourceQuestionKey: String?
   var pipingSnippet: String?
-  var sourcePreLogicQuestionKey: String?
+  var sourcePreLogicQuestionKey: String? // remove
   var isPiping: Bool?
   
   var preactivityVersion: String?
@@ -75,6 +75,8 @@ class ActivityStep {
   var predestinationTrueStepIndex: String?
   var preoperator: String?
   var prevalue: String?
+  var presourceQuestionKey: String?
+  var predefaultVisibility: String?
   
     var groupName: String?
     var repeatable: Bool? // used for RepeatableFormStep
@@ -106,6 +108,8 @@ class ActivityStep {
       self.predestinationTrueStepIndex = ""
       self.preoperator = ""
       self.prevalue = ""
+      self.presourceQuestionKey = ""
+      self.predefaultVisibility = ""
       
         self.groupName = ""
         self.repeatable = false
@@ -137,6 +141,8 @@ class ActivityStep {
           predestinationTrueStepIndex: String,
           preoperator: String,
           prevalue: String,
+          presourceQuestionKey: String,
+          predefaultVisibility: String,
           
           groupName: String,
           repeatable: Bool,
@@ -163,7 +169,7 @@ class ActivityStep {
        self.predestinationFalseStepIndex = predestinationFalseStepIndex
        self.predestinationTrueStepIndex = predestinationTrueStepIndex
        self.preoperator = preoperator
-       self.prevalue = prevalue
+       self.predefaultVisibility = predefaultVisibility
        
         self.groupName = groupName
         self.repeatable = repeatable
@@ -230,6 +236,11 @@ class ActivityStep {
           
           preoperator = val2?["operator"] ?? ""
           prevalue = val2?["value"] ?? ""
+//          sourcePreLogicQuestionKey = stepDict["sourceQuestionKey"] as? String
+          presourceQuestionKey = stepDict["sourceQuestionKey"] as? String
+          
+          let valdefalut = stepDict["defaultVisibility"] as? Bool ?? true
+          predefaultVisibility = valdefalut ? "true" : "false"
           
           isPiping = stepDict["isPiping"] as? Bool
           

@@ -534,6 +534,8 @@ class ActivityQuestionStep: ActivityStep {
                   questionStep?.stepresultType = resultType as? String ?? ""
                   questionStep?.steppreoperator = preoperator
                   questionStep?.stepprevalue = prevalue
+                  questionStep?.steppresourceQuestionKey = presourceQuestionKey
+                  questionStep?.steppredefaultVisibility = predefaultVisibility
                   
                   
                     return questionStep
@@ -814,6 +816,8 @@ class ActivityQuestionStep: ActivityStep {
           questionStep?.stepresultType = resultType as? String ?? ""
           questionStep?.steppreoperator = preoperator
           questionStep?.stepprevalue = prevalue
+          questionStep?.steppresourceQuestionKey = presourceQuestionKey
+          questionStep?.steppredefaultVisibility = predefaultVisibility
           
             return questionStep!
         } else {

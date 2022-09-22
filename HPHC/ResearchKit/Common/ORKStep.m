@@ -96,6 +96,8 @@
   step.stepresultType = _stepresultType;
   step.steppreoperator = _steppreoperator;
   step.stepprevalue = _stepprevalue;
+  step.steppresourceQuestionKey = _steppresourceQuestionKey;
+  step.steppredefaultVisibility = _steppredefaultVisibility;
     step.optional = _optional;
     step.text = _text;
     step.shouldTintImages = _shouldTintImages;

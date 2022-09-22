@@ -23,7 +23,64 @@ import Foundation
 ////    }
 //}
 
-  @objc public func setResultValue(stepResult: ORKStepResult, activityType: String, resultType: String) -> NSString {
+//  @objc public func setResultValue(stepResult: ORKStepResult, activityType: String, resultType: String, allSteps: [ORKStep], currentStep: ORKStep) -> NSString {
+//    var valAnswer = ""
+//    let valRes = stepResult.results?.count ?? 0
+//    if valRes > 0 {
+//
+//        if  activityType == "questionnaire" {
+//            // for question Step
+////            if stepResult.results?.count == 1 && self.type != .form {
+//          if stepResult.results?.count == 1 { // && activityType != .form {
+//            print("1questionstepResult---\(stepResult.results?.first as? ORKQuestionResult?)")
+//                if let questionstepResult: ORKQuestionResult? = stepResult.results?.first as? ORKQuestionResult? {
+//                  print("2questionstepResult---\(questionstepResult)")
+//                  let val = self.setValue(questionstepResult:questionstepResult!, resultType: resultType )
+//
+//                  let val1 = self.setValue(questionstepResult:questionstepResult!, resultType: resultType ) as NSString
+//
+//                  print("resulttt---\(currentStep.stepprevalue)")
+//                  if let operato = currentStep.steppreoperator, operato == "=" {
+//                    if val == currentStep.stepprevalue {
+//                      print("1resulttt---\(val)")
+//                    }
+//                  }
+//                  else if let operato = currentStep.steppreoperator, operato == ">" {
+//                    if let intVal1 = Double(val), let intVal2 = Double(currentStep.stepprevalue ?? ""),
+//                       intVal1 > intVal2 {
+//                      print("2resulttt---\(val)")
+//                      let destinStep = currentStep.steppredestinationTrueStepKey ?? ""
+//
+////                      if destinStep != "" {
+////                        findTheIndex(allSteps: allSteps)
+////                      }
+//                      return destinStep  as NSString
+//
+//                    }
+//                  }
+//                  else if let operato = currentStep.steppreoperator, operato == "<" {
+//                    if let intVal1 = Int(val), let intVal2 = Int(currentStep.stepprevalue ?? ""),
+//                        intVal1 < intVal2 {
+//                      print("3resulttt---\(val)")
+//                    }
+//                  }
+//
+//                  print("5questionstepResult---\(val1)")
+//
+//
+//
+//
+//                    return val1
+//                }
+//            }
+//
+//        }
+//
+//    }
+//  return ""
+//}
+  
+  @objc public func setResultValue(stepResult: ORKStepResult, activityType: String, resultType: String, allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {
     var valAnswer = ""
     let valRes = stepResult.results?.count ?? 0
     if valRes > 0 {
@@ -35,20 +92,60 @@ import Foundation
             print("1questionstepResult---\(stepResult.results?.first as? ORKQuestionResult?)")
                 if let questionstepResult: ORKQuestionResult? = stepResult.results?.first as? ORKQuestionResult? {
                   print("2questionstepResult---\(questionstepResult)")
-                  let val = self.setValue(questionstepResult:questionstepResult!, resultType: resultType ) 
+                  let val = self.setValue(questionstepResult:questionstepResult!, resultType: resultType )
                   
                   let val1 = self.setValue(questionstepResult:questionstepResult!, resultType: resultType ) as NSString
                   
+                  print("resulttt---\(currentStep.stepprevalue)")
+                  if let operato = currentStep.steppreoperator, operato == "=" {
+                    if val == currentStep.stepprevalue {
+                      print("1resulttt---\(val)")
+                    }
+                  }
+                  else if let operato = currentStep.steppreoperator, operato == ">" {
+                    if let intVal1 = Double(val), let intVal2 = Double(currentStep.stepprevalue ?? ""),
+                       intVal1 > intVal2 {
+                      print("2resulttt---\(val)")
+                      let destinStep = currentStep.steppredestinationTrueStepKey ?? ""
+                      
+//                      if destinStep != "" {
+//                        findTheIndex(allSteps: allSteps)
+//                      }
+                      
+                      for aSteps in allSteps {
+                        if aSteps.identifier == destinStep {
+                          return aSteps
+                        }
+                      }
+                      
+                    }
+                  }
+                  else if let operato = currentStep.steppreoperator, operato == "<" {
+                    if let intVal1 = Int(val), let intVal2 = Int(currentStep.stepprevalue ?? ""),
+                        intVal1 < intVal2 {
+                      print("3resulttt---\(val)")
+                    }
+                  }
+                  
                   print("5questionstepResult---\(val1)")
-                    return val1
+                  
+                  
+                  
+                  
+//                    return val1
                 }
             }
             
         }
       
     }
-  return ""
+  return nil
 }
+  
+//  func findTheIndex(allSteps: [ORKStep]) -> String {
+//
+//    return ""
+//  }
 
 func setValue(questionstepResult: ORKQuestionResult, resultType: String) -> String {
     switch questionstepResult.questionType.rawValue {
@@ -330,6 +427,29 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String) -> Stri
 //      }
 //    return ""
 //  }
+  
+  
+  @objc public func findPreviousStep(taskResult: ORKTaskResult, allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {
+    var valAnswer = ""
+    let valRes = taskResult.results?.count ?? 0
+    if valRes > 0 {
+      if let valMainResult = taskResult.results, let valSourceKey = currentStep.steppresourceQuestionKey {
+        for aSteps in valMainResult {
+          if aSteps.identifier == valSourceKey {
+            
+            for aSteps1 in allSteps {
+              if aSteps1.identifier == valSourceKey {
+                return aSteps1
+              }
+            }
+            
+          }
+        }
+        
+      }
+    }
+    return nil
+  }
   
 }
 

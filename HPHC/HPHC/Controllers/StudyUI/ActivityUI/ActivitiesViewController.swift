@@ -56,6 +56,8 @@ class ActivitiesViewController : UIViewController{
     private var managedResult: [String: Any] = [:]
     
     let labkeyResponseFetch = ResponseDataFetch()
+  
+  var isActivityDismissed = false
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
@@ -140,6 +142,23 @@ class ActivitiesViewController : UIViewController{
             self.tableView?.isHidden = false
             self.labelNoNetworkAvailable?.isHidden = true
         }
+      
+      if let activityId = UserDefaults.standard.string(forKey: "activityId") {
+          let sectionCount = tableViewSections.count
+          for section in 0..<sectionCount {
+              let rowDetail = tableViewSections[section]
+              let activities = (rowDetail["activities"] as? Array<Activity>)!
+              if activities.count > 0 {
+                  if let row = activities.firstIndex(where: {$0.actvityId == activityId}) {
+                      let indexPath = IndexPath(row: row, section: section)
+                      self.selectTableCell(indexPath: indexPath)
+//                        UserDefaults.standard.setValue("TextScale", forKey: "identifier")
+                      break
+                  }
+              }
+          }
+          UserDefaults.standard.setValue(nil, forKey: "activityId")
+      }
         
     }
   
@@ -1022,7 +1041,74 @@ extension ActivitiesViewController: UITableViewDelegate{
         case .upcoming, .past: break
             
         }
+      
+      selectTableCell(indexPath: indexPath)
     }
+  
+  private func selectTableCell(indexPath: IndexPath) {
+      let availabilityStatus = ActivityAvailabilityStatus(rawValue: indexPath.section)!
+      
+      switch availabilityStatus {
+      case .current:
+          
+          let rowDetail = tableViewSections[indexPath.section]
+          let activities = (rowDetail["activities"] as? Array<Activity>)!
+          
+          let activity = activities[indexPath.row]
+          // Check for activity run status & if run is available
+          if activity.currentRun != nil {
+              if activity.userParticipationStatus != nil {
+                  let activityRunParticipationStatus = activity.userParticipationStatus
+                  if activityRunParticipationStatus?.status == .yetToJoin
+                      || activityRunParticipationStatus?.status == .inProgress {
+                      
+                      Study.updateCurrentActivity(activity: activities[indexPath.row])
+                      
+                      // Following to be commented
+                      // self.createActivity()
+                      Logger.sharedInstance.info("Activity Fetching from db")
+                      // check in database
+                      DBHandler.loadActivityMetaData(
+                          activity: activities[indexPath.row],
+                          completionHandler: { (_) in
+                              
+                              //                            if found {
+                              //
+                              //                                self.createActivity()
+                              //                            } else {
+                              //  if NetworkManager.isNetworkAvailable() {
+                              if let studyID = Study.currentStudy?.studyId,
+                                 let activityID = Study.currentActivity?.actvityId,
+                                 let version = Study.currentActivity?.version {
+                                  WCPServices().getStudyActivityMetadata(studyId: studyID,
+                                                                         activityId: activityID,
+                                                                         activityVersion: version,
+                                                                         delegate: self)
+                                  //                                } else if found{
+                                  //                                    self.createActivity()
+                                  //                                }
+                                  ///  }
+                              }
+                          })
+                      
+                      self.updateActivityStatusToInProgress()
+                      self.selectedIndexPath = indexPath
+                      
+                  } else {
+                      
+                  }
+              }
+              
+          } else if activity.userParticipationStatus?.status == .abandoned {
+              
+              UIUtilities.showAlertWithMessage(alertMessage: kActivityAbondonedAlertMessage)
+          }
+          
+      case .upcoming, .past: break
+          
+      }
+  }
+  
 }
 
 // MARK: - ActivitiesCell Delegate
@@ -1668,7 +1754,9 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
           if (questionstepResult as? ORKScaleQuestionResult) != nil {
               let stepTypeResult = (questionstepResult as? ORKScaleQuestionResult)!
             print("1res---\(stepTypeResult.answer)---\(stepTypeResult.scaleAnswer)")
+            if stepTypeResult.scaleAnswer != nil {
             return "\(stepTypeResult.scaleAnswer!)"
+            }
              } else {
               let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
 //               print("2res---\(stepTypeResult.answer)---\(stepTypeResult.choiceAnswers)")
@@ -1677,8 +1765,9 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                  print("3res---\(stepTypeResult.choiceAnswers?.first)")
                  
 //                 getActualAnswer(choiceSelected: "\(stepTypeResult.choiceAnswers!.first!)", identifierOfRes: <#T##String#>)
-                 
+                 if stepTypeResult.choiceAnswers != nil {
                  return "\(stepTypeResult.choiceAnswers!.first!)" //check
+                 }
                }
                
           }
@@ -1921,8 +2010,16 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
 //                pipingsourceQuestionKey = activityStepArray?.last?.pipingsourceQuestionKey ?? ""
 //              }
           }
+    
+    
   }
     
+  //rinuthaa
+  @objc func dismisscontroller() {
+      dismiss(animated: true, completion: nil)
+  }
+  //rinuthab
+  
     // MARK: - StepViewController Delegate
     public func stepViewController(_ stepViewController: ORKStepViewController,
                                    didFinishWith direction: ORKStepViewControllerNavigationDirection){
@@ -1948,6 +2045,37 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
 //      step.title = "GGG"
 //      step.text = "GGG"
 //      step
+      
+//      //rinuthaa
+//      //Perform dismiss task here :
+//           if let result = taskViewController.result.stepResult(forStepIdentifier: "textscale") {
+//
+//               self.isActivityDismissed = true
+//               self.managedResult["textscale"] = result
+//               self.updateActivityStatusToComplete()
+//
+//   //            if isActivityDismissed {
+//   ////                self.addProgressIndicator()
+//   //
+//   //            }
+//
+//               UserDefaults.standard.setValue("Responce_Types", forKey: "activityId")
+//
+//               UserDefaults.standard.setValue("textscale", forKey: "identifier")
+//
+//               //dismiss
+//               perform(#selector(dismisscontroller), with: self, afterDelay: 1.5)
+//
+//           }
+//
+//           //Going to next activity's particular step
+//           if isActivityDismissed {
+//               print("Came to next activity")
+//           }
+//      //rinuthab
+      
+      
+      
      
       let activityCu = Study.currentActivity
       var valPiping = false

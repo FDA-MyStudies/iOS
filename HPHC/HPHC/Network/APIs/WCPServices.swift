@@ -507,7 +507,7 @@ class WCPServices: NSObject {
         UserDefaults.standard.synchronize()
       }
       
-      let jsonName = val1 ? "iOSActivity2" : "iOSActivity2"
+      let jsonName = val1 ? "iOSActivity6" : "iOSActivity6"
       var response2: Dictionary<String, Any> = [:]
       // Comment out when done
              let filePath  = Bundle.main.path(forResource: jsonName, ofType: "json")
@@ -551,7 +551,7 @@ class WCPServices: NSObject {
 //
 //        Study.currentActivity?.setActivityMetaData(activityDict: activities)
         
-        Study.currentActivity?.setActivityMetaData(activityDict: response2[kActivity] as! Dictionary<String, Any>)
+        Study.currentActivity?.setActivityMetaData(activityDict: response[kActivity] as! Dictionary<String, Any>)
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
             
@@ -560,7 +560,7 @@ class WCPServices: NSObject {
         }
         
         // Save and Update activity meta data
-        DBHandler.saveActivityMetaData(activity: Study.currentActivity!, data: response2)
+        DBHandler.saveActivityMetaData(activity: Study.currentActivity!, data: response)
         DBHandler.updateActivityMetaData(activity: Study.currentActivity!)
         
     }

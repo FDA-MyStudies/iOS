@@ -536,6 +536,7 @@ class ActivityQuestionStep: ActivityStep {
                   questionStep?.stepprevalue = prevalue
                   questionStep?.steppresourceQuestionKey = presourceQuestionKey
                   questionStep?.steppredefaultVisibility = predefaultVisibility
+                  questionStep?.steppreisHidden = preisHidden
                   
                   
                     return questionStep
@@ -818,6 +819,7 @@ class ActivityQuestionStep: ActivityStep {
           questionStep?.stepprevalue = prevalue
           questionStep?.steppresourceQuestionKey = presourceQuestionKey
           questionStep?.steppredefaultVisibility = predefaultVisibility
+          questionStep?.steppreisHidden = preisHidden
           
             return questionStep!
         } else {

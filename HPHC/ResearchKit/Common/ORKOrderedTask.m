@@ -235,7 +235,7 @@
             nextStep = steps[index - 1];
         }
     }
-  
+//  if ([step.steppreisHidden isEqual: @"false"] ) {//check
   if ([step.steppredefaultVisibility isEqual: @"false"] ) {
 //      nextStep = nil;
     if (![step.steppresourceQuestionKey  isEqual: @""]) {

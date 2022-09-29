@@ -121,11 +121,24 @@ import Foundation
                     }
                   }
                   else if let operato = currentStep.steppreoperator, operato == "<" {
-                    if let intVal1 = Int(val), let intVal2 = Int(currentStep.stepprevalue ?? ""),
-                        intVal1 < intVal2 {
-                      print("3resulttt---\(val)")
+                    if let intVal1 = Double(val), let intVal2 = Double(currentStep.stepprevalue ?? ""),
+                       intVal1 < intVal2 {
+                      print("2resulttt---\(val)")
+                      let destinStep = currentStep.steppredestinationTrueStepKey ?? ""
+                      
+//                      if destinStep != "" {
+//                        findTheIndex(allSteps: allSteps)
+//                      }
+                      
+                      for aSteps in allSteps {
+                        if aSteps.identifier == destinStep {
+                          return aSteps
+                        }
+                      }
+                      
                     }
                   }
+
                   
                   print("5questionstepResult---\(val1)")
                   
@@ -155,7 +168,9 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String) -> Stri
         if (questionstepResult as? ORKScaleQuestionResult) != nil {
             let stepTypeResult = (questionstepResult as? ORKScaleQuestionResult)!
           print("1res---\(stepTypeResult.answer)---\(stepTypeResult.scaleAnswer)")
+          if stepTypeResult.scaleAnswer != nil {
           return "\(stepTypeResult.scaleAnswer!)"
+          }
            } else {
             let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
 //               print("2res---\(stepTypeResult.answer)---\(stepTypeResult.choiceAnswers)")

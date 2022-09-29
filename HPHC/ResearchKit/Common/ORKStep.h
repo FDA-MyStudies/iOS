@@ -162,6 +162,8 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, copy, nullable) NSString *steppredefaultVisibility;
 
+@property (nonatomic, copy, nullable) NSString *steppreisHidden;
+
 @property (nonatomic, copy, nullable) NSString *steppresourceQuestionKey;
 
 @property (nonatomic, copy, nullable) NSString *stepresultType;

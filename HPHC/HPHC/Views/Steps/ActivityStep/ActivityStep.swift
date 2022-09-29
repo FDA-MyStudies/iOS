@@ -63,6 +63,8 @@ class ActivityStep {
     var skippable: Bool?
   
   var pipingsourceQuestionKey: String?
+  var pipingactivityVersion: String?
+  var pipingactivityid: String?
   var pipingSnippet: String?
   var sourcePreLogicQuestionKey: String? // remove
   var isPiping: Bool?
@@ -77,6 +79,7 @@ class ActivityStep {
   var prevalue: String?
   var presourceQuestionKey: String?
   var predefaultVisibility: String?
+  var preisHidden: String?
   
     var groupName: String?
     var repeatable: Bool? // used for RepeatableFormStep
@@ -96,6 +99,8 @@ class ActivityStep {
         self.skippable = false
       
       self.pipingsourceQuestionKey = ""
+      self.pipingactivityVersion = ""
+      self.pipingactivityid = ""
       self.pipingSnippet = ""
       self.sourcePreLogicQuestionKey = ""
       self.isPiping = false
@@ -110,6 +115,7 @@ class ActivityStep {
       self.prevalue = ""
       self.presourceQuestionKey = ""
       self.predefaultVisibility = ""
+      self.preisHidden = ""
       
         self.groupName = ""
         self.repeatable = false
@@ -129,6 +135,8 @@ class ActivityStep {
           skippable: Bool,
           
           pipingsourceQuestionKey: String,
+          pipingactivityVersion: String,
+          pipingactivityid: String,
           pipingSnippet: String,
           sourcePreLogicQuestionKey: String,
           isPiping: Bool,
@@ -143,6 +151,7 @@ class ActivityStep {
           prevalue: String,
           presourceQuestionKey: String,
           predefaultVisibility: String,
+          preisHidden: String,
           
           groupName: String,
           repeatable: Bool,
@@ -158,6 +167,8 @@ class ActivityStep {
         self.skippable = skippable
        
        self.pipingsourceQuestionKey = pipingsourceQuestionKey
+       self.pipingactivityVersion = pipingactivityVersion
+       self.pipingactivityid = pipingactivityid
        self.pipingSnippet = pipingSnippet
        self.sourcePreLogicQuestionKey = sourcePreLogicQuestionKey
        self.isPiping = isPiping
@@ -170,6 +181,7 @@ class ActivityStep {
        self.predestinationTrueStepIndex = predestinationTrueStepIndex
        self.preoperator = preoperator
        self.predefaultVisibility = predefaultVisibility
+       self.preisHidden = preisHidden
        
         self.groupName = groupName
         self.repeatable = repeatable
@@ -213,14 +225,16 @@ class ActivityStep {
             let val1 = stepDict["piping"] as? [String: String]
           pipingSnippet = val1?["pipingSnippet"] ?? ""
           pipingsourceQuestionKey = val1?["sourceQuestionKey"] ?? ""
+          pipingactivityVersion = val1?["activityVersion"] ?? ""
+          pipingactivityid = val1?["activityId"] ?? ""
 //          }
           sourcePreLogicQuestionKey = stepDict["sourceQuestionKey"] as? String
           
           let val2 = stepDict["preLoadLogic"] as? [String: String]
           preactivityVersion = val2?["activityVersion"] ?? ""
-          preactivityid = val2?["activityid"] ?? ""
+          preactivityid = val2?["activityId"] ?? ""
           predestinationFalseStepKey = val2?["destinationFalseStepKey"] ?? ""
-          predestinationTrueStepKey = val2?["destinationTrueStepKey"] ?? ""
+          predestinationTrueStepKey = val2?["destinationStepKey"] ?? ""
           
           if predestinationFalseStepKey != "" {
           predestinationFalseStepIndex = getIndexByIdentifier(identifier1: predestinationFalseStepKey ?? "", allSteps: allSteps)
@@ -241,6 +255,9 @@ class ActivityStep {
           
           let valdefalut = stepDict["defaultVisibility"] as? Bool ?? true
           predefaultVisibility = valdefalut ? "true" : "false"
+          
+          let valisHidden = stepDict["isHidden"] as? Bool ?? true
+          preisHidden = valisHidden ? "true" : "false"
           
           isPiping = stepDict["isPiping"] as? Bool
           

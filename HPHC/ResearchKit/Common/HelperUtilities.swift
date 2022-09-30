@@ -80,7 +80,7 @@ import Foundation
 //  return ""
 //}
   
-  @objc public func setResultValue(stepResult: ORKStepResult, activityType: String, resultType: String, allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {
+  @objc public func setResultValue(stepResult: ORKStepResult, activityType: String, resultType: String, allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {// (ORKStep?, NSString?)  {
     var valAnswer = ""
     let valRes = stepResult.results?.count ?? 0
     if valRes > 0 {
@@ -103,10 +103,18 @@ import Foundation
                       
                       let destinStep = currentStep.steppredestinationTrueStepKey ?? ""
                                        
+                      var identifierfound = false
                       for aSteps in allSteps {
                         if aSteps.identifier == destinStep {
+                          identifierfound = true
                           return aSteps
                         }
+                      }
+                      if !identifierfound {
+                        let destinStep = currentStep.steppreactivityid ?? ""
+                        var valDummy = ORKStep(identifier: "valDummy")
+                        valDummy.steppreactivityid = destinStep
+                        return valDummy
                       }
                       
                     }
@@ -120,11 +128,17 @@ import Foundation
 //                      if destinStep != "" {
 //                        findTheIndex(allSteps: allSteps)
 //                      }
-                      
+                      var identifierfound = false
                       for aSteps in allSteps {
                         if aSteps.identifier == destinStep {
+                          identifierfound = true
                           return aSteps
                         }
+                      }
+                      if !identifierfound {
+                        let destinStep = currentStep.steppreactivityid ?? ""
+                        var valDummy = ORKStep(identifier: "valDummy")
+                        return valDummy
                       }
                       
                     }
@@ -184,7 +198,7 @@ import Foundation
         }
       
     }
-  return nil
+    return nil
 }
   
   func meetTheCondition(operato: String, actualResult: String, comparisionValues: String) -> Bool {

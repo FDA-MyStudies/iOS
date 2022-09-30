@@ -176,6 +176,16 @@
   
   printf("val3---%@----", val3);
   
+  if ([val3.identifier  isEqual: @"valDummy"]) {
+    NSString *valueToSave = val3.steppreactivityid;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:valueToSave
+                     forKey:@"jumpActivity"];
+    [userDefaults synchronize];
+    
+    return nil;
+  }
+  
 //  ActivityHelper* myScript = [[ActivityHelper alloc] init];
 //
 //  [ActivityHelper isValidObject]

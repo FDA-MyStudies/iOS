@@ -528,6 +528,7 @@ class ActivityQuestionStep: ActivityStep {
                   
                   
                   questionStep?.steppredestinationTrueStepKey = predestinationTrueStepKey
+                  questionStep?.steppreactivityid = preactivityid
                   questionStep?.steppredestinationFalseStepKey = predestinationFalseStepKey
                   questionStep?.steppredestinationTrueStepIndex = predestinationTrueStepIndex
                   questionStep?.steppredestinationFalseStepIndex = predestinationFalseStepIndex
@@ -811,6 +812,7 @@ class ActivityQuestionStep: ActivityStep {
             questionStep?.text = text
           
           questionStep?.steppredestinationTrueStepKey = predestinationTrueStepKey
+          questionStep?.steppreactivityid = preactivityid
           questionStep?.steppredestinationFalseStepKey = predestinationFalseStepKey
           questionStep?.steppredestinationTrueStepIndex = predestinationTrueStepIndex
           questionStep?.steppredestinationFalseStepIndex = predestinationFalseStepIndex

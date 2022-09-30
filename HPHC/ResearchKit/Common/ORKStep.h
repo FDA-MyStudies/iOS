@@ -150,6 +150,8 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, copy, nullable) NSString *steppredestinationTrueStepKey;
 
+@property (nonatomic, copy, nullable) NSString *steppreactivityid;
+
 @property (nonatomic, copy, nullable) NSString *steppredestinationFalseStepKey;
 
 @property (nonatomic, copy, nullable) NSString *steppredestinationTrueStepIndex;

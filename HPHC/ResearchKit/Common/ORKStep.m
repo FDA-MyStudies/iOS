@@ -90,6 +90,7 @@
     ORKStep *step = [[[self class] allocWithZone:zone] initWithIdentifier:[_identifier copy]];
     step.title = _title;
   step.steppredestinationTrueStepKey = _steppredestinationTrueStepKey;
+  step.steppreactivityid = _steppreactivityid;
   step.steppredestinationFalseStepKey = _steppredestinationFalseStepKey;
   step.steppredestinationTrueStepIndex = _steppredestinationTrueStepIndex;
   step.steppredestinationFalseStepIndex = _steppredestinationFalseStepIndex;

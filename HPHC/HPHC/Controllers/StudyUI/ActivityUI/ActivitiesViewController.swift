@@ -1284,6 +1284,92 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
         return true
     }
+  
+  func jumpActi(activityId: String) {
+    
+        let sectionCount = tableViewSections.count
+        for section in 0..<sectionCount {
+            let rowDetail = tableViewSections[section]
+            let activities = (rowDetail["activities"] as? Array<Activity>)!
+            if activities.count > 0 {
+                if let row = activities.firstIndex(where: {$0.actvityId == activityId}) {
+                    let indexPath = IndexPath(row: row, section: section)
+                    self.selectTableCell(indexPath: indexPath)
+//                        UserDefaults.standard.setValue("TextScale", forKey: "identifier")
+                    break
+                }
+            }
+        }
+        UserDefaults.standard.setValue("", forKey: "jumpActivity")
+    UserDefaults.standard.synchronize()
+    
+  }
+  
+  func jumpToActivity(identifier: String, indexPath: IndexPath) {
+    let availabilityStatus = ActivityAvailabilityStatus(rawValue: indexPath.section)!
+    
+    switch availabilityStatus {
+    case .current:
+        
+        let rowDetail = tableViewSections[indexPath.section]
+        let activities = (rowDetail["activities"] as? Array<Activity>)!
+        
+        let activity = activities[indexPath.row]
+        // Check for activity run status & if run is available
+        if activity.currentRun != nil {
+            if activity.userParticipationStatus != nil {
+                let activityRunParticipationStatus = activity.userParticipationStatus
+                if activityRunParticipationStatus?.status == .yetToJoin
+                    || activityRunParticipationStatus?.status == .inProgress {
+                    
+                    Study.updateCurrentActivity(activity: activities[indexPath.row])
+                    
+                    // Following to be commented
+                    // self.createActivity()
+                    Logger.sharedInstance.info("Activity Fetching from db")
+                    // check in database
+                    DBHandler.loadActivityMetaData(
+                        activity: activities[indexPath.row],
+                        completionHandler: { (_) in
+                            
+//                            if found {
+//
+//                                self.createActivity()
+//                            } else {
+                      //  if NetworkManager.isNetworkAvailable() {
+                            if let studyID = Study.currentStudy?.studyId,
+                                let activityID = Study.currentActivity?.actvityId,
+                                let version = Study.currentActivity?.version {
+                                WCPServices().getStudyActivityMetadata(studyId: studyID,
+                                                                       activityId: activityID,
+                                                                       activityVersion: version,
+                                                                       delegate: self)
+//                                } else if found{
+//                                    self.createActivity()
+//                                }
+                                ///  }
+                        }
+                    })
+                    
+                    self.updateActivityStatusToInProgress()
+                    self.selectedIndexPath = indexPath
+                    
+                } else {
+                    
+                }
+            }
+            
+        } else if activity.userParticipationStatus?.status == .abandoned {
+            
+            UIUtilities.showAlertWithMessage(alertMessage: kActivityAbondonedAlertMessage)
+        }
+        
+    case .upcoming, .past: break
+        
+    }
+  
+  selectTableCell(indexPath: indexPath)
+}
     
     /// This method will update the result for other choices for each step
     fileprivate func updateResultForChoiceQuestions(_ taskViewController: ORKTaskViewController) {
@@ -1317,7 +1403,11 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
     public func taskViewController(_ taskViewController: ORKTaskViewController,
                                    didFinishWith reason: ORKTaskViewControllerFinishReason,
                                    error: Error?) {
-        
+        print("taskViewControllertaskViewController---")
+      
+      
+      
+      
         // Enable Custom Keypad with toolbar
         // IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
@@ -1543,6 +1633,17 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         }
         
       })
+      
+      
+      let ud1 = UserDefaults.standard
+      
+      let valJum = ud1.object(forKey: "jumpActivity") as? String ?? ""
+      if valJum != "" {
+        print("valJum---\(valJum)")
+        jumpActi(activityId: valJum)
+      }
+      
+      
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController,

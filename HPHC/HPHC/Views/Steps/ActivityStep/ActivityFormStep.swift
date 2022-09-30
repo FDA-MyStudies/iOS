@@ -82,7 +82,7 @@ class ActivityFormStep: ActivityStep {
                 
                 if  Utilities.isValidObject(someObject: dict  as AnyObject?){
                     
-                    let questionStep: ActivityQuestionStep? = ActivityQuestionStep()
+                  if let questionStep: ActivityQuestionStep? = ActivityQuestionStep() {
                   questionStep?.initWithDict(stepDict: dict, allSteps: self.itemsArray)
                     
                     let orkQuestionStep:ORKQuestionStep = (questionStep?.getQuestionStep())!
@@ -93,7 +93,9 @@ class ActivityFormStep: ActivityStep {
                     formItem01.placeholder = orkQuestionStep.placeholder == nil ? "" :  orkQuestionStep.placeholder
                     formItem01.isOptional = (questionStep?.skippable)!
                     formItemsArray.append(formItem01)
-                    
+                  } else {
+                      Logger.sharedInstance.debug("item Dictionary is null :\(dict)")
+                  }
                 } else {
                     Logger.sharedInstance.debug("item Dictionary is null :\(dict)")
                 }

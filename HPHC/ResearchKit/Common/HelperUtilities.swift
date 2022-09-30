@@ -100,6 +100,15 @@ import Foundation
                   if let operato = currentStep.steppreoperator, operato == "=" {
                     if val == currentStep.stepprevalue {
                       print("1resulttt---\(val)")
+                      
+                      let destinStep = currentStep.steppredestinationTrueStepKey ?? ""
+                                       
+                      for aSteps in allSteps {
+                        if aSteps.identifier == destinStep {
+                          return aSteps
+                        }
+                      }
+                      
                     }
                   }
                   else if let operato = currentStep.steppreoperator, operato == ">" {
@@ -139,6 +148,29 @@ import Foundation
                     }
                   }
 
+                  else if let operato = currentStep.steppreoperator, operato.contains(":") {
+                    
+//                    ley va
+                   let valCondition = meetTheCondition(operato: operato, actualResult: val, comparisionValues: currentStep.stepprevalue ?? "")
+                    
+                    if valCondition {
+                      print("1colonresulttt---\(val)")
+                      let destinStep = currentStep.steppredestinationTrueStepKey ?? ""
+                      
+//                      if destinStep != "" {
+//                        findTheIndex(allSteps: allSteps)
+//                      }
+                      
+                      for aSteps in allSteps {
+                        
+                        if aSteps.identifier == destinStep {
+                          print("aSteps.identifier---\(aSteps.identifier)---\(destinStep)")
+                          return aSteps
+                        }
+                      }
+                      
+                    }
+                  }
                   
                   print("5questionstepResult---\(val1)")
                   
@@ -154,6 +186,89 @@ import Foundation
     }
   return nil
 }
+  
+  func meetTheCondition(operato: String, actualResult: String, comparisionValues: String) -> Bool {
+    var conditonsatisfied = false
+    if let intValactualResult = Double(actualResult) {
+      let valArroperato = operato.components(separatedBy: ":")
+      let valArrcomparisionValues = comparisionValues.components(separatedBy: ":")
+      if valArroperato.count > 0 && valArrcomparisionValues.count > 0 {
+        
+        var valOperatorCount = 0
+        var valcomparisionValuesCount = 0
+        var conditonRequired = ""
+        
+        for valoperato in valArroperato {
+          valOperatorCount += 1
+         var valInternalconditonRequired = ""
+          var valPreviousconditonsatisfied = conditonsatisfied
+          if valoperato == ">" {
+            if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
+               intValactualResult > intVal2 {
+              print("1intValactualResult---\(intValactualResult)")
+              
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+            valcomparisionValuesCount += 1
+          }
+          else if valoperato == "<" {
+            if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
+               intValactualResult < intVal2 {
+              print("2intValactualResult---\(intValactualResult)")
+              
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+            valcomparisionValuesCount += 1
+          }
+          else if valoperato == "=" {
+            if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
+               intValactualResult == intVal2 {
+              print("3intValactualResult---\(intValactualResult)")
+              
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+            
+            valcomparisionValuesCount += 1
+          }
+          
+          else if valoperato == "&&" {
+            
+            valInternalconditonRequired = "&&"
+          }
+          else if valoperato == "||" {
+            
+            valInternalconditonRequired = "||"
+          }
+          
+          if conditonRequired == "&&", valInternalconditonRequired != "&&" {
+            if (valPreviousconditonsatisfied && conditonsatisfied) {
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+          } else if conditonRequired == "||", valInternalconditonRequired != "||" {
+            if valPreviousconditonsatisfied || conditonsatisfied {
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+          }
+          
+          conditonRequired = valInternalconditonRequired
+        }
+        valcomparisionValuesCount += 1
+      }
+      
+    }
+    print("conditonsatisfied---\(conditonsatisfied)")
+    return conditonsatisfied
+  }
   
 //  func findTheIndex(allSteps: [ORKStep]) -> String {
 //

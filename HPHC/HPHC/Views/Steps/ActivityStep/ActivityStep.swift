@@ -222,7 +222,7 @@ class ActivityStep {
           
 //          if Utilities.isValidValue(someObject: stepDict["piping"] as AnyObject )  {
             print("piping---\(stepDict["piping"])")
-            let val1 = stepDict["piping"] as? [String: String]
+            let val1 = stepDict["pipingLogic"] as? [String: String]
           pipingSnippet = val1?["pipingSnippet"] ?? ""
           pipingsourceQuestionKey = val1?["sourceQuestionKey"] ?? ""
           pipingactivityVersion = val1?["activityVersion"] ?? ""
@@ -259,7 +259,7 @@ class ActivityStep {
           let valisHidden = stepDict["isHidden"] as? Bool ?? true
           preisHidden = valisHidden ? "true" : "false"
           
-          isPiping = stepDict["isPiping"] as? Bool
+          isPiping = stepDict["piping"] as? Bool
           
 //          let val7 = activity?.steps
           

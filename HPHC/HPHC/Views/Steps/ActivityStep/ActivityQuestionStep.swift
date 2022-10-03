@@ -530,6 +530,12 @@ class ActivityQuestionStep: ActivityStep {
                   questionStep?.steppredestinationTrueStepKey = predestinationTrueStepKey
                   questionStep?.steppreactivityid = preactivityid
                   questionStep?.steppredestinationFalseStepKey = predestinationFalseStepKey
+                  
+                 let valOtherActiStepId = UserDefaults.standard.value(forKey: "OtherActiStepId") as? String ?? ""
+                  UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
+              UserDefaults.standard.synchronize()
+                  
+                  questionStep?.steppreOtherActiStepId = valOtherActiStepId
                   questionStep?.steppredestinationTrueStepIndex = predestinationTrueStepIndex
                   questionStep?.steppredestinationFalseStepIndex = predestinationFalseStepIndex
                   questionStep?.stepresultType = resultType as? String ?? ""
@@ -814,6 +820,12 @@ class ActivityQuestionStep: ActivityStep {
           questionStep?.steppredestinationTrueStepKey = predestinationTrueStepKey
           questionStep?.steppreactivityid = preactivityid
           questionStep?.steppredestinationFalseStepKey = predestinationFalseStepKey
+          
+          let valOtherActiStepId = UserDefaults.standard.value(forKey: "OtherActiStepId") as? String ?? ""
+          UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
+          UserDefaults.standard.synchronize()
+          
+          questionStep?.steppreOtherActiStepId = valOtherActiStepId
           questionStep?.steppredestinationTrueStepIndex = predestinationTrueStepIndex
           questionStep?.steppredestinationFalseStepIndex = predestinationFalseStepIndex
           questionStep?.stepresultType = resultType as? String ?? ""

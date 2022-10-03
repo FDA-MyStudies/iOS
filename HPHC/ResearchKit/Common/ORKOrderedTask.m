@@ -181,6 +181,10 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:valueToSave
                      forKey:@"jumpActivity"];
+    
+    NSString *valueToSave2 = val3.steppredestinationTrueStepKey;
+    [userDefaults setObject:valueToSave2
+                     forKey:@"OtherActiStepId"];
     [userDefaults synchronize];
     
     return nil;
@@ -201,6 +205,9 @@
     
     if (currentStep == nil) {
         nextStep = steps[0];
+      if (nextStep.steppreOtherActiStepId != nil && nextStep.steppreOtherActiStepId != @"") {
+      
+      }
     } else {
         NSUInteger index = [self indexOfStep:step];
       

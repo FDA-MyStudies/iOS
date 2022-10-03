@@ -72,6 +72,7 @@ class ActivityStep {
   var preactivityVersion: String?
   var preactivityid: String?
   var predestinationFalseStepKey: String?
+  var preOtherActiStepId: String?
   var predestinationTrueStepKey: String?
   var predestinationFalseStepIndex: String?
   var predestinationTrueStepIndex: String?
@@ -108,6 +109,7 @@ class ActivityStep {
       self.preactivityVersion = ""
       self.preactivityid = ""
       self.predestinationFalseStepKey = ""
+      self.preOtherActiStepId = ""
       self.predestinationTrueStepKey = ""
       self.predestinationFalseStepIndex = ""
       self.predestinationTrueStepIndex = ""
@@ -144,6 +146,7 @@ class ActivityStep {
           preactivityVersion: String,
           preactivityid: String,
           predestinationFalseStepKey: String,
+          preOtherActiStepId: String,
           predestinationTrueStepKey: String,
           predestinationFalseStepIndex: String,
           predestinationTrueStepIndex: String,
@@ -176,6 +179,7 @@ class ActivityStep {
        self.preactivityVersion = preactivityVersion
        self.preactivityid = preactivityid
        self.predestinationFalseStepKey = predestinationFalseStepKey
+       self.preOtherActiStepId = preOtherActiStepId
        self.predestinationTrueStepKey = predestinationTrueStepKey
        self.predestinationFalseStepIndex = predestinationFalseStepIndex
        self.predestinationTrueStepIndex = predestinationTrueStepIndex

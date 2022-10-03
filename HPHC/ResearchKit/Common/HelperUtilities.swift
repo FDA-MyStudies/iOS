@@ -9,76 +9,6 @@
 import Foundation
 
 @objc public class ActivityHelper: NSObject {
-//func evaluateResult(result: ORKStepResult) {
-//
-//  let valName = setResultValue(stepResult: result, activityType: .Questionnaire, resultType: <#String#> )
-//    print("valNamevalName---\(valName)")
-//              print("SORTED STEP RESULT -- \(result)")
-//              print("SORTED STEP RESULT ANSWER -- \((result as? ORKScaleQuestionResult)?.answer)")
-////    var orignalVal = step1.question ?? ""
-////    if pipingSnippet != "" {
-////   let changedText = orignalVal.replacingOccurrences(of: pipingSnippet, with: valName)
-////      print("orignalVal---\(orignalVal)")
-////    step1.question = changedText// "GGG2"
-////    }
-//}
-
-//  @objc public func setResultValue(stepResult: ORKStepResult, activityType: String, resultType: String, allSteps: [ORKStep], currentStep: ORKStep) -> NSString {
-//    var valAnswer = ""
-//    let valRes = stepResult.results?.count ?? 0
-//    if valRes > 0 {
-//
-//        if  activityType == "questionnaire" {
-//            // for question Step
-////            if stepResult.results?.count == 1 && self.type != .form {
-//          if stepResult.results?.count == 1 { // && activityType != .form {
-//            print("1questionstepResult---\(stepResult.results?.first as? ORKQuestionResult?)")
-//                if let questionstepResult: ORKQuestionResult? = stepResult.results?.first as? ORKQuestionResult? {
-//                  print("2questionstepResult---\(questionstepResult)")
-//                  let val = self.setValue(questionstepResult:questionstepResult!, resultType: resultType )
-//
-//                  let val1 = self.setValue(questionstepResult:questionstepResult!, resultType: resultType ) as NSString
-//
-//                  print("resulttt---\(currentStep.stepprevalue)")
-//                  if let operato = currentStep.steppreoperator, operato == "=" {
-//                    if val == currentStep.stepprevalue {
-//                      print("1resulttt---\(val)")
-//                    }
-//                  }
-//                  else if let operato = currentStep.steppreoperator, operato == ">" {
-//                    if let intVal1 = Double(val), let intVal2 = Double(currentStep.stepprevalue ?? ""),
-//                       intVal1 > intVal2 {
-//                      print("2resulttt---\(val)")
-//                      let destinStep = currentStep.steppredestinationTrueStepKey ?? ""
-//
-////                      if destinStep != "" {
-////                        findTheIndex(allSteps: allSteps)
-////                      }
-//                      return destinStep  as NSString
-//
-//                    }
-//                  }
-//                  else if let operato = currentStep.steppreoperator, operato == "<" {
-//                    if let intVal1 = Int(val), let intVal2 = Int(currentStep.stepprevalue ?? ""),
-//                        intVal1 < intVal2 {
-//                      print("3resulttt---\(val)")
-//                    }
-//                  }
-//
-//                  print("5questionstepResult---\(val1)")
-//
-//
-//
-//
-//                    return val1
-//                }
-//            }
-//
-//        }
-//
-//    }
-//  return ""
-//}
   
   @objc public func setResultValue(stepResult: ORKStepResult, activityType: String, resultType: String, allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {// (ORKStep?, NSString?)  {
     var valAnswer = ""
@@ -200,6 +130,23 @@ import Foundation
     }
     return nil
 }
+  
+  @objc public func  getsecondActivityJumpStep(allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {
+    let destinStep = currentStep.steppreOtherActiStepId ?? ""
+    
+//                      if destinStep != "" {
+//                        findTheIndex(allSteps: allSteps)
+//                      }
+    
+    for aSteps in allSteps {
+      
+      if aSteps.identifier == destinStep {
+        print("aSteps.identifier---\(aSteps.identifier)---\(destinStep)")
+        return aSteps
+      }
+    }
+    return nil
+  }
   
   func meetTheCondition(operato: String, actualResult: String, comparisionValues: String) -> Bool {
     var conditonsatisfied = false

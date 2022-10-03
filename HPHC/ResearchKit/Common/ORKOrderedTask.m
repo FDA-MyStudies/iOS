@@ -203,10 +203,20 @@
     ORKStep *currentStep = step;
     ORKStep *nextStep = nil;
     
+  printf("1therActiStepId---");
     if (currentStep == nil) {
+      printf("2therActiStepId---");
         nextStep = steps[0];
-      if (nextStep.steppreOtherActiStepId != nil && nextStep.steppreOtherActiStepId != @"") {
-      
+      if (nextStep.steppreOtherActiStepId != nil && ![nextStep.steppreOtherActiStepId isEqual: @""]) {
+        printf("3therActiStepId---");
+        
+        ORKStep *val5 =  [activityHelper1 getsecondActivityJumpStepWithAllSteps:steps currentStep:step];
+        if (val5 != nil) {
+          printf("4therActiStepId---");
+          nextStep = val5;
+          return nextStep;
+        }
+        
       }
     } else {
         NSUInteger index = [self indexOfStep:step];

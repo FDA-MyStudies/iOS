@@ -41,9 +41,11 @@ import Foundation
                         }
                       }
                       if !identifierfound {
-                        let destinStep = currentStep.steppreactivityid ?? ""
+                        let destinActiId = currentStep.steppreactivityid ?? ""
+                        let destinStepId = currentStep.steppredestinationTrueStepKey ?? ""
                         var valDummy = ORKStep(identifier: "valDummy")
-                        valDummy.steppreactivityid = destinStep
+                        valDummy.steppreactivityid = destinActiId
+                        valDummy.steppredestinationTrueStepKey = destinStepId
                         return valDummy
                       }
                       

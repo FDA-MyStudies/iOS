@@ -210,7 +210,7 @@
       if (nextStep.steppreOtherActiStepId != nil && ![nextStep.steppreOtherActiStepId isEqual: @""]) {
         printf("3therActiStepId---");
         
-        ORKStep *val5 =  [activityHelper1 getsecondActivityJumpStepWithAllSteps:steps currentStep:step];
+        ORKStep *val5 =  [activityHelper1 getsecondActivityJumpStepWithAllSteps:steps currentStep:nextStep];
         if (val5 != nil) {
           printf("4therActiStepId---");
           nextStep = val5;

@@ -1286,7 +1286,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
     }
   
   func jumpActi(activityId: String) {
-    
+    addProgressIndicator2()
         let sectionCount = tableViewSections.count
         for section in 0..<sectionCount {
             let rowDetail = tableViewSections[section]
@@ -1294,8 +1294,19 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             if activities.count > 0 {
                 if let row = activities.firstIndex(where: {$0.actvityId == activityId}) {
                     let indexPath = IndexPath(row: row, section: section)
+                  
+                  
+                  UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
+                                                                message: "Jump Activity Message",
+                                                                buttonTitle: "Ok",
+                                                                viewControllerUsed: self,
+                                                                action: {
+                    self.removeProgressIndicator2()
                     self.selectTableCell(indexPath: indexPath)
-//                        UserDefaults.standard.setValue("TextScale", forKey: "identifier")
+                  })
+                  
+                  
+                    
                     break
                 }
             }

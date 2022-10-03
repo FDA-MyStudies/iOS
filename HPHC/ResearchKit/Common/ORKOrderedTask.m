@@ -248,6 +248,11 @@
     if (steps.count <= 0) {
         return nil;
     }
+  
+  ORKStep *checkStep = steps[0];
+    if (step.identifier == checkStep.steppreOtherActiStepId) {
+      return nil;
+    }
     
     ORKStep *currentStep = step;
     ORKStep *nextStep = nil;

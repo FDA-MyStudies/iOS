@@ -169,4 +169,74 @@ extension UIViewController {
             view?.removeFromSuperview()
         }
     }
+  
+  func addProgressIndicator2() {
+
+      self.navigationItem.leftBarButtonItem?.isEnabled = false
+      self.navigationItem.rightBarButtonItem?.isEnabled = true
+      self.navigationItem.backBarButtonItem?.isEnabled = false
+      slideMenuController()?.removeLeftGestures()
+      slideMenuController()?.view.isUserInteractionEnabled = false
+
+      self.navigationController?.navigationBar.isUserInteractionEnabled = false
+
+      var progressView = self.view.viewWithTag(5002)
+      if progressView == nil {
+
+          progressView = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(
+              withOwner: nil, options: nil)[0] as? UIView
+
+          let fdaGif = UIImage.gifImageWithName(kResourceName)
+          let imageView = progressView?.subviews.first as? UIImageView
+          imageView?.image = fdaGif
+          
+          UI:do {
+              progressView!.alpha = 0
+              progressView!.tag = 5002
+          }
+
+          layout:do {
+              self.view.addSubview(progressView!)
+             
+              progressView!.translatesAutoresizingMaskIntoConstraints = false
+
+              NSLayoutConstraint.activate(
+                  [
+                      progressView!.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                      progressView!.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+                      progressView!.widthAnchor.constraint(
+                          equalToConstant: UIScreen.main.bounds.size.width),
+                      progressView!.heightAnchor.constraint(
+                          equalToConstant: UIScreen.main.bounds.size.height),
+                  ])
+          }
+
+          UIView.animate(withDuration: 0.3) {
+              progressView!.alpha = 1
+          }
+      }
+  }
+
+  func removeProgressIndicator2() {
+
+      self.navigationItem.leftBarButtonItem?.isEnabled = true
+      self.navigationItem.rightBarButtonItem?.isEnabled = true
+      self.navigationItem.backBarButtonItem?.isEnabled = true
+
+      self.navigationController?.navigationBar.isUserInteractionEnabled = true
+
+      let view = self.view.viewWithTag(5002)  // as UIView
+
+      slideMenuController()?.view.isUserInteractionEnabled = true
+      slideMenuController()?.addLeftGestures()
+
+      UIView.animate(
+          withDuration: 0.2,
+          animations: {
+              view?.alpha = 0
+          }
+      ) { (_) in
+          view?.removeFromSuperview()
+      }
+  }
 }

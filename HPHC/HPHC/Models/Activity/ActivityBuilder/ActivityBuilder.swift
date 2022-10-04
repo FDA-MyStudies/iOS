@@ -146,6 +146,7 @@ class ActivityBuilder {
                     completionStep.title = kActivityCompleted
                     completionStep.image = #imageLiteral(resourceName: "successBlueBig")
                     completionStep.detailText = kTapDoneSubmit
+                  completionStep.steppreisHidden = "false"
                     orkStepArray?.append(completionStep)
                     
                     // Creating ordered or navigable task

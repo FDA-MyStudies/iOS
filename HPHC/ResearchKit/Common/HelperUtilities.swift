@@ -150,6 +150,33 @@ import Foundation
     return nil
   }
   
+  @objc public func  getNonHiddenStep(allSteps: [ORKStep], currentStep: ORKStep, indexVal: Int) -> ORKStep? {
+    let destinStep = currentStep.steppreOtherActiStepId ?? ""
+    
+    var valindexVal = indexVal
+    let valAllCount = allSteps.count - 1
+    
+    for acount in 0...valAllCount {
+      if acount > indexVal {
+//        if acount > indexVal && acount < valAllCount {
+        let varStep = allSteps[acount]
+        if ((varStep.steppreisHidden ?? "false") == "false") {
+          return varStep
+        }
+      }
+    }
+    
+//    for aSteps in allSteps {
+//
+//
+//      if aSteps.identifier == destinStep {
+//        print("aSteps.identifier---\(aSteps.identifier)---\(destinStep)")
+//        return aSteps
+//      }
+//    }
+    return nil
+  }
+  
   func meetTheCondition(operato: String, actualResult: String, comparisionValues: String) -> Bool {
     var conditonsatisfied = false
     if let intValactualResult = Double(actualResult) {
@@ -252,7 +279,7 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String) -> Stri
            } else {
             let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
 //               print("2res---\(stepTypeResult.answer)---\(stepTypeResult.choiceAnswers)")
-             if (stepTypeResult.choiceAnswers?.count)! > 0 {
+             if (stepTypeResult.choiceAnswers?.count) ?? 0 > 0 {
 //                   self.value = stepTypeResult.choiceAnswers?.first
                print("3res---\(stepTypeResult.choiceAnswers?.first)")
                

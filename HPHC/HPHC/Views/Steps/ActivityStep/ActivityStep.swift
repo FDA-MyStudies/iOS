@@ -260,7 +260,7 @@ class ActivityStep {
           let valdefalut = stepDict["defaultVisibility"] as? Bool ?? true
           predefaultVisibility = valdefalut ? "true" : "false"
           
-          let valisHidden = stepDict["isHidden"] as? Bool ?? true
+          let valisHidden = stepDict["hidden"] as? Bool ?? true
           preisHidden = valisHidden ? "true" : "false"
           
           isPiping = stepDict["piping"] as? Bool

@@ -235,8 +235,21 @@
 //            nextStep = steps[13];
 //          }
 //          else {
-            nextStep = steps[index + 1];
+//            nextStep = steps[index + 1];
 //          }
+          
+          nextStep = steps[index + 1];
+          if (![nextStep.steppreisHidden isEqual: @"false"] ) {
+//            nextStep = steps[index + 2];
+            
+//            ORKStep *val7 =  [activityHelper1 getNonHiddenStep:steps currentStep:nextStep];
+            
+            ORKStep *val7 =  [activityHelper1 getNonHiddenStepWithAllSteps:steps currentStep:nextStep indexVal:index + 1];
+            return val7;
+          } else {
+            return nextStep;
+          }
+          
         }
     }
     return nextStep;

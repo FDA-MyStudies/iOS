@@ -78,29 +78,30 @@ class ActivityFormStep: ActivityStep {
             
             var formItemsArray = [ORKFormItem]()
             
-            for dict in self.itemsArray {
-                
-                if  Utilities.isValidObject(someObject: dict  as AnyObject?){
-                    
-                  if let questionStep: ActivityQuestionStep? = ActivityQuestionStep() {
+          for dict in self.itemsArray {
+              
+              if  Utilities.isValidObject(someObject: dict  as AnyObject?){
+                  
+                  let questionStep: ActivityQuestionStep? = ActivityQuestionStep()
                   questionStep?.initWithDict(stepDict: dict, allSteps: self.itemsArray)
-                    if questionStep?.getQuestionStep() != nil {
-                    let orkQuestionStep:ORKQuestionStep = (questionStep?.getQuestionStep())!
-                    
-                    let formItem01 = ORKFormItem(identifier: orkQuestionStep.identifier,
-                                                 text: orkQuestionStep.question,
-                                                 answerFormat: orkQuestionStep.answerFormat)
-                    formItem01.placeholder = orkQuestionStep.placeholder == nil ? "" :  orkQuestionStep.placeholder
-                    formItem01.isOptional = (questionStep?.skippable)!
-                    formItemsArray.append(formItem01)
-                    }
-                  } else {
-                      Logger.sharedInstance.debug("item Dictionary is null :\(dict)")
+                  
+                  if let orkQuestionStep:ORKQuestionStep = (questionStep?.getQuestionStep()){
+                      
+                      let formItem01 = ORKFormItem(identifier: orkQuestionStep.identifier,
+                                                   text: orkQuestionStep.question,
+                                                   answerFormat: orkQuestionStep.answerFormat)
+                      formItem01.placeholder = orkQuestionStep.placeholder == nil ? "" :  orkQuestionStep.placeholder
+                      formItem01.isOptional = (questionStep?.skippable)!
+                      formItemsArray.append(formItem01)
+                  }else{
+                      Logger.sharedInstance.debug("step is null :\(dict)")
                   }
-                } else {
-                    Logger.sharedInstance.debug("item Dictionary is null :\(dict)")
-                }
-            }
+
+                  
+              } else {
+                  Logger.sharedInstance.debug("item Dictionary is null :\(dict)")
+              }
+          }
             
             if self.repeatable == true {
                 (step as? RepeatableFormStep)!.initialItemCount = formItemsArray.count

@@ -1631,9 +1631,9 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         
         if reason == ORKTaskViewControllerFinishReason.completed {
           
-          let lifeTimeUpdated = DBHandler.updateTargetActivityAnchorDateDetail(studyId: studyId!,
-                                                                               activityId: activityId!,
-                                                                               response: response!)
+          let lifeTimeUpdated = DBHandler.updateTargetActivityAnchorDateDetail(studyId: studyId ?? "",
+                                                                               activityId: activityId ?? "",
+                                                                               response: response ?? [String:Any]())
           if lifeTimeUpdated {
             self.loadActivitiesFromDatabase()
           } else {
@@ -1662,45 +1662,58 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         
         if (taskViewController.result.results?.count)! > 1 {
             
-            if activityBuilder?.actvityResult?.result?.count == taskViewController.result.results?.count {
-                activityBuilder?.actvityResult?.result?.removeLast()
-            } else {
-                
-                let study = Study.currentStudy
-                let activity = Study.currentActivity
-                
-                if activity?.type != .activeTask{
-                    
-                    // Update RestortionData for Activity in DB
-                    DBHandler.updateActivityRestortionDataFor(activity: activity!,
-                                                              studyId: (study?.studyId)!,
-                                                              restortionData: taskViewController.restorationData!)
-                    activity?.currentRun.restortionData = taskViewController.restorationData!
-                }
-                
-                let orkStepResult: ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2]
-                    as! ORKStepResult?
-                let activityStepResult: ActivityStepResult? = ActivityStepResult()
-                if (activity?.activitySteps?.count )! > 0 {
-                    
-                    let activityStepArray = activity?.activitySteps?.filter({$0.key == orkStepResult?.identifier
-                    })
-                    if (activityStepArray?.count)! > 0 {
-                        activityStepResult?.step  = activityStepArray?.first
-                    }
-                }
-                activityStepResult?.initWithORKStepResult(stepResult: orkStepResult! as ORKStepResult ,
-                                                          activityType: (ActivityBuilder.currentActivityBuilder.actvityResult?.type)!)
-                
-                // let dictionary = activityStepResult?.getActivityStepResultDict()
-                
-                // check for anchor date
-                if study?.anchorDate != nil && study?.anchorDate?.anchorDateActivityId == activity?.actvityId {
-                    
-                    if (study?.anchorDate?.anchorDateQuestionKey)! ==  (activityStepResult?.key)!{
-                        if let value1 = activityStepResult?.value as? String {
-                            isAnchorDateSet = true
-                            study?.anchorDate?.setAnchorDateFromQuestion(date: value1)
+          if activityBuilder?.actvityResult?.result?.count
+            == taskViewController.result.results?
+            .count
+          {
+            activityBuilder?.actvityResult?.result?.removeLast()
+          } else {
+
+            let study = Study.currentStudy
+            guard let activity = Study.currentActivity else { return }
+
+            if activity.type != .activeTask {
+
+              // Update RestortionData for Activity in DB
+              
+              DBHandler.updateActivityRestortionDataFor(
+                activity: activity,
+                studyId: (study?.studyId)!,
+                restortionData: taskViewController.restorationData!
+              )
+              activity.currentRun.restortionData = taskViewController.restorationData!
+            }
+
+            let orkStepResult: ORKStepResult? =
+              taskViewController.result.results?[
+                (taskViewController.result.results?.count)! - 2
+              ] as! ORKStepResult?
+            let activityStepResult: ActivityStepResult? = ActivityStepResult()
+            if (activity.activitySteps?.count)! > 0 {
+
+              let activityStepArray = activity.activitySteps?.filter({
+                $0.key == orkStepResult?.identifier
+              })
+              if (activityStepArray?.count)! > 0 {
+                activityStepResult?.step = activityStepArray?.first
+              }
+            }
+            activityStepResult?.initWithORKStepResult(
+              stepResult: orkStepResult! as ORKStepResult,
+              activityType: (ActivityBuilder.currentActivityBuilder.actvityResult?.type)!
+            )
+
+            /// check for anchor date.
+            if study?.anchorDate != nil
+              && study?.anchorDate?.anchorDateActivityId
+                == activity
+                .actvityId
+            {
+
+              if (study?.anchorDate?.anchorDateQuestionKey)! == (activityStepResult?.key)! {
+                if let value1 = activityStepResult?.value as? String {
+                  isAnchorDateSet = true
+                  study?.anchorDate?.setAnchorDateFromQuestion(date: value1)
                         }
                     }
                 }
@@ -1710,7 +1723,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                     
                     if let value1 = activityStepResult?.value as? NSNumber {
                         let value = value1.floatValue
-                        DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!,
+                        DBHandler.saveStatisticsDataFor(activityId: (activity.actvityId)!,
                                                         key: (activityStepResult?.key)!,
                                                         data: value,
                                                         fkDuration: 0,
@@ -1722,15 +1735,15 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                 
                 let activityId:String? = ud.value(forKey:"FetalKickActivityId" ) as! String?
                 // go forward if fetal kick task is running
-                if activity?.type == .activeTask
+                if activity.type == .activeTask
                     && ud.bool(forKey: "FKC")
                     && activityId != nil
                     && activityId == Study.currentActivity?.actvityId
                     && (stepViewController is ORKInstructionStepViewController)  {
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now()) {
-                        stepViewController.goForward()
-                    }
+//                    DispatchQueue.main.asyncAfter(deadline: .now()) {
+//                        stepViewController.goForward()
+//                    }
                 }
                 
                 // disable back button
@@ -2149,8 +2162,6 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
     func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
 //      taskViewController.currentStepViewController
       
-      
-      
         if let result = taskViewController.result.stepResult(forStepIdentifier: step.identifier) {
             self.managedResult[step.identifier] = result
         }
@@ -2265,7 +2276,20 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         
       }
         if let step = step as? QuestionStep, step.answerFormat?.isKind(of: ORKTextChoiceAnswerFormat.self) ?? false {
-            
+          
+          let valStep = step
+          if valStep.isOptional {
+            UserDefaults.standard.set("true", forKey: "isOptionalTextChoice")
+            UserDefaults.standard.synchronize()
+          } else {
+            UserDefaults.standard.set("false", forKey: "isOptionalTextChoice")
+            UserDefaults.standard.synchronize()
+          }
+          
+          if let result = taskViewController.result.stepResult(forStepIdentifier: step.identifier) {
+            self.managedResult[step.identifier] = result
+          }
+          
             var textChoiceQuestionController :TextChoiceQuestionController
             
             var result = taskViewController.result.result(forIdentifier: step.identifier)
@@ -2279,36 +2303,55 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                      
             return textChoiceQuestionController
         }
+      
+      UserDefaults.standard.set("", forKey: "isOptionalTextChoice")
+      UserDefaults.standard.synchronize()
+      if let step = step as? CustomInstructionStep {
+        return CustomInstructionStepViewController(step: step)
+      }
 
-        let storyboard = UIStoryboard.init(name: "FetalKickCounter", bundle: nil)
+      let storyboard = UIStoryboard.init(name: "FetalKickCounter", bundle: nil)
         
-        if step is FetalKickCounterStep {
-            
-            let ttController = (storyboard.instantiateViewController(withIdentifier: "FetalKickCounterStepViewController") as?
-                                    FetalKickCounterStepViewController)!
-            ttController.step = step
-            return ttController
-        } else if  step is FetalKickIntroStep {
-            
-            let ttController = (storyboard.instantiateViewController(withIdentifier: "FetalKickIntroStepViewControllerIdentifier") as?
-                                    FetalKickIntroStepViewController)!
-            ttController.step = step
-            return ttController
-        } else {
-            return nil
-        }
+      if step is FetalKickCounterStep {
         
+        let ttController =
+        (storyboard.instantiateViewController(
+          withIdentifier: "FetalKickCounterStepViewController"
+        )
+         as? FetalKickCounterStepViewController)!
+        ttController.step = step
+        return ttController
+      } else if step is FetalKickIntroStep {
+        
+        let ttController =
+        (storyboard.instantiateViewController(
+          withIdentifier: "FetalKickIntroStepViewControllerIdentifier"
+        )
+         as? FetalKickIntroStepViewController)!
+        ttController.step = step
+        return ttController
+      } else {
+        return nil
+      }
+      
     }
     
-    func taskViewController(_ taskViewController: ORKTaskViewController, didChange result: ORKTaskResult) {
-        
-        // Saving the TextChoiceQuestionController result to publish it later.
-        if taskViewController.currentStepViewController?.isKind(of: TextChoiceQuestionController.self) ?? false {
-            if let result = result.stepResult(forStepIdentifier: taskViewController.currentStepViewController?.step?.identifier ?? "") {
-                self.managedResult[result.identifier] = result
-            }
-        }
+  func taskViewController(_ taskViewController: ORKTaskViewController, didChange result: ORKTaskResult) {
+    
+    // Saving the TextChoiceQuestionController result to publish it later.
+    if taskViewController.currentStepViewController?.isKind(
+      of: TextChoiceQuestionController.self
+    )
+        ?? false
+    {
+      if let result = result.stepResult(
+        forStepIdentifier: taskViewController.currentStepViewController?.step?.identifier
+        ?? ""
+      ) {
+        self.managedResult[result.identifier] = result
+      }
     }
+  }
   
   func taskViewController(_ taskViewController: ORKTaskViewController, shouldPresent step: ORKStep) -> Bool {
     return true

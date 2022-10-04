@@ -156,6 +156,8 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, copy, nullable) NSString *steppreOtherActiStepId;
 
+@property (nonatomic, copy, nullable) NSString *steppreActiBack;
+
 @property (nonatomic, copy, nullable) NSString *steppredestinationTrueStepIndex;
 
 @property (nonatomic, copy, nullable) NSString *steppredestinationFalseStepIndex;

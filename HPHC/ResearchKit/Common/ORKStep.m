@@ -93,6 +93,7 @@
   step.steppreactivityid = _steppreactivityid;
   step.steppredestinationFalseStepKey = _steppredestinationFalseStepKey;
   step.steppreOtherActiStepId = _steppreOtherActiStepId;
+  step.steppreActiBack = _steppreActiBack;
   step.steppredestinationTrueStepIndex = _steppredestinationTrueStepIndex;
   step.steppredestinationFalseStepIndex = _steppredestinationFalseStepIndex;
   step.stepresultType = _stepresultType;

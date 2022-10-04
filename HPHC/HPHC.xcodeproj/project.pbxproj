@@ -199,6 +199,10 @@
 		89EDB46D2271EFDF0070F16C /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		89F2EAA923F289280026DA0B /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EAA623F289280026DA0B /* UIImage+Gif.swift */; };
 		89F7C8BE28D4B4DD0022354D /* iOSActivity3.json in Resources */ = {isa = PBXBuildFile; fileRef = 89F7C8BB28D4B4DD0022354D /* iOSActivity3.json */; };
+		89FE158C28EC531C0089DB0F /* CustomInstructionStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE158928EC531B0089DB0F /* CustomInstructionStepViewController.swift */; };
+		89FE158D28EC531C0089DB0F /* CustomInstructionStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE158928EC531B0089DB0F /* CustomInstructionStepViewController.swift */; };
+		89FE158F28EC539E0089DB0F /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE158E28EC539E0089DB0F /* String+Extensions.swift */; };
+		89FE159028EC539E0089DB0F /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE158E28EC539E0089DB0F /* String+Extensions.swift */; };
 		940577A81E767AC60043215C /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940577A71E767AC60043215C /* ChangePasswordViewController.swift */; };
 		941909B51E52FA9B001B01C5 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909B41E52FA9B001B01C5 /* Study.swift */; };
 		941909B81E5310D6001B01C5 /* Gateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909B71E5310D6001B01C5 /* Gateway.swift */; };
@@ -867,6 +871,8 @@
 		89CD64B92244CAA600008178 /* ResourceAnchorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceAnchorTest.swift; sourceTree = "<group>"; };
 		89F2EAA623F289280026DA0B /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
 		89F7C8BB28D4B4DD0022354D /* iOSActivity3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = iOSActivity3.json; sourceTree = "<group>"; };
+		89FE158928EC531B0089DB0F /* CustomInstructionStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInstructionStepViewController.swift; sourceTree = "<group>"; };
+		89FE158E28EC539E0089DB0F /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		8B3AB6BB340BA150D5A31DFA /* Pods_LimitJIA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LimitJIA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9052BDFCCBA34907500A7158 /* Pods-HPHC QA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HPHC QA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HPHC QA/Pods-HPHC QA.debug.xcconfig"; sourceTree = "<group>"; };
 		940577A71E767AC60043215C /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
@@ -1596,6 +1602,7 @@
 		8401E82624EE541600AB4D18 /* Steps */ = {
 			isa = PBXGroup;
 			children = (
+				89FE158828EC531B0089DB0F /* CustomInstructionStepViewController */,
 				8401E83124EE7EAC00AB4D18 /* ActivityStep */,
 				6ED134301E5EB0110090C976 /* ConsentStep */,
 				6EED7B371E6574E5002C1FA3 /* FetalKickCounterStep */,
@@ -2027,6 +2034,14 @@
 			path = JsonFiles;
 			sourceTree = "<group>";
 		};
+		89FE158828EC531B0089DB0F /* CustomInstructionStepViewController */ = {
+			isa = PBXGroup;
+			children = (
+				89FE158928EC531B0089DB0F /* CustomInstructionStepViewController.swift */,
+			);
+			path = CustomInstructionStepViewController;
+			sourceTree = "<group>";
+		};
 		941909B11E52FA78001B01C5 /* StudyModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -2063,6 +2078,7 @@
 		94334F821E70054100755444 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				89FE158E28EC539E0089DB0F /* String+Extensions.swift */,
 				94334F851E70055A00755444 /* UIViewController.swift */,
 				94334F861E70055A00755444 /* UIApplication.swift */,
 				94334F8B1E701EB700755444 /* NavigationBackButton.swift */,
@@ -2883,6 +2899,7 @@
 				94CD96E91E4AF61800946477 /* NetworkManager.swift in Sources */,
 				89F2EAA923F289280026DA0B /* UIImage+Gif.swift in Sources */,
 				94334F801E6FE65600755444 /* FDASlideMenuViewController.swift in Sources */,
+				89FE158C28EC531C0089DB0F /* CustomInstructionStepViewController.swift in Sources */,
 				6E7D2D5A1E433E8800763D4C /* AppDelegate.swift in Sources */,
 				4833E9DF1E7126900032D244 /* StudyHomeViewController.swift in Sources */,
 				6FDEFDA923F5A0F50067534C /* DBParticipantPropertyMetadata.swift in Sources */,
@@ -2948,6 +2965,7 @@
 				482CC61E1EC5F52E00BFE8C6 /* KDCircularProgress.swift in Sources */,
 				6EF0466B1ED1C943008098BB /* DBNotification.swift in Sources */,
 				6EE93DCB1E93C8850027A5DC /* ActivitiesViewController.swift in Sources */,
+				89FE158F28EC539E0089DB0F /* String+Extensions.swift in Sources */,
 				6ED1B2211E54253800BF463F /* Activity.swift in Sources */,
 				6E4D86E01F38A740003DBDD8 /* SearchBarView.swift in Sources */,
 				94C6BD441EB8513300D4AA72 /* AppUpdateBlocker.swift in Sources */,
@@ -3073,6 +3091,7 @@
 				9456C40B27CFADC20054AA8E /* NetworkManager.swift in Sources */,
 				9456C40C27CFADC20054AA8E /* UIImage+Gif.swift in Sources */,
 				9456C40D27CFADC20054AA8E /* FDASlideMenuViewController.swift in Sources */,
+				89FE158D28EC531C0089DB0F /* CustomInstructionStepViewController.swift in Sources */,
 				9456C40E27CFADC20054AA8E /* AppDelegate.swift in Sources */,
 				9456C40F27CFADC20054AA8E /* StudyHomeViewController.swift in Sources */,
 				9456C41027CFADC20054AA8E /* DBParticipantPropertyMetadata.swift in Sources */,
@@ -3138,6 +3157,7 @@
 				9456C44C27CFADC20054AA8E /* KDCircularProgress.swift in Sources */,
 				9456C44D27CFADC20054AA8E /* DBNotification.swift in Sources */,
 				9456C44E27CFADC20054AA8E /* ActivitiesViewController.swift in Sources */,
+				89FE159028EC539E0089DB0F /* String+Extensions.swift in Sources */,
 				9456C44F27CFADC20054AA8E /* Activity.swift in Sources */,
 				9456C45027CFADC20054AA8E /* SearchBarView.swift in Sources */,
 				9456C45127CFADC20054AA8E /* AppUpdateBlocker.swift in Sources */,
@@ -3830,7 +3850,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 3485DDCN2M;
 				ENABLE_BITCODE = NO;
@@ -3863,7 +3883,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3485DDCN2M;
 				ENABLE_BITCODE = NO;

@@ -37,6 +37,7 @@ import Foundation
                       for aSteps in allSteps {
                         if aSteps.identifier == destinStep {
                           identifierfound = true
+                          aSteps.steppreActiBack = currentStep.identifier
                           return aSteps
                         }
                       }
@@ -64,6 +65,7 @@ import Foundation
                       for aSteps in allSteps {
                         if aSteps.identifier == destinStep {
                           identifierfound = true
+                          aSteps.steppreActiBack = currentStep.identifier
                           return aSteps
                         }
                       }
@@ -87,6 +89,7 @@ import Foundation
                       
                       for aSteps in allSteps {
                         if aSteps.identifier == destinStep {
+                          aSteps.steppreActiBack = currentStep.identifier
                           return aSteps
                         }
                       }
@@ -111,6 +114,7 @@ import Foundation
                         
                         if aSteps.identifier == destinStep {
                           print("aSteps.identifier---\(aSteps.identifier)---\(destinStep)")
+                          aSteps.steppreActiBack = currentStep.identifier
                           return aSteps
                         }
                       }
@@ -160,6 +164,34 @@ import Foundation
       if acount > indexVal {
 //        if acount > indexVal && acount < valAllCount {
         let varStep = allSteps[acount]
+        if ((varStep.steppreisHidden ?? "false") == "false") {
+          return varStep
+        }
+      }
+    }
+    
+//    for aSteps in allSteps {
+//
+//
+//      if aSteps.identifier == destinStep {
+//        print("aSteps.identifier---\(aSteps.identifier)---\(destinStep)")
+//        return aSteps
+//      }
+//    }
+    return nil
+  }
+  
+  @objc public func  getNonHiddenPreviousStep(allSteps: [ORKStep], currentStep: ORKStep, indexVal: Int) -> ORKStep? {
+    let destinStep = currentStep.steppreOtherActiStepId ?? ""
+    
+    var valindexVal = allSteps.count - indexVal
+    let valAllCount = allSteps.count - 1
+    let allSteps2 = Array(allSteps.reversed())
+    
+    for acount in 0...valAllCount {
+      if acount > valindexVal {
+//        if acount > indexVal && acount < valAllCount {
+        let varStep = allSteps2[acount]
         if ((varStep.steppreisHidden ?? "false") == "false") {
           return varStep
         }

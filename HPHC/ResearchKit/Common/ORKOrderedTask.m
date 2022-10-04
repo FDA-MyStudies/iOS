@@ -80,7 +80,7 @@
         
         _identifier = [identifier copy];
         _steps = steps;
-        
+      _stepsReplaced = steps.mutableCopy;
         _progressLabelColor = ORKColor(ORKProgressLabelColorKey);
         [self validateParameters];
     }
@@ -223,6 +223,10 @@
       
       if (val3 != nil) {
         index = [self indexOfStep:val3];
+//        _stepsReplaced = self.steps.mutableCopy;
+        [_stepsReplaced replaceObjectAtIndex:index withObject:val3];
+
+//        steps[index] = val3;
         nextStep = steps[index];
         return nextStep;
       }
@@ -257,6 +261,8 @@
 
 - (ORKStep *)stepBeforeStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
     NSArray *steps = _steps;
+  
+  NSArray *arraystepsReplaced = [_stepsReplaced copy];
     
     if (steps.count <= 0) {
         return nil;
@@ -269,15 +275,57 @@
     
     ORKStep *currentStep = step;
     ORKStep *nextStep = nil;
+  ActivityHelper *activityHelper1 = [[ActivityHelper alloc] init];
     
     if (currentStep == nil) {
         nextStep = nil;
         
     } else {
+      
+      if ([step.steppredefaultVisibility isEqual: @"false"] ) {
+    //      nextStep = nil;
+        if (![step.steppresourceQuestionKey  isEqual: @""]) {
+        
+    //      ActivityHelper *activityHelper1 = [[ActivityHelper alloc] init];
+          
+    //      ORKStep *val3 =  [activityHelper1 setResultValueWithStepResult:stepResult activityType:@"questionnaire" resultType:step.stepresultType allSteps:steps currentStep:step];
+          NSArray *steps2 = _steps;
+          ORKStep *val3 =  [activityHelper1 findPreviousStepWithTaskResult:result allSteps:steps2 currentStep:step];
+          
+          NSUInteger index1 = [self indexOfStep:step];
+          if (val3 != nil) {
+            index1 = [self indexOfStep:val3];
+            nextStep = steps[index1];
+            return nextStep;
+          }
+          
+        }
+      }
+      
+      
+      
+      
         NSUInteger index = [self indexOfStep:step];
         
         if (NSNotFound != index && index != 0) {
             nextStep = steps[index - 1];
+          
+          if (![nextStep.steppreisHidden isEqual: @"false"] ) {
+//            nextStep = steps[index + 2];
+            
+//            ORKStep *val7 =  [activityHelper1 getNonHiddenStep:steps currentStep:nextStep];
+            
+//            ORKStep *val7 =  [activityHelper1 getNonHiddenPreviousStep:steps currentStep:nextStep indexVal:index - 1];
+            
+            
+            ORKStep *currentStepReplaced = arraystepsReplaced[index - 1];
+            
+            ORKStep *val7 =  [activityHelper1 getNonHiddenPreviousStepWithAllSteps:steps currentStep:nextStep indexVal:index - 1];
+            return val7;
+          } else {
+            return nextStep;
+          }
+
         }
     }
 //  if ([step.steppreisHidden isEqual: @"false"] ) {//check
@@ -285,7 +333,7 @@
 //      nextStep = nil;
     if (![step.steppresourceQuestionKey  isEqual: @""]) {
     
-      ActivityHelper *activityHelper1 = [[ActivityHelper alloc] init];
+//      ActivityHelper *activityHelper1 = [[ActivityHelper alloc] init];
       
 //      ORKStep *val3 =  [activityHelper1 setResultValueWithStepResult:stepResult activityType:@"questionnaire" resultType:step.stepresultType allSteps:steps currentStep:step];
       NSArray *steps2 = _steps;

@@ -1885,7 +1885,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
              } else {
               let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
 //               print("2res---\(stepTypeResult.answer)---\(stepTypeResult.choiceAnswers)")
-               if (stepTypeResult.choiceAnswers?.count)! > 0 {
+               if (stepTypeResult.choiceAnswers?.count) ?? 0 > 0 {
 //                   self.value = stepTypeResult.choiceAnswers?.first
                  print("3res---\(stepTypeResult.choiceAnswers?.first)")
                  
@@ -1904,7 +1904,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         var resultType: String = getresultType(identifier: questionstepResult.identifier) //(self.step?.resultType as? String)!
         print("1resultTyperesultTyperesultType---\(resultType)")
           if Utilities.isValidObject(someObject: stepTypeResult.choiceAnswers as AnyObject?) {
-              if (stepTypeResult.choiceAnswers?.count)! > 0 {
+            if (stepTypeResult.choiceAnswers?.count) ?? 0 > 0 {
 
                   if resultType ==  QuestionStepType.imageChoice.rawValue ||  resultType == QuestionStepType.valuePicker.rawValue {
 

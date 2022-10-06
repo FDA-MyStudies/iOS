@@ -1229,7 +1229,7 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
 //                self.studyEnrollmentFinished()
 //            }
            
-            if (reviewStep?.identifier)! == kReviewIdentifier, (reviewStep?.results?.count)! > 0 {
+            if let val = reviewStep?.identifier, (reviewStep?.identifier)! == kReviewIdentifier, (reviewStep?.results?.count)! > 0 {
                 let consentSignatureResult: ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
 
                 if consentSignatureResult?.consented == false {

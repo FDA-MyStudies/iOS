@@ -243,7 +243,7 @@
 //          }
           
           nextStep = steps[index + 1];
-          if (![nextStep.steppreisHidden isEqual: @"false"] ) {
+          if (nextStep.steppreisHidden != nil && ![nextStep.steppreisHidden isEqual: @"false"] ) {
 //            nextStep = steps[index + 2];
             
 //            ORKStep *val7 =  [activityHelper1 getNonHiddenStep:steps currentStep:nextStep];

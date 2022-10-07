@@ -2074,16 +2074,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
 //              self.skipped = true
 //          }
 //
-//      case ORKQuestionType.height.rawValue:
-//
-//          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
-//          if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?) {
-//              self.value = Double(truncating:stepTypeResult.numericAnswer!)
-//
-//          } else {
-//              // self.value = 0.0
-//              self.skipped = true
-//          }
+//      case ORK`+`
 //
 //      case ORKQuestionType.location.rawValue:
 //          let stepTypeResult = (questionstepResult as? ORKLocationQuestionResult)!

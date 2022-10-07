@@ -1297,7 +1297,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                   
                   
                   UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
-                                                                message: "Jump Activity Message",
+                                                                message: "You will be navigated to a different activity/survey as this activity/survey is completed",
                                                                 buttonTitle: "Ok",
                                                                 viewControllerUsed: self,
                                                                 action: {
@@ -1929,7 +1929,8 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                           resultValue.append(selectedValue as Any)
                       }
                     print("5res---\(resultValue)")
-                    return "\(resultValue)" //check
+                    let valFinalRes = resultValue.first as? String ?? ""
+                    return "\(valFinalRes)" //check
 
 //                      self.value = resultValue
                   }
@@ -2221,34 +2222,34 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
           
           
 //        print("3resultTyperesultTyperesultType---\(step.)")
-        if let result = taskViewController.result.stepResult(forStepIdentifier: "scale") {
-       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-          print("1valval---\(val)")
-        }
-        if let result = taskViewController.result.stepResult(forStepIdentifier: "cscale") {
-       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-          print("2valval---\(val)")
-        }
-        if let result = taskViewController.result.stepResult(forStepIdentifier: "textscale") {
-       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-          print("3valval---\(val)")
-        }
-        if let result = taskViewController.result.stepResult(forStepIdentifier: "valuepicker") {
-       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-          print("4valval---\(val)")
-        }
-        if let result = taskViewController.result.stepResult(forStepIdentifier: "textchoice") {
-       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-          print("5valval---\(val)")
-        }
-        if let result = taskViewController.result.stepResult(forStepIdentifier: "boolean") {
-       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-          print("6valval---\(val)")
-        }
-        if let result = taskViewController.result.stepResult(forStepIdentifier: "numeric") {
-       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-          print("7valval---\(val)")
-        }
+//        if let result = taskViewController.result.stepResult(forStepIdentifier: "scale") {
+//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+//          print("1valval---\(val)")
+//        }
+//        if let result = taskViewController.result.stepResult(forStepIdentifier: "cscale") {
+//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+//          print("2valval---\(val)")
+//        }
+//        if let result = taskViewController.result.stepResult(forStepIdentifier: "textscale") {
+//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+//          print("3valval---\(val)")
+//        }
+//        if let result = taskViewController.result.stepResult(forStepIdentifier: "valuepicker") {
+//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+//          print("4valval---\(val)")
+//        }
+//        if let result = taskViewController.result.stepResult(forStepIdentifier: "textchoice") {
+//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+//          print("5valval---\(val)")
+//        }
+//        if let result = taskViewController.result.stepResult(forStepIdentifier: "boolean") {
+//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+//          print("6valval---\(val)")
+//        }
+//        if let result = taskViewController.result.stepResult(forStepIdentifier: "numeric") {
+//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+//          print("7valval---\(val)")
+//        }
         
           
           if let result = taskViewController.result.stepResult(forStepIdentifier: pipingsourceQuestionKey) {

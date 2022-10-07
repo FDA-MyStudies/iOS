@@ -282,7 +282,8 @@
         
     } else {
       
-      if ([step.steppredefaultVisibility isEqual: @"false"] ) {
+      if ([step.steppreisHidden isEqual: @"true"] ) {
+//      if ([step.steppredefaultVisibility isEqual: @"false"] ) {
     //      nextStep = nil;
         if (![step.steppresourceQuestionKey  isEqual: @""]) {
         
@@ -312,16 +313,20 @@
           
           if (![nextStep.steppreisHidden isEqual: @"false"] ) {
 //            nextStep = steps[index + 2];
+
             
-//            ORKStep *val7 =  [activityHelper1 getNonHiddenStep:steps currentStep:nextStep];
+//            ORKStep *val7 =  [activityHelper1 findPreviousStepWithTaskResult:result allSteps:steps2 currentStep:step];
             
-//            ORKStep *val7 =  [activityHelper1 getNonHiddenPreviousStep:steps currentStep:nextStep indexVal:index - 1];
-            
+            NSString *valStr1 = [activityHelper1 findPreviousHiddenResultStepWithTaskResult:result currentStepIdentifier:nextStep.identifier];
+            if ([valStr1  isEqual: @"true"]) {
+              return nextStep;
+            } else {
             
             ORKStep *currentStepReplaced = arraystepsReplaced[index - 1];
-            
-            ORKStep *val7 =  [activityHelper1 getNonHiddenPreviousStepWithAllSteps:steps currentStep:nextStep indexVal:index - 1];
+              ORKStep *val7 =  [activityHelper1 getNonHiddenPreviousStepWithAllSteps:steps currentStep:nextStep indexVal:index - 1 taskResult:result];
+//            ORKStep *val7 =  [activityHelper1 getNonHiddenPreviousStepWithAllSteps:steps currentStep:nextStep indexVal:index - 1];
             return val7;
+            }
           } else {
             return nextStep;
           }

@@ -181,7 +181,7 @@ import Foundation
     return nil
   }
   
-  @objc public func  getNonHiddenPreviousStep(allSteps: [ORKStep], currentStep: ORKStep, indexVal: Int) -> ORKStep? {
+  @objc public func getNonHiddenPreviousStep(allSteps: [ORKStep], currentStep: ORKStep, indexVal: Int, taskResult: ORKTaskResult) -> ORKStep? {
     let destinStep = currentStep.steppreOtherActiStepId ?? ""
     
     var valindexVal = allSteps.count - indexVal
@@ -189,11 +189,16 @@ import Foundation
     let allSteps2 = Array(allSteps.reversed())
     
     for acount in 0...valAllCount {
-      if acount > valindexVal {
+      if acount >= valindexVal {
 //        if acount > indexVal && acount < valAllCount {
         let varStep = allSteps2[acount]
         if ((varStep.steppreisHidden ?? "false") == "false") {
           return varStep
+        } else if ((varStep.steppreisHidden ?? "false") == "true") {
+          let val = findPreviousHiddenResultStep(taskResult: taskResult, currentStepIdentifier: varStep.identifier)
+          if val == "true" {
+          return varStep
+          }
         }
       }
     }
@@ -601,6 +606,28 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String) -> Stri
       }
     }
     return nil
+  }
+  
+  @objc public func findPreviousHiddenResultStep(taskResult: ORKTaskResult,  currentStepIdentifier: String) -> String {
+    var valAnswer = ""
+    let valRes = taskResult.results?.count ?? 0
+    if valRes > 0 {
+      if let valMainResult = taskResult.results {
+        for aSteps in valMainResult {
+          if aSteps.identifier == currentStepIdentifier {
+            return "true"
+//            for aSteps1 in allSteps {
+//              if aSteps1.identifier == valSourceKey {
+//                return aSteps1
+//              }
+//            }
+            
+          }
+        }
+        
+      }
+    }
+    return "false"
   }
   
 }

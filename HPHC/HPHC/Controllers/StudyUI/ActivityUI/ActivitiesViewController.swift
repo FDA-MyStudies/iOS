@@ -2151,182 +2151,183 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         
     }
     
-    func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
-//      taskViewController.currentStepViewController
+  func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
+    //      taskViewController.currentStepViewController
+    
+    if let result = taskViewController.result.stepResult(forStepIdentifier: step.identifier) {
+      self.managedResult[step.identifier] = result
+    }
+    //      step.title = "GGG"
+    //      step.text = "GGG"
+    //      step
+    
+    //      //rinuthaa
+    //      //Perform dismiss task here :
+    //           if let result = taskViewController.result.stepResult(forStepIdentifier: "textscale") {
+    //
+    //               self.isActivityDismissed = true
+    //               self.managedResult["textscale"] = result
+    //               self.updateActivityStatusToComplete()
+    //
+    //   //            if isActivityDismissed {
+    //   ////                self.addProgressIndicator()
+    //   //
+    //   //            }
+    //
+    //               UserDefaults.standard.setValue("Responce_Types", forKey: "activityId")
+    //
+    //               UserDefaults.standard.setValue("textscale", forKey: "identifier")
+    //
+    //               //dismiss
+    //               perform(#selector(dismisscontroller), with: self, afterDelay: 1.5)
+    //
+    //           }
+    //
+    //           //Going to next activity's particular step
+    //           if isActivityDismissed {
+    //               print("Came to next activity")
+    //           }
+    //      //rinuthab
+    
+    
+    
+    
+    let activityCu = Study.currentActivity
+    var valPiping = false
+    var pipingSnippet = ""
+    var pipingsourceQuestionKey = ""
+    if (activityCu?.activitySteps?.count )! > 0 {
       
-        if let result = taskViewController.result.stepResult(forStepIdentifier: step.identifier) {
-            self.managedResult[step.identifier] = result
+      let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
+      if (activityStepArray?.count)! > 0 {
+        valPiping = activityStepArray?.last?.isPiping ?? false
+        pipingSnippet = activityStepArray?.last?.pipingSnippet ?? ""
+        pipingsourceQuestionKey = activityStepArray?.last?.pipingsourceQuestionKey ?? ""
+      }
+    }
+    print("valPiping---\(valPiping)---\(pipingSnippet)---\(pipingsourceQuestionKey)---\(step.identifier)")
+    if let step1 = step as? ORKQuestionStep {
+      
+      //        if valPiping, pipingSnippet != "",  pipingsourceQuestionKey != "" {
+      
+      
+      //        print("3resultTyperesultTyperesultType---\(step.)")
+      //        if let result = taskViewController.result.stepResult(forStepIdentifier: "scale") {
+      //       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+      //          print("1valval---\(val)")
+      //        }
+      //        if let result = taskViewController.result.stepResult(forStepIdentifier: "cscale") {
+      //       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+      //          print("2valval---\(val)")
+      //        }
+      //        if let result = taskViewController.result.stepResult(forStepIdentifier: "textscale") {
+      //       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+      //          print("3valval---\(val)")
+      //        }
+      //        if let result = taskViewController.result.stepResult(forStepIdentifier: "valuepicker") {
+      //       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+      //          print("4valval---\(val)")
+      //        }
+      //        if let result = taskViewController.result.stepResult(forStepIdentifier: "textchoice") {
+      //       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+      //          print("5valval---\(val)")
+      //        }
+      //        if let result = taskViewController.result.stepResult(forStepIdentifier: "boolean") {
+      //       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+      //          print("6valval---\(val)")
+      //        }
+      //        if let result = taskViewController.result.stepResult(forStepIdentifier: "numeric") {
+      //       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+      //          print("7valval---\(val)")
+      //        }
+      
+      
+      if let result = taskViewController.result.stepResult(forStepIdentifier: pipingsourceQuestionKey) {
+        
+        let valName = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+        
+        print("SORTED STEP RESULT -- \(result)")
+        print("SORTED STEP RESULT ANSWER -- \((result as? ORKScaleQuestionResult)?.answer)")
+        var orignalVal = step1.question ?? ""
+        if pipingSnippet != "" {
+          let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
+          // replaced originalVal with this ---> activityStepArray?.last?.title
+          let changedText = activityStepArray?.last?.title?.replacingOccurrences(of: pipingSnippet, with: valName)
+          print("orignalVal---\(orignalVal)")
+          step1.question = changedText// "GGG2"
         }
-//      step.title = "GGG"
-//      step.text = "GGG"
-//      step
-      
-//      //rinuthaa
-//      //Perform dismiss task here :
-//           if let result = taskViewController.result.stepResult(forStepIdentifier: "textscale") {
-//
-//               self.isActivityDismissed = true
-//               self.managedResult["textscale"] = result
-//               self.updateActivityStatusToComplete()
-//
-//   //            if isActivityDismissed {
-//   ////                self.addProgressIndicator()
-//   //
-//   //            }
-//
-//               UserDefaults.standard.setValue("Responce_Types", forKey: "activityId")
-//
-//               UserDefaults.standard.setValue("textscale", forKey: "identifier")
-//
-//               //dismiss
-//               perform(#selector(dismisscontroller), with: self, afterDelay: 1.5)
-//
-//           }
-//
-//           //Going to next activity's particular step
-//           if isActivityDismissed {
-//               print("Came to next activity")
-//           }
-//      //rinuthab
-      
-      
-      
-     
-      let activityCu = Study.currentActivity
-      var valPiping = false
-      var pipingSnippet = ""
-      var pipingsourceQuestionKey = ""
-      if (activityCu?.activitySteps?.count )! > 0 {
-          
-          let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier
-          })
-          if (activityStepArray?.count)! > 0 {
-            valPiping = activityStepArray?.last?.isPiping ?? false
-            pipingSnippet = activityStepArray?.last?.pipingSnippet ?? ""
-            pipingsourceQuestionKey = activityStepArray?.last?.pipingsourceQuestionKey ?? ""
-          }
       }
-      print("valPiping---\(valPiping)---\(pipingSnippet)---\(pipingsourceQuestionKey)---\(step.identifier)")
-      if let step1 = step as? ORKQuestionStep {
-        
-//        if valPiping, pipingSnippet != "",  pipingsourceQuestionKey != "" {
-          
-          
-//        print("3resultTyperesultTyperesultType---\(step.)")
-//        if let result = taskViewController.result.stepResult(forStepIdentifier: "scale") {
-//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-//          print("1valval---\(val)")
-//        }
-//        if let result = taskViewController.result.stepResult(forStepIdentifier: "cscale") {
-//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-//          print("2valval---\(val)")
-//        }
-//        if let result = taskViewController.result.stepResult(forStepIdentifier: "textscale") {
-//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-//          print("3valval---\(val)")
-//        }
-//        if let result = taskViewController.result.stepResult(forStepIdentifier: "valuepicker") {
-//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-//          print("4valval---\(val)")
-//        }
-//        if let result = taskViewController.result.stepResult(forStepIdentifier: "textchoice") {
-//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-//          print("5valval---\(val)")
-//        }
-//        if let result = taskViewController.result.stepResult(forStepIdentifier: "boolean") {
-//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-//          print("6valval---\(val)")
-//        }
-//        if let result = taskViewController.result.stepResult(forStepIdentifier: "numeric") {
-//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-//          print("7valval---\(val)")
-//        }
-        
-          
-          if let result = taskViewController.result.stepResult(forStepIdentifier: pipingsourceQuestionKey) {
-            
-           let valName = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-            
-                      print("SORTED STEP RESULT -- \(result)")
-                      print("SORTED STEP RESULT ANSWER -- \((result as? ORKScaleQuestionResult)?.answer)")
-            var orignalVal = step1.question ?? ""
-            if pipingSnippet != "" {
-           let changedText = orignalVal.replacingOccurrences(of: pipingSnippet, with: valName)
-              print("orignalVal---\(orignalVal)")
-            step1.question = changedText// "GGG2"
-            }
-                    }
-          
-          
-//        step1.question = "GGG2"
-//        }
-        print("step1.question---\(step1.question)")
-//        taskViewController.currentStepViewController = step1
-//        step = step1
-        
-        
-        
-      }
-        if let step = step as? QuestionStep, step.answerFormat?.isKind(of: ORKTextChoiceAnswerFormat.self) ?? false {
-          
-          let valStep = step
-          if valStep.isOptional {
-            UserDefaults.standard.set("true", forKey: "isOptionalTextChoice")
-            UserDefaults.standard.synchronize()
-          } else {
-            UserDefaults.standard.set("false", forKey: "isOptionalTextChoice")
-            UserDefaults.standard.synchronize()
-          }
-          
-          if let result = taskViewController.result.stepResult(forStepIdentifier: step.identifier) {
-            self.managedResult[step.identifier] = result
-          }
-          
-            var textChoiceQuestionController :TextChoiceQuestionController
-            
-            var result = taskViewController.result.result(forIdentifier: step.identifier)
-            result = ( result == nil ) ? self.managedResult[step.identifier] as? ORKStepResult : result
-            
-            if let result = result  {
-                textChoiceQuestionController = TextChoiceQuestionController(step: step, result: result)
-            } else {
-                textChoiceQuestionController = TextChoiceQuestionController(step: step)
-            }
-                     
-            return textChoiceQuestionController
-        }
       
-      UserDefaults.standard.set("", forKey: "isOptionalTextChoice")
-      UserDefaults.standard.synchronize()
-      if let step = step as? CustomInstructionStep {
-        return CustomInstructionStepViewController(step: step)
-      }
-
-      let storyboard = UIStoryboard.init(name: "FetalKickCounter", bundle: nil)
-        
-      if step is FetalKickCounterStep {
-        
-        let ttController =
-        (storyboard.instantiateViewController(
-          withIdentifier: "FetalKickCounterStepViewController"
-        )
-         as? FetalKickCounterStepViewController)!
-        ttController.step = step
-        return ttController
-      } else if step is FetalKickIntroStep {
-        
-        let ttController =
-        (storyboard.instantiateViewController(
-          withIdentifier: "FetalKickIntroStepViewControllerIdentifier"
-        )
-         as? FetalKickIntroStepViewController)!
-        ttController.step = step
-        return ttController
-      } else {
-        return nil
-      }
+      
+      //        step1.question = "GGG2"
+      //        }
+      print("step1.question---\(step1.question)")
+      //        taskViewController.currentStepViewController = step1
+      //        step = step1
+      
+      
       
     }
+    if let step = step as? QuestionStep, step.answerFormat?.isKind(of: ORKTextChoiceAnswerFormat.self) ?? false {
+      
+      let valStep = step
+      if valStep.isOptional {
+        UserDefaults.standard.set("true", forKey: "isOptionalTextChoice")
+        UserDefaults.standard.synchronize()
+      } else {
+        UserDefaults.standard.set("false", forKey: "isOptionalTextChoice")
+        UserDefaults.standard.synchronize()
+      }
+      
+      if let result = taskViewController.result.stepResult(forStepIdentifier: step.identifier) {
+        self.managedResult[step.identifier] = result
+      }
+      
+      var textChoiceQuestionController :TextChoiceQuestionController
+      
+      var result = taskViewController.result.result(forIdentifier: step.identifier)
+      result = ( result == nil ) ? self.managedResult[step.identifier] as? ORKStepResult : result
+      
+      if let result = result  {
+        textChoiceQuestionController = TextChoiceQuestionController(step: step, result: result)
+      } else {
+        textChoiceQuestionController = TextChoiceQuestionController(step: step)
+      }
+      
+      return textChoiceQuestionController
+    }
+    
+    UserDefaults.standard.set("", forKey: "isOptionalTextChoice")
+    UserDefaults.standard.synchronize()
+    if let step = step as? CustomInstructionStep {
+      return CustomInstructionStepViewController(step: step)
+    }
+    
+    let storyboard = UIStoryboard.init(name: "FetalKickCounter", bundle: nil)
+    
+    if step is FetalKickCounterStep {
+      
+      let ttController =
+      (storyboard.instantiateViewController(
+        withIdentifier: "FetalKickCounterStepViewController"
+      )
+       as? FetalKickCounterStepViewController)!
+      ttController.step = step
+      return ttController
+    } else if step is FetalKickIntroStep {
+      
+      let ttController =
+      (storyboard.instantiateViewController(
+        withIdentifier: "FetalKickIntroStepViewControllerIdentifier"
+      )
+       as? FetalKickIntroStepViewController)!
+      ttController.step = step
+      return ttController
+    } else {
+      return nil
+    }
+    
+  }
     
   func taskViewController(_ taskViewController: ORKTaskViewController, didChange result: ORKTaskResult) {
     

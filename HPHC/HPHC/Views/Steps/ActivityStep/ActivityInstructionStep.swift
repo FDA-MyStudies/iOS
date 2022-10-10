@@ -59,6 +59,9 @@ class ActivityInstructionStep: ActivityStep {
             
             instructionStep.title = NSLocalizedStrings(title!, comment: "")
             instructionStep.text = text!
+          instructionStep.steppreisHidden = preisHidden!
+          print("instructionStep---\(instructionStep.steppreisHidden)---\(preisHidden)")
+//          instructionStep.hi
             return instructionStep
         } else {
             Logger.sharedInstance.debug("Instruction Step Data is null ")

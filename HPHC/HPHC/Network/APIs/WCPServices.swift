@@ -494,7 +494,7 @@ class WCPServices: NSObject {
     }
     
     func handleGetStudyActivityMetadata(response: Dictionary<String, Any>){
-      print("1responseresponse---\(response)")
+//      print("1responseresponse---\(response)")
       
       
       
@@ -516,7 +516,7 @@ class WCPServices: NSObject {
              do {
                   response2 = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String, Any> ?? [:]
 
-               print("2responseresponse---\(response2)")
+//               print("2responseresponse---\(response2)")
 
 //               self.handleGetStudyActivityMetadata(response: res as! Dictionary<String, Any>)
 
@@ -632,7 +632,7 @@ extension WCPServices:NMWebServiceDelegate{
         case .activityList:
             self.handleStudyActivityList(response: response as! Dictionary<String, Any>)
         case .activity:
-          print("1responseresponse---\(response)")
+//          print("1responseresponse---\(response)")
          
             self.handleGetStudyActivityMetadata(response: response as! Dictionary<String, Any>)
         case .studyDashboard:

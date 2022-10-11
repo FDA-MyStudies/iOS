@@ -31,9 +31,21 @@ import Foundation
                     if val == currentStep.stepprevalue {
                       print("1resulttt---\(val)")
                       
+//                     let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
+//                      if val90 != nil {
+//                        return val90
+//                      }
+                      
                       let destinStep = currentStep.steppredestinationTrueStepKey ?? ""
                                        
                       var identifierfound = false
+                      if destinStep == "" {
+                        identifierfound = true
+                        let val = allSteps.last
+                        val?.steppresourceQuestionKey = currentStep.identifier
+                        allSteps.last?.steppresourceQuestionKey = currentStep.identifier
+                        return val
+                      }
                       for aSteps in allSteps {
                         if aSteps.identifier == destinStep {
                           identifierfound = true
@@ -62,6 +74,11 @@ import Foundation
 //                        findTheIndex(allSteps: allSteps)
 //                      }
                       var identifierfound = false
+                      if destinStep == "" {
+                        identifierfound = true
+                        
+                        return allSteps.last
+                      }
                       for aSteps in allSteps {
                         if aSteps.identifier == destinStep {
                           identifierfound = true
@@ -70,10 +87,18 @@ import Foundation
                         }
                       }
                       if !identifierfound {
-                        let destinStep = currentStep.steppreactivityid ?? ""
+                        let destinActiId = currentStep.steppreactivityid ?? ""
+                        let destinStepId = currentStep.steppredestinationTrueStepKey ?? ""
                         var valDummy = ORKStep(identifier: "valDummy")
+                        valDummy.steppreactivityid = destinActiId
+                        valDummy.steppredestinationTrueStepKey = destinStepId
                         return valDummy
                       }
+//                      if !identifierfound {
+//                        let destinStep = currentStep.steppreactivityid ?? ""
+//                        var valDummy = ORKStep(identifier: "valDummy")
+//                        return valDummy
+//                      }
                       
                     }
                   }
@@ -86,12 +111,25 @@ import Foundation
 //                      if destinStep != "" {
 //                        findTheIndex(allSteps: allSteps)
 //                      }
-                      
+                      var identifierfound = false
+                      if destinStep == "" {
+                        identifierfound = true
+                        return allSteps.last
+                      }
                       for aSteps in allSteps {
                         if aSteps.identifier == destinStep {
+                          identifierfound = true
                           aSteps.steppreActiBack = currentStep.identifier
                           return aSteps
                         }
+                      }
+                      if !identifierfound {
+                        let destinActiId = currentStep.steppreactivityid ?? ""
+                        let destinStepId = currentStep.steppredestinationTrueStepKey ?? ""
+                        var valDummy = ORKStep(identifier: "valDummy")
+                        valDummy.steppreactivityid = destinActiId
+                        valDummy.steppredestinationTrueStepKey = destinStepId
+                        return valDummy
                       }
                       
                     }
@@ -110,13 +148,28 @@ import Foundation
 //                        findTheIndex(allSteps: allSteps)
 //                      }
                       
+                      var identifierfound = false
+                      if destinStep == "" {
+                        identifierfound = true
+                        return allSteps.last
+                      }
                       for aSteps in allSteps {
                         
                         if aSteps.identifier == destinStep {
                           print("aSteps.identifier---\(aSteps.identifier)---\(destinStep)")
+                          identifierfound = true
                           aSteps.steppreActiBack = currentStep.identifier
                           return aSteps
                         }
+                      }
+                      
+                      if !identifierfound {
+                        let destinActiId = currentStep.steppreactivityid ?? ""
+                        let destinStepId = currentStep.steppredestinationTrueStepKey ?? ""
+                        var valDummy = ORKStep(identifier: "valDummy")
+                        valDummy.steppreactivityid = destinActiId
+                        valDummy.steppredestinationTrueStepKey = destinStepId
+                        return valDummy
                       }
                       
                     }
@@ -136,6 +189,36 @@ import Foundation
     }
     return nil
 }
+  
+  @objc public func getReccurOverStepValue(stepResult: ORKStepResult, activityType: String, resultType: String, allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {
+    
+    let destinStep = currentStep.steppredestinationTrueStepKey ?? ""
+                     
+    var identifierfound = false
+    if destinStep == "" {
+      identifierfound = true
+      let val = allSteps.last
+      val?.steppresourceQuestionKey = currentStep.identifier
+      allSteps.last?.steppresourceQuestionKey = currentStep.identifier
+      return val
+    }
+    for aSteps in allSteps {
+      if aSteps.identifier == destinStep {
+        identifierfound = true
+        aSteps.steppreActiBack = currentStep.identifier
+        return aSteps
+      }
+    }
+    if !identifierfound {
+      let destinActiId = currentStep.steppreactivityid ?? ""
+      let destinStepId = currentStep.steppredestinationTrueStepKey ?? ""
+      var valDummy = ORKStep(identifier: "valDummy")
+      valDummy.steppreactivityid = destinActiId
+      valDummy.steppredestinationTrueStepKey = destinStepId
+      return valDummy
+    }
+    
+  }
   
   @objc public func  getsecondActivityJumpStep(allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {
     let destinStep = currentStep.steppreOtherActiStepId ?? ""
@@ -705,6 +788,30 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String) -> Stri
       }
     }
     return "false"
+  }
+  
+  @objc public func findPreviousStepForCompletionStep(taskResult: ORKTaskResult, allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {
+    var valAnswer = ""
+    let valRes = taskResult.results?.count ?? 0
+    if valRes > 0 {
+      if let valMainResult = taskResult.results, let valSourceKey = currentStep.steppresourceQuestionKey {
+        for aSteps in valMainResult {
+          if aSteps.identifier == valSourceKey {
+            
+            for aSteps1 in allSteps {
+              if aSteps1.identifier == valSourceKey {
+//                let val = allSteps.last
+//                allSteps.last?.steppresourceQuestionKey = ""
+                return aSteps1
+              }
+            }
+            
+          }
+        }
+        
+      }
+    }
+    return nil
   }
   
 }

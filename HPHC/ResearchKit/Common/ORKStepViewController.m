@@ -127,6 +127,7 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
         [self setupiPadStepTitleLabel];
         [self setupiPadConstraints];
     }
+  printf("StepMainLoad---%s---/n", [_step.identifier UTF8String]);
 }
 
 - (void)setupiPadBackgroundView {
@@ -333,6 +334,12 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
     
     [super viewDidDisappear:animated];
 
+  printf("StepMainDisappear1---%s---/n", [_step.identifier UTF8String]);
+  printf("StepMainDisappear2---%s---/n", [_step.steppresourceQuestionKey UTF8String]);
+  if ([_step.identifier  isEqual: @"CompletionStep"]) {
+    _step.steppresourceQuestionKey = @"";
+  }
+  
     // Set endDate if current stepVC is dismissed
     // Because stepVC is embeded in a UIPageViewController,
     // when current stepVC is out of screen, it didn't belongs to UIPageViewController's viewControllers any more.

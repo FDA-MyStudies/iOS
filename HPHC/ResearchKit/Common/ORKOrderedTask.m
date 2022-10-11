@@ -138,7 +138,7 @@
 }
 
 - (ORKStep *)stepAfterStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
-  printf("resultresult---%@---", result);
+  printf("resultresult---%s---/n", [step.identifier UTF8String]);
 
 
   ORKStepResult *stepResult = [result stepResultForStepIdentifier:step.identifier];
@@ -281,6 +281,15 @@
         nextStep = nil;
         
     } else {
+      
+      if ([step.identifier  isEqual: @"CompletionStep"]) {
+//      ORKStep *val3 =  [activityHelper1 findPreviousStepWithTaskResult:result allSteps:steps currentStep:step];
+      ORKStep *val9 =  [activityHelper1 findPreviousStepForCompletionStepWithTaskResult:result allSteps:steps currentStep:step];
+        if (val9 != nil) {
+        return val9;
+        }
+      }
+      
       
       if ([step.steppreisHidden isEqual: @"true"] ) {
 //      if ([step.steppredefaultVisibility isEqual: @"false"] ) {

@@ -59,7 +59,22 @@ class ActivityInstructionStep: ActivityStep {
             
             instructionStep.title = NSLocalizedStrings(title!, comment: "")
             instructionStep.text = text!
-          instructionStep.steppreisHidden = preisHidden!
+          
+          
+          instructionStep.steppredestinationTrueStepKey = predestinationTrueStepKey ?? ""
+          instructionStep.steppreactivityid = preactivityid ?? ""
+          instructionStep.steppredestinationFalseStepKey = predestinationFalseStepKey ?? ""
+          
+          instructionStep.steppreOtherActiStepId = preOtherActiStepId ?? ""
+          instructionStep.steppredestinationTrueStepIndex = predestinationTrueStepIndex ?? ""
+          instructionStep.steppredestinationFalseStepIndex = predestinationFalseStepIndex ?? ""
+          instructionStep.stepresultType = resultType as? String ?? ""
+          instructionStep.steppreoperator = preoperator ?? ""
+          instructionStep.stepprevalue = prevalue ?? ""
+          instructionStep.steppresourceQuestionKey = presourceQuestionKey ?? ""
+          instructionStep.steppredefaultVisibility = predefaultVisibility ?? ""
+          instructionStep.steppreisHidden = preisHidden ?? ""
+          
           print("instructionStep---\(instructionStep.steppreisHidden)---\(preisHidden)")
 //          instructionStep.hi
             return instructionStep

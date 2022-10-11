@@ -175,18 +175,10 @@
 		890559282301616F005FB284 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890559272301616F005FB284 /* Config.swift */; };
 		8905592A23016852005FB284 /* UITestingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905592923016852005FB284 /* UITestingHelpers.swift */; };
 		8905592C230169FF005FB284 /* LoginVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905592B230169FF005FB284 /* LoginVCTests.swift */; };
-		890C158728D2DACC00BFB6ED /* iOSActivity1.json in Resources */ = {isa = PBXBuildFile; fileRef = 890C158528D2DACC00BFB6ED /* iOSActivity1.json */; };
-		890C158828D2DACC00BFB6ED /* iOSActivity2.json in Resources */ = {isa = PBXBuildFile; fileRef = 890C158628D2DACC00BFB6ED /* iOSActivity2.json */; };
-		890C158A28D2DE8900BFB6ED /* iOSActivity1.json in Resources */ = {isa = PBXBuildFile; fileRef = 890C158528D2DACC00BFB6ED /* iOSActivity1.json */; };
-		890C158B28D2DE8C00BFB6ED /* iOSActivity2.json in Resources */ = {isa = PBXBuildFile; fileRef = 890C158628D2DACC00BFB6ED /* iOSActivity2.json */; };
-		8912EB9E28DDB23B00C2DA79 /* iOSActivity5.json in Resources */ = {isa = PBXBuildFile; fileRef = 8912EB9B28DDB23B00C2DA79 /* iOSActivity5.json */; };
-		8912EB9F28DDB23B00C2DA79 /* iOSActivity5.json in Resources */ = {isa = PBXBuildFile; fileRef = 8912EB9B28DDB23B00C2DA79 /* iOSActivity5.json */; };
 		8923429122B122DF0059F910 /* LoginAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2D1E6ED8E500327AE5 /* LoginAssets.xcassets */; };
 		8926D7EA2383F25C00558F4E /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8926D7E92383F25C00558F4E /* KeyChain.swift */; };
 		8948349D22BB9C59000B7BFA /* HPHCSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8948349C22BB9C59000B7BFA /* HPHCSettings.swift */; };
 		8948349F22BB9D56000B7BFA /* HPHCSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8948349E22BB9D56000B7BFA /* HPHCSettings.xib */; };
-		896DECC128E5A3AB007D55E0 /* iOSActivity6.json in Resources */ = {isa = PBXBuildFile; fileRef = 896DECBE28E5A3AB007D55E0 /* iOSActivity6.json */; };
-		896DECC228E5A3AB007D55E0 /* iOSActivity6.json in Resources */ = {isa = PBXBuildFile; fileRef = 896DECBE28E5A3AB007D55E0 /* iOSActivity6.json */; };
 		8973F76D23F6B657008F5B22 /* Branding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8973F76C23F6B657008F5B22 /* Branding.swift */; };
 		89831393224399FC0000BEB5 /* ResourceList.json in Resources */ = {isa = PBXBuildFile; fileRef = 89831392224399FC0000BEB5 /* ResourceList.json */; };
 		89893F0522B1115300A846CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D5D1E433E8800763D4C /* Main.storyboard */; };
@@ -198,7 +190,6 @@
 		89EDB46C2271EFDF0070F16C /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; };
 		89EDB46D2271EFDF0070F16C /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		89F2EAA923F289280026DA0B /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EAA623F289280026DA0B /* UIImage+Gif.swift */; };
-		89F7C8BE28D4B4DD0022354D /* iOSActivity3.json in Resources */ = {isa = PBXBuildFile; fileRef = 89F7C8BB28D4B4DD0022354D /* iOSActivity3.json */; };
 		89FE158C28EC531C0089DB0F /* CustomInstructionStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE158928EC531B0089DB0F /* CustomInstructionStepViewController.swift */; };
 		89FE158D28EC531C0089DB0F /* CustomInstructionStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE158928EC531B0089DB0F /* CustomInstructionStepViewController.swift */; };
 		89FE158F28EC539E0089DB0F /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE158E28EC539E0089DB0F /* String+Extensions.swift */; };
@@ -856,13 +847,9 @@
 		890559272301616F005FB284 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		8905592923016852005FB284 /* UITestingHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITestingHelpers.swift; sourceTree = "<group>"; };
 		8905592B230169FF005FB284 /* LoginVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVCTests.swift; sourceTree = "<group>"; };
-		890C158528D2DACC00BFB6ED /* iOSActivity1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = iOSActivity1.json; sourceTree = "<group>"; };
-		890C158628D2DACC00BFB6ED /* iOSActivity2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = iOSActivity2.json; sourceTree = "<group>"; };
-		8912EB9B28DDB23B00C2DA79 /* iOSActivity5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = iOSActivity5.json; sourceTree = "<group>"; };
 		8926D7E92383F25C00558F4E /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		8948349C22BB9C59000B7BFA /* HPHCSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPHCSettings.swift; sourceTree = "<group>"; };
 		8948349E22BB9D56000B7BFA /* HPHCSettings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HPHCSettings.xib; sourceTree = "<group>"; };
-		896DECBE28E5A3AB007D55E0 /* iOSActivity6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = iOSActivity6.json; sourceTree = "<group>"; };
 		8973F76C23F6B657008F5B22 /* Branding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Branding.swift; sourceTree = "<group>"; };
 		89831392224399FC0000BEB5 /* ResourceList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ResourceList.json; sourceTree = "<group>"; };
 		8987BC7722F8446000F6EECC /* Pods_HPHC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_HPHC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -870,7 +857,6 @@
 		89956ABA23EDA1E3005CB333 /* Pods_HPHC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_HPHC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89CD64B92244CAA600008178 /* ResourceAnchorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceAnchorTest.swift; sourceTree = "<group>"; };
 		89F2EAA623F289280026DA0B /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
-		89F7C8BB28D4B4DD0022354D /* iOSActivity3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = iOSActivity3.json; sourceTree = "<group>"; };
 		89FE158928EC531B0089DB0F /* CustomInstructionStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInstructionStepViewController.swift; sourceTree = "<group>"; };
 		89FE158E28EC539E0089DB0F /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		8B3AB6BB340BA150D5A31DFA /* Pods_LimitJIA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LimitJIA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2002,11 +1988,6 @@
 		8983138F224399810000BEB5 /* JsonFiles */ = {
 			isa = PBXGroup;
 			children = (
-				896DECBE28E5A3AB007D55E0 /* iOSActivity6.json */,
-				8912EB9B28DDB23B00C2DA79 /* iOSActivity5.json */,
-				89F7C8BB28D4B4DD0022354D /* iOSActivity3.json */,
-				890C158528D2DACC00BFB6ED /* iOSActivity1.json */,
-				890C158628D2DACC00BFB6ED /* iOSActivity2.json */,
 				6EE8E4D81F17459200028853 /* Eligibility_1B.json */,
 				6E93C7E01EE2EC26006788B1 /* ConsentLatest.json */,
 				6ED134371E5F1B110090C976 /* Consent.json */,
@@ -2500,7 +2481,6 @@
 				6ED5B05D1FCDBD8200925352 /* Labkey_Activity_Latest4.json in Resources */,
 				8923429122B122DF0059F910 /* LoginAssets.xcassets in Resources */,
 				6E93C7E11EE2EC26006788B1 /* ConsentLatest.json in Resources */,
-				8912EB9E28DDB23B00C2DA79 /* iOSActivity5.json in Resources */,
 				6EABD0331E56FE2000623D94 /* TaskSchema.json in Resources */,
 				89893F0622B1125300A846CE /* Assets.xcassets in Resources */,
 				6E80BC041FB04350008C9B8C /* Labkey_Activity_Latest2.json in Resources */,
@@ -2520,7 +2500,6 @@
 				6ED5B05B1FCD551600925352 /* Units.json in Resources */,
 				843B6AB825C80AF40022B5E9 /* ResourcesUI.plist in Resources */,
 				6EBC2E811E94FB5300828CA1 /* StudyDashboard.plist in Resources */,
-				89F7C8BE28D4B4DD0022354D /* iOSActivity3.json in Resources */,
 				89831393224399FC0000BEB5 /* ResourceList.json in Resources */,
 				846C698A25A872D8002B9F42 /* Localizable.strings in Resources */,
 				6F02217A2264729E00A2DBC8 /* OtherTextChoiceCell.xib in Resources */,
@@ -2547,7 +2526,6 @@
 				6F10BB19234DE45D006388E2 /* Activity_New_Other_Form.json in Resources */,
 				94B3DD491E6ED8E500327AE5 /* StudyList.json in Resources */,
 				843B6AD625C814840022B5E9 /* Confirmation.plist in Resources */,
-				890C158728D2DACC00BFB6ED /* iOSActivity1.json in Resources */,
 				6E14F2031F0224AD00EA8D1E /* Notification.json in Resources */,
 				89893F0522B1115300A846CE /* Main.storyboard in Resources */,
 				6F0221792264729E00A2DBC8 /* TextChoiceCell.xib in Resources */,
@@ -2557,12 +2535,10 @@
 				843B6A7825C808E00022B5E9 /* ContactUs.plist in Resources */,
 				6EB740181E9CD38100A4C773 /* FetalKickTest.json in Resources */,
 				842ECED525D952D500A612DA /* Gateway.storyboard in Resources */,
-				890C158828D2DACC00BFB6ED /* iOSActivity2.json in Resources */,
 				6EC129241E64624F00B90167 /* Acivity_Question.json in Resources */,
 				84D3B26325E43B0900780211 /* ComprehensionFailure.xib in Resources */,
 				6EED31A31F1CD7B300A7AF56 /* LatestActive_1B.json in Resources */,
 				6EEB0AFC1FD2811700136EAA /* Labkey_Activity_Latest3.json in Resources */,
-				896DECC128E5A3AB007D55E0 /* iOSActivity6.json in Resources */,
 				6EE8E4D91F17459200028853 /* Eligibility_1B.json in Resources */,
 				843B6A9825C809E20022B5E9 /* GatewayOverview.plist in Resources */,
 				843B6A7225C808CA0022B5E9 /* Profile.plist in Resources */,
@@ -2603,7 +2579,6 @@
 				9456C48527CFADC20054AA8E /* LaunchScreen.storyboard in Resources */,
 				9456C48627CFADC20054AA8E /* UserPreferences.plist in Resources */,
 				9456C48727CFADC20054AA8E /* AppGlossary.pdf in Resources */,
-				8912EB9F28DDB23B00C2DA79 /* iOSActivity5.json in Resources */,
 				9456C48827CFADC20054AA8E /* Verdana Italic.ttf in Resources */,
 				9456C48927CFADC20054AA8E /* SignUpPlist.plist in Resources */,
 				9456C48A27CFADC20054AA8E /* ActiveTask.json in Resources */,
@@ -2636,7 +2611,6 @@
 				9456C4A327CFADC20054AA8E /* Labkey_Activity.json in Resources */,
 				9456C4A427CFADC20054AA8E /* Consent.json in Resources */,
 				9456C4A527CFADC20054AA8E /* SignInPlist.plist in Resources */,
-				890C158A28D2DE8900BFB6ED /* iOSActivity1.json in Resources */,
 				9456C4A627CFADC20054AA8E /* NewProgressView.xib in Resources */,
 				9456C4A727CFADC20054AA8E /* fda_preload.gif in Resources */,
 				9456C4A827CFADC20054AA8E /* StudyOverview.plist in Resources */,
@@ -2659,11 +2633,9 @@
 				9456C4D227CFAE1D0054AA8E /* AppConfiguration.plist in Resources */,
 				9456C4B827CFADC20054AA8E /* ComprehensionFailure.xib in Resources */,
 				9456C4B927CFADC20054AA8E /* LatestActive_1B.json in Resources */,
-				890C158B28D2DE8C00BFB6ED /* iOSActivity2.json in Resources */,
 				9456C4BA27CFADC20054AA8E /* Labkey_Activity_Latest3.json in Resources */,
 				945BADE427D8FB690034B240 /* GatewayOverview.plist in Resources */,
 				9456C4BB27CFADC20054AA8E /* Eligibility_1B.json in Resources */,
-				896DECC228E5A3AB007D55E0 /* iOSActivity6.json in Resources */,
 				9456C4BD27CFADC20054AA8E /* Profile.plist in Resources */,
 				9456C4BE27CFADC20054AA8E /* HPHCSettings.xib in Resources */,
 				9456C4BF27CFADC20054AA8E /* AnanomousFilterData.plist in Resources */,

@@ -507,31 +507,31 @@ class WCPServices: NSObject {
         UserDefaults.standard.synchronize()
       }
       
-      let jsonName = val1 ? "iOSActivity6" : "iOSActivity6"
-      var response2: Dictionary<String, Any> = [:]
-      // Comment out when done
-             let filePath  = Bundle.main.path(forResource: jsonName, ofType: "json")
-             let data = NSData(contentsOfFile: filePath!)
-
-             do {
-                  response2 = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String, Any> ?? [:]
-
-//               print("2responseresponse---\(response2)")
-
-//               self.handleGetStudyActivityMetadata(response: res as! Dictionary<String, Any>)
-
-//                 if let activites = res![kActivites]  as? Array<Dictionary<String, Any>> {
-//                     if Study.currentStudy != nil {
-//                         for activity in activites {
-//                             let participatedActivity = UserActivityStatus(detail: activity,studyId:(Study.currentStudy?.studyId)!)
-//                             user.participatedActivites.append(participatedActivity)
-//                         }
-//                     }
-//                 }
-             }
-             catch {
-
-             }
+//      let jsonName = val1 ? "iOSActivity6" : "iOSActivity6"
+//      var response2: Dictionary<String, Any> = [:]
+//      // Comment out when done
+//             let filePath  = Bundle.main.path(forResource: jsonName, ofType: "json")
+//             let data = NSData(contentsOfFile: filePath!)
+//
+//             do {
+//                  response2 = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String, Any> ?? [:]
+//
+////               print("2responseresponse---\(response2)")
+//
+////               self.handleGetStudyActivityMetadata(response: res as! Dictionary<String, Any>)
+//
+////                 if let activites = res![kActivites]  as? Array<Dictionary<String, Any>> {
+////                     if Study.currentStudy != nil {
+////                         for activity in activites {
+////                             let participatedActivity = UserActivityStatus(detail: activity,studyId:(Study.currentStudy?.studyId)!)
+////                             user.participatedActivites.append(participatedActivity)
+////                         }
+////                     }
+////                 }
+//             }
+//             catch {
+//
+//             }
       
         
 //        let filePath  = Bundle.main.path(forResource: "ActivityMetadata TEST1", ofType: "json") // Activity_Metadata_Other

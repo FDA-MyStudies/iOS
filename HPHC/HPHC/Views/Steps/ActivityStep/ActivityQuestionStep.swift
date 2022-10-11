@@ -536,7 +536,7 @@ class ActivityQuestionStep: ActivityStep {
                   questionStep?.steppreactivityid = preactivityid
                   questionStep?.steppredestinationFalseStepKey = predestinationFalseStepKey
                   
-                 let valOtherActiStepId = UserDefaults.standard.value(forKey: "OtherActiStepId") as? String ?? ""
+                 let valOtherActiStepId = UserDefaults.standard.value(forKey: "OtherActiStepId") as? String ?? "" //CHECK
                   UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
               UserDefaults.standard.synchronize()
                   
@@ -826,7 +826,7 @@ class ActivityQuestionStep: ActivityStep {
           questionStep?.steppreactivityid = preactivityid
           questionStep?.steppredestinationFalseStepKey = predestinationFalseStepKey
           
-          let valOtherActiStepId = UserDefaults.standard.value(forKey: "OtherActiStepId") as? String ?? ""
+          let valOtherActiStepId = UserDefaults.standard.value(forKey: "OtherActiStepId") as? String ?? "" //CHECK
           UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
           UserDefaults.standard.synchronize()
           

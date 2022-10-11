@@ -346,6 +346,28 @@ import Foundation
             
             valcomparisionValuesCount += 1
           }
+          else if valoperato == ">=" {
+            if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
+               intValactualResult >= intVal2 {
+              print("2intValactualResult---\(intValactualResult)")
+              
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+            valcomparisionValuesCount += 1
+          }
+          else if valoperato == "<=" {
+            if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
+               intValactualResult <= intVal2 {
+              print("2intValactualResult---\(intValactualResult)")
+              
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+            valcomparisionValuesCount += 1
+          }
           
           else if valoperato == "&&" {
             
@@ -389,28 +411,7 @@ import Foundation
           valOperatorCount += 1
          var valInternalconditonRequired = ""
           var valPreviousconditonsatisfied = conditonsatisfied
-//          if valoperato == ">" {
-//            if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
-//               intValactualResult > intVal2 {
-//              print("1intValactualResult---\(intValactualResult)")
-//
-//              conditonsatisfied = true
-//            } else {
-//              conditonsatisfied = false
-//            }
-//            valcomparisionValuesCount += 1
-//          }
-//          else if valoperato == "<" {
-//            if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
-//               intValactualResult < intVal2 {
-//              print("2intValactualResult---\(intValactualResult)")
-//
-//              conditonsatisfied = true
-//            } else {
-//              conditonsatisfied = false
-//            }
-//            valcomparisionValuesCount += 1
-//          }
+
            if valoperato == "=" {
             if valArrcomparisionValues.count > valcomparisionValuesCount,
                actualResult == (valArrcomparisionValues[valcomparisionValuesCount] ) {

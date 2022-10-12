@@ -38,6 +38,17 @@ import Foundation
                                             
                     }
                   }
+                  else if let operato = currentStep.steppreoperator, operato == "!=" {
+                    if val != currentStep.stepprevalue {
+                      print("1resulttt---\(val)")
+                      
+                     let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
+                      if val90 != nil {
+                        return val90
+                      }
+                                            
+                    }
+                  }
                   else if let operato = currentStep.steppreoperator, operato == ">" {
                     if let intVal1 = Double(val), let intVal2 = Double(currentStep.stepprevalue ?? ""),
                        intVal1 > intVal2 {
@@ -266,6 +277,18 @@ import Foundation
             
             valcomparisionValuesCount += 1
           }
+          else if valoperato == "!=" {
+            if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
+               intValactualResult != intVal2 {
+              print("3intValactualResult---\(intValactualResult)")
+              
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+            
+            valcomparisionValuesCount += 1
+          }
           else if valoperato == ">=" {
             if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
                intValactualResult >= intVal2 {
@@ -335,6 +358,18 @@ import Foundation
            if valoperato == "=" {
             if valArrcomparisionValues.count > valcomparisionValuesCount,
                actualResult == (valArrcomparisionValues[valcomparisionValuesCount] ) {
+              print("3intValactualResult---\(actualResult)")
+              
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+            
+            valcomparisionValuesCount += 1
+          }
+          else if valoperato == "!=" {
+            if valArrcomparisionValues.count > valcomparisionValuesCount,
+               actualResult != (valArrcomparisionValues[valcomparisionValuesCount] ) {
               print("3intValactualResult---\(actualResult)")
               
               conditonsatisfied = true

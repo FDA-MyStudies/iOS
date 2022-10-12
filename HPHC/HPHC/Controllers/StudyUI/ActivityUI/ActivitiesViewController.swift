@@ -1871,6 +1871,186 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
     return ""
   }
   
+  func getTextValueFromValue(identifier: String, valFinalRes: String) -> String {
+    let activity = Study.currentActivity
+    let activityStepArray = activity?.activitySteps?.filter({$0.key == identifier
+    })
+      
+      if (activityStepArray?.count)! > 0 {
+          let step1 = activityStepArray?.first
+        print("step1?.resultType---\(step1?.resultType)")
+        let val1 = step1?.resultType as? String ?? ""
+        
+        //        var style = ""
+//                var style = ((step1 as? ActivityQuestionStep)?.formatDict?["textChoices"] as? [String: String])!
+                
+//                let activityStep: ActivityStep?
+
+        let valFormat = (step1 as? ActivityQuestionStep)?.formatDict
+        
+        if  Utilities.isValidObject(someObject: valFormat?[kStepQuestionTextChoiceTextChoices] as AnyObject?)
+            && Utilities.isValidValue(someObject: valFormat?[kStepQuestionTextChoiceSelectionStyle] as AnyObject?) {
+            
+//            let textChoiceDict = valFormat?[kStepQuestionTextChoiceTextChoices] as? [Any] ?? []
+          let textChoiceDict = valFormat?[kStepQuestionTextChoiceTextChoices] as? [JSONDictionary] ?? []
+         
+            
+            for dict in textChoiceDict {
+              let text = dict[kORKTextChoiceText] as? String ?? ""
+              let value = dict[kORKTextChoiceValue] as? String ?? ""
+              
+              if valFinalRes == value {
+                print("valuevaluevalue---\(value)---\(text)")
+                return text
+              }
+            }
+          
+        }
+        
+        
+       return valFinalRes
+      }
+    return valFinalRes
+  }
+  
+  func getTextChoicesSingleSelection(dataArray: [Any]) -> ([ORKTextChoice]?, OtherChoice?) {
+    print("1getTextChoicesSingleSelection---")
+    var textChoiceArray: [ORKTextChoice] = []
+    var otherChoice: OtherChoice?
+    
+    if let dictArr = dataArray as? [JSONDictionary] {
+      
+      for dict in dictArr {
+        
+        let text = dict[kORKTextChoiceText] as? String ?? ""
+        let value = dict[kORKTextChoiceValue] as? String ?? ""
+        let detail = dict[kORKTextChoiceDetailText] as? String ?? ""
+        let isExclusive = true
+        
+        if let otherDict = dict[kORKOTherChoice] as? JSONDictionary {
+          
+          let placeholder = otherDict["placeholder"] as? String ?? "enter here"
+          let isMandatory = otherDict["isMandatory"] as? Bool ?? false
+          let textFieldReq = otherDict["textfieldReq"] as? Bool ?? false
+          
+//          otherChoice = OtherChoice(
+//            isShowOtherCell: true,
+//            isShowOtherField: textFieldReq,
+//            otherTitle: text,
+//            placeholder: placeholder,
+//            isMandatory: isMandatory,
+//            isExclusive: isExclusive,
+//            detailText: detail,
+//            value: value
+//          )
+          // No need to add other text choice
+          continue
+        }
+        
+//        let choice = ORKTextChoice(
+//          text: text,
+//          detailText: detail,
+//          value: value as NSCoding & NSCopying & NSObjectProtocol,
+//          exclusive: isExclusive
+//        )
+//
+//        textChoiceArray.append(choice)
+        
+      }
+      
+    } else if let titleArr = dataArray as? [String] {
+      
+      for (i, title) in titleArr.enumerated() {
+        
+        let choice = ORKTextChoice(
+          text: title,
+          value: i as NSCoding & NSCopying & NSObjectProtocol
+        )
+        
+//        if self.textScaleDefaultValue?.isEmpty == false && self.textScaleDefaultValue != "" {
+//          if title == self.textScaleDefaultValue {
+//            self.textScaleDefaultIndex = i
+//          }
+//        }
+//        textChoiceArray.append(choice)
+      }
+      
+    }
+    if textChoiceArray.isEmpty {
+      return (nil, nil)
+    } else {
+      return (textChoiceArray, otherChoice)
+    }
+    
+  }
+  
+  func getTextChoices(dataArray: [Any]) -> ([ORKTextChoice]?, OtherChoice?) {
+      
+      var textChoiceArray: [ORKTextChoice] = []
+      var otherChoice: OtherChoice?
+      
+      if let dictArr = dataArray as? [JSONDictionary] {
+          
+          for dict in dictArr {
+              
+              let text = dict[kORKTextChoiceText] as? String ?? ""
+              let value = dict[kORKTextChoiceValue] as? String ?? ""
+              let detail = dict[kORKTextChoiceDetailText] as? String ?? ""
+              let isExclusive = dict[kORKTextChoiceExclusive] as? Bool ?? false
+              
+              if let otherDict = dict[kORKOTherChoice] as? JSONDictionary {
+                  
+                  let placeholder = otherDict["placeholder"] as? String ?? kEnterHere
+                  let isMandatory = otherDict["isMandatory"] as? Bool ?? false
+                  let textFieldReq = otherDict["textfieldReq"] as? Bool ?? false
+      
+//                    otherChoice = OtherChoice(isShowOtherCell: true,
+//                                              isShowOtherField: textFieldReq,
+//                                              otherTitle: text,
+//                                              placeholder: placeholder,
+//                                              isMandatory: isMandatory,
+//                                              isExclusive: isExclusive,
+//                                              detailText: detail,
+//                                              value: value)
+//
+//                    continue // No need to add other text choice
+              }
+              
+//                let choice = ORKTextChoice(text: text ,
+//                                           detailText: detail,
+//                                           value: value as NSCoding & NSCopying & NSObjectProtocol,
+//                                           exclusive: isExclusive)
+//
+//                textChoiceArray.append(choice)
+              
+          }
+          
+      } else if let titleArr = dataArray as? [String] {
+          
+          for (i, title) in titleArr.enumerated() {
+              
+              let choice = ORKTextChoice(text: title, value: i as NSCoding & NSCopying & NSObjectProtocol)
+              
+//                if self.textScaleDefaultValue?.isEmpty == false && self.textScaleDefaultValue != "" {
+//                    if title == self.textScaleDefaultValue {
+//                        self.textScaleDefaultIndex = i
+//                    }
+//                }
+//                textChoiceArray.append(choice)
+          }
+          
+      } else {
+          Logger.sharedInstance.debug("dataArray has Invalid data: null for Text Choice ")
+      }
+      
+        if textChoiceArray.isEmpty {
+            return (nil, nil)
+        } else {
+            return (textChoiceArray, otherChoice)
+        }
+      
+  }
+  
   func setValue(questionstepResult: ORKQuestionResult) -> String {
       switch questionstepResult.questionType.rawValue {
 
@@ -1913,7 +2093,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                       let resultValue: String! = "\(stepTypeResult.choiceAnswers!.first!)"
 
 //                      self.value = (resultValue == nil ? "" : resultValue)
-                    print("4res---\((resultValue == nil ? "" : resultValue))")
+                    print("478res---\((resultValue == nil ? "" : resultValue))")
                     
                     return "\(resultValue == nil ? "" : resultValue ?? "")"
                   } else {
@@ -1930,7 +2110,12 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                       }
                     print("5res---\(resultValue)")
                     let valFinalRes = resultValue.first as? String ?? ""
-                    return "\(valFinalRes)" //check
+                    
+                    
+                    let val = getTextValueFromValue(identifier: stepTypeResult.identifier, valFinalRes: valFinalRes)
+                    
+//                    return "\(valFinalRes)" //check
+                    return "\(val)" //check
 
 //                      self.value = resultValue
                   }

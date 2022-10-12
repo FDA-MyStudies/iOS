@@ -28,7 +28,11 @@ import Foundation
                   
                   print("resulttt---\(currentStep.stepprevalue)")
                   if let operato = currentStep.steppreoperator, operato == "=" {
+                    
                     if val == currentStep.stepprevalue {
+                      
+//                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
+                      
                       print("1resulttt---\(val)")
                       
                      let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
@@ -528,36 +532,61 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String) -> Stri
 //          }
 //           */
 //
-//      case ORKQuestionType.boolean.rawValue:
-//
-//          let stepTypeResult = (questionstepResult as? ORKBooleanQuestionResult)!
-//
+      case ORKQuestionType.boolean.rawValue:
+
+          let stepTypeResult = (questionstepResult as? ORKBooleanQuestionResult)!
+
 //          if Utilities.isValidValue(someObject: stepTypeResult.booleanAnswer as AnyObject?) {
-//              self.value =  stepTypeResult.booleanAnswer! == 1 ? true : false
-//
-//          } else {
+              let value = stepTypeResult.booleanAnswer ?? false == 1 ? "True" : "False"
+            return value
+//          }
+//      else {
 //              // self.value = false
 //              self.skipped = true
 //          }
+      
+      
+    
+//    case  ORKQuestionType.scale.rawValue : // scale and continuos scale
 //
-//      case ORKQuestionType.integer.rawValue: // numeric type
-//          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
+//        if (questionstepResult as? ORKScaleQuestionResult) != nil {
+//            let stepTypeResult = (questionstepResult as? ORKScaleQuestionResult)!
+//          print("1res---\(stepTypeResult.answer)---\(stepTypeResult.scaleAnswer)")
+//          if stepTypeResult.scaleAnswer != nil {
+//          return "\(stepTypeResult.scaleAnswer!)"
+//          }
+//           } else {
+//            let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
+////               print("2res---\(stepTypeResult.answer)---\(stepTypeResult.choiceAnswers)")
+//             if (stepTypeResult.choiceAnswers?.count) ?? 0 > 0 {
+////                   self.value = stepTypeResult.choiceAnswers?.first
+//               print("3res---\(stepTypeResult.choiceAnswers?.first)")
 //
-//          if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?) {
-//              self.value =  Double(truncating:stepTypeResult.numericAnswer!)
+////                 getActualAnswer(choiceSelected: "\(stepTypeResult.choiceAnswers!.first!)", identifierOfRes: <#T##String#>)
 //
-//          } else {
+//               return "\(stepTypeResult.choiceAnswers!.first!)" //check
+//             }
+//
+//        }
+//
+      case ORKQuestionType.integer.rawValue: // numeric type
+          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
+      if let val = stepTypeResult.numericAnswer {
+            let value = Double(truncating:stepTypeResult.numericAnswer!)
+            return "\(value)"
+      }
+//      else {
 //              // self.value = 0.0
 //              self.skipped = true
 //          }
 //
-//      case ORKQuestionType.decimal.rawValue: // numeric type
-//          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
-//
-//          if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?) {
-//              self.value = Double(truncating:stepTypeResult.numericAnswer!)
-//
-//          } else {
+      case ORKQuestionType.decimal.rawValue: // numeric type
+          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
+      if let val = stepTypeResult.numericAnswer {
+            let value = Double(truncating:stepTypeResult.numericAnswer!)
+            return "\(value)"
+      }
+//      else {
 //              // self.value = 0.0
 //              self.skipped = true
 //          }
@@ -581,9 +610,9 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String) -> Stri
 //      case ORKQuestionType.date.rawValue:
 //          let stepTypeResult = (questionstepResult as? ORKDateQuestionResult)!
 //
-//          if Utilities.isValidValue(someObject: stepTypeResult.dateAnswer as AnyObject?) {
-//              self.value =  Utilities.getStringFromDate(date: stepTypeResult.dateAnswer!)
-//          } else {
+//            let value = Utilities.getStringFromDate(date: stepTypeResult.dateAnswer!) //CHECK
+//            return "\(value ?? "")"
+//      else {
 //              // self.value = "0000-00-00'T'00:00:00"
 //              self.skipped = true
 //          }
@@ -597,14 +626,13 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String) -> Stri
 //              // self.value = "0000-00-00'T'00:00:00"
 //              self.skipped = true
 //          }
-//      case ORKQuestionType.text.rawValue: // text + email
-//
-//          let stepTypeResult = (questionstepResult as? ORKTextQuestionResult)!
-//
-//          if Utilities.isValidValue(someObject: stepTypeResult.answer as AnyObject?) {
-//              self.value = (stepTypeResult.answer as? String)!
-//
-//          } else {
+      case ORKQuestionType.text.rawValue: // text + email
+
+          let stepTypeResult = (questionstepResult as? ORKTextQuestionResult)!
+
+            let value = (stepTypeResult.answer as? String)!
+            return "\(value)"
+//      else {
 //              // self.value = ""
 //              self.skipped = true
 //          }
@@ -621,13 +649,12 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String) -> Stri
 //              self.skipped = true
 //          }
 //
-//      case ORKQuestionType.height.rawValue:
-//
-//          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
-//          if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?) {
-//              self.value = Double(truncating:stepTypeResult.numericAnswer!)
-//
-//          } else {
+      case ORKQuestionType.height.rawValue:
+
+          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
+            let value = Double(truncating:stepTypeResult.numericAnswer!)
+            return "\(value)"
+//      else {
 //              // self.value = 0.0
 //              self.skipped = true
 //          }

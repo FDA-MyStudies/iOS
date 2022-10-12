@@ -1913,6 +1913,47 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
     return valFinalRes
   }
   
+  func getScaleValueFromValue(identifier: String, valFinalRes: String) -> String {
+    let activity = Study.currentActivity
+    let activityStepArray = activity?.activitySteps?.filter({$0.key == identifier
+    })
+      
+      if (activityStepArray?.count)! > 0 {
+          let step1 = activityStepArray?.first
+        print("step1?.resultType---\(step1?.resultType)")
+        let val1 = step1?.resultType as? String ?? ""
+        
+        //        var style = ""
+//                var style = ((step1 as? ActivityQuestionStep)?.formatDict?["textChoices"] as? [String: String])!
+                
+//                let activityStep: ActivityStep?
+
+        let valFormat = (step1 as? ActivityQuestionStep)?.formatDict
+        
+        if  Utilities.isValidObject(someObject: valFormat?[kStepQuestionTextChoiceTextChoices] as AnyObject?) {
+            
+//            let textChoiceDict = valFormat?[kStepQuestionTextChoiceTextChoices] as? [Any] ?? []
+          let textChoiceDict = valFormat?[kStepQuestionTextChoiceTextChoices] as? [JSONDictionary] ?? []
+         
+            
+            for dict in textChoiceDict {
+              let text = dict[kORKTextChoiceText] as? String ?? ""
+              let value = dict[kORKTextChoiceValue] as? String ?? ""
+              
+              if valFinalRes == value {
+                print("valuevaluevalue---\(value)---\(text)")
+                return text
+              }
+            }
+          
+        }
+        
+        
+       return valFinalRes
+      }
+    return valFinalRes
+  }
+  
   func getTextChoicesSingleSelection(dataArray: [Any]) -> ([ORKTextChoice]?, OtherChoice?) {
     print("1getTextChoicesSingleSelection---")
     var textChoiceArray: [ORKTextChoice] = []
@@ -2071,7 +2112,10 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                  
 //                 getActualAnswer(choiceSelected: "\(stepTypeResult.choiceAnswers!.first!)", identifierOfRes: <#T##String#>)
                  if stepTypeResult.choiceAnswers != nil {
-                 return "\(stepTypeResult.choiceAnswers!.first!)" //check
+                   
+                   let val = getScaleValueFromValue(identifier: stepTypeResult.identifier, valFinalRes: "\(stepTypeResult.choiceAnswers!.first!)")
+                   
+                 return "\(val)" //check
                  }
                }
                
@@ -2165,6 +2209,15 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
 //              self.value = []
 //          }
 //           */
+        
+      case ORKQuestionType.boolean.rawValue:
+
+          let stepTypeResult = (questionstepResult as? ORKBooleanQuestionResult)!
+
+//          if Utilities.isValidValue(someObject: stepTypeResult.booleanAnswer as AnyObject?) {
+              let value = stepTypeResult.booleanAnswer ?? false == 1 ? "True" : "False"
+            return value
+        
 //
 //      case ORKQuestionType.boolean.rawValue:
 //
@@ -2178,6 +2231,14 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
 //              self.skipped = true
 //          }
 //
+        
+      case ORKQuestionType.integer.rawValue: // numeric type
+          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
+      if let val = stepTypeResult.numericAnswer {
+            let value = Double(truncating:stepTypeResult.numericAnswer!)
+            return "\(value)"
+      }
+        
 //      case ORKQuestionType.integer.rawValue: // numeric type
 //          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
 //
@@ -2189,6 +2250,14 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
 //              self.skipped = true
 //          }
 //
+        
+      case ORKQuestionType.decimal.rawValue: // numeric type
+          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
+      if let val = stepTypeResult.numericAnswer {
+            let value = Double(truncating:stepTypeResult.numericAnswer!)
+            return "\(value)"
+      }
+        
 //      case ORKQuestionType.decimal.rawValue: // numeric type
 //          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
 //
@@ -2235,6 +2304,14 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
 //              // self.value = "0000-00-00'T'00:00:00"
 //              self.skipped = true
 //          }
+        
+      case ORKQuestionType.text.rawValue: // text + email
+
+          let stepTypeResult = (questionstepResult as? ORKTextQuestionResult)!
+
+            let value = (stepTypeResult.answer as? String)!
+            return "\(value)"
+        
 //      case ORKQuestionType.text.rawValue: // text + email
 //
 //          let stepTypeResult = (questionstepResult as? ORKTextQuestionResult)!
@@ -2259,7 +2336,11 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
 //              self.skipped = true
 //          }
 //
-//      case ORK`+`
+      case ORKQuestionType.height.rawValue:
+
+          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
+            let value = Double(truncating:stepTypeResult.numericAnswer!)
+            return "\(value)"
 //
 //      case ORKQuestionType.location.rawValue:
 //          let stepTypeResult = (questionstepResult as? ORKLocationQuestionResult)!

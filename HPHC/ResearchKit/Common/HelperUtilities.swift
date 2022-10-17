@@ -40,7 +40,18 @@ import Foundation
                         return val90
                       }
                                             
-                    }
+                    } else if currentStep.stepprevalue == "Other", val.contains("\"other\": \"Other\"") {
+                      
+                      //                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
+                                            
+                                            print("1resulttt---\(val)")
+                                            
+                                           let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
+                                            if val90 != nil {
+                                              return val90
+                                            }
+                                                                  
+                                          }
                   }
                   else if let operato = currentStep.steppreoperator, operato == "!=" {
                     if val != currentStep.stepprevalue {

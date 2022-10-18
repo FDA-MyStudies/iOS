@@ -197,7 +197,136 @@ class ActivityStep {
      @stepDict:contains as key:Value pair for all the properties of ActiveStep
      */
   func initWithDict(stepDict: Dictionary<String, Any>, allSteps: Array<Dictionary<String, Any>>?) {
+    if stepDict["type"] as? String ?? "" == "form" {
+      if Utilities.isValidObject(someObject: stepDict as AnyObject?){
+          
+          if Utilities.isValidValue(someObject: stepDict[kActivityStepActivityId] as AnyObject ){
+              self.activityId = stepDict[kActivityStepActivityId] as? String
+          }
+          
+          if Utilities.isValidValue(someObject: stepDict[kActivityStepType] as AnyObject ){
+              self.type = stepDict[kActivityStepType] as? ActivityStepType
+          }
+          if Utilities.isValidValue(someObject: stepDict[kActivityStepResultType] as AnyObject ){
+              self.resultType = stepDict[kActivityStepResultType] as? String
+          }
+          if Utilities.isValidValue(someObject: stepDict[kActivityStepKey] as AnyObject ){
+              self.key = stepDict[kActivityStepKey] as? String
+          }
+          if Utilities.isValidValue(someObject: stepDict[kActivityStepTitle] as AnyObject ) {
+              self.title = stepDict[kActivityStepTitle] as? String
+          }
+          if Utilities.isValidValue(someObject: stepDict[kActivityStepText] as AnyObject )  {
+              self.text = stepDict[kActivityStepText] as? String
+          }
+          if Utilities.isValidValue(someObject: stepDict[kActivityStepSkippable] as AnyObject )  {
+              self.skippable = stepDict[kActivityStepSkippable] as? Bool
+          }
         
+        
+//          if Utilities.isValidValue(someObject: stepDict["piping"] as AnyObject )  {
+          print("piping---\(stepDict["piping"])")
+          let val1 = stepDict["pipingLogic"] as? [String: String]
+        pipingSnippet = val1?["pipingSnippet"] ?? ""
+        pipingsourceQuestionKey = val1?["sourceQuestionKey"] ?? ""
+        pipingactivityVersion = val1?["activityVersion"] ?? ""
+        pipingactivityid = val1?["activityId"] ?? ""
+//          }
+        //here
+        
+        
+        
+        
+    
+        let valForm = stepDict["steps"] as? Array<Dictionary<String, Any>>
+        let formstepDict = valForm?.last ?? [:]
+        if valForm?.count ?? 0 > 0 {
+          sourcePreLogicQuestionKey = formstepDict["sourceQuestionKey"] as? String
+          let val2 = formstepDict["preLoadLogic"] as? [String: String]
+          preactivityVersion = val2?["activityVersion"] ?? ""
+          preactivityid = val2?["activityId"] ?? ""
+          predestinationFalseStepKey = val2?["destinationFalseStepKey"] ?? ""
+          predestinationTrueStepKey = val2?["destinationStepKey"] ?? ""
+          
+          if predestinationFalseStepKey != "" {
+          predestinationFalseStepIndex = getIndexByIdentifier(identifier1: predestinationFalseStepKey ?? "", allSteps: allSteps)
+          } else {
+            predestinationFalseStepIndex = ""
+          }
+          if predestinationTrueStepKey != "" {
+          predestinationTrueStepIndex = getIndexByIdentifier(identifier1: predestinationTrueStepKey ?? "", allSteps: allSteps)
+          } else {
+            predestinationTrueStepIndex = ""
+          }
+          
+          preoperator = val2?["operator"] ?? ""
+          prevalue = val2?["value"] ?? ""
+  //          sourcePreLogicQuestionKey = stepDict["sourceQuestionKey"] as? String
+          presourceQuestionKey = stepDict["sourceQuestionKey"] as? String
+          
+        }
+        
+        
+        
+        else {
+        sourcePreLogicQuestionKey = stepDict["sourceQuestionKey"] as? String
+        let val2 = stepDict["preLoadLogic"] as? [String: String]
+        preactivityVersion = val2?["activityVersion"] ?? ""
+        preactivityid = val2?["activityId"] ?? ""
+        predestinationFalseStepKey = val2?["destinationFalseStepKey"] ?? ""
+        predestinationTrueStepKey = val2?["destinationStepKey"] ?? ""
+        
+        if predestinationFalseStepKey != "" {
+        predestinationFalseStepIndex = getIndexByIdentifier(identifier1: predestinationFalseStepKey ?? "", allSteps: allSteps)
+        } else {
+          predestinationFalseStepIndex = ""
+        }
+        if predestinationTrueStepKey != "" {
+        predestinationTrueStepIndex = getIndexByIdentifier(identifier1: predestinationTrueStepKey ?? "", allSteps: allSteps)
+        } else {
+          predestinationTrueStepIndex = ""
+        }
+        
+        preoperator = val2?["operator"] ?? ""
+        prevalue = val2?["value"] ?? ""
+//          sourcePreLogicQuestionKey = stepDict["sourceQuestionKey"] as? String
+        presourceQuestionKey = stepDict["sourceQuestionKey"] as? String
+        }
+        
+        
+        
+        //HERE
+        
+        let valdefalut = stepDict["defaultVisibility"] as? Bool ?? true
+        predefaultVisibility = valdefalut ? "true" : "false"
+        
+        let valisHidden = stepDict["hidden"] as? Bool ?? true
+        preisHidden = valisHidden ? "true" : "false"
+        
+        isPiping = stepDict["piping"] as? Bool
+        
+//          let val7 = activity?.steps
+        
+        
+        
+          if Utilities.isValidValue(someObject: stepDict[kActivityStepGroupName] as AnyObject )  {
+              self.groupName = stepDict[kActivityStepGroupName] as? String
+          }
+          if Utilities.isValidValue(someObject: stepDict[kActivityStepRepeatable] as AnyObject )  {
+              self.repeatable = stepDict[kActivityStepRepeatable] as? Bool
+          }
+          if Utilities.isValidValue(someObject: stepDict[kActivityStepRepeatableText] as AnyObject )  {
+              self.repeatableText = stepDict[kActivityStepRepeatableText] as? String
+          }
+          if Utilities.isValidObject(someObject: stepDict[kActivityStepDestinations] as AnyObject )  {
+              self.destinations = stepDict[kActivityStepDestinations] as? Array<Dictionary<String, Any>>
+          }
+      } else {
+          Logger.sharedInstance.debug("Step Dictionary is null:\(stepDict)")
+      }
+    }
+    else {
+    
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
             
             if Utilities.isValidValue(someObject: stepDict[kActivityStepActivityId] as AnyObject ){
@@ -284,6 +413,7 @@ class ActivityStep {
         } else {
             Logger.sharedInstance.debug("Step Dictionary is null:\(stepDict)")
         }
+    }
     }
   
   func getIndexByIdentifier(identifier1: String, allSteps: Array<Dictionary<String, Any>>?) -> String {

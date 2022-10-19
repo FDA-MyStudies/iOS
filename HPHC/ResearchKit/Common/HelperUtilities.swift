@@ -84,7 +84,7 @@ import Foundation
                                           }
                   }
                   else if let operato = currentStep.steppreoperator, operato == "!=" {
-                    if currentStep.stepprevalue == "Other", !(val.contains("\"other\": \"Other\"")){
+                    if currentStep.stepprevalue == "Other", !(val.contains("\"other\": \"Other\"")) {
                       
                       //                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
                       
@@ -96,7 +96,8 @@ import Foundation
                       }
                       
                     }
-                    if currentStep.stepprevalue != "Other" && val != currentStep.stepprevalue {
+//                    if currentStep.stepprevalue != "Other" && val != currentStep.stepprevalue {
+                      if currentStep.stepprevalue != "Other", currentStep.stepprevalue != "", compareStringNumerics(valStr1: val, valStr2: currentStep.stepprevalue ?? "", operatorVal: operato) {
                       print("1resulttt---\(val)")
                       
                       let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
@@ -197,10 +198,10 @@ import Foundation
         return true
       }
     }
-    else if operatorVal == "=" {
-      if valStr1 == valStr2 {
+    else if operatorVal == "!=" {
+      if valStr1 != valStr2 {
         return true
-      } else if Decimal(string: valStr1) == Decimal(string: valStr2) {
+      } else if let val = Decimal(string: valStr1), Decimal(string: valStr1) != Decimal(string: valStr2) {
         return true
       }
     }

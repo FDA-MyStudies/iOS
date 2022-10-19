@@ -22,14 +22,14 @@ import Foundation
             // && activityType != .form {
              
              if let questionstepResult: ORKQuestionResult? = stepResult.results?.last as? ORKQuestionResult? {
-               set1ResultValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep, questionstepValResult: questionstepResult)
+              return set1ResultValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep, questionstepValResult: questionstepResult)
              }
            }
           else if stepResult.results?.count == 1 {
             // && activityType != .form {
              
              if let questionstepResult: ORKQuestionResult? = stepResult.results?.first as? ORKQuestionResult? {
-               set1ResultValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep, questionstepValResult: questionstepResult)
+               return set1ResultValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep, questionstepValResult: questionstepResult)
              }
            }
           
@@ -59,7 +59,7 @@ import Foundation
                   print("resulttt---\(currentStep.stepprevalue)")
                   if let operato = currentStep.steppreoperator, operato == "=" {
                     
-                    if val == currentStep.stepprevalue {
+                    if currentStep.stepprevalue != "", compareStringNumerics(valStr1: val, valStr2: currentStep.stepprevalue ?? "", operatorVal: operato) {
                       
 //                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
                       
@@ -187,6 +187,25 @@ import Foundation
     }
     return nil
 }
+  
+  func compareStringNumerics(valStr1: String, valStr2: String, operatorVal: String) -> Bool {
+    
+    if operatorVal == "=" {
+      if valStr1 == valStr2 {
+        return true
+      } else if let val = Decimal(string: valStr1), Decimal(string: valStr1) == Decimal(string: valStr2) {
+        return true
+      }
+    }
+    else if operatorVal == "=" {
+      if valStr1 == valStr2 {
+        return true
+      } else if Decimal(string: valStr1) == Decimal(string: valStr2) {
+        return true
+      }
+    }
+    return false
+  }
   
   @objc public func getReccurOverStepValue(stepResult: ORKStepResult, activityType: String, resultType: String, allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {
     
@@ -716,8 +735,14 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String) -> Stri
       case ORKQuestionType.height.rawValue:
 
           let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
-            let value = Double(truncating:stepTypeResult.numericAnswer!)
-            return "\(value)"
+//            let value = Double(truncating:stepTypeResult.numericAnswer!)
+//
+            if let val = stepTypeResult.numericAnswer {
+              let value = Double(truncating:stepTypeResult.numericAnswer!)
+              return "\(value)"
+            }
+      
+//            return "\(value)"
 //      else {
 //              // self.value = 0.0
 //              self.skipped = true

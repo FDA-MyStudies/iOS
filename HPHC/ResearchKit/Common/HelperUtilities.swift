@@ -15,12 +15,42 @@ import Foundation
     let valRes = stepResult.results?.count ?? 0
     if valRes > 0 {
         
+//        if  activityType == "questionnaire" {
+            // for question Step
+//            if stepResult.results?.count == 1 && self.type != .form {
+           if let valForm = currentStep as? ORKFormStep, stepResult.results?.count ?? 0 >= 1 {
+            // && activityType != .form {
+             
+             if let questionstepResult: ORKQuestionResult? = stepResult.results?.last as? ORKQuestionResult? {
+               set1ResultValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep, questionstepValResult: questionstepResult)
+             }
+           }
+          else if stepResult.results?.count == 1 {
+            // && activityType != .form {
+             
+             if let questionstepResult: ORKQuestionResult? = stepResult.results?.first as? ORKQuestionResult? {
+               set1ResultValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep, questionstepValResult: questionstepResult)
+             }
+           }
+          
+            
+//        }
+      
+    }
+    return nil
+}
+  
+  func set1ResultValue(stepResult: ORKStepResult, activityType: String, resultType: String, allSteps: [ORKStep], currentStep: ORKStep, questionstepValResult: ORKQuestionResult?) -> ORKStep? {// (ORKStep?, NSString?)  {
+    var valAnswer = ""
+    let valRes = stepResult.results?.count ?? 0
+    if valRes > 0 {
+        
         if  activityType == "questionnaire" {
             // for question Step
 //            if stepResult.results?.count == 1 && self.type != .form {
-          if stepResult.results?.count == 1 { // && activityType != .form {
-            print("1questionstepResult---\(stepResult.results?.first as? ORKQuestionResult?)")
-                if let questionstepResult: ORKQuestionResult? = stepResult.results?.first as? ORKQuestionResult? {
+//          if stepResult.results?.count == 1 { // && activityType != .form {
+            print("1questionstepResult---\(questionstepValResult as? ORKQuestionResult?)")
+                if let questionstepResult: ORKQuestionResult? = questionstepValResult as? ORKQuestionResult? {
                   print("2questionstepResult---\(questionstepResult)")
                   let val = self.setValue(questionstepResult:questionstepResult!, resultType: resultType )
                   
@@ -150,140 +180,7 @@ import Foundation
                   
 //                    return val1
                 }
-            }
-          else if stepResult.results?.count ?? 0 > 1 { // && activityType != .form {
-            print("1questionstepResult---\(stepResult.results?.last as? ORKQuestionResult?)")
-                if let questionstepResult: ORKQuestionResult? = stepResult.results?.last as? ORKQuestionResult? {
-                  print("2questionstepResult---\(questionstepResult)")
-                  let val = self.setValue(questionstepResult:questionstepResult!, resultType: resultType )
-                  
-                  let val1 = self.setValue(questionstepResult:questionstepResult!, resultType: resultType ) as NSString
-                  
-                  print("resulttt---\(currentStep.stepprevalue)")
-                  if let operato = currentStep.steppreoperator, operato == "=" {
-                    
-                    if val == currentStep.stepprevalue {
-                      
-//                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
-                      
-                      print("1resulttt---\(val)")
-                      
-                     let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
-                      if val90 != nil {
-                        return val90
-                      }
-                                            
-                    } else if currentStep.stepprevalue == "Other", val.contains("\"other\": \"Other\"") {
-                      
-                      //                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
-                                            
-                                            print("1resulttt---\(val)")
-                                            
-                                           let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
-                                            if val90 != nil {
-                                              return val90
-                                            }
-                                                                  
-                                          }
-                  }
-                  else if let operato = currentStep.steppreoperator, operato == "!=" {
-                    if currentStep.stepprevalue == "Other", !(val.contains("\"other\": \"Other\"")){
-                      
-                      //                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
-                      
-                      print("1resulttt---\(val)")
-                      
-                      let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
-                      if val90 != nil {
-                        return val90
-                      }
-                      
-                    }
-                    if currentStep.stepprevalue != "Other" && val != currentStep.stepprevalue {
-                      print("1resulttt---\(val)")
-                      
-                      let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
-                      if val90 != nil {
-                        return val90
-                      }
-                      
-                    }
-                    
-                    //                    if val != currentStep.stepprevalue {
-                    //                      print("1resulttt---\(val)")
-                    //
-                    //                     let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
-                    //                      if val90 != nil {
-                    //                        return val90
-                    //                      }
-                    //
-                    //                    }
-                  }
-                  else if let operato = currentStep.steppreoperator, operato == ">" {
-                    if let intVal1 = Double(val), let intVal2 = Double(currentStep.stepprevalue ?? ""),
-                       intVal1 > intVal2 {
-                      print("2resulttt---\(val)")
-                      let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
-                       if val90 != nil {
-                         return val90
-                       }
-                    }
-                  }
-                  else if let operato = currentStep.steppreoperator, operato == "<" {
-                    if let intVal1 = Double(val), let intVal2 = Double(currentStep.stepprevalue ?? ""),
-                       intVal1 < intVal2 {
-                      print("2resulttt---\(val)")
-                      let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
-                       if val90 != nil {
-                         return val90
-                       }
-                    }
-                  }
-                  
-                  else if let operato = currentStep.steppreoperator, operato == ">=" {
-                    if let intVal1 = Double(val), let intVal2 = Double(currentStep.stepprevalue ?? ""),
-                       intVal1 >= intVal2 {
-                      print("2resulttt---\(val)")
-                      let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
-                       if val90 != nil {
-                         return val90
-                       }
-                    }
-                  }
-                  
-                  else if let operato = currentStep.steppreoperator, operato == "<=" {
-                    if let intVal1 = Double(val), let intVal2 = Double(currentStep.stepprevalue ?? ""),
-                       intVal1 <= intVal2 {
-                      print("2resulttt---\(val)")
-                      let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
-                       if val90 != nil {
-                         return val90
-                       }
-                    }
-                  }
-
-                  else if let operato = currentStep.steppreoperator, operato.contains(":") {
-                    
-//                    ley va
-                   let valCondition = meetTheCondition(operato: operato, actualResult: val, comparisionValues: currentStep.stepprevalue ?? "")
-                    
-                    if valCondition {
-                      print("1colonresulttt---\(val)")
-                      let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
-                       if val90 != nil {
-                         return val90
-                       }
-                    }
-                  }
-                  
-                  print("5questionstepResult---\(val1)")
-                  
-                  
-                  
-                  
-//                    return val1
-                }
-            }
+//            }
             
         }
       

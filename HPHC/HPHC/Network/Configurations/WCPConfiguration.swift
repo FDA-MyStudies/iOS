@@ -83,6 +83,7 @@ class WCPConfiguration: NetworkConfiguration {
         let headers = ["Authorization": base64token,
                        "applicationId": appId,
                        "orgId": orgId,
+                       "Connection": "keep-alive",
                        "language": language]
 
         return headers

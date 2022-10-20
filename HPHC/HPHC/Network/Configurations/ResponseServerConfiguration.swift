@@ -79,7 +79,8 @@ class ResponseServerConfiguration: NetworkConfiguration {
         if localeDefault.hasPrefix("es") { // true
           language = "es"
         }
-        let headers = ["language": language]
+        let headers = ["language": language,
+                       "Connection": "keep-alive"]
 
         return headers
        // return Dictionary()

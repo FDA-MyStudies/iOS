@@ -199,11 +199,12 @@ import Foundation
       }
     }
     else if operatorVal == "!=" {
-      if valStr1 != valStr2 {
-        return true
-      } else if let val = Decimal(string: valStr1), Decimal(string: valStr1) != Decimal(string: valStr2) {
-        return true
+      if valStr1 == valStr2 {
+        return false
+      } else if let val = Decimal(string: valStr1), Decimal(string: valStr1) == Decimal(string: valStr2) {
+        return false
       }
+      return true
     }
     return false
   }

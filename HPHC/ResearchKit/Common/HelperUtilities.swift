@@ -214,7 +214,7 @@ import Foundation
     let destinStep = currentStep.steppredestinationTrueStepKey ?? ""
                      
     var identifierfound = false
-    if destinStep == "" {
+    if destinStep == "0" {
       identifierfound = true
       let val = allSteps.last
       val?.steppresourceQuestionKey = currentStep.identifier

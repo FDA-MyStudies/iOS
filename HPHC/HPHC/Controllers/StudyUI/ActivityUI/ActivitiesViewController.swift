@@ -1954,6 +1954,47 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
     return valFinalRes
   }
   
+  func getPickerValueFromValue(identifier: String, valFinalRes: String) -> String {
+    let activity = Study.currentActivity
+    let activityStepArray = activity?.activitySteps?.filter({$0.key == identifier
+    })
+      
+      if (activityStepArray?.count)! > 0 {
+          let step1 = activityStepArray?.first
+        print("step1?.resultType---\(step1?.resultType)")
+        let val1 = step1?.resultType as? String ?? ""
+        
+        //        var style = ""
+//                var style = ((step1 as? ActivityQuestionStep)?.formatDict?["textChoices"] as? [String: String])!
+                
+//                let activityStep: ActivityStep?
+
+        let valFormat = (step1 as? ActivityQuestionStep)?.formatDict
+        
+        if  Utilities.isValidObject(someObject: valFormat?[kStepQuestionTextChoiceTextChoices] as AnyObject?) {
+            
+//            let textChoiceDict = valFormat?[kStepQuestionTextChoiceTextChoices] as? [Any] ?? []
+          let textChoiceDict = valFormat?[kStepQuestionTextChoiceTextChoices] as? [JSONDictionary] ?? []
+         
+            
+            for dict in textChoiceDict {
+              let text = dict[kORKTextChoiceText] as? String ?? ""
+              let value = dict[kORKTextChoiceValue] as? String ?? ""
+              
+              if valFinalRes == value {
+                print("valuevaluevalue---\(value)---\(text)")
+                return text
+              }
+            }
+          
+        }
+        
+        
+       return valFinalRes
+      }
+    return valFinalRes
+  }
+  
   func getTextChoicesSingleSelection(dataArray: [Any]) -> ([ORKTextChoice]?, OtherChoice?) {
     print("1getTextChoicesSingleSelection---")
     var textChoiceArray: [ORKTextChoice] = []
@@ -2130,7 +2171,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
           if Utilities.isValidObject(someObject: stepTypeResult.choiceAnswers as AnyObject?) {
             if (stepTypeResult.choiceAnswers?.count) ?? 0 > 0 {
 
-                  if resultType ==  QuestionStepType.imageChoice.rawValue ||  resultType == QuestionStepType.valuePicker.rawValue {
+                  if resultType ==  QuestionStepType.imageChoice.rawValue {
 
                       // for image choice and valuepicker
 
@@ -2140,7 +2181,25 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                     print("478res---\((resultValue == nil ? "" : resultValue))")
                     
                     return "\(resultValue == nil ? "" : resultValue ?? "")"
-                  } else {
+                  } else if resultType == QuestionStepType.valuePicker.rawValue {
+                    
+                    // for image choice and valuepicker
+
+                    let resultValue: String! = "\(stepTypeResult.choiceAnswers!.first!)"
+
+//                      self.value = (resultValue == nil ? "" : resultValue)
+                  print("478res---\((resultValue == nil ? "" : resultValue))")
+                    
+                    
+                    
+                    let val = getPickerValueFromValue(identifier: stepTypeResult.identifier, valFinalRes: "\(stepTypeResult.choiceAnswers!.first!)")
+                    
+                  return "\(val)" //check
+                    
+                    
+                  
+                  return "\(resultValue == nil ? "" : resultValue ?? "")"
+                } else {
                       // for text choice
                       var resultValue: [Any] = []
                       let selectedValue = stepTypeResult.choiceAnswers?.first
@@ -2309,8 +2368,9 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
 
           let stepTypeResult = (questionstepResult as? ORKTextQuestionResult)!
 
-            let value = (stepTypeResult.answer as? String)!
+        if let value = (stepTypeResult.answer as? String) {
             return "\(value)"
+        }
         
 //      case ORKQuestionType.text.rawValue: // text + email
 //
@@ -2516,7 +2576,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                       print("SORTED STEP RESULT -- \(result)")
                       print("SORTED STEP RESULT ANSWER -- \((result as? ORKScaleQuestionResult)?.answer)")
             var orignalVal = step1.question ?? ""
-            if pipingSnippet != "" {
+            if valName != "", pipingSnippet != "" {
               let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
               // replaced originalVal with this ---> activityStepArray?.last?.title
               let changedText2 = activityStepArray?.last?.title?.replacingOccurrences(of: pipingSnippet, with: valName)
@@ -2539,6 +2599,41 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         print("step1.question---\(step1.question)")
 //        taskViewController.currentStepViewController = step1
 //        step = step1
+        
+        
+        
+      } else if let step1 = step as? ORKInstructionStep {
+        
+        if let result = taskViewController.result.stepResult(forStepIdentifier: pipingsourceQuestionKey) {
+          
+          let valName = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+          
+          print("SORTED STEP RESULT -- \(result)")
+          print("SORTED STEP RESULT ANSWER -- \((result as? ORKScaleQuestionResult)?.answer)")
+          var orignalVal = step1.text ?? ""
+          if valName != "", pipingSnippet != "" {
+            let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
+            // replaced originalVal with this ---> activityStepArray?.last?.title
+            let changedText2 = activityStepArray?.last?.title?.replacingOccurrences(of: pipingSnippet, with: valName)
+            print("1orignalVal---\(orignalVal)----\(changedText2)")
+            
+            
+            
+            let changedText = orignalVal.replacingOccurrences(of: pipingSnippet, with: valName)
+            print("2orignalVal---\(orignalVal)")
+            step1.text = changedText2// "GGG2"
+            if !(step1.text != nil && step1.text != "") {
+              
+            }
+          }
+        }
+        
+        
+        //        step1.question = "GGG2"
+        //        }
+        print("step1.question---\(step1.text)")
+        //        taskViewController.currentStepViewController = step1
+        //        step = step1
         
         
         

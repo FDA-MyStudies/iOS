@@ -240,7 +240,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         if httpHeaders != nil && (httpHeaders?.count)! > 0{
             request.allHTTPHeaderFields = httpHeaders as? [String : String]
         }
-        
+      print("4response---\(requestName)---\(params)---\(httpHeaders)")
         self.fireRequest(request, requestName: requestName)
     }
     
@@ -275,7 +275,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             if httpHeaders != nil {
                 request.allHTTPHeaderFields = httpHeaders! as? [String : String]
             }
-            
+          print("5response---\(requestName)---\(params)---\(httpHeaders)")
             self.fireRequest(request, requestName: requestName)
             
         } catch {
@@ -339,7 +339,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                 do{
                     // NSJSONReadingOptions.MutableContainers
                     responseDict = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary
-                     print("response1---\(responseDict)---\(requestName)---\(error)")
+                     print("1response---\(responseDict)---\(requestName)---\(error)")
                     
                 } catch {
                      print("Serilization error")
@@ -369,7 +369,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                     do {
                         
                       responseDict = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? [String:Any]
-                       print("response1---\(responseDict)---\(requestName)---\(error)")
+                       print("2response---\(responseDict)---\(requestName)---\(error)")
                         
                     } catch {
                         print("Serilization error")

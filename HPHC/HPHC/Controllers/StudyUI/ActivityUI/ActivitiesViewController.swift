@@ -2610,7 +2610,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
           
           print("SORTED STEP RESULT -- \(result)")
           print("SORTED STEP RESULT ANSWER -- \((result as? ORKScaleQuestionResult)?.answer)")
-          var orignalVal = step1.text ?? ""
+          var orignalVal = step1.title ?? ""
           if valName != "", pipingSnippet != "" {
             let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
             // replaced originalVal with this ---> activityStepArray?.last?.title
@@ -2621,8 +2621,8 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             
             let changedText = orignalVal.replacingOccurrences(of: pipingSnippet, with: valName)
             print("2orignalVal---\(orignalVal)")
-            step1.text = changedText2// "GGG2"
-            if !(step1.text != nil && step1.text != "") {
+            step1.title = changedText2// "GGG2"
+            if !(step1.title != nil && step1.title != "") {
               
             }
           }

@@ -275,7 +275,8 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             if httpHeaders != nil {
                 request.allHTTPHeaderFields = httpHeaders! as? [String : String]
             }
-          print("5response---\(requestName)---\(params)---\(httpHeaders)")
+          print("5response---\(requestUrl)---\(params)---\(httpHeaders)")
+  
             self.fireRequest(request, requestName: requestName)
             
         } catch {
@@ -369,7 +370,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                     do {
                         
                       responseDict = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? [String:Any]
-                       print("2response---\(responseDict)---\(requestName)---\(error)")
+                       print("1response---\(responseDict)---\(requestName)---\(error)")
                         
                     } catch {
                         print("Serilization error")

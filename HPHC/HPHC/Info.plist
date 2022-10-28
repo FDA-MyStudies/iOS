@@ -42,6 +42,8 @@
 	<string>$(IS_STANDALONE_STUDY)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>Localization native development region</key>
+	<string>English</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -108,7 +110,5 @@
 	<string>$(WCP_URL)</string>
 	<key>WebsiteLink</key>
 	<string>www.fda.gov</string>
-	<key>Localization native development region</key>
-	<string>English</string>
 </dict>
 </plist>

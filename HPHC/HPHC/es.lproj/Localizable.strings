@@ -41,6 +41,7 @@
 "Select Lead Time"="Seleccionar plazo de entrega";
 "Done"="Aceptar";
 "Cancel"="Cancelar";
+"ySK-jB-LwD.normalTitle.value" = "CANCELAR";
 "Profile"="Perfil";
 "Profile updated Successfully."="Perfil actualizado con éxito.";
 "Sign Out"="Desconectar";
@@ -149,6 +150,7 @@
 
 
 "Please update to the latest version of the app to continue."="Actualice a la última versión de la aplicación para continuar.";
+"New version of app is available, click on 'Update' to update now or 'Cancel' to update later."="La nueva version de la aplicacion esta disponible, haga clic en “Actualizar” para actualizar ahora o haga clic en “Cancelar” para actualizar mas tarde.";
 "Please go to AppStore to update to the latest version of the app."="Vaya a AppStore para actualizar a la última versión de la aplicación.";
 "Consent Updated"="Consentimiento actualizado";
 

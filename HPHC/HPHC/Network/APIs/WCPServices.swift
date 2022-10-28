@@ -103,6 +103,13 @@ class WCPServices: NSObject {
     var delegateSource: NMWebServiceDelegate?
     
     // MARK: Requests
+  func updatesAppVersion(delegate: NMWebServiceDelegate){
+    
+    self.delegate = delegate
+    let method = WCPMethods.updateVersionInfo.method
+    let headerParams = ["appId": AppDetails.applicationID,"appName" : Branding.NavigationTitleName,"appVersion": "4.0.0","osType" : "ios", "orgId" : AppDetails.organizationID]
+    self.sendRequestWith(method: method, params: headerParams, headers: nil)
+  }
     
     func checkForAppUpdates(delegate: NMWebServiceDelegate){
         

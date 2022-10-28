@@ -41,6 +41,7 @@
 "Select Lead Time"="Select Lead Time";
 "Done"="Done";
 "Cancel"="Cancel";
+"ySK-jB-LwD.normalTitle.value" = "CANCEL";
 "Join Study"="Join Study";
 "Leave Study"="Leave Study";
 
@@ -152,6 +153,7 @@
 
 
 "Please update to the latest version of the app to continue."="Please update to the latest version of the app to continue.";
+"New version of app is available, click on 'Update' to update now or 'Cancel' to update later." = "New version of app is available, click on 'Update' to update now or 'Cancel' to update later.";
 "Please go to AppStore to update to the latest version of the app."="Please go to AppStore to update to the latest version of the app.";
 "Consent Updated"="Consent Updated";
 

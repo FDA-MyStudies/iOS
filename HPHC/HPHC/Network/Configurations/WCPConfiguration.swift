@@ -37,9 +37,13 @@ enum WCPMethods: String {
     case studyUpdates
     case appUpdates
     case versionInfo
+    case updateVersionInfo
+
     
     var method: Method{
         switch self {
+        case .updateVersionInfo:
+            return Method(methodName: self.rawValue, methodType: .httpMethodPOST, requestType: .requestTypeJSON)
         default:
             return Method(methodName: self.rawValue, methodType: .httpMethodGet, requestType: .requestTypeHTTP)
         }

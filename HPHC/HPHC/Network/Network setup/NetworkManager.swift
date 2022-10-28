@@ -76,7 +76,7 @@ protocol NMAuthChallengeDelegate{
 class NetworkManager {
     
     static var instance : NetworkManager?
-    var networkAvailability : Bool = false
+    var networkAvailability : Bool = true
     var reachability : Reachability?
     
     class func isNetworkAvailable() -> Bool{

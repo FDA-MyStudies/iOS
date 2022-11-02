@@ -225,11 +225,13 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             requestString = String(format:"%@?%@", baseURLString, httpRequestString!) as NSString?
         }
         
+      if requestName != "/BTC/LIMITOPEN001/mobileappstudy-selectRows.api" {
         if #available(iOS 9, *) {
             requestString = requestString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) as NSString?
         } else {
             requestString = requestString.addingPercentEscapes(using: String.Encoding.utf8.rawValue) as NSString?
         }
+      }
         
         let requestUrl = URL(string: requestString as String)!
       
@@ -237,11 +239,32 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                                        cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData,
                                        timeoutInterval: self.connectionTimeoutInterval)
         request.httpMethod = self.getRequestMethod(method) as String
+      
+      if requestName != "/BTC/LIMITOPEN001/mobileappstudy-selectRows.api" {
         if httpHeaders != nil && (httpHeaders?.count)! > 0{
             request.allHTTPHeaderFields = httpHeaders as? [String : String]
         }
-      print("4response---\(requestName)---\(params)---\(httpHeaders)")
         self.fireRequest(request, requestName: requestName)
+      } else {
+        let url = URL(string: requestString as String)!
+
+        let task = URLSession.shared.dataTask(with: url) {(data, response, error) -> Void in
+          if let data = data {
+              DispatchQueue.main.async {
+                  self.handleResponse(data, response: response, requestName: requestName, error: error as NSError?)
+              }
+          } else {
+              DispatchQueue.main.async {
+                self.delegate?.failedRequest(self.networkManager!, requestName: requestName, error: error! as NSError)
+              }
+          }
+          }
+
+        task.resume()
+
+      }
+      print("4response---\(requestName)---\(params)---\(httpHeaders)")
+//        self.fireRequest(request, requestName: requestName)
     }
     
     fileprivate func generateJSONRequest(_ requestName: NSString, method: HTTPMethod, params: NSDictionary?, headers: NSDictionary?) {

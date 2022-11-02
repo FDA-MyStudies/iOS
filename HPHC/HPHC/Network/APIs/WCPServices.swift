@@ -195,7 +195,8 @@ class WCPServices: NSObject {
         let method = WCPMethods.activity.method
         let headerParams = [kStudyId: studyId,
                             kActivityId: activityId,
-                            kActivityVersion: activityVersion]
+                            kActivityVersion: activityVersion,
+                            "isLive": true] as [String : Any]
         self.sendRequestWith(method: method, params: headerParams, headers: nil)
     }
     

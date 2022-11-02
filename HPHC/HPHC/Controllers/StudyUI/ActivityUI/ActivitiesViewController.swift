@@ -58,6 +58,10 @@ class ActivitiesViewController : UIViewController{
     let labkeyResponseFetch = ResponseDataFetch()
   
   var isActivityDismissed = false
+  
+  var valPipingDetailsMain: [String: [[String: String]]] = [:]
+  
+  var valPipingValuesMain: JSONDictionary = [:]
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
@@ -414,10 +418,18 @@ class ActivitiesViewController : UIViewController{
         
         let task: ORKTask?
         let taskViewController: ORKTaskViewController?
-        
+      
         task = ActivityBuilder.currentActivityBuilder.createTask()
         
         if task != nil {
+          
+          let activityCu = Study.currentActivity
+          let activityStepArray = activityCu?.activitySteps
+        print("activityStepArray---\(activityStepArray)")
+          
+          if let val = activityStepArray {
+          getPipingArray(activityStepArray: val)
+          }
             
             // check if restorationData is available
             if Study.currentActivity?.currentRun.restortionData != nil {
@@ -456,6 +468,85 @@ class ActivitiesViewController : UIViewController{
         }
         
     }
+  
+  func getPipingArray(activityStepArray: [ActivityStep]) {
+    valPipingDetailsMain = [:]
+    valPipingValuesMain = [:]
+    var valPipingDetails: [String: [[String: String]]] = [:]
+    for activityStepArr in activityStepArray {
+    let valpipingactivityid = activityStepArr.pipingactivityid ?? ""
+      if valpipingactivityid != "" {
+        var valPipStructure: [String: String] = [:]
+        valPipStructure["pipingactivityid"] = activityStepArr.pipingactivityid
+        valPipStructure["pipingSnippet"] = activityStepArr.pipingSnippet
+        valPipStructure["pipingactivityVersion"] = activityStepArr.pipingactivityVersion
+        valPipStructure["pipingsourceQuestionKey"] = activityStepArr.pipingsourceQuestionKey
+//        valPipStructure["isPiping"] = activityStepArr.isPiping
+        var valActiInmain = valPipingDetails[valpipingactivityid]
+        if valActiInmain?.count ?? 0 > 0 {
+         var valtempPipActiId = valActiInmain
+          valtempPipActiId?.append(valPipStructure)
+        } else {
+          valPipingDetails[valpipingactivityid] = [valPipStructure]
+        }
+      }
+    }
+    valPipingDetailsMain = valPipingDetails
+    print("valPipingDetails---\(valPipingDetails)")
+    getValueForPiping()
+    
+//    LabKeyServices().withdrawFromStudy(studyId: (studyToWithdrawn?.studyId)!,
+//                                                   participantId: (studyToWithdrawn?.participantId)!,
+//                                                   deleteResponses: (studyToWithdrawn?.shouldDelete)!,
+//                                                   delegate: self)
+    
+    
+//    let participantId = Study.currentStudy?.userParticipateState.participantId ?? ""
+//    guard let studyID = Study.currentStudy?.studyId else { return }
+//    LabKeyServices().selectRows(studyId: "LIMITOPEN001", activityId: "imageque", stepId: "ContinuousScal", participantId: "dcb2f1938fd6b64c5e039ff476629a49", delegate: self)
+    
+  }
+  
+  func getValueForPiping() {
+    
+    let valvalPipingDetailsMain = valPipingDetailsMain
+    
+    if valvalPipingDetailsMain.count > 0 {
+      let valKeys = valvalPipingDetailsMain.keys
+      if valKeys.count > 0 {
+        for valKey in valKeys {
+          if let valValues1 = valvalPipingDetailsMain[valKey] {
+            if valValues1.count > 0 {
+              let valValues1a = valValues1[0]
+              if let valValues1aActivityId = valValues1a["pipingactivityid"] {
+              if valValues1.count > 1 {
+                querypipingresponse(activityId: valValues1aActivityId, stepId: "")
+                
+              } else {
+                querypipingresponse(activityId: valValues1aActivityId, stepId: valValues1a["pipingsourceQuestionKey"] ?? "")
+              }
+            }
+              }
+              
+            }
+          
+          }
+        }
+      }
+      
+//    let participantId = Study.currentStudy?.userParticipateState.participantId ?? ""
+//    guard let studyID = Study.currentStudy?.studyId else { return }
+//    LabKeyServices().selectRows(studyId: "LIMITOPEN001", activityId: "imageque", stepId: "ContinuousScal", participantId: "dcb2f1938fd6b64c5e039ff476629a49", delegate: self)
+
+  }
+  
+  func querypipingresponse(activityId: String, stepId: String) {
+//    let activityId = Study.currentActivity
+    
+    let participantId = Study.currentStudy?.userParticipateState.participantId ?? ""
+    guard let studyID = Study.currentStudy?.studyId else { return }
+    LabKeyServices().selectRows(studyId: "LIMITOPEN001", activityId: "imageque", stepId: "ContinuousScal", participantId: "dcb2f1938fd6b64c5e039ff476629a49", delegate: self)
+  }
    
     /**
      Used to get Activity Availability Status
@@ -1014,6 +1105,7 @@ extension ActivitiesViewController: UITableViewDelegate{
                                 if let studyID = Study.currentStudy?.studyId,
                                     let activityID = Study.currentActivity?.actvityId,
                                     let version = Study.currentActivity?.version {
+                                  print("1getStudyActivityMetadata---")
                                     WCPServices().getStudyActivityMetadata(studyId: studyID,
                                                                            activityId: activityID,
                                                                            activityVersion: version,
@@ -1080,10 +1172,11 @@ extension ActivitiesViewController: UITableViewDelegate{
                               if let studyID = Study.currentStudy?.studyId,
                                  let activityID = Study.currentActivity?.actvityId,
                                  let version = Study.currentActivity?.version {
-                                  WCPServices().getStudyActivityMetadata(studyId: studyID,
-                                                                         activityId: activityID,
-                                                                         activityVersion: version,
-                                                                         delegate: self)
+                                print("2getStudyActivityMetadata---")
+//                                  WCPServices().getStudyActivityMetadata(studyId: studyID,
+//                                                                         activityId: activityID,
+//                                                                         activityVersion: version,
+//                                                                         delegate: self)
                                   //                                } else if found{
                                   //                                    self.createActivity()
                                   //                                }
@@ -1241,7 +1334,22 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
             
             self.checkForActivitiesUpdates()
-        }
+        }  else if requestName as String == "/BTC/LIMITOPEN001/mobileappstudy-selectRows.api" {
+          print("selectRows---\(response)")
+          
+          guard let rows = response?["rows"] as? [JSONDictionary] ,
+                let rowDetail = rows.last
+               else { return }
+          
+          let resultA = valPipingValuesMain.merging(rowDetail, uniquingKeysWith: { (first, _) in first })
+          
+          valPipingValuesMain = resultA
+          valPipingValuesMain.removeValue(forKey: "Key")
+          valPipingValuesMain.removeValue(forKey: "ParticipantId")
+          valPipingValuesMain["valuePicker"] = "3"
+          
+          print("resultA---\(resultA)---\(valPipingValuesMain)")
+      }
     }
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
@@ -2522,6 +2630,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
       var valPiping = false
       var pipingSnippet = ""
       var pipingsourceQuestionKey = ""
+      var pipingactivityid = ""
       if (activityCu?.activitySteps?.count )! > 0 {
           
           let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier
@@ -2530,46 +2639,39 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             valPiping = activityStepArray?.last?.isPiping ?? false
             pipingSnippet = activityStepArray?.last?.pipingSnippet ?? ""
             pipingsourceQuestionKey = activityStepArray?.last?.pipingsourceQuestionKey ?? ""
+            pipingactivityid = activityStepArray?.last?.pipingactivityid ?? ""
           }
       }
-      print("valPiping---\(valPiping)---\(pipingSnippet)---\(pipingsourceQuestionKey)---\(step.identifier)")
+      print("valPiping---\(valPiping)---\(pipingSnippet)---\(pipingsourceQuestionKey)---\(step.identifier)---\(pipingactivityid)")
       if let step1 = step as? ORKQuestionStep {
         
 //        if valPiping, pipingSnippet != "",  pipingsourceQuestionKey != "" {
+        
+        
+        //other ActivityPiping
+        if pipingSnippet != "", pipingactivityid != "", pipingsourceQuestionKey != "" {
+          
+          let valName = "\(valPipingValuesMain[pipingsourceQuestionKey] ?? "")"
+          
+          var orignalVal1 = step1.question ?? ""
+          let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
+          // replaced originalVal with this ---> activityStepArray?.last?.title
+          let changedText2 = activityStepArray?.last?.title?.replacingOccurrences(of: pipingSnippet, with: valName)
+          print("1orignalVal---\(orignalVal1)----\(changedText2)")
           
           
-//        print("3resultTyperesultTyperesultType---\(step.)")
-//        if let result = taskViewController.result.stepResult(forStepIdentifier: "scale") {
-//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-//          print("1valval---\(val)")
-//        }
-//        if let result = taskViewController.result.stepResult(forStepIdentifier: "cscale") {
-//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-//          print("2valval---\(val)")
-//        }
-//        if let result = taskViewController.result.stepResult(forStepIdentifier: "textscale") {
-//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-//          print("3valval---\(val)")
-//        }
-//        if let result = taskViewController.result.stepResult(forStepIdentifier: "valuepicker") {
-//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-//          print("4valval---\(val)")
-//        }
-//        if let result = taskViewController.result.stepResult(forStepIdentifier: "textchoice") {
-//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-//          print("5valval---\(val)")
-//        }
-//        if let result = taskViewController.result.stepResult(forStepIdentifier: "boolean") {
-//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-//          print("6valval---\(val)")
-//        }
-//        if let result = taskViewController.result.stepResult(forStepIdentifier: "numeric") {
-//       let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-//          print("7valval---\(val)")
-//        }
+          
+          let changedText = orignalVal1.replacingOccurrences(of: pipingSnippet, with: valName)
+          print("2orignalVal---\(orignalVal1)")
+          step1.question = changedText2// "GGG2"
+          if !(step1.question != nil && step1.question != "") {
+            
+          }
+        }
+        
         
           
-          if let result = taskViewController.result.stepResult(forStepIdentifier: pipingsourceQuestionKey) {
+         else if let result = taskViewController.result.stepResult(forStepIdentifier: pipingsourceQuestionKey) {
             
            let valName = self.setResultValue(stepResult: result, activityType: .Questionnaire )
             

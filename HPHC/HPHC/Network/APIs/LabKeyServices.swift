@@ -94,7 +94,27 @@ class LabKeyServices: NSObject {
         
         self.sendRequestWith(method: method, params: params, headers: nil)
     }
-    
+  
+  func selectRows(studyId: String, activityId: String, stepId: String, participantId: String, delegate: NMWebServiceDelegate){
+      self.delegate = delegate
+      let method = ResponseMethods.selectRows.method
+      
+    var params: [String : Any] = [:]
+    if stepId != "" {
+       params = [
+          "query.queryName": activityId,
+          "query.columns": stepId,
+          kParticipantId: participantId,
+          ] as [String : Any]
+    } else {
+       params = [
+          "query.queryName": activityId,
+          kParticipantId: participantId,
+          ] as [String : Any]
+    }
+      self.sendRequestWith(method: method, params: params, headers: nil)
+  }
+  
     func processResponse(metaData: Dictionary<String, Any>,
                          activityType: String,
                          responseData: Dictionary<String, Any>,
@@ -192,6 +212,11 @@ class LabKeyServices: NSObject {
     
     func handleWithdrawFromStudy(response: Dictionary<String, Any>) {
     }
+  
+  func handleselectRows(response: Dictionary<String, Any>) {
+    
+    print("handleselectRows---")
+  }
     
     func handleProcessResponse(response: Dictionary<String, Any>) {
     }
@@ -336,6 +361,9 @@ extension LabKeyServices: NMWebServiceDelegate{
             self.handleGetParticipantResponse(response: response as! Dictionary<String, Any>)
         case ResponseMethods.processResponse.description as String: break
         case ResponseMethods.withdrawFromStudy.description as String: break
+        case ResponseMethods.selectRows.description as String:
+          handleselectRows(response: response as! Dictionary<String, Any>)
+          
         default: break
             
         }

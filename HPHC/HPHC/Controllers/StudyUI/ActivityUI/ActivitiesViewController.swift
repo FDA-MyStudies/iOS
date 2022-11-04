@@ -2389,7 +2389,10 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                         
                         let valOtherText = otherDict["text"]
 //                          resultValue.append(otherDict)
-                        resultValue.append(valOtherText)
+                        
+                        let valFinalText = getOtherTextValue(identifier: questionstepResult.identifier, valueStr: "\(valOtherText ?? "")")
+                        
+                        resultValue.append(valFinalText)
                       } else {
                           resultValue.append(selectedValue as Any)
                       }
@@ -2611,6 +2614,66 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
       default:break
       }
     return ""
+  }
+  
+  func getOtherTextValue(identifier: String, valueStr: String) -> String {
+    let activityCu = Study.currentActivity
+    var valPiping = false
+    var pipingSnippet = ""
+    var pipingsourceQuestionKey = ""
+    var pipingactivityid = ""
+    
+    let valMandatory = false
+    
+    if (activityCu?.activitySteps?.count )! > 0 {
+        
+        let activityStepArray = activityCu?.activitySteps?.filter({$0.key == identifier
+        })
+        if (activityStepArray?.count)! > 0 {
+          valPiping = activityStepArray?.last?.isPiping ?? false
+          pipingSnippet = activityStepArray?.last?.pipingSnippet ?? ""
+          pipingsourceQuestionKey = activityStepArray?.last?.pipingsourceQuestionKey ?? ""
+          pipingactivityid = activityStepArray?.last?.pipingactivityid ?? ""
+          
+          
+          
+          
+          let step1 = activityStepArray?.first
+          let valFormat = (step1 as? ActivityQuestionStep)?.formatDict
+          
+          if  Utilities.isValidObject(someObject: valFormat?[kStepQuestionTextChoiceTextChoices] as AnyObject?)
+              && Utilities.isValidValue(someObject: valFormat?[kStepQuestionTextChoiceSelectionStyle] as AnyObject?) {
+              
+  //            let textChoiceDict = valFormat?[kStepQuestionTextChoiceTextChoices] as? [Any] ?? []
+            let textChoiceDict = valFormat?[kStepQuestionTextChoiceTextChoices] as? [JSONDictionary] ?? []
+           
+              
+              for dict in textChoiceDict {
+                let text = dict[kORKTextChoiceText] as? String ?? ""
+                let value = dict[kORKTextChoiceValue] as? String ?? ""
+                
+                let other = dict["other"] as? [String: Any] ?? [:]
+                
+                if other.count > 0 {
+                  print("valuevaluevalue---\(value)---\(text)")
+                  
+                  let valMandatory = other["isMandatory"] as? Bool ?? false
+                  
+                  if !valMandatory {
+                    let valOthertext = dict["text"] as? String ?? valueStr
+                    return valOthertext
+                  }
+//                  return text
+                }
+              }
+            
+          }
+          
+          
+        }
+    }
+    
+    return valueStr
   }
   
   func getActualAnswer(choiceSelected : String, identifierOfRes: String) {

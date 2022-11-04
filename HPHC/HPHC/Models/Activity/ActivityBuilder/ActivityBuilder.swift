@@ -263,7 +263,7 @@ class ActivityBuilder {
                                                  is ORKContinuousScaleAnswerFormat,
                                                  is ORKHealthKitQuantityTypeAnswerFormat:
                                                 
-                                                if let operatorValue = dict[kOperator] as? String {
+                                                if let operatorValue = dict[kOperator] as? String, operatorValue != "" {
                                                     
                                                     let condition: String = (dict[kCondtion] as? String)!
                                                     let conditionValue = condition.components(separatedBy: CharacterSet(charactersIn: ","))

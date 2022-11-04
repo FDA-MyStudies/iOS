@@ -62,6 +62,8 @@ class ActivitiesViewController : UIViewController{
   var valPipingDetailsMain: [String: [[String: String]]] = [:]
   
   var valPipingValuesMain: JSONDictionary = [:]
+  
+  var createActiCalled = ""
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
@@ -119,6 +121,8 @@ class ActivitiesViewController : UIViewController{
         if #available(iOS 15, *) {
             UITableView.appearance().sectionHeaderTopPadding = CGFloat(0)
         }
+      UserDefaults.standard.set("", forKey: "createActiCalled")
+      UserDefaults.standard.synchronize()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -472,6 +476,11 @@ class ActivitiesViewController : UIViewController{
   func getPipingArray(activityStepArray: [ActivityStep]) {
     valPipingDetailsMain = [:]
     valPipingValuesMain = [:]
+    createActiCalled = "true"
+    
+    UserDefaults.standard.set("true", forKey: "createActiCalled")
+    UserDefaults.standard.synchronize()
+    
     var valPipingDetails: [String: [[String: String]]] = [:]
     for activityStepArr in activityStepArray {
     let valpipingactivityid = activityStepArr.pipingactivityid ?? ""
@@ -522,8 +531,12 @@ class ActivitiesViewController : UIViewController{
               if valValues1.count > 1 {
                 querypipingresponse(activityId: valValues1aActivityId, stepId: "")
                 
+                
+                getActivityForPiping()
               } else {
                 querypipingresponse(activityId: valValues1aActivityId, stepId: valValues1a["pipingsourceQuestionKey"] ?? "")
+                
+                getActivityForPiping()
               }
             }
               }
@@ -546,6 +559,52 @@ class ActivitiesViewController : UIViewController{
     let participantId = Study.currentStudy?.userParticipateState.participantId ?? ""
     guard let studyID = Study.currentStudy?.studyId else { return }
     LabKeyServices().selectRows(studyId: "LIMITOPEN001", activityId: "imageque", stepId: "ContinuousScal", participantId: "dcb2f1938fd6b64c5e039ff476629a49", delegate: self)
+  }
+  
+  func getActivityForPiping() {
+    
+    let valvalPipingDetailsMain = valPipingDetailsMain
+    
+    if valvalPipingDetailsMain.count > 0 {
+      let valKeys = valvalPipingDetailsMain.keys
+      if valKeys.count > 0 {
+        for valKey in valKeys {
+          if let valValues1 = valvalPipingDetailsMain[valKey] {
+            if valValues1.count > 0 {
+              let valValues1a = valValues1[0]
+              if let valValues1aActivityId = valValues1a["pipingactivityid"],  let valpipingactivityVersion = valValues1a["pipingactivityVersion"] {
+              if valValues1.count > 1 {
+                
+                guard let studyID = Study.currentStudy?.studyId else { return }
+                WCPServices().getStudyActivityVersionMetadata(studyId: studyID,
+                                                                                           activityId: valValues1aActivityId,
+                                                                                           activityVersion: valpipingactivityVersion,
+                                                                                           delegate: self)
+                
+                
+//                querypipingresponse(activityId: valValues1aActivityId, stepId: "")
+                
+              } else {
+                guard let studyID = Study.currentStudy?.studyId else { return }
+                WCPServices().getStudyActivityVersionMetadata(studyId: studyID,
+                                                                                           activityId: valValues1aActivityId,
+                                                                                           activityVersion: valpipingactivityVersion,
+                                                                                           delegate: self)
+                
+              }
+            }
+              }
+              
+            }
+          
+          }
+        }
+      }
+      
+//    let participantId = Study.currentStudy?.userParticipateState.participantId ?? ""
+//    guard let studyID = Study.currentStudy?.studyId else { return }
+//    LabKeyServices().selectRows(studyId: "LIMITOPEN001", activityId: "imageque", stepId: "ContinuousScal", participantId: "dcb2f1938fd6b64c5e039ff476629a49", delegate: self)
+
   }
    
     /**
@@ -1069,8 +1128,10 @@ extension ActivitiesViewController: UITableViewDelegate{
 //
 //        }
       
+      createActiCalled = ""
+      UserDefaults.standard.set("", forKey: "createActiCalled")
+      UserDefaults.standard.synchronize()
       
-        
         let availabilityStatus = ActivityAvailabilityStatus(rawValue: indexPath.section)!
         
         switch availabilityStatus {
@@ -1298,7 +1359,17 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             
         } else if requestName as String == WCPMethods.activity.method.methodName {
             self.removeProgressIndicator()
+          
+          if createActiCalled != "true" {
+            UserDefaults.standard.set("true", forKey: "createActiCalled")
+            UserDefaults.standard.synchronize()
             self.createActivity()
+          } else {
+            if let valresponse: Dictionary<String, Any> = response as? Dictionary<String, Any> {
+            
+            setActivityMetaData(activityDict: valresponse)
+            }
+          }
             
         } else if requestName as String == WCPMethods.studyDashboard.method.methodName {
             self.sendRequestToGetResourcesInfo()
@@ -2315,7 +2386,10 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                       if let stringValue = selectedValue as? String {
                           resultValue.append(stringValue)
                       } else if let otherDict = selectedValue as? [String:Any] {
-                          resultValue.append(otherDict)
+                        
+                        let valOtherText = otherDict["text"]
+//                          resultValue.append(otherDict)
+                        resultValue.append(valOtherText)
                       } else {
                           resultValue.append(selectedValue as Any)
                       }
@@ -2834,6 +2908,47 @@ extension ActivitiesViewController:UITabBarControllerDelegate{
             // self.checkForActivitiesUpdates()
         }
     }
+  
+  
+  func setActivityMetaData(activityDict: Dictionary<String, Any>) {
+      
+      if Utilities.isValidObject(someObject: activityDict as AnyObject?) {
+          
+          if Utilities.isValidValue(someObject: activityDict[kActivityType] as AnyObject ) {
+//              self.type? =  ActivityType(rawValue: (activityDict[kActivityType] as? String)!)!
+             
+          }
+//          self.setInfo(infoDict: (activityDict[kActivityInfoMetaData] as? Dictionary<String, Any>)!)
+          
+//          if Utilities.isValidObject(someObject: activityDict[kActivitySteps] as AnyObject?) {
+        
+        
+//               self.setStepArray(stepArray: (activityDict[kActivitySteps] as? Array)! )
+              
+        
+        
+        let valactivity1 = activityDict["activity"] as? Dictionary<String, Any>
+//        let valactivity2 = valactivity1["steps"] as? Array)!
+        
+        self.setStepArray(stepArray: (valactivity1?["steps"] as? Array)! )
+        
+        
+//          } else {
+//
+//          }
+      } else {
+          
+      }
+  }
+  
+  func setStepArray(stepArray: Array<Dictionary<String, Any>>) {
+     
+      if Utilities.isValidObject(someObject: stepArray as AnyObject?){
+//          self.steps? = stepArray
+      } else {
+          Logger.sharedInstance.debug("stepArray is null:\(stepArray)")
+      }
+  }
   
 }
 

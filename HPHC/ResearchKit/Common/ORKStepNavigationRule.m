@@ -38,7 +38,7 @@
 #import "ORKResultPredicate.h"
 
 #import "ORKHelpers_Internal.h"
-
+#import <ResearchKit/ResearchKit-Swift.h>
 
 NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
 
@@ -194,6 +194,8 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     ORKValidateIdentifiersUnique(allTaskResults, @"All tasks should have unique identifiers");
 
     NSString *destinationStepIdentifier = nil;
+  printf("resultresult---%lu---/n", (unsigned long)_resultPredicates.count);
+  
     for (NSInteger i = 0; i < _resultPredicates.count; i++) {
         NSPredicate *predicate = _resultPredicates[i];
         // The predicate can either have:
@@ -203,7 +205,31 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
                     substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName: taskResult.identifier}]) {
             destinationStepIdentifier = _destinationStepIdentifiers[i];
             break;
-        }
+        } else if ((i + 1) == _resultPredicates.count) {
+                   destinationStepIdentifier = _destinationStepIdentifiers[i];
+//          taskResult.results[0]
+          if (taskResult.results.count > 0) {
+          ActivityHelper *activityHelper1 = [[ActivityHelper alloc] init];
+          NSString *val3 =  [activityHelper1 getorderedNavigationOtherConfirmationWithResultval:taskResult.results[0]];
+            
+            if ([(val3)  isEqual: @"true"]) {
+              destinationStepIdentifier = _destinationStepIdentifiers[i];
+              
+              printf("_resultPredicates---/n");
+              
+              break;
+            }
+            
+          }
+          
+          
+          
+                   break;
+          
+          
+          
+          
+               }
     }
     return destinationStepIdentifier ? : _defaultStepIdentifier;
 }

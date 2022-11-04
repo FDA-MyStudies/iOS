@@ -10,6 +10,16 @@ import Foundation
 
 @objc public class ActivityHelper: NSObject {
   
+  @objc public func getorderedNavigationOtherConfirmation(resultval: ORKResult) -> String {
+    print("resultval---\(resultval)")
+    if "\(resultval)".contains("other = ") {
+      print("trueresultval---")
+      return "true"
+    }
+    print("falseresultval---")
+    return "false"
+  }
+  
   @objc public func setResultValue(stepResult: ORKStepResult, activityType: String, resultType: String, allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {// (ORKStep?, NSString?)  {
     var valAnswer = ""
     let valRes = stepResult.results?.count ?? 0

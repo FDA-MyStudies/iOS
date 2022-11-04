@@ -199,6 +199,18 @@ class WCPServices: NSObject {
                             "isLive": true] as [String : Any]
         self.sendRequestWith(method: method, params: headerParams, headers: nil)
     }
+  
+  func getStudyActivityVersionMetadata(studyId: String, activityId: String, activityVersion: String, delegate: NMWebServiceDelegate) {
+      
+      self.delegate = delegate
+      
+      let method = WCPMethods.activity.method
+      let headerParams = [kStudyId: studyId,
+                          kActivityId: activityId,
+                          kActivityVersion: activityVersion,
+                          "isLive": false] as [String : Any]
+      self.sendRequestWith(method: method, params: headerParams, headers: nil)
+  }
     
     func getStudyDashboardInfo(studyId: String, delegate: NMWebServiceDelegate){
         
@@ -642,7 +654,11 @@ extension WCPServices:NMWebServiceDelegate{
         case .activity:
 //          print("1responseresponse---\(response)")
          
+          
+          let val1 = UserDefaults.standard.value(forKey: "createActiCalled") as? String ?? ""
+          if val1 != "true" {
             self.handleGetStudyActivityMetadata(response: response as! Dictionary<String, Any>)
+          }
         case .studyDashboard:
             self.handleStudyDashboard(response: response as! Dictionary<String, Any>)
         case .termsPolicy:

@@ -2390,9 +2390,16 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                         let valOtherText = otherDict["text"]
 //                          resultValue.append(otherDict)
                         
-                        let valFinalText = getOtherTextValue(identifier: questionstepResult.identifier, valueStr: "\(valOtherText ?? "")")
                         
-                        resultValue.append(valFinalText)
+                        let valOthertextString = otherDict["text"] as? String ?? ""
+                        
+                        if valOthertextString == "" {
+                        
+                        let valFinalText = getOtherTextValue(identifier: questionstepResult.identifier, valueStr: "\(valOtherText ?? "")")
+                          resultValue.append(valFinalText)
+                        } else {
+                        resultValue.append(valOthertextString)
+                        }
                       } else {
                           resultValue.append(selectedValue as Any)
                       }

@@ -2837,6 +2837,19 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                 
               }
             }
+           
+           else if valName == "", pipingSnippet != "" {//Skipped sce
+             let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
+             // replaced originalVal with this ---> activityStepArray?.last?.title
+             let changedText2 = activityStepArray?.last?.title
+             print("1orignalVal---\(orignalVal)----\(changedText2)")
+             step1.question = changedText2// "GGG2"
+           }
+           
+      
+           
+           
+           
                     }
           
           

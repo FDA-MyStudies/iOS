@@ -569,12 +569,13 @@ class ActivityQuestionStep: ActivityStep {
                     
                     var minValue = formatDict?[kStepQuestionNumericMinValue] as? NSNumber
                     
-                    if maxValue != nil && maxValue == 0 {
-                        maxValue = nil
-                    }
-                    if minValue != nil && minValue == 0 {
-                        minValue = nil
-                    }
+//                    if maxValue != nil && maxValue == 0 {
+//                        maxValue = nil
+//                    }
+//                    if minValue != nil && minValue == 0 {
+//                        minValue = nil
+//                    }
+                  
                     
                     if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericPlaceholder] as AnyObject?) {
                         placeholderText = formatDict?[kStepQuestionNumericPlaceholder] as? String

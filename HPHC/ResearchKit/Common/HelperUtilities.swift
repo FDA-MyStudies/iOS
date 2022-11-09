@@ -62,9 +62,9 @@ import Foundation
             print("1questionstepResult---\(questionstepValResult as? ORKQuestionResult?)")
                 if let questionstepResult: ORKQuestionResult? = questionstepValResult as? ORKQuestionResult? {
                   print("2questionstepResult---\(questionstepResult)")
-                  let val = self.setValue(questionstepResult:questionstepResult!, resultType: resultType )
+                  let val = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep )
                   
-                  let val1 = self.setValue(questionstepResult:questionstepResult!, resultType: resultType ) as NSString
+                  let val1 = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep ) as NSString
                   
                   print("resulttt---\(currentStep.stepprevalue)")
                   if let operato = currentStep.steppreoperator, operato == "=" {
@@ -516,7 +516,7 @@ import Foundation
 //    return ""
 //  }
 
-func setValue(questionstepResult: ORKQuestionResult, resultType: String) -> String {
+func setValue(questionstepResult: ORKQuestionResult, resultType: String, currentStep: ORKStep) -> String {
     switch questionstepResult.questionType.rawValue {
 
     case  ORKQuestionType.scale.rawValue : // scale and continuos scale
@@ -751,6 +751,24 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String) -> Stri
 //
             if let val = stepTypeResult.numericAnswer {
               let value = Double(truncating:stepTypeResult.numericAnswer!)
+              
+              
+              
+              if let valStep = currentStep as? ORKQuestionStep {
+                if let val2 = valStep.answerFormat {
+                  if let val3 = val2 as? ORKHeightAnswerFormat {
+                    if val3.measurementSystem.rawValue == 2 {
+                      let valresult = showFootAndInchesFromCm(value)
+                      return valresult
+                    }
+                  }
+                }
+              }
+              
+              
+              
+//              showFootAndInchesFromCm(value)
+              
               return "\(value)"
             }
       
@@ -788,6 +806,22 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String) -> Stri
     }
   return ""
 }
+  
+  func showFootAndInchesFromCm(_ cms: Double) -> String {
+
+        let feet = cms * 0.0328084
+        let feetShow = Int(floor(feet))
+        let feetRest: Double = ((feet * 100).truncatingRemainder(dividingBy: 100) / 100)
+        let inches = Int(floor(feetRest * 12))
+    
+    
+    let valFeet = "\(feetShow)"
+    let val1 = valFeet.components(separatedBy: "\'")
+//print("feetShow---\(feetShow)' \(inches)\"---\(valFeet)---\(feet)")
+    print("feetShow---\(cms)-----\(feetShow).\(inches)")
+    
+    return "\(feetShow).\(inches)"
+  }
   
   class func isValidObject(someObject: AnyObject?) -> Bool {
       

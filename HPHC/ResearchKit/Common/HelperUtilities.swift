@@ -754,16 +754,16 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String, current
               
               
               
-              if let valStep = currentStep as? ORKQuestionStep {
-                if let val2 = valStep.answerFormat {
-                  if let val3 = val2 as? ORKHeightAnswerFormat {
-                    if val3.measurementSystem.rawValue == 2 {
-                      let valresult = showFootAndInchesFromCm(value)
-                      return valresult
-                    }
-                  }
-                }
-              }
+//              if let valStep = currentStep as? ORKQuestionStep {
+//                if let val2 = valStep.answerFormat {
+//                  if let val3 = val2 as? ORKHeightAnswerFormat {
+//                    if val3.measurementSystem.rawValue == 2 {
+//                      let valresult = showFootAndInchesFromCm(value)
+//                      return valresult
+//                    }
+//                  }
+//                }
+//              }
               
               
               

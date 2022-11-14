@@ -1365,9 +1365,9 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             UserDefaults.standard.synchronize()
             self.createActivity()
           } else {
-            if let valresponse: Dictionary<String, Any> = response as? Dictionary<String, Any> {
-            
-            setActivityMetaData(activityDict: valresponse[kActivity] as! Dictionary<String, Any>)
+//            if let valresponse: Dictionary<String, Any> = response as? Dictionary<String, Any> {
+//
+//            setActivityMetaData(activityDict: valresponse[kActivity] as! Dictionary<String, Any>)
             }
           }
             

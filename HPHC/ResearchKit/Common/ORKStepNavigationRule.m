@@ -205,9 +205,12 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
                     substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName: taskResult.identifier}]) {
             destinationStepIdentifier = _destinationStepIdentifiers[i];
             break;
-        } else if ((i + 1) == _resultPredicates.count) {
-                   destinationStepIdentifier = _destinationStepIdentifiers[i];
+        }
+        else if ((i + 1) == _resultPredicates.count) {
+                   
 //          taskResult.results[0]
+          if (![_destinationStepIdentifiers[i]  isEqual: @"InEligibilityStep"]) {
+            destinationStepIdentifier = _destinationStepIdentifiers[i];
           if (taskResult.results.count > 0) {
           ActivityHelper *activityHelper1 = [[ActivityHelper alloc] init];
           NSString *val3 =  [activityHelper1 getorderedNavigationOtherConfirmationWithResultval:taskResult.results[0]];
@@ -221,10 +224,13 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
             }
             
           }
+            break;
+          } else {
+            
+          }
           
           
-          
-                   break;
+//                   break;
           
           
           

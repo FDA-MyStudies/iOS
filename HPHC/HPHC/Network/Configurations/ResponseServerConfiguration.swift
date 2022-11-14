@@ -33,11 +33,6 @@ enum ResponseMethods: String {
     var description: String{
         switch self {
             
-        case .withdrawFromStudy:
-          return self.rawValue+".api"
-        case .enroll:
-          return self.rawValue+".api"
-          
         default:
 //            return self.rawValue+".api"
           return "/mobileappstudy-"+self.rawValue+".api"
@@ -49,11 +44,8 @@ enum ResponseMethods: String {
         switch self {
         case .executeSQL:
             return Method(methodName: ("/mobileappstudy-"+self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeHTTP)
-        case .getParticipantResponse, .validateEnrollmentToken:
+        case .withdrawFromStudy, .getParticipantResponse, .validateEnrollmentToken:
             return Method(methodName: ("/mobileappstudy-"+self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
-          
-        case .withdrawFromStudy:
-            return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
 //        case .selectRows:
 //            return Method(methodName: ("/BTC/\(AppDetails.applicationID)/"+self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
           
@@ -61,7 +53,7 @@ enum ResponseMethods: String {
 //            return Method(methodName: ("/BTC/LIMITOPEN001"+self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
           return Method(methodName: ("/BTC/LIMITOPEN001/mobileappstudy-"+self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
         case .enroll:
-            return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
+            return Method(methodName: ("/mobileappstudy-"+self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
         case .resolveEnrollmentToken:
           return Method(methodName: ("/mobileappstudy-"+self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
         default:

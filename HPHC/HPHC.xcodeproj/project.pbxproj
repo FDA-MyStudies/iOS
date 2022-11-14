@@ -847,6 +847,7 @@
 		890559272301616F005FB284 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		8905592923016852005FB284 /* UITestingHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITestingHelpers.swift; sourceTree = "<group>"; };
 		8905592B230169FF005FB284 /* LoginVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVCTests.swift; sourceTree = "<group>"; };
+		89172276290EBC7F00162E83 /* Staging New ENv.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Staging New ENv.xcconfig"; sourceTree = "<group>"; };
 		8926D7E92383F25C00558F4E /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		8948349C22BB9C59000B7BFA /* HPHCSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPHCSettings.swift; sourceTree = "<group>"; };
 		8948349E22BB9D56000B7BFA /* HPHCSettings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HPHCSettings.xib; sourceTree = "<group>"; };
@@ -1123,6 +1124,7 @@
 		6E7D2D581E433E8700763D4C /* HPHC */ = {
 			isa = PBXGroup;
 			children = (
+				89172276290EBC7F00162E83 /* Staging New ENv.xcconfig */,
 				843DD02825F9F38900AE3FDF /* Production.xcconfig */,
 				846C697D25A86360002B9F42 /* Staging.xcconfig */,
 				846C695A25A83F49002B9F42 /* Environments */,
@@ -3529,7 +3531,7 @@
 /* Begin XCBuildConfiguration section */
 		6E7D2D7C1E433E8800763D4C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 846C697D25A86360002B9F42 /* Staging.xcconfig */;
+			baseConfigurationReference = 89172276290EBC7F00162E83 /* Staging New ENv.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -3591,7 +3593,7 @@
 		};
 		6E7D2D7D1E433E8800763D4C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 846C697D25A86360002B9F42 /* Staging.xcconfig */;
+			baseConfigurationReference = 89172276290EBC7F00162E83 /* Staging New ENv.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -3822,7 +3824,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 3485DDCN2M;
 				ENABLE_BITCODE = NO;
@@ -3831,7 +3833,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				IS_STANDALONE_STUDY = false;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.btc.FDA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3855,7 +3857,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3485DDCN2M;
 				ENABLE_BITCODE = NO;
@@ -3864,7 +3866,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				IS_STANDALONE_STUDY = false;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.btc.FDA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

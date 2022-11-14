@@ -1263,6 +1263,74 @@ extension ActivitiesViewController: UITableViewDelegate{
       }
   }
   
+  private func selectACTIOTHERTableCell(indexPath: IndexPath) {
+      let availabilityStatus = ActivityAvailabilityStatus(rawValue: indexPath.section)!
+      
+      switch availabilityStatus {
+      case .current:
+          
+          let rowDetail = tableViewSections[indexPath.section]
+          let activities = (rowDetail["activities"] as? Array<Activity>)!
+          
+          let activity = activities[indexPath.row]
+          // Check for activity run status & if run is available
+          if activity.currentRun != nil {
+              if activity.userParticipationStatus != nil {
+                  let activityRunParticipationStatus = activity.userParticipationStatus
+                  if activityRunParticipationStatus?.status == .yetToJoin
+                      || activityRunParticipationStatus?.status == .inProgress {
+                      
+                      Study.updateCurrentActivity(activity: activities[indexPath.row])
+                      
+                      // Following to be commented
+                      // self.createActivity()
+                      Logger.sharedInstance.info("Activity Fetching from db")
+                      // check in database
+                      DBHandler.loadActivityMetaData(
+                          activity: activities[indexPath.row],
+                          completionHandler: { (_) in
+                              
+                              //                            if found {
+                              //
+                              //                                self.createActivity()
+                              //                            } else {
+                              //  if NetworkManager.isNetworkAvailable() {
+                              if let studyID = Study.currentStudy?.studyId,
+                                 let activityID = Study.currentActivity?.actvityId,
+                                 let version = Study.currentActivity?.version {
+                                print("2getStudyActivityMetadata---")
+                                UserDefaults.standard.set("", forKey: "createActiCalled")
+                                UserDefaults.standard.synchronize()
+                                self.createActiCalled = ""
+                                  WCPServices().getStudyActivityMetadata(studyId: studyID,
+                                                                         activityId: activityID,
+                                                                         activityVersion: version,
+                                                                         delegate: self)
+                                  //                                } else if found{
+                                  //                                    self.createActivity()
+                                  //                                }
+                                  ///  }
+                              }
+                          })
+                      
+                      self.updateActivityStatusToInProgress()
+                      self.selectedIndexPath = indexPath
+                      
+                  } else {
+                      
+                  }
+              }
+              
+          } else if activity.userParticipationStatus?.status == .abandoned {
+              
+              UIUtilities.showAlertWithMessage(alertMessage: kActivityAbondonedAlertMessage)
+          }
+          
+      case .upcoming, .past: break
+          
+      }
+  }
+  
 }
 
 // MARK: - ActivitiesCell Delegate
@@ -1481,7 +1549,8 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                                                                 viewControllerUsed: self,
                                                                 action: {
                     self.removeProgressIndicator2()
-                    self.selectTableCell(indexPath: indexPath)
+//                    self.selectTableCell(indexPath: indexPath)
+                    self.selectACTIOTHERTableCell(indexPath: indexPath)
                   })
                   
                   

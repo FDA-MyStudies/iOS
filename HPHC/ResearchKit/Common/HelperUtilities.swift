@@ -224,6 +224,18 @@ import Foundation
     let destinStep = currentStep.steppredestinationTrueStepKey ?? ""
                      
     var identifierfound = false
+    
+    let destinActiId1 = currentStep.steppreactivityid ?? ""
+    let destinStepId1 = currentStep.steppredestinationTrueStepKey ?? ""
+    if destinActiId1 != "" {//check
+      let destinActiId2 = currentStep.steppreactivityid ?? ""
+      let destinStepId2 = currentStep.steppredestinationTrueStepKey ?? ""
+      var valDummy = ORKStep(identifier: "valDummy")
+      valDummy.steppreactivityid = destinActiId2
+      valDummy.steppredestinationTrueStepKey = destinStepId2
+      return valDummy
+    }
+    
     if destinStep == "0" {
       identifierfound = true
       let val = allSteps.last

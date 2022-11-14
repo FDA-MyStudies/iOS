@@ -1368,7 +1368,7 @@ extension ActivitiesViewController: NMWebServiceDelegate {
 //            if let valresponse: Dictionary<String, Any> = response as? Dictionary<String, Any> {
 //
 //            setActivityMetaData(activityDict: valresponse[kActivity] as! Dictionary<String, Any>)
-            }
+//            }
           }
             
         } else if requestName as String == WCPMethods.studyDashboard.method.methodName {

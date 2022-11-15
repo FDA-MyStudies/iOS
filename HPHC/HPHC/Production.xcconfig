@@ -31,7 +31,7 @@ WCP_URL = hpwcp.lkcompliant.net/StudyMetaData/
 
 // URL of response datastore.
 // e.g. mystudiesdeployment.com/mystudies-response-server/
-RESPONSE_URL = hpresp.lkcompliant.net/mobileappstudy-
+RESPONSE_URL = hpresp.lkcompliant.net/
 
 // URL of different service bundles within participant datastore.
 // e.g. mystudiesdeployment.com/myStudiesUserMgmtWS/

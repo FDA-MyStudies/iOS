@@ -64,6 +64,8 @@ class ActivitiesViewController : UIViewController{
   var valPipingValuesMain: JSONDictionary = [:]
   
   var createActiCalled = ""
+  
+  var timer: Timer?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
@@ -122,6 +124,8 @@ class ActivitiesViewController : UIViewController{
             UITableView.appearance().sectionHeaderTopPadding = CGFloat(0)
         }
       UserDefaults.standard.set("", forKey: "createActiCalled")
+      UserDefaults.standard.setValue("", forKey: "jumpActivity")
+      UserDefaults.standard.setValue("", forKey: "jumpInternalLoad")
       UserDefaults.standard.synchronize()
     }
     
@@ -408,7 +412,7 @@ class ActivitiesViewController : UIViewController{
      Used to create an activity using ORKTaskViewController
      */
     func createActivity(){
-        
+      addProgressIndicator3()
         // Disable Custom KeyPad with toolbars
         //        IQKeyboardManager.sharedManager().enable = false
         IQKeyboardManager.shared.enableAutoToolbar = false
@@ -461,9 +465,28 @@ class ActivitiesViewController : UIViewController{
             taskViewController?.navigationBar.prefersLargeTitles = false
             
             taskViewController?.modalPresentationStyle = .fullScreen
+          
+          let ud1 = UserDefaults.standard
+                      let valJum = ud1.object(forKey: "jumpInternalLoad") as? String ?? ""
+
+          if valJum != "jumpInternalLoad" {
+            print("1jumpInternalLoad---")
+            self.removeProgressIndicator3()
             present(taskViewController!, animated: true, completion: nil)
+          } else {
+            print("2jumpInternalLoad---")
             
+//            startTimer()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+              self.removeProgressIndicator3()
+              self.present(taskViewController!, animated: true, completion: nil)
+            }
+            
+            
+          }
         } else {
+          self.removeProgressIndicator3()
             // Task creation failed
             UIUtilities.showAlertMessage(kTitleMessage,
                                          errorMessage: NSLocalizedStrings("Invalid Data!", comment: ""),
@@ -528,6 +551,12 @@ class ActivitiesViewController : UIViewController{
             if valValues1.count > 0 {
               let valValues1a = valValues1[0]
               if let valValues1aActivityId = valValues1a["pipingactivityid"] {
+                
+                UserDefaults.standard.setValue("jumpInternalLoad", forKey: "jumpInternalLoad")
+                UserDefaults.standard.synchronize()
+
+                
+                
               if valValues1.count > 1 {
                 querypipingresponse(activityId: valValues1aActivityId, stepId: "")
                 
@@ -557,8 +586,11 @@ class ActivitiesViewController : UIViewController{
 //    let activityId = Study.currentActivity
     
     let participantId = Study.currentStudy?.userParticipateState.participantId ?? ""
+//    guard let studyID = Study.currentStudy?.studyId else { return }
+//    LabKeyServices().selectRows(studyId: "LIMITOPEN001", activityId: "imageque", stepId: "ContinuousScal", participantId: "dcb2f1938fd6b64c5e039ff476629a49", delegate: self)
+    
     guard let studyID = Study.currentStudy?.studyId else { return }
-    LabKeyServices().selectRows(studyId: "LIMITOPEN001", activityId: "imageque", stepId: "ContinuousScal", participantId: "dcb2f1938fd6b64c5e039ff476629a49", delegate: self)
+    LabKeyServices().selectRows(studyId: Study.currentStudy?.studyId ?? "", activityId: "\(activityId)", stepId: "\(stepId)", participantId: "\(participantId)", delegate: self)
   }
   
   func getActivityForPiping() {
@@ -573,6 +605,11 @@ class ActivitiesViewController : UIViewController{
             if valValues1.count > 0 {
               let valValues1a = valValues1[0]
               if let valValues1aActivityId = valValues1a["pipingactivityid"],  let valpipingactivityVersion = valValues1a["pipingactivityVersion"] {
+                
+                UserDefaults.standard.setValue("jumpInternalLoad", forKey: "jumpInternalLoad")
+            UserDefaults.standard.synchronize()
+                
+                
               if valValues1.count > 1 {
                 
                 guard let studyID = Study.currentStudy?.studyId else { return }
@@ -1431,12 +1468,30 @@ extension ActivitiesViewController: NMWebServiceDelegate {
           if createActiCalled != "true" {
             UserDefaults.standard.set("true", forKey: "createActiCalled")
             UserDefaults.standard.synchronize()
+            
             self.createActivity()
-          } else {
-//            if let valresponse: Dictionary<String, Any> = response as? Dictionary<String, Any> {
+            
+            
+//            let ud1 = UserDefaults.standard
+//            let valJum = ud1.object(forKey: "jumpInternalLoad") as? String ?? ""
+//            if valJum != "jumpInternalLoad" {
+//              print("1jumpInternalLoad---")
+//            self.createActivity()
+//            } else {
+//              print("2jumpInternalLoad---")
 //
-//            setActivityMetaData(activityDict: valresponse[kActivity] as! Dictionary<String, Any>)
+//              addProgressIndicator3()
+////              DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
+////                self.createActivity()
+////                UserDefaults.standard.setValue("", forKey: "jumpInternalLoad")
+////            UserDefaults.standard.synchronize()
+////              }
 //            }
+          } else {
+            if let valresponse: Dictionary<String, Any> = response as? Dictionary<String, Any> {
+
+            setActivityMetaData(activityDict: valresponse[kActivity] as! Dictionary<String, Any>)
+            }
           }
             
         } else if requestName as String == WCPMethods.studyDashboard.method.methodName {
@@ -1473,7 +1528,7 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
             
             self.checkForActivitiesUpdates()
-        }  else if requestName as String == "/BTC/LIMITOPEN001/mobileappstudy-selectRows.api" {
+        } else if requestName as String == "BTC/\(Study.currentStudy?.studyId ?? "")/mobileappstudy-selectRows.api" {
           print("selectRows---\(response)")
           
           guard let rows = response?["rows"] as? [JSONDictionary] ,
@@ -1485,7 +1540,7 @@ extension ActivitiesViewController: NMWebServiceDelegate {
           valPipingValuesMain = resultA
           valPipingValuesMain.removeValue(forKey: "Key")
           valPipingValuesMain.removeValue(forKey: "ParticipantId")
-          valPipingValuesMain["valuePicker"] = "3"
+//          valPipingValuesMain["valuePicker"] = "3"
           
           print("resultA---\(resultA)---\(valPipingValuesMain)")
       }
@@ -1523,6 +1578,23 @@ extension ActivitiesViewController: NMWebServiceDelegate {
                 message: errorMsg as NSString)
         }
     }
+  
+  func startTimer() {
+    timer = Timer.scheduledTimer(timeInterval: 5.0,
+                                 target: self,
+                                 selector: #selector(eventWith(timer:)),
+                                 userInfo: [ "foo" : "bar" ],
+                                 repeats: false)
+  }
+  
+  @objc func eventWith(timer: Timer!) {
+//    let info = timer.userInfo as Any
+//    print(info)
+    timer.invalidate()
+    UserDefaults.standard.setValue("", forKey: "jumpInternalLoad")
+UserDefaults.standard.synchronize()
+    removeProgressIndicator3()
+  }
 }
 
 // MARK: - ORKTaskViewController Delegate
@@ -1544,7 +1616,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                   
                   
                   UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
-                                                                message: "You will be navigated to a different activity/survey as this activity/survey is completed",
+                                                                message: "Current activity/survey is completed. Kindly standby for the next activity/survey",
                                                                 buttonTitle: "Ok",
                                                                 viewControllerUsed: self,
                                                                 action: {
@@ -3082,10 +3154,10 @@ extension ActivitiesViewController:UITabBarControllerDelegate{
               
         
         
-        let valactivity1 = activityDict["activity"] as? Dictionary<String, Any>
+        let valactivity1 = activityDict["steps"] as? Array<Dictionary<String, Any>>
 //        let valactivity2 = valactivity1["steps"] as? Array)!
         
-        self.setStepArray(stepArray: (valactivity1?["steps"] as? Array)!, valActivityData: valActivityData )
+        self.setStepArray(stepArray: (valactivity1)!, valActivityData: valActivityData )
         
         
 //          } else {
@@ -3565,8 +3637,8 @@ extension ActivitiesViewController:UITabBarControllerDelegate{
 //              self.shortName =   infoDict["name"] as? String
 //          }
           
-          if Utilities.isValidValue(someObject: infoDict[kActivityVersion] as AnyObject ) {
-            version =  infoDict[kActivityVersion] as? String ?? ""
+          if Utilities.isValidValue(someObject: infoDict["version"] as AnyObject ) {
+            version =  infoDict["version"] as? String ?? ""
           }
         if Utilities.isValidValue(someObject: infoDict["activityId"] as AnyObject ) {
           activityId =  infoDict["activityId"] as? String ?? ""
@@ -3594,6 +3666,38 @@ extension ActivitiesViewController:UITabBarControllerDelegate{
       if Utilities.isValidObject(someObject: stepArray as AnyObject?){
 //          self.steps? = stepArray
         
+        for stepArr in stepArray {
+          let valKey = stepArr["key"] as? String ?? ""
+          if valKey != "" {
+            let valresultType = stepArr["resultType"] as? String ?? ""
+            if valresultType == QuestionStepType.valuePicker.rawValue {
+              
+            } else if valresultType == QuestionStepType.textChoice.rawValue {
+              
+            } else if valresultType == QuestionStepType.textscale.rawValue {
+//              let stepArr1 = stepArr as? Dictionary<String, Any>
+              let valformatDict = stepArr["format"] as? [String: Any] ?? [:]
+              let valTextChoices = valformatDict["textChoices"] as? [[String: Any]] ?? []
+              
+              let valRes = valPipingValuesMain[valKey] as? String ?? ""
+              if valRes != "" {
+                
+                for valTextChoices1 in valTextChoices {
+                  let valValue = valTextChoices1["value"] as? String ?? ""
+                  if valValue == valRes {
+                    let valText = valTextChoices1["text"] as? String ?? ""
+                    print("valText---\(valText)---\(valRes)")
+                    
+                  }
+                }
+                
+                
+              }
+              
+            }
+            
+          }
+        }
         
       } else {
           Logger.sharedInstance.debug("stepArray is null:\(stepArray)")

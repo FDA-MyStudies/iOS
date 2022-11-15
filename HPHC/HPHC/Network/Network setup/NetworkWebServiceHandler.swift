@@ -225,7 +225,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             requestString = String(format:"%@?%@", baseURLString, httpRequestString!) as NSString?
         }
         
-      if requestName != "/BTC/LIMITOPEN001/mobileappstudy-selectRows.api" {
+      if requestName as String != "BTC/\(Study.currentStudy?.studyId ?? "")/mobileappstudy-selectRows.api" {
         if #available(iOS 9, *) {
             requestString = requestString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) as NSString?
         } else {
@@ -240,7 +240,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                                        timeoutInterval: self.connectionTimeoutInterval)
         request.httpMethod = self.getRequestMethod(method) as String
       
-      if requestName != "/BTC/LIMITOPEN001/mobileappstudy-selectRows.api" {
+      if requestName as String != "BTC/\(Study.currentStudy?.studyId ?? "")/mobileappstudy-selectRows.api" {
         if httpHeaders != nil && (httpHeaders?.count)! > 0{
             request.allHTTPHeaderFields = httpHeaders as? [String : String]
         }

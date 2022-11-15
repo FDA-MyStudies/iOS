@@ -2934,13 +2934,14 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         
         
         //other ActivityPiping
-        if pipingSnippet != "", pipingactivityid != "", pipingsourceQuestionKey != "" {
+        if pipingSnippet != "", pipingactivityid != "", pipingsourceQuestionKey != "" {// same to Instructio-
           
           let valName = "\(valPipingValuesMain[pipingsourceQuestionKey] ?? "")"
           
           var orignalVal1 = step1.question ?? ""
           let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
           // replaced originalVal with this ---> activityStepArray?.last?.title
+          if valName != "" {
           let changedText2 = activityStepArray?.last?.title?.replacingOccurrences(of: pipingSnippet, with: valName)
           print("1orignalVal---\(orignalVal1)----\(changedText2)")
           
@@ -2951,6 +2952,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
           step1.question = changedText2// "GGG2"
           if !(step1.question != nil && step1.question != "") {
             
+          }
           }
         }
         
@@ -3672,9 +3674,50 @@ extension ActivitiesViewController:UITabBarControllerDelegate{
             let valresultType = stepArr["resultType"] as? String ?? ""
             if valresultType == QuestionStepType.valuePicker.rawValue {
               
+              //              let stepArr1 = stepArr as? Dictionary<String, Any>
+                            let valformatDict = stepArr["format"] as? [String: Any] ?? [:]
+                            let valTextChoices = valformatDict["textChoices"] as? [[String: Any]] ?? []
+                            
+                            let valRes = valPipingValuesMain[valKey] as? String ?? ""
+                            if valRes != "" {
+                              
+                              for valTextChoices1 in valTextChoices {
+                                let valValue = valTextChoices1["value"] as? String ?? ""
+                                if valValue == valRes {
+                                  let valText = valTextChoices1["text"] as? String ?? ""
+                                  print("valText---\(valText)---\(valRes)")
+                                  valPipingValuesMain[valKey] = valText
+                                  
+                                }
+                              }
+                              
+                              
+                            }
+                            
             } else if valresultType == QuestionStepType.textChoice.rawValue {
               
+              //              let stepArr1 = stepArr as? Dictionary<String, Any>
+              let valformatDict = stepArr["format"] as? [String: Any] ?? [:]
+              let valTextChoices = valformatDict["textChoices"] as? [[String: Any]] ?? []
+              
+              let valRes = valPipingValuesMain[valKey] as? String ?? ""
+              if valRes != "" {
+                
+                for valTextChoices1 in valTextChoices {
+                  let valValue = valTextChoices1["value"] as? String ?? ""
+                  if valValue == valRes {
+                    let valText = valTextChoices1["text"] as? String ?? ""
+                    print("valText---\(valText)---\(valRes)")
+                    valPipingValuesMain[valKey] = valText
+                    
+                  }
+                }
+                
+                
+              }
+              
             } else if valresultType == QuestionStepType.textscale.rawValue {
+              
 //              let stepArr1 = stepArr as? Dictionary<String, Any>
               let valformatDict = stepArr["format"] as? [String: Any] ?? [:]
               let valTextChoices = valformatDict["textChoices"] as? [[String: Any]] ?? []
@@ -3687,6 +3730,7 @@ extension ActivitiesViewController:UITabBarControllerDelegate{
                   if valValue == valRes {
                     let valText = valTextChoices1["text"] as? String ?? ""
                     print("valText---\(valText)---\(valRes)")
+                    valPipingValuesMain[valKey] = valText
                     
                   }
                 }

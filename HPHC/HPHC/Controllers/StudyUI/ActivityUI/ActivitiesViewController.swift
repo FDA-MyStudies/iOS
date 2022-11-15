@@ -1615,15 +1615,35 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                     let indexPath = IndexPath(row: row, section: section)
                   
                   
-                  UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
-                                                                message: "Current activity/survey is completed. Kindly standby for the next activity/survey",
-                                                                buttonTitle: "Ok",
-                                                                viewControllerUsed: self,
-                                                                action: {
-                    self.removeProgressIndicator2()
-//                    self.selectTableCell(indexPath: indexPath)
-                    self.selectACTIOTHERTableCell(indexPath: indexPath)
-                  })
+                  
+                  
+                      let availabilityStatus = ActivityAvailabilityStatus(rawValue: indexPath.section)!
+                      
+                      switch availabilityStatus {
+                      case .current:
+                        UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
+                                                                      message: "You will be navigated to a different activity/survey as this activity/survey is completed",
+                                                                      buttonTitle: "Ok",
+                                                                      viewControllerUsed: self,
+                                                                      action: {
+                          self.removeProgressIndicator2()
+      //                    self.selectTableCell(indexPath: indexPath)
+                          self.selectACTIOTHERTableCell(indexPath: indexPath)
+                        })
+                          
+                      case .upcoming, .past: break
+                        UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
+                                                                      message: "Current activity/survey is completed. Kindly standby for the next activity/survey",
+                                                                      buttonTitle: "Ok",
+                                                                      viewControllerUsed: self,
+                                                                      action: {
+                          self.removeProgressIndicator2()
+      //                    self.selectTableCell(indexPath: indexPath)
+//                          self.selectACTIOTHERTableCell(indexPath: indexPath)
+                        })
+                      }
+                  
+                  
                   
                   
                     
@@ -1697,6 +1717,8 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         
     case .upcoming, .past: break
         
+      
+      
     }
   
   selectTableCell(indexPath: indexPath)
@@ -3021,7 +3043,34 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         
       } else if let step1 = step as? ORKInstructionStep {
         
-        if let result = taskViewController.result.stepResult(forStepIdentifier: pipingsourceQuestionKey) {
+        
+        //other ActivityPiping
+        if pipingSnippet != "", pipingactivityid != "", pipingsourceQuestionKey != "" {// same to Instructio-
+          
+          let valName = "\(valPipingValuesMain[pipingsourceQuestionKey] ?? "")"
+          
+          var orignalVal = step1.title ?? ""
+          if valName != "", pipingSnippet != "" {
+            let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
+            // replaced originalVal with this ---> activityStepArray?.last?.title
+            let changedText2 = activityStepArray?.last?.title?.replacingOccurrences(of: pipingSnippet, with: valName)
+            print("1orignalVal---\(orignalVal)----\(changedText2)")
+            
+            
+            
+            let changedText = orignalVal.replacingOccurrences(of: pipingSnippet, with: valName)
+            print("2orignalVal---\(orignalVal)")
+            step1.title = changedText2// "GGG2"
+            if !(step1.title != nil && step1.title != "") {
+              
+            }
+          }
+        }
+        
+        
+        
+        
+       else if let result = taskViewController.result.stepResult(forStepIdentifier: pipingsourceQuestionKey) {
           
           let valName = self.setResultValue(stepResult: result, activityType: .Questionnaire )
           

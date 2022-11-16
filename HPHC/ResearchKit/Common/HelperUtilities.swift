@@ -945,6 +945,31 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String, current
     return nil
   }
   
+  @objc public func findPreviousStepForNOresultStep(taskResult: ORKTaskResult, allSteps: [ORKStep], currentStep: ORKStep) -> String? {
+    var valAnswer = ""
+    let valRes = taskResult.results?.count ?? 0
+    
+    if valRes > 0 {
+      if let valMainResult = taskResult.results {
+        var valICOunt = 0
+        for aSteps in valMainResult {
+          if aSteps.identifier == currentStep.identifier, valICOunt == 0 {
+            
+            
+            
+            return "true"
+            
+            
+          }
+          valICOunt += 1
+        }
+        
+      }
+    }
+    return "false"
+  }
+  
+  
 }
 
 enum ActivityType: String {

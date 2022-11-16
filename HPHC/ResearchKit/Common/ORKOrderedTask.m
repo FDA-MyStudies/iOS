@@ -280,10 +280,21 @@
     if (step.identifier == checkStep.steppreOtherActiStepId) {
       return nil;
     }
+  
+  ActivityHelper *activityHelper1 = [[ActivityHelper alloc] init];
+//  ORKStep *val89 =  [activityHelper1 findPreviousStepForNOresultStep:result allSteps:steps currentStep:step];
+  
+  
+  NSString *val89 =  [activityHelper1 findPreviousStepForNOresultStepWithTaskResult:result allSteps:steps currentStep:step];
+  
+  if ([val89  isEqual: @"true"]) {
+    return nil;
+    }
+  
     
     ORKStep *currentStep = step;
     ORKStep *nextStep = nil;
-  ActivityHelper *activityHelper1 = [[ActivityHelper alloc] init];
+  
     
     if (currentStep == nil) {
         nextStep = nil;

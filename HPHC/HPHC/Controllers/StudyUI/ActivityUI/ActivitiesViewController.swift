@@ -1621,6 +1621,26 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                       
                       switch availabilityStatus {
                       case .current:
+                        
+                        let activityVal = activities[indexPath.row]
+                        let valStatus = activityVal.userParticipationStatus.status
+                        if valStatus == .completed ||
+                            valStatus == .abandoned ||
+                            valStatus == .expired {
+                          UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
+                                                                        message: "Current activity/survey is completed. Kindly standby for the next activity/survey",
+                                                                        buttonTitle: "Ok",
+                                                                        viewControllerUsed: self,
+                                                                        action: {
+                            self.removeProgressIndicator2()
+        //                    self.selectTableCell(indexPath: indexPath)
+  //                          self.selectACTIOTHERTableCell(indexPath: indexPath)
+                          })
+                        } else {
+
+                        
+                        
+                        
                         UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
                                                                       message: "You will be navigated to a different activity/survey as this activity/survey is completed",
                                                                       buttonTitle: "Ok",
@@ -1630,7 +1650,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
       //                    self.selectTableCell(indexPath: indexPath)
                           self.selectACTIOTHERTableCell(indexPath: indexPath)
                         })
-                          
+                        }
                       case .upcoming, .past: break
                         UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
                                                                       message: "Current activity/survey is completed. Kindly standby for the next activity/survey",
@@ -1793,10 +1813,12 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             //            }
             
         case ORKTaskViewControllerFinishReason.failed: break
-            
+          UserDefaults.standard.setValue("", forKey: "jumpActivity")
+      UserDefaults.standard.synchronize()
             // taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.discarded:
-                        
+          UserDefaults.standard.setValue("", forKey: "jumpActivity")
+      UserDefaults.standard.synchronize()
             let study = Study.currentStudy
             let activity = Study.currentActivity
             activity?.currentRun.restortionData = nil
@@ -1814,7 +1836,8 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             self.checkForActivitiesUpdates()
             
         case ORKTaskViewControllerFinishReason.saved:
-            
+          UserDefaults.standard.setValue("", forKey: "jumpActivity")
+      UserDefaults.standard.synchronize()
             // taskResult = taskViewController.restorationData
             
             if taskViewController.task?.identifier == "ConsentTask" {

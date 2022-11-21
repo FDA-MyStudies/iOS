@@ -155,6 +155,7 @@ class ActivityFormStep: ActivityStep {
           step?.steppreoperator = preoperator
           step?.stepprevalue = prevalue
           step?.steppresourceQuestionKey = presourceQuestionKey
+          step?.steppregroupId = pregroupId
           step?.steppredefaultVisibility = predefaultVisibility
           step?.steppreisHidden = preisHidden
 //

@@ -172,6 +172,8 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, copy, nullable) NSString *steppresourceQuestionKey;
 
+@property (nonatomic, copy, nullable) NSString *steppregroupId;
+
 @property (nonatomic, copy, nullable) NSString *stepresultType;
 
 /**

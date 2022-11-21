@@ -547,6 +547,7 @@ class ActivityQuestionStep: ActivityStep {
                   questionStep?.steppreoperator = preoperator
                   questionStep?.stepprevalue = prevalue
                   questionStep?.steppresourceQuestionKey = presourceQuestionKey
+                  questionStep?.steppregroupId = pregroupId
                   questionStep?.steppredefaultVisibility = predefaultVisibility
                   questionStep?.steppreisHidden = preisHidden
                   
@@ -838,6 +839,7 @@ class ActivityQuestionStep: ActivityStep {
           questionStep?.steppreoperator = preoperator
           questionStep?.stepprevalue = prevalue
           questionStep?.steppresourceQuestionKey = presourceQuestionKey
+          questionStep?.steppregroupId = pregroupId
           questionStep?.steppredefaultVisibility = predefaultVisibility
           questionStep?.steppreisHidden = preisHidden
           

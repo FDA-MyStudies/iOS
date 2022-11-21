@@ -72,6 +72,7 @@ class ActivityInstructionStep: ActivityStep {
           instructionStep.steppreoperator = preoperator ?? ""
           instructionStep.stepprevalue = prevalue ?? ""
           instructionStep.steppresourceQuestionKey = presourceQuestionKey ?? ""
+          instructionStep.steppregroupId = pregroupId ?? ""
           instructionStep.steppredefaultVisibility = predefaultVisibility ?? ""
           instructionStep.steppreisHidden = preisHidden ?? ""
           

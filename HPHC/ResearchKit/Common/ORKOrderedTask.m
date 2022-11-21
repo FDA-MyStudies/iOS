@@ -237,6 +237,16 @@
 //        steps[index] = val3;
         nextStep = steps[index];
         return nextStep;
+      } else if (currentStep.steppregroupId != nil && ![currentStep.steppregroupId isEqual: @""]) {
+        
+        
+        ORKStep *val9 =  [activityHelper1 setGroupResultValueWithStepResult:stepResult activityType:@"questionnaire" resultType:step.stepresultType allSteps:steps currentStep:step];
+        
+        if (val9 != nil) {
+          printf("4therActiStepId---");
+          nextStep = val9;
+          return nextStep;
+        }
       }
       
         

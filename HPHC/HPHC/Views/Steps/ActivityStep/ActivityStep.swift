@@ -79,6 +79,7 @@ class ActivityStep {
   var preoperator: String?
   var prevalue: String?
   var presourceQuestionKey: String?
+  var pregroupId: String?
   var predefaultVisibility: String?
   var preisHidden: String?
   
@@ -116,6 +117,7 @@ class ActivityStep {
       self.preoperator = ""
       self.prevalue = ""
       self.presourceQuestionKey = ""
+      self.pregroupId = ""
       self.predefaultVisibility = ""
       self.preisHidden = ""
       
@@ -153,6 +155,7 @@ class ActivityStep {
           preoperator: String,
           prevalue: String,
           presourceQuestionKey: String,
+          pregroupId: String,
           predefaultVisibility: String,
           preisHidden: String,
           
@@ -263,6 +266,7 @@ class ActivityStep {
           prevalue = val2?["value"] ?? ""
   //          sourcePreLogicQuestionKey = stepDict["sourceQuestionKey"] as? String
           presourceQuestionKey = stepDict["sourceQuestionKey"] as? String
+          pregroupId = stepDict["groupId"] as? String
           
         }
         
@@ -291,6 +295,7 @@ class ActivityStep {
         prevalue = val2?["value"] ?? ""
 //          sourcePreLogicQuestionKey = stepDict["sourceQuestionKey"] as? String
         presourceQuestionKey = stepDict["sourceQuestionKey"] as? String
+          pregroupId = stepDict["groupId"] as? String
         }
         
         
@@ -385,6 +390,7 @@ class ActivityStep {
           prevalue = val2?["value"] ?? ""
 //          sourcePreLogicQuestionKey = stepDict["sourceQuestionKey"] as? String
           presourceQuestionKey = stepDict["sourceQuestionKey"] as? String
+          pregroupId = stepDict["groupId"] as? String
           
           let valdefalut = stepDict["defaultVisibility"] as? Bool ?? true
           predefaultVisibility = valdefalut ? "true" : "false"

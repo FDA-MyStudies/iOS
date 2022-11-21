@@ -100,6 +100,7 @@
   step.steppreoperator = _steppreoperator;
   step.stepprevalue = _stepprevalue;
   step.steppresourceQuestionKey = _steppresourceQuestionKey;
+  step.steppregroupId = _steppregroupId;
   step.steppredefaultVisibility = _steppredefaultVisibility;
   step.steppreisHidden = _steppreisHidden;
     step.optional = _optional;

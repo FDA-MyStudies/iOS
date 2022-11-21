@@ -64,7 +64,7 @@ import Foundation
                   print("2questionstepResult---\(questionstepResult)")
                   let val = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep )
                   
-                  let val1 = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep ) as NSString
+//                  let val1 = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep ) as NSString
                   
                   print("resulttt---\(currentStep.stepprevalue)")
                   if let operato = currentStep.steppreoperator, operato == "=" {
@@ -184,7 +184,7 @@ import Foundation
                     }
                   }
                   
-                  print("5questionstepResult---\(val1)")
+                  print("5questionstepResult---\(val)")
                   
                   
                   
@@ -969,6 +969,93 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String, current
     return "false"
   }
   
+  // MARK:  Groups
+  
+  @objc public func setGroupResultValue(stepResult: ORKStepResult, activityType: String, resultType: String, allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {// (ORKStep?, NSString?)  {
+    var valAnswer = ""
+    let valRes = stepResult.results?.count ?? 0
+    if valRes > 0 {
+        
+//        if  activityType == "questionnaire" {
+            // for question Step
+//            if stepResult.results?.count == 1 && self.type != .form {
+           if let valForm = currentStep as? ORKFormStep, stepResult.results?.count ?? 0 >= 1 {
+            // && activityType != .form {
+             
+             if let questionstepResult: ORKQuestionResult? = stepResult.results?.last as? ORKQuestionResult? {
+              return set1GroupResultValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep, questionstepValResult: questionstepResult)
+             }
+           }
+          else if stepResult.results?.count == 1 {
+            // && activityType != .form {
+             
+             if let questionstepResult: ORKQuestionResult? = stepResult.results?.first as? ORKQuestionResult? {
+               return set1GroupResultValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep, questionstepValResult: questionstepResult)
+             }
+           }
+          
+            
+//        }
+      
+    }
+    return nil
+}
+  
+  func set1GroupResultValue(stepResult: ORKStepResult, activityType: String, resultType: String, allSteps: [ORKStep], currentStep: ORKStep, questionstepValResult: ORKQuestionResult?) -> ORKStep? {// (ORKStep?, NSString?)  {
+    var valAnswer = ""
+    let valRes = stepResult.results?.count ?? 0
+    if valRes > 0 {
+        
+        if  activityType == "questionnaire" {
+            // for question Step
+//            if stepResult.results?.count == 1 && self.type != .form {
+//          if stepResult.results?.count == 1 { // && activityType != .form {
+            print("1questionstepResult---\(questionstepValResult as? ORKQuestionResult?)")
+                if let questionstepResult: ORKQuestionResult? = questionstepValResult as? ORKQuestionResult? {
+                  print("2questionstepResult---\(questionstepResult)")
+                  let val = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep )
+                  
+//                  let val1 = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep ) as NSString
+                  
+                  print("2resulttt---\(currentStep.stepprevalue)")
+                  
+                  let valsteppreoperator = currentStep.steppreoperator ?? ""
+                  let valstepprevalue = currentStep.stepprevalue ?? ""
+                  let valsteppreisHidden = currentStep.steppreisHidden ?? ""
+                  let valsteppresourceQuestionKey = currentStep.steppresourceQuestionKey ?? ""
+                  let valsteppreactivityid = currentStep.steppreactivityid ?? ""
+                  let valsteppredestinationTrueStepKey = currentStep.steppredestinationTrueStepKey ?? ""
+                  
+                  if valsteppreoperator == "", valstepprevalue == "", valsteppreisHidden == "true", valsteppredestinationTrueStepKey != "" {
+                    
+                      
+//                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
+                      
+                      print("3resulttt---\(val)")
+                      
+                     let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
+                      if val90 != nil {
+                        return val90
+                      }
+                         
+                  } else if valsteppreoperator == "", valstepprevalue == "", valsteppreisHidden == "true", valsteppredestinationTrueStepKey == "" {
+                  
+                  print("6questionstepResult---\(val)")
+                  
+                    let val = allSteps.last
+                    val?.steppresourceQuestionKey = currentStep.identifier
+                    allSteps.last?.steppresourceQuestionKey = currentStep.identifier
+                    return val
+                  }
+//                    return val1
+                }
+//            }
+            
+        }
+      
+    }
+    return nil
+}
   
 }
 

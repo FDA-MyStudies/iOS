@@ -1038,15 +1038,16 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String, current
                         return val90
                       }
                          
-                  } else if valsteppreoperator == "", valstepprevalue == "", valsteppreisHidden == "true", valsteppredestinationTrueStepKey == "" {
-                  
-                  print("6questionstepResult---\(val)")
-                  
-                    let val = allSteps.last
-                    val?.steppresourceQuestionKey = currentStep.identifier
-                    allSteps.last?.steppresourceQuestionKey = currentStep.identifier
-                    return val
                   }
+//                  else if valsteppreoperator == "", valstepprevalue == "", valsteppreisHidden == "true", valsteppredestinationTrueStepKey == "" {
+//
+//                  print("6questionstepResult---\(val)")
+//
+//                    let val = allSteps.last
+//                    val?.steppresourceQuestionKey = currentStep.identifier
+//                    allSteps.last?.steppresourceQuestionKey = currentStep.identifier
+//                    return val
+//                  }
 //                    return val1
                 }
 //            }

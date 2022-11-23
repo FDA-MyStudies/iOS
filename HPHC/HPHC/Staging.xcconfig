@@ -32,7 +32,7 @@ WCP_URL = 45.136.113.122:8082/StudyMetaData/
 
 // URL of response datastore.
 // e.g. mystudiesdeployment.com/mystudies-response-server/
-RESPONSE_URL = hpresp-stage.lkcompliant.net
+RESPONSE_URL = hpresp-stage.lkcompliant.net/
 
 // URL of different service bundles within participant datastore.
 // e.g. mystudiesdeployment.com/myStudiesUserMgmtWS/

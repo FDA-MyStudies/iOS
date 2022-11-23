@@ -58,7 +58,7 @@ enum API {
 
   static var wcpURL: String {
 
-    return   "https://" + ((try? Configuration.value(for: "WCP_URL")) ?? "")
+    return   "http://" + ((try? Configuration.value(for: "WCP_URL")) ?? "")
 //     return AppProtocol.value + ((try? Configuration.value(for: "WCP_URL")) ?? "")
   }
 
@@ -67,7 +67,7 @@ enum API {
   }
 
   static var registrationURL: String {
-  return  "https://" + ((try? Configuration.value(for: "REGISTRATION_URL")) ?? "")
+  return  "http://" + ((try? Configuration.value(for: "REGISTRATION_URL")) ?? "")
 //    return AppProtocol.value + ((try? Configuration.value(for: "REGISTRATION_URL")) ?? "")
   }
   

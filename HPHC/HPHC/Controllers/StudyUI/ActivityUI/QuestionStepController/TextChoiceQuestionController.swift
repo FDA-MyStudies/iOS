@@ -294,11 +294,13 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
     // Try to get the ref of the continue of the next button
     if let nextBtn = self.view.allSubViewsOf(type: ORKContinueButton.self).last {
       self.continueBtn = nextBtn
+
+      let kNextBtn = NSLocalizedStrings("BUTTON_NEXT", comment: "")
       if self.questionStep?.isOptional ?? false {
-        self.continueBtn?.setTitle("Next", for: .normal)
+        self.continueBtn?.setTitle(kNextBtn, for: .normal)
       }
       if self.questionStep?.isOptional ?? false {
-        self.continueBtn?.setTitle("Next", for: .normal)
+        self.continueBtn?.setTitle(kNextBtn, for: .normal)
       }
       continueBtn?.addTarget(
         self,
@@ -575,10 +577,13 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
       self.isOtherCellSelected,
       self.otherChoice.isMandatory
     {
+      
+      let kAlertTitle = NSLocalizedStrings("Answer required", comment: "")
+      let kAlertMessage = NSLocalizedStrings("Please provide an input for the text field too.", comment: "")
 
       let alertVC = UIAlertController(
-        title: "Answer required",
-        message: "Please fill out the text field too.",
+        title: kAlertTitle,
+        message: kAlertMessage,
         preferredStyle: .alert
       )
 

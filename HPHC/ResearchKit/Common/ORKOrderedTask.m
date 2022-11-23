@@ -269,6 +269,10 @@
             ORKStep *val7 =  [activityHelper1 getNonHiddenStepWithAllSteps:steps currentStep:nextStep indexVal:index + 1];
             return val7;
           } else {
+            
+            if (![step.steppredestinationTrueStepKey isEqual: @"0"] && [nextStep.identifier isEqual: @"CompletionStep"]) {
+              nextStep.steppresourceQuestionKey = @"";
+            }
             return nextStep;
           }
           

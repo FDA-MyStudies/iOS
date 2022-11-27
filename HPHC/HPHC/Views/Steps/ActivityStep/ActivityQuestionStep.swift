@@ -536,9 +536,13 @@ class ActivityQuestionStep: ActivityStep {
                   questionStep?.steppreactivityid = preactivityid
                   questionStep?.steppredestinationFalseStepKey = predestinationFalseStepKey
                   
-                 let valOtherActiStepId = UserDefaults.standard.value(forKey: "OtherActiStepId") as? String ?? "" //CHECK
+                 var valOtherActiStepId = UserDefaults.standard.value(forKey: "OtherActiStepId") as? String ?? "" //CHECK
                   UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
               UserDefaults.standard.synchronize()
+                  
+                  if valOtherActiStepId == "0" {
+                    valOtherActiStepId = "CompletionStep"
+                  }
                   
                   questionStep?.steppreOtherActiStepId = valOtherActiStepId
                   questionStep?.steppredestinationTrueStepIndex = predestinationTrueStepIndex
@@ -828,9 +832,13 @@ class ActivityQuestionStep: ActivityStep {
           questionStep?.steppreactivityid = preactivityid
           questionStep?.steppredestinationFalseStepKey = predestinationFalseStepKey
           
-          let valOtherActiStepId = UserDefaults.standard.value(forKey: "OtherActiStepId") as? String ?? "" //CHECK
+          var valOtherActiStepId = UserDefaults.standard.value(forKey: "OtherActiStepId") as? String ?? "" //CHECK
           UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
           UserDefaults.standard.synchronize()
+          
+          if valOtherActiStepId == "0" {
+            valOtherActiStepId = "CompletionStep"
+          }
           
           questionStep?.steppreOtherActiStepId = valOtherActiStepId
           questionStep?.steppredestinationTrueStepIndex = predestinationTrueStepIndex

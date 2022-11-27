@@ -144,10 +144,14 @@ class ActivityFormStep: ActivityStep {
           step?.steppreactivityid = preactivityid
           step?.steppredestinationFalseStepKey = predestinationFalseStepKey
 
-         let valOtherActiStepId = UserDefaults.standard.value(forKey: "OtherActiStepId") as? String ?? "" //CHECK
+         var valOtherActiStepId = UserDefaults.standard.value(forKey: "OtherActiStepId") as? String ?? "" //CHECK
           UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
       UserDefaults.standard.synchronize()
 
+          if valOtherActiStepId == "0" {
+            valOtherActiStepId = "CompletionStep"
+          }
+          
           step?.steppreOtherActiStepId = valOtherActiStepId
           step?.steppredestinationTrueStepIndex = predestinationTrueStepIndex
           step?.steppredestinationFalseStepIndex = predestinationFalseStepIndex

@@ -1651,7 +1651,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                           self.selectACTIOTHERTableCell(indexPath: indexPath)
                         })
                         }
-                      case .upcoming, .past: break
+                      case .upcoming, .past:
                         UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
                                                                       message: "Current activity/survey is completed. Kindly standby for the next activity/survey",
                                                                       buttonTitle: "Ok",
@@ -3001,7 +3001,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
           var orignalVal1 = step1.question ?? ""
           let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
           // replaced originalVal with this ---> activityStepArray?.last?.title
-          if valName != "" {
+          if valName != "", valName != "<null>" {
           let changedText2 = activityStepArray?.last?.title?.replacingOccurrences(of: pipingSnippet, with: valName)
           print("1orignalVal---\(orignalVal1)----\(changedText2)")
           
@@ -3025,7 +3025,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                       print("SORTED STEP RESULT -- \(result)")
                       print("SORTED STEP RESULT ANSWER -- \((result as? ORKScaleQuestionResult)?.answer)")
             var orignalVal = step1.question ?? ""
-            if valName != "", pipingSnippet != "" {
+            if valName != "", pipingSnippet != "", valName != "<null>" {
               let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
               // replaced originalVal with this ---> activityStepArray?.last?.title
               let changedText2 = activityStepArray?.last?.title?.replacingOccurrences(of: pipingSnippet, with: valName)
@@ -3041,7 +3041,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
               }
             }
            
-           else if valName == "", pipingSnippet != "" {//Skipped sce
+           else if (valName == "" || valName == "<null>"), pipingSnippet != "" {//Skipped sce
              let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
              // replaced originalVal with this ---> activityStepArray?.last?.title
              let changedText2 = activityStepArray?.last?.title
@@ -3073,7 +3073,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
           let valName = "\(valPipingValuesMain[pipingsourceQuestionKey] ?? "")"
           
           var orignalVal = step1.title ?? ""
-          if valName != "", pipingSnippet != "" {
+          if valName != "", pipingSnippet != "", valName != "<null>" {
             let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
             // replaced originalVal with this ---> activityStepArray?.last?.title
             let changedText2 = activityStepArray?.last?.title?.replacingOccurrences(of: pipingSnippet, with: valName)
@@ -3100,7 +3100,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
           print("SORTED STEP RESULT -- \(result)")
           print("SORTED STEP RESULT ANSWER -- \((result as? ORKScaleQuestionResult)?.answer)")
           var orignalVal = step1.title ?? ""
-          if valName != "", pipingSnippet != "" {
+          if valName != "", pipingSnippet != "", valName != "<null>" {
             let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
             // replaced originalVal with this ---> activityStepArray?.last?.title
             let changedText2 = activityStepArray?.last?.title?.replacingOccurrences(of: pipingSnippet, with: valName)

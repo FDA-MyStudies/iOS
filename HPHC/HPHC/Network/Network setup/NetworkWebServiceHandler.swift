@@ -241,13 +241,14 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         request.httpMethod = self.getRequestMethod(method) as String
       
       if requestName as String != "BTC/\(Study.currentStudy?.studyId ?? "")/mobileappstudy-selectRows.api" {
+        print("2urlurl---\(requestName)")
         if httpHeaders != nil && (httpHeaders?.count)! > 0{
             request.allHTTPHeaderFields = httpHeaders as? [String : String]
         }
         self.fireRequest(request, requestName: requestName)
       } else {
         let url = URL(string: requestString as String)!
-
+print("1urlurl---\(url)")
         let task = URLSession.shared.dataTask(with: url) {(data, response, error) -> Void in
           if let data = data {
               DispatchQueue.main.async {

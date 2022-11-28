@@ -1470,6 +1470,7 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             self.removeProgressIndicator()
           
           if createActiCalled != "true" {
+            print("1createActiCalled---")
             UserDefaults.standard.set("true", forKey: "createActiCalled")
             UserDefaults.standard.synchronize()
             
@@ -1492,6 +1493,7 @@ extension ActivitiesViewController: NMWebServiceDelegate {
 ////              }
 //            }
           } else {
+            print("2createActiCalled---")
             if let valresponse: Dictionary<String, Any> = response as? Dictionary<String, Any> {
 
             setActivityMetaData(activityDict: valresponse[kActivity] as! Dictionary<String, Any>)
@@ -3804,6 +3806,41 @@ extension ActivitiesViewController:UITabBarControllerDelegate{
                   }
                 }
                 
+                
+              } else {
+                guard let studyID = Study.currentStudy?.studyId else { return }
+                
+               let valValues1aActivityId1 = valActivityData[0]
+                var valValues1aActivityId2 = valActivityData[0]
+                let valpipingactivityVersion = valActivityData[1]
+                
+                if let valValues1 = valPipingDetailsMain[valValues1aActivityId1] {
+                  if valValues1.count > 0 {
+                    let valValues1a = valValues1[0]
+                    if let valValues1aActivityId = valValues1a["pipingsourceQuestionKey"] {
+                      valValues1aActivityId2 = valValues1aActivityId2 + valValues1aActivityId
+                    }
+                  }
+                }
+                
+                if valValues1aActivityId2 != valValues1aActivityId1, valValues1aActivityId2 != "" {
+                  if let valValues1 = valPipingDetailsMain[valValues1aActivityId1] {
+                  if valValues1.count > 0 {
+                    let valValues1a = valValues1[0]
+                    if let valValues1aActivityId = valValues1a["pipingsourceQuestionKey"] {
+                      querypipingresponse(activityId: valValues1aActivityId2, stepId: valValues1aActivityId)
+                    }
+                  }
+                    
+                }
+                  
+                  
+                  
+//                WCPServices().getStudyActivityVersionMetadata(studyId: studyID,
+//                                                                                           activityId: valValues1aActivityId2,
+//                                                                                           activityVersion: valpipingactivityVersion,
+//                                                                                           delegate: self)
+                }
                 
               }
               

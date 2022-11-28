@@ -1300,16 +1300,19 @@ extension ActivitiesViewController: UITableViewDelegate{
       }
   }
   
-  private func selectACTIOTHERTableCell(indexPath: IndexPath) {
-      let availabilityStatus = ActivityAvailabilityStatus(rawValue: indexPath.section)!
+  private func selectACTIOTHERTableCell(indexPathMain: IndexPath, actiActivityId: String) {
+      let availabilityStatus = ActivityAvailabilityStatus(rawValue: indexPathMain.section)!
       
       switch availabilityStatus {
       case .current:
           
-          let rowDetail = tableViewSections[indexPath.section]
+          let rowDetail = tableViewSections[indexPathMain.section]
           let activities = (rowDetail["activities"] as? Array<Activity>)!
-          
+//        if activities.count > 0 {
+          if let row = activities.firstIndex(where: {$0.actvityId == actiActivityId}) {
+            let indexPath = IndexPath(row: row, section: indexPathMain.section)
           let activity = activities[indexPath.row]
+        print("1jumpactivity---\(activity.actvityId)")
           // Check for activity run status & if run is available
           if activity.currentRun != nil {
               if activity.userParticipationStatus != nil {
@@ -1318,7 +1321,7 @@ extension ActivitiesViewController: UITableViewDelegate{
                       || activityRunParticipationStatus?.status == .inProgress {
                       
                       Study.updateCurrentActivity(activity: activities[indexPath.row])
-                      
+                    print("2jumpactivity---\(activities[indexPath.row].actvityId)")
                       // Following to be commented
                       // self.createActivity()
                       Logger.sharedInstance.info("Activity Fetching from db")
@@ -1339,6 +1342,7 @@ extension ActivitiesViewController: UITableViewDelegate{
                                 UserDefaults.standard.set("", forKey: "createActiCalled")
                                 UserDefaults.standard.synchronize()
                                 self.createActiCalled = ""
+                                print("3jumpactivity---\(activityID)")
                                   WCPServices().getStudyActivityMetadata(studyId: studyID,
                                                                          activityId: activityID,
                                                                          activityVersion: version,
@@ -1362,7 +1366,7 @@ extension ActivitiesViewController: UITableViewDelegate{
               
               UIUtilities.showAlertWithMessage(alertMessage: kActivityAbondonedAlertMessage)
           }
-          
+          }
       case .upcoming, .past: break
           
       }
@@ -1648,7 +1652,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                                                                       action: {
                           self.removeProgressIndicator2()
       //                    self.selectTableCell(indexPath: indexPath)
-                          self.selectACTIOTHERTableCell(indexPath: indexPath)
+                          self.selectACTIOTHERTableCell(indexPathMain: indexPath, actiActivityId: activityId)
                         })
                         }
                       case .upcoming, .past:

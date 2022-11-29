@@ -65,7 +65,17 @@ class ActivityInstructionStep: ActivityStep {
           instructionStep.steppreactivityid = preactivityid ?? ""
           instructionStep.steppredestinationFalseStepKey = predestinationFalseStepKey ?? ""
           
-          instructionStep.steppreOtherActiStepId = preOtherActiStepId ?? ""
+          
+          
+          var valOtherActiStepId = UserDefaults.standard.value(forKey: "OtherActiStepId") as? String ?? "" //CHECK
+           UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
+       UserDefaults.standard.synchronize()
+           
+           if valOtherActiStepId == "0" {
+             valOtherActiStepId = "CompletionStep"
+           }
+          
+          instructionStep.steppreOtherActiStepId = valOtherActiStepId
           instructionStep.steppredestinationTrueStepIndex = predestinationTrueStepIndex ?? ""
           instructionStep.steppredestinationFalseStepIndex = predestinationFalseStepIndex ?? ""
           instructionStep.stepresultType = resultType as? String ?? ""

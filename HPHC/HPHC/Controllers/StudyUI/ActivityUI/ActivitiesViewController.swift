@@ -126,6 +126,7 @@ class ActivitiesViewController : UIViewController{
       UserDefaults.standard.set("", forKey: "createActiCalled")
       UserDefaults.standard.setValue("", forKey: "jumpActivity")
       UserDefaults.standard.setValue("", forKey: "jumpInternalLoad")
+      UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
       UserDefaults.standard.synchronize()
     }
     
@@ -2048,7 +2049,9 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
     
     func taskViewController(_ taskViewController: ORKTaskViewController,
                             stepViewControllerWillAppear stepViewController: ORKStepViewController) {
-        
+        print("111111---")
+      UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
+      UserDefaults.standard.synchronize()
         if (taskViewController.result.results?.count)! > 1 {
             
           if activityBuilder?.actvityResult?.result?.count

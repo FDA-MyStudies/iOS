@@ -387,7 +387,7 @@ print("1urlurl---\(url)")
                     }
                 }
             } else {
-                
+              if requestName as? String != "BTC/\(Study.currentStudy?.studyId ?? "")/mobileappstudy-selectRows.api" {
                 if self.configuration.shouldParseErrorMessage() {
                   
                     var responseDict: [String:Any]?
@@ -409,6 +409,11 @@ print("1urlurl---\(url)")
                 if (delegate?.failedRequest) != nil {
                     delegate?.failedRequest(networkManager!, requestName: requestName!,error:error1!)
                 }
+              } else {
+//                let responseDict: [String:Any] = [:]
+                let responseDict: NSDictionary = [:]
+                delegate?.finishedRequest(networkManager!, requestName: requestName!, response: responseDict)
+              }
             }
         }
     }

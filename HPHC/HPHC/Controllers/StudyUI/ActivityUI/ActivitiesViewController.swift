@@ -518,6 +518,7 @@ class ActivitiesViewController : UIViewController{
         if valActiInmain?.count ?? 0 > 0 {
          var valtempPipActiId = valActiInmain
           valtempPipActiId?.append(valPipStructure)
+          valPipingDetails[valpipingactivityid] = valtempPipActiId
         } else {
           valPipingDetails[valpipingactivityid] = [valPipStructure]
         }
@@ -540,7 +541,7 @@ class ActivitiesViewController : UIViewController{
   }
   
   func getValueForPiping() {
-    
+    print("1valvalPipingDetailsMain---\(valPipingDetailsMain)")
     let valvalPipingDetailsMain = valPipingDetailsMain
     
     if valvalPipingDetailsMain.count > 0 {
@@ -558,11 +559,13 @@ class ActivitiesViewController : UIViewController{
                 
                 
               if valValues1.count > 1 {
+                print("1valValues1---")
                 querypipingresponse(activityId: valValues1aActivityId, stepId: "")
                 
                 
                 getActivityForPiping()
               } else {
+                print("2valValues1---")
                 querypipingresponse(activityId: valValues1aActivityId, stepId: valValues1a["pipingsourceQuestionKey"] ?? "")
                 
                 getActivityForPiping()

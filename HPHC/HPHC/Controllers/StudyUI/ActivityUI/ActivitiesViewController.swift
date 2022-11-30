@@ -1545,6 +1545,10 @@ extension ActivitiesViewController: NMWebServiceDelegate {
                 let rowDetail = rows.last
                else { return }
           
+//          let valOtherTextChoice = rowDetail["TextChoice_Other_Text"] as? String ?? ""
+//          if valOtherTextChoice != "", valOtherTextChoice != "<null>" {
+//
+//          }
           let resultA = valPipingValuesMain.merging(rowDetail, uniquingKeysWith: { (first, _) in first })
           
           valPipingValuesMain = resultA
@@ -3008,7 +3012,14 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         //other ActivityPiping
         if pipingSnippet != "", pipingactivityid != "", pipingsourceQuestionKey != "" {// same to Instructio-
           
-          let valName = "\(valPipingValuesMain[pipingsourceQuestionKey] ?? "")"
+          var valName = "\(valPipingValuesMain[pipingsourceQuestionKey] ?? "")"
+          
+          let valNameOther = "\(valPipingValuesMain[pipingsourceQuestionKey + "_Other_Text"] ?? "")"
+          if valNameOther != "", valNameOther != "<null>" {
+            valName = valNameOther
+          }
+          
+          
           
           var orignalVal1 = step1.question ?? ""
           let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
@@ -3082,7 +3093,12 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         //other ActivityPiping
         if pipingSnippet != "", pipingactivityid != "", pipingsourceQuestionKey != "" {// same to Instructio-
           
-          let valName = "\(valPipingValuesMain[pipingsourceQuestionKey] ?? "")"
+          var valName = "\(valPipingValuesMain[pipingsourceQuestionKey] ?? "")"
+          
+          let valNameOther = "\(valPipingValuesMain[pipingsourceQuestionKey + "_Other_Text"] ?? "")"
+          if valNameOther != "", valNameOther != "<null>" {
+            valName = valNameOther
+          }
           
           var orignalVal = step1.title ?? ""
           if valName != "", pipingSnippet != "", valName != "<null>" {
@@ -3834,7 +3850,7 @@ extension ActivitiesViewController:UITabBarControllerDelegate{
                   if valValues1.count > 0 {
                     let valValues1a = valValues1[0]
                     if let valValues1aActivityId = valValues1a["pipingsourceQuestionKey"] {
-                      querypipingresponse(activityId: valValues1aActivityId2, stepId: valValues1aActivityId)
+                      querypipingresponse(activityId: valValues1aActivityId2, stepId: "") //valValues1aActivityId
                     }
                   }
                     

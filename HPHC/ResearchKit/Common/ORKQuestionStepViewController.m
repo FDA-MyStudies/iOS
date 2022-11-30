@@ -588,7 +588,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 - (void)notifyDelegateOnResultChange {
     [super notifyDelegateOnResultChange];
     
-    if (self.hasNextStep == NO) {
+    if (self.hasNextStep == NO) {//change
         self.continueButtonItem = self.internalDoneButtonItem;
     } else {
         self.continueButtonItem = self.internalContinueButtonItem;

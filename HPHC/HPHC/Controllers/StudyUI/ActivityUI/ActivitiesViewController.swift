@@ -647,6 +647,54 @@ class ActivitiesViewController : UIViewController{
 //    LabKeyServices().selectRows(studyId: "LIMITOPEN001", activityId: "imageque", stepId: "ContinuousScal", participantId: "dcb2f1938fd6b64c5e039ff476629a49", delegate: self)
 
   }
+  
+  func getActivityForTextChoicePiping(textactivityid: String, textStepId: String) {
+    
+    let valvalPipingDetailsMain = valPipingDetailsMain
+    
+    if valvalPipingDetailsMain.count > 0 {
+      let valKeys = valvalPipingDetailsMain.keys
+      if valKeys.count > 0 {
+        for valKey in valKeys {
+          if let valValues1 = valvalPipingDetailsMain[valKey] {
+            if valValues1.count > 0 {
+              let valValues1a = valValues1[0]
+              if let valValues1aActivityId = valValues1a["pipingactivityid"],  let valpipingactivityVersion = valValues1a["pipingactivityVersion"] {
+                
+                UserDefaults.standard.setValue("jumpInternalLoad", forKey: "jumpInternalLoad")
+            UserDefaults.standard.synchronize()
+                
+                
+              if valValues1.count > 1 {
+                
+                guard let studyID = Study.currentStudy?.studyId else { return }
+                WCPServices().getStudyActivityVersionMetadata(studyId: studyID,
+                                                                                           activityId: valValues1aActivityId,
+                                                                                           activityVersion: valpipingactivityVersion,
+                                                                                           delegate: self)
+                
+                
+//                querypipingresponse(activityId: valValues1aActivityId, stepId: "")
+                
+              } else {
+                guard let studyID = Study.currentStudy?.studyId else { return }
+                WCPServices().getStudyActivityVersionMetadata(studyId: studyID,
+                                                                                           activityId: valValues1aActivityId,
+                                                                                           activityVersion: valpipingactivityVersion,
+                                                                                           delegate: self)
+                
+              }
+            }
+              }
+              
+            }
+          
+          }
+        }
+      }
+
+  }
+  
    
     /**
      Used to get Activity Availability Status
@@ -1556,6 +1604,53 @@ extension ActivitiesViewController: NMWebServiceDelegate {
           valPipingValuesMain.removeValue(forKey: "ParticipantId")
 //          valPipingValuesMain["valuePicker"] = "3"
           
+          
+//          let valOtherTextChoice = rowDetail["TextChoice_Other_Text"] as? String ?? ""
+//          if valOtherTextChoice != "", valOtherTextChoice != "<null>" {
+            
+            
+            var queryName = response?["queryName"] as? String ?? ""
+            
+            if queryName != "" {
+              let valKeys = rowDetail.keys
+              let valSpecificKeys = rowDetail.filter({
+                $0.key.containsIgnoringCase("_labkeyurl_")
+              })
+              
+              print("valSpecificKeys---\(valSpecificKeys)")
+              
+              if valSpecificKeys.count > 0 {
+                var valSourceKey = valSpecificKeys.first?.key ?? ""
+                
+                if valSourceKey != "" {
+                  valSourceKey = valSourceKey.replacingOccurrences(of: "_labkeyurl_", with: "")
+                  valSourceKey = valSourceKey.replacingOccurrences(of: "_labkeyurl_", with: "")
+                  
+                  let val = valSourceKey.dropLast(2)
+                  valSourceKey = "\(val)"
+                  print("2valSpecificKeys---\(valSourceKey)")
+                  queryName = queryName.replacingOccurrences(of: valSourceKey, with: "")
+                  print("3valSpecificKeys---\(queryName)")
+                  if queryName != "", valSourceKey != ""{
+                    getActivityForTextChoicePiping(textactivityid: valSourceKey, textStepId: queryName)
+                  }
+                }
+              }
+            }
+            
+            
+//            if let valValues1aActivityId = valValues1a["pipingactivityid"],  let valpipingactivityVersion = valValues1a["pipingactivityVersion"] {
+//
+//              guard let studyID = Study.currentStudy?.studyId else { return }
+//                              WCPServices().getStudyActivityVersionMetadata(studyId: studyID,
+//                                                                                                         activityId: valValues1aActivityId,
+//                                                                                                         activityVersion: valpipingactivityVersion,
+//                                                                                                         delegate: self)
+//
+//            }
+            
+//          }
+          
           print("resultA---\(resultA)---\(valPipingValuesMain)")
       }
     }
@@ -1620,9 +1715,12 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
   
   func jumpActi(activityId: String) {
     addProgressIndicator2()
-        let sectionCount = tableViewSections.count
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {//newww
+    
+      let sectionCount = self.tableViewSections.count
         for section in 0..<sectionCount {
-            let rowDetail = tableViewSections[section]
+          let rowDetail = self.tableViewSections[section]
             let activities = (rowDetail["activities"] as? Array<Activity>)!
             if activities.count > 0 {
                 if let row = activities.firstIndex(where: {$0.actvityId == activityId}) {
@@ -1687,7 +1785,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         }
         UserDefaults.standard.setValue("", forKey: "jumpActivity")
     UserDefaults.standard.synchronize()
-    
+  }//newww
   }
   
   func jumpToActivity(identifier: String, indexPath: IndexPath) {
@@ -3838,10 +3936,27 @@ extension ActivitiesViewController:UITabBarControllerDelegate{
                 
                 if let valValues1 = valPipingDetailsMain[valValues1aActivityId1] {
                   if valValues1.count > 0 {
-                    let valValues1a = valValues1[0]
-                    if let valValues1aActivityId = valValues1a["pipingsourceQuestionKey"] {
-                      valValues1aActivityId2 = valValues1aActivityId2 + valValues1aActivityId
+                    
+                    
+                    for valValues1Val in valValues1 {
+//                      let valValues1a = valValues1[0]
+                      
+                      if valValues1Val["pipingsourceQuestionKey"] == valKey {
+                      
+                      if let valValues1aActivityId = valValues1Val["pipingsourceQuestionKey"] {
+                        valValues1aActivityId2 = valValues1aActivityId2 + valValues1aActivityId
+                        
+                        break
+                      }
                     }
+                    }
+                    
+                    
+                    
+//                    let valValues1a = valValues1[0]
+//                    if let valValues1aActivityId = valValues1a["pipingsourceQuestionKey"] {
+//                      valValues1aActivityId2 = valValues1aActivityId2 + valValues1aActivityId
+//                    }
                   }
                 }
                 

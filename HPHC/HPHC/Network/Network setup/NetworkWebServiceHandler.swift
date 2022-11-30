@@ -248,7 +248,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         self.fireRequest(request, requestName: requestName)
       } else {
         let url = URL(string: requestString as String)!
-print("1urlurl---\(url)")
+        print("1urlurl---\(requestName)---\(requestUrl)")
         let task = URLSession.shared.dataTask(with: url) {(data, response, error) -> Void in
           if let data = data {
               DispatchQueue.main.async {
@@ -411,6 +411,19 @@ print("1urlurl---\(url)")
                 }
               } else {
 //                let responseDict: [String:Any] = [:]
+                
+                var responseDict1: [String:Any]?
+                  do {
+                      
+                    responseDict1 = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? [String:Any]
+                     print("Showrows1response---\(responseDict1)---\(requestName)---\(error)")
+                      
+                  } catch {
+                      print("Serilization error")
+                  }
+
+                
+                
                 let responseDict: NSDictionary = [:]
                 delegate?.finishedRequest(networkManager!, requestName: requestName!, response: responseDict)
               }

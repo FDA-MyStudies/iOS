@@ -537,8 +537,8 @@ class ActivityQuestionStep: ActivityStep {
                   questionStep?.steppredestinationFalseStepKey = predestinationFalseStepKey
                   
                  var valOtherActiStepId = UserDefaults.standard.value(forKey: "OtherActiStepId") as? String ?? "" //CHECK
-                  UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
-              UserDefaults.standard.synchronize()
+//                  UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
+//              UserDefaults.standard.synchronize()
                   
                   if valOtherActiStepId == "0" {
                     valOtherActiStepId = "CompletionStep"
@@ -833,8 +833,8 @@ class ActivityQuestionStep: ActivityStep {
           questionStep?.steppredestinationFalseStepKey = predestinationFalseStepKey
           
           var valOtherActiStepId = UserDefaults.standard.value(forKey: "OtherActiStepId") as? String ?? "" //CHECK
-          UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
-          UserDefaults.standard.synchronize()
+//          UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
+//          UserDefaults.standard.synchronize()
           
           if valOtherActiStepId == "0" {
             valOtherActiStepId = "CompletionStep"

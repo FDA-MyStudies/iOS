@@ -419,15 +419,15 @@ class StudyListViewController: UIViewController {
                 Gateway.instance.studies = studies
 
                 // Applying Filters
-                if StudyFilterHandler.instance.previousAppliedFilters.count > 0 {
-                    let previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
-
+                let previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
+                if previousCollectionData.count > 0 {
                     if User.currentUser.userType == .FDAUser {
-                        self.appliedFilter(studyStatus: previousCollectionData.first!,
-                                           pariticipationsStatus: previousCollectionData[2],
-                                           categories: previousCollectionData[3],
-                                           searchText: "",
-                                           bookmarked: previousCollectionData[1].count > 0 ? true : false) // TBD: Crashed
+                            self.appliedFilter(
+                                studyStatus: previousCollectionData.first!,
+                                               pariticipationsStatus: previousCollectionData.count > 2 ? previousCollectionData[2] : [],
+                                               categories: previousCollectionData.count > 3 ? previousCollectionData[3] : [],
+                                               searchText: "",
+                                               bookmarked: previousCollectionData[1].count > 0 ? true : false) // TBD: Crashed
                     } else {
                         self.appliedFilter(studyStatus: previousCollectionData.first!,
                                            pariticipationsStatus: [],

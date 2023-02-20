@@ -107,7 +107,7 @@ class WCPServices: NSObject {
     
     self.delegate = delegate
     let method = WCPMethods.updateVersionInfo.method
-    let headerParams = ["appId": AppDetails.applicationID,"appName" : Branding.NavigationTitleName,"appVersion": "4.0.0","osType" : "ios", "orgId" : AppDetails.organizationID]
+    let headerParams = ["appId": AppDetails.applicationID,"appName" : Branding.NavigationTitleName,"appVersion": "2.0.2","osType" : "ios", "orgId" : AppDetails.organizationID]
     self.sendRequestWith(method: method, params: headerParams, headers: nil)
   }
     

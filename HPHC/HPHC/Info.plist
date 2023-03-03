@@ -44,13 +44,6 @@
 	<true/>
 	<key>Localization native development region</key>
 	<string>English</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-		<key>NSAllowsArbitraryLoadsInWebContent</key>
-		<true/>
-	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to access your camera for the task to give more accurate result.</string>
 	<key>NSFaceIDUsageDescription</key>

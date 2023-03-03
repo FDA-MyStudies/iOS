@@ -68,8 +68,10 @@ import Foundation
                   
                   print("resulttt---\(currentStep.stepprevalue)")
                   if let operato = currentStep.steppreoperator, operato == "=" {
-                    
-                    if currentStep.stepprevalue != "", compareStringNumerics(valStr1: val, valStr2: currentStep.stepprevalue ?? "", operatorVal: operato) {
+                      let valCaseSensitive1 = val.lowercased()
+                      let caseSensitive = currentStep.stepprevalue ?? ""
+                      let valCaseSensitive2 = caseSensitive.lowercased()
+                    if currentStep.stepprevalue != "", compareStringNumerics(valStr1: valCaseSensitive1, valStr2: valCaseSensitive2, operatorVal: operato) {
                       
 //                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
                       
@@ -106,8 +108,11 @@ import Foundation
                       }
                       
                     }
+                      let valCaseSensitive3 = val.lowercased()
+                      let caseSensitive1 = currentStep.stepprevalue ?? ""
+                      let valCaseSensitive4 = caseSensitive1.lowercased()
 //                    if currentStep.stepprevalue != "Other" && val != currentStep.stepprevalue {
-                      if currentStep.stepprevalue != "Other", currentStep.stepprevalue != "", compareStringNumerics(valStr1: val, valStr2: currentStep.stepprevalue ?? "", operatorVal: operato) {
+                      if currentStep.stepprevalue != "Other", currentStep.stepprevalue != "", compareStringNumerics(valStr1: valCaseSensitive3, valStr2: valCaseSensitive4, operatorVal: operato) {
                       print("1resulttt---\(val)")
                       
                       let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)

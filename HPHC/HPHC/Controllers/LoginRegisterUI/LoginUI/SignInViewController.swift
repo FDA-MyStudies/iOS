@@ -525,7 +525,7 @@ extension SignInViewController: NMWebServiceDelegate {
             let delegate = (UIApplication.shared.delegate as? AppDelegate)!
             delegate.calculateTimeZoneChange()
             if User.currentUser.verified == true {
-                
+                StudyFilterHandler.instance.previousAppliedFilters = []
                 let ud = UserDefaults.standard
                 ud.set(true, forKey: kNotificationRegistrationIsPending)
                 ud.synchronize()

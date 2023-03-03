@@ -263,7 +263,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.updateNotification()
         }
         // Check For Updates
-        self.checkForAppUpdate()
+//        self.checkForAppUpdate()
         
     }
     

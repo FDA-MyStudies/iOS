@@ -19,8 +19,6 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import UIKit
-import Fabric
-import Crashlytics
 import UserNotifications
 import RealmSwift
 import CallKit
@@ -124,7 +122,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = NSLocalizedStrings("Done", comment: "")
         
         self.customizeNavigationBar()
-        Fabric.with([Crashlytics.self])
         
 //        if #available(iOS 15, *) {
 //            let appearance = UINavigationBarAppearance()

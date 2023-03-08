@@ -228,7 +228,6 @@ class ActivityStep {
         
         
 //          if Utilities.isValidValue(someObject: stepDict["piping"] as AnyObject )  {
-          print("piping---\(stepDict["piping"])")
           let val1 = stepDict["pipingLogic"] as? [String: String]
         pipingSnippet = val1?["pipingSnippet"] ?? ""
         pipingsourceQuestionKey = val1?["sourceQuestionKey"] ?? ""
@@ -359,7 +358,6 @@ class ActivityStep {
           
           
 //          if Utilities.isValidValue(someObject: stepDict["piping"] as AnyObject )  {
-            print("piping---\(stepDict["piping"])")
             let val1 = stepDict["pipingLogic"] as? [String: String]
           pipingSnippet = val1?["pipingSnippet"] ?? ""
           pipingsourceQuestionKey = val1?["sourceQuestionKey"] ?? ""
@@ -431,7 +429,6 @@ class ActivityStep {
       if Utilities.isValidValue(someObject: stepDict[kActivityStepKey] as AnyObject ){
           let valKey = stepDict[kActivityStepKey] as? String ?? ""
         if valKey == identifier1 {
-          print("count---\(count)")
           return "\(count)"
         }
         count+=1

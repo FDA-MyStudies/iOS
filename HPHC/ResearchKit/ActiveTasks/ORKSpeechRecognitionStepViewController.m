@@ -276,7 +276,6 @@
 }
 
 - (void)recordersWillStart {
-    NSLog(@"Recorder is starting");
 }
 
 @end

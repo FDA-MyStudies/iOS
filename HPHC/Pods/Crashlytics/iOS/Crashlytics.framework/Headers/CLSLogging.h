@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
  * The CLS_LOG macro provides as easy way to gather more information in your log messages that are
  * sent with your crash data. CLS_LOG prepends your custom log message with the function name and
  * line number where the macro was used. If your app was built with the DEBUG preprocessor macro
- * defined CLS_LOG uses the CLSNSLog function which forwards your log message to NSLog and CLSLog.
  * If the DEBUG preprocessor macro is not defined CLS_LOG uses CLSLog only.
  *
  * Example output:

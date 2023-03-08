@@ -514,10 +514,7 @@ class WCPServices: NSObject {
     }
     
     func handleGetStudyActivityMetadata(response: Dictionary<String, Any>){
-//      print("1responseresponse---\(response)")
-      
-      
-      
+
       let val1 = UserDefaults.standard.value(forKey: "changeActivity") as? Bool ?? true
       if val1 {
         UserDefaults.standard.set(false, forKey: "changeActivity")
@@ -536,7 +533,6 @@ class WCPServices: NSObject {
 //             do {
 //                  response2 = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String, Any> ?? [:]
 //
-////               print("2responseresponse---\(response2)")
 //
 ////               self.handleGetStudyActivityMetadata(response: res as! Dictionary<String, Any>)
 //
@@ -651,9 +647,7 @@ extension WCPServices:NMWebServiceDelegate{
             self.handleStudyInfo(response: response as! Dictionary<String, Any>)
         case .activityList:
             self.handleStudyActivityList(response: response as! Dictionary<String, Any>)
-        case .activity:
-//          print("1responseresponse---\(response)")
-         
+        case .activity:         
           
           let val1 = UserDefaults.standard.value(forKey: "createActiCalled") as? String ?? ""
           if val1 != "true" {

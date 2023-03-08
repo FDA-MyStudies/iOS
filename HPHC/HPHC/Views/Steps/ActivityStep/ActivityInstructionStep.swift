@@ -86,7 +86,6 @@ class ActivityInstructionStep: ActivityStep {
           instructionStep.steppredefaultVisibility = predefaultVisibility ?? ""
           instructionStep.steppreisHidden = preisHidden ?? ""
           
-          print("instructionStep---\(instructionStep.steppreisHidden)---\(preisHidden)")
 //          instructionStep.hi
             return instructionStep
         } else {

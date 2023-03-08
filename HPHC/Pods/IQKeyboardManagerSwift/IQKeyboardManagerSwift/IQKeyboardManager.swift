@@ -2292,7 +2292,7 @@ Codeless drop-in universal library allows to prevent issues of keyboard sliding 
             for _ in 0 ... Static.indentation {
                 preLog += "|\t"
             }
-            print(preLog + logString)
+
         }
 
         if indentation > 0 {

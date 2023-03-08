@@ -11,12 +11,9 @@ import Foundation
 @objc public class ActivityHelper: NSObject {
   
   @objc public func getorderedNavigationOtherConfirmation(resultval: ORKResult) -> String {
-    print("resultval---\(resultval)")
     if "\(resultval)".contains("other = ") {
-      print("trueresultval---")
       return "true"
     }
-    print("falseresultval---")
     return "false"
   }
   
@@ -59,14 +56,11 @@ import Foundation
             // for question Step
 //            if stepResult.results?.count == 1 && self.type != .form {
 //          if stepResult.results?.count == 1 { // && activityType != .form {
-            print("1questionstepResult---\(questionstepValResult as? ORKQuestionResult?)")
                 if let questionstepResult: ORKQuestionResult? = questionstepValResult as? ORKQuestionResult? {
-                  print("2questionstepResult---\(questionstepResult)")
                   let val = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep )
                   
 //                  let val1 = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep ) as NSString
-                  
-                  print("resulttt---\(currentStep.stepprevalue)")
+                   
                   if let operato = currentStep.steppreoperator, operato == "=" {
                       let valCaseSensitive1 = val.lowercased()
                       let caseSensitive = currentStep.stepprevalue ?? ""
@@ -74,8 +68,7 @@ import Foundation
                     if currentStep.stepprevalue != "", compareStringNumerics(valStr1: valCaseSensitive1, valStr2: valCaseSensitive2, operatorVal: operato) {
                       
 //                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
-                      
-                      print("1resulttt---\(val)")
+
                       
                      let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
                       if val90 != nil {
@@ -86,7 +79,6 @@ import Foundation
                       
                       //                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
                                             
-                                            print("1resulttt---\(val)")
                                             
                                            let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
                                             if val90 != nil {
@@ -100,7 +92,6 @@ import Foundation
                       
                       //                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
                       
-                      print("1resulttt---\(val)")
                       
                       let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
                       if val90 != nil {
@@ -113,7 +104,6 @@ import Foundation
                       let valCaseSensitive4 = caseSensitive1.lowercased()
 //                    if currentStep.stepprevalue != "Other" && val != currentStep.stepprevalue {
                       if currentStep.stepprevalue != "Other", currentStep.stepprevalue != "", compareStringNumerics(valStr1: valCaseSensitive3, valStr2: valCaseSensitive4, operatorVal: operato) {
-                      print("1resulttt---\(val)")
                       
                       let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
                       if val90 != nil {
@@ -123,7 +113,6 @@ import Foundation
                     }
                     
                     //                    if val != currentStep.stepprevalue {
-                    //                      print("1resulttt---\(val)")
                     //
                     //                     let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
                     //                      if val90 != nil {
@@ -135,7 +124,6 @@ import Foundation
                   else if let operato = currentStep.steppreoperator, operato == ">" {
                     if let intVal1 = Double(val), let intVal2 = Double(currentStep.stepprevalue ?? ""),
                        intVal1 > intVal2 {
-                      print("2resulttt---\(val)")
                       let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
                        if val90 != nil {
                          return val90
@@ -145,7 +133,6 @@ import Foundation
                   else if let operato = currentStep.steppreoperator, operato == "<" {
                     if let intVal1 = Double(val), let intVal2 = Double(currentStep.stepprevalue ?? ""),
                        intVal1 < intVal2 {
-                      print("2resulttt---\(val)")
                       let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
                        if val90 != nil {
                          return val90
@@ -156,7 +143,6 @@ import Foundation
                   else if let operato = currentStep.steppreoperator, operato == ">=" {
                     if let intVal1 = Double(val), let intVal2 = Double(currentStep.stepprevalue ?? ""),
                        intVal1 >= intVal2 {
-                      print("2resulttt---\(val)")
                       let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
                        if val90 != nil {
                          return val90
@@ -167,7 +153,6 @@ import Foundation
                   else if let operato = currentStep.steppreoperator, operato == "<=" {
                     if let intVal1 = Double(val), let intVal2 = Double(currentStep.stepprevalue ?? ""),
                        intVal1 <= intVal2 {
-                      print("2resulttt---\(val)")
                       let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
                        if val90 != nil {
                          return val90
@@ -181,15 +166,12 @@ import Foundation
                    let valCondition = meetTheCondition(operato: operato, actualResult: val, comparisionValues: currentStep.stepprevalue ?? "")
                     
                     if valCondition {
-                      print("1colonresulttt---\(val)")
                       let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
                        if val90 != nil {
                          return val90
                        }
                     }
                   }
-                  
-                  print("5questionstepResult---\(val)")
                   
                   
                   
@@ -276,7 +258,6 @@ import Foundation
     for aSteps in allSteps {
       
       if aSteps.identifier == destinStep {
-        print("aSteps.identifier---\(aSteps.identifier)---\(destinStep)")
         return aSteps
       }
     }
@@ -303,7 +284,6 @@ import Foundation
 //
 //
 //      if aSteps.identifier == destinStep {
-//        print("aSteps.identifier---\(aSteps.identifier)---\(destinStep)")
 //        return aSteps
 //      }
 //    }
@@ -336,7 +316,6 @@ import Foundation
 //
 //
 //      if aSteps.identifier == destinStep {
-//        print("aSteps.identifier---\(aSteps.identifier)---\(destinStep)")
 //        return aSteps
 //      }
 //    }
@@ -361,7 +340,6 @@ import Foundation
           if valoperato == ">" {
             if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
                intValactualResult > intVal2 {
-              print("1intValactualResult---\(intValactualResult)")
               
               conditonsatisfied = true
             } else {
@@ -372,7 +350,6 @@ import Foundation
           else if valoperato == "<" {
             if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
                intValactualResult < intVal2 {
-              print("2intValactualResult---\(intValactualResult)")
               
               conditonsatisfied = true
             } else {
@@ -383,7 +360,6 @@ import Foundation
           else if valoperato == "=" {
             if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
                intValactualResult == intVal2 {
-              print("3intValactualResult---\(intValactualResult)")
               
               conditonsatisfied = true
             } else {
@@ -395,7 +371,6 @@ import Foundation
           else if valoperato == "!=" {
             if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
                intValactualResult != intVal2 {
-              print("3intValactualResult---\(intValactualResult)")
               
               conditonsatisfied = true
             } else {
@@ -407,7 +382,6 @@ import Foundation
           else if valoperato == ">=" {
             if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
                intValactualResult >= intVal2 {
-              print("2intValactualResult---\(intValactualResult)")
               
               conditonsatisfied = true
             } else {
@@ -418,7 +392,6 @@ import Foundation
           else if valoperato == "<=" {
             if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
                intValactualResult <= intVal2 {
-              print("2intValactualResult---\(intValactualResult)")
               
               conditonsatisfied = true
             } else {
@@ -473,7 +446,6 @@ import Foundation
            if valoperato == "=" {
             if valArrcomparisionValues.count > valcomparisionValuesCount,
                actualResult == (valArrcomparisionValues[valcomparisionValuesCount] ) {
-              print("3intValactualResult---\(actualResult)")
               
               conditonsatisfied = true
             } else {
@@ -485,7 +457,6 @@ import Foundation
           else if valoperato == "!=" {
             if valArrcomparisionValues.count > valcomparisionValuesCount,
                actualResult != (valArrcomparisionValues[valcomparisionValuesCount] ) {
-              print("3intValactualResult---\(actualResult)")
               
               conditonsatisfied = true
             } else {
@@ -524,7 +495,6 @@ import Foundation
       }
       
     }
-    print("conditonsatisfied---\(conditonsatisfied)")
     return conditonsatisfied
   }
   
@@ -540,16 +510,13 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String, current
 
         if (questionstepResult as? ORKScaleQuestionResult) != nil {
             let stepTypeResult = (questionstepResult as? ORKScaleQuestionResult)!
-          print("1res---\(stepTypeResult.answer)---\(stepTypeResult.scaleAnswer)")
           if stepTypeResult.scaleAnswer != nil {
           return "\(stepTypeResult.scaleAnswer!)"
           }
            } else {
             let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
-//               print("2res---\(stepTypeResult.answer)---\(stepTypeResult.choiceAnswers)")
              if (stepTypeResult.choiceAnswers?.count) ?? 0 > 0 {
 //                   self.value = stepTypeResult.choiceAnswers?.first
-               print("3res---\(stepTypeResult.choiceAnswers?.first)")
                
 //                 getActualAnswer(choiceSelected: "\(stepTypeResult.choiceAnswers!.first!)", identifierOfRes: <#T##String#>)
                
@@ -576,7 +543,6 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String, current
                     let resultValue: String! = "\(stepTypeResult.choiceAnswers!.first!)"
 
 //                      self.value = (resultValue == nil ? "" : resultValue)
-                  print("41res---\((resultValue == nil ? "" : resultValue))")
                   
                   return "\(resultValue == nil ? "" : resultValue ?? "")"
                 } else {
@@ -591,7 +557,6 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String, current
                     } else {
                         resultValue.append(selectedValue as Any)
                     }
-                  print("51res---\(resultValue)")
                   return "\(resultValue.first ?? "")" //check
 
 //                      self.value = resultValue
@@ -662,16 +627,13 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String, current
 //
 //        if (questionstepResult as? ORKScaleQuestionResult) != nil {
 //            let stepTypeResult = (questionstepResult as? ORKScaleQuestionResult)!
-//          print("1res---\(stepTypeResult.answer)---\(stepTypeResult.scaleAnswer)")
 //          if stepTypeResult.scaleAnswer != nil {
 //          return "\(stepTypeResult.scaleAnswer!)"
 //          }
 //           } else {
 //            let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
-////               print("2res---\(stepTypeResult.answer)---\(stepTypeResult.choiceAnswers)")
 //             if (stepTypeResult.choiceAnswers?.count) ?? 0 > 0 {
 ////                   self.value = stepTypeResult.choiceAnswers?.first
-//               print("3res---\(stepTypeResult.choiceAnswers?.first)")
 //
 ////                 getActualAnswer(choiceSelected: "\(stepTypeResult.choiceAnswers!.first!)", identifierOfRes: <#T##String#>)
 //
@@ -834,8 +796,6 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String, current
     
     let valFeet = "\(feetShow)"
     let val1 = valFeet.components(separatedBy: "\'")
-//print("feetShow---\(feetShow)' \(inches)\"---\(valFeet)---\(feet)")
-    print("feetShow---\(cms)-----\(feetShow).\(inches)")
     
     return "\(feetShow).\(inches)"
   }
@@ -872,7 +832,6 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String, current
 //
 //      if (activityStepArray?.count)! > 0 {
 //          let step1 = activityStepArray?.first
-//        print("step1?.resultType---\(step1?.resultType)")
 //        let val1 = step1?.resultType as? String ?? ""
 //
 //       return val1
@@ -887,7 +846,6 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String, current
     if valRes > 0 {
       if let valMainResult = taskResult.results, let valSourceKey = currentStep.steppresourceQuestionKey {
         for aSteps in valMainResult {
-          print("aSteps.identifier---\(aSteps.identifier)---\(valSourceKey)")
           if aSteps.identifier == valSourceKey {
             
             for aSteps1 in allSteps {
@@ -1021,14 +979,11 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String, current
             // for question Step
 //            if stepResult.results?.count == 1 && self.type != .form {
 //          if stepResult.results?.count == 1 { // && activityType != .form {
-            print("1questionstepResult---\(questionstepValResult as? ORKQuestionResult?)")
                 if let questionstepResult: ORKQuestionResult? = questionstepValResult as? ORKQuestionResult? {
-                  print("2questionstepResult---\(questionstepResult)")
                   let val = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep )
                   
 //                  let val1 = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep ) as NSString
                   
-                  print("2resulttt---\(currentStep.stepprevalue)")
                   
                   let valsteppreoperator = currentStep.steppreoperator ?? ""
                   let valstepprevalue = currentStep.stepprevalue ?? ""
@@ -1041,8 +996,7 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String, current
                     
                       
 //                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
-                      
-                      print("3resulttt---\(val)")
+                    
                       
                      let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
                       if val90 != nil {
@@ -1052,7 +1006,6 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String, current
                   }
 //                  else if valsteppreoperator == "", valstepprevalue == "", valsteppreisHidden == "true", valsteppredestinationTrueStepKey == "" {
 //
-//                  print("6questionstepResult---\(val)")
 //
 //                    let val = allSteps.last
 //                    val?.steppresourceQuestionKey = currentStep.identifier
@@ -1078,14 +1031,11 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String, current
             // for question Step
 //            if stepResult.results?.count == 1 && self.type != .form {
 //          if stepResult.results?.count == 1 { // && activityType != .form {
-//            print("1questionstepResult---\(questionstepValResult as? ORKQuestionResult?)")
 //                if let questionstepResult: ORKQuestionResult? = questionstepValResult as? ORKQuestionResult? {
-//                  print("2questionstepResult---\(questionstepResult)")
 //                  let val = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep )
                   
 //                  let val1 = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep ) as NSString
                   
-                  print("2resulttt---\(currentStep.stepprevalue)")
                   
                   let valsteppreoperator = currentStep.steppreoperator ?? ""
                   let valstepprevalue = currentStep.stepprevalue ?? ""
@@ -1099,7 +1049,6 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String, current
                       
 //                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
                       
-//                      print("3resulttt---\(val)")
                       
                      let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
                       if val90 != nil {
@@ -1109,7 +1058,6 @@ func setValue(questionstepResult: ORKQuestionResult, resultType: String, current
                   }
 //                  else if valsteppreoperator == "", valstepprevalue == "", valsteppreisHidden == "true", valsteppredestinationTrueStepKey == "" {
 //
-//                  print("6questionstepResult---\(val)")
 //
 //                    let val = allSteps.last
 //                    val?.steppresourceQuestionKey = currentStep.identifier

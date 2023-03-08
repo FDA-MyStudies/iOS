@@ -233,12 +233,12 @@ NS_ASSUME_NONNULL_BEGIN
  the write transaction.
 
      RLMResults<Dog *> *results = [Dog allObjects];
-     NSLog(@"dogs.count: %zu", dogs.count); // => 0
+    
      self.token = [results addNotificationBlock:^(RLMResults *dogs,
                                                   RLMCollectionChange *changes,
                                                   NSError *error) {
          // Only fired once for the example
-         NSLog(@"dogs.count: %zu", dogs.count); // => 1
+         
      }];
      [realm transactionWithBlock:^{
          Dog *dog = [[Dog alloc] init];

@@ -215,7 +215,6 @@ class LabKeyServices: NSObject {
   
   func handleselectRows(response: Dictionary<String, Any>) {
     
-    print("handleselectRows---")
   }
     
     func handleProcessResponse(response: Dictionary<String, Any>) {

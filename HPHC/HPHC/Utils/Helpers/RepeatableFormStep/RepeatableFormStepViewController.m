@@ -84,8 +84,6 @@ OTHER DEALINGS IN THE SOFTWARE.
     _originalTableView = tableView;
     
     NSInteger sections = [super numberOfSectionsInTableView:tableView];
-    
-    NSLog(@"sections-> %ld", (long)sections);
 
     if (sections - 1 == section) {
         if ([view.subviews.lastObject isKindOfClass:[UIButton class]]) {
@@ -127,7 +125,6 @@ OTHER DEALINGS IN THE SOFTWARE.
         _repeatableTextSection = section;
         
         _lastSectionRowCount = [_originalTableView numberOfRowsInSection:section - 1];
-      NSLog(@"last section row Count: %ld",(long)_lastSectionRowCount);
     }
 }
 
@@ -162,8 +159,6 @@ OTHER DEALINGS IN THE SOFTWARE.
    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        NSLog(@"tcs-> %@ %@", NSStringFromCGSize(self.originalTableView.contentSize), NSStringFromCGSize(self.originalTableView.frame.size));
-
         if (self.originalTableView.contentSize.height > self.originalTableView.frame.size.height)
         {
           

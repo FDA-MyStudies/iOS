@@ -379,7 +379,7 @@ BOOL RLMIsDebuggerAttached()
     struct kinfo_proc info;
     size_t info_size = sizeof(info);
     if (sysctl(name, sizeof(name)/sizeof(name[0]), &info, &info_size, NULL, 0) == -1) {
-        NSLog(@"sysctl() failed: %s", strerror(errno));
+        
         return false;
     }
 

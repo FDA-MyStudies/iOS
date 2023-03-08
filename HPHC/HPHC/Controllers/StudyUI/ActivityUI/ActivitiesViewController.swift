@@ -434,7 +434,6 @@ class ActivitiesViewController : UIViewController{
           
           let activityCu = Study.currentActivity
           let activityStepArray = activityCu?.activitySteps
-        print("activityStepArray---\(activityStepArray)")
           
           if let val = activityStepArray {
           getPipingArray(activityStepArray: val)
@@ -471,11 +470,9 @@ class ActivitiesViewController : UIViewController{
                       let valJum = ud1.object(forKey: "jumpInternalLoad") as? String ?? ""
 
           if valJum != "jumpInternalLoad" {
-            print("1jumpInternalLoad---")
             self.removeProgressIndicator3()
             present(taskViewController!, animated: true, completion: nil)
           } else {
-            print("2jumpInternalLoad---")
             
 //            startTimer()
             
@@ -526,7 +523,6 @@ class ActivitiesViewController : UIViewController{
       }
     }
     valPipingDetailsMain = valPipingDetails
-    print("valPipingDetails---\(valPipingDetails)")
     getValueForPiping()
     
 //    LabKeyServices().withdrawFromStudy(studyId: (studyToWithdrawn?.studyId)!,
@@ -542,7 +538,6 @@ class ActivitiesViewController : UIViewController{
   }
   
   func getValueForPiping() {
-    print("1valvalPipingDetailsMain---\(valPipingDetailsMain)")
     let valvalPipingDetailsMain = valPipingDetailsMain
     
     if valvalPipingDetailsMain.count > 0 {
@@ -560,13 +555,11 @@ class ActivitiesViewController : UIViewController{
                 
                 
               if valValues1.count > 1 {
-                print("1valValues1---")
                 querypipingresponse(activityId: valValues1aActivityId, stepId: "")
                 
                 
                 getActivityForPiping()
               } else {
-                print("2valValues1---")
                 querypipingresponse(activityId: valValues1aActivityId, stepId: valValues1a["pipingsourceQuestionKey"] ?? "")
                 
                 getActivityForPiping()
@@ -1255,7 +1248,6 @@ extension ActivitiesViewController: UITableViewDelegate{
                                 if let studyID = Study.currentStudy?.studyId,
                                     let activityID = Study.currentActivity?.actvityId,
                                     let version = Study.currentActivity?.version {
-                                  print("1getStudyActivityMetadata---")
                                     WCPServices().getStudyActivityMetadata(studyId: studyID,
                                                                            activityId: activityID,
                                                                            activityVersion: version,
@@ -1322,7 +1314,6 @@ extension ActivitiesViewController: UITableViewDelegate{
                               if let studyID = Study.currentStudy?.studyId,
                                  let activityID = Study.currentActivity?.actvityId,
                                  let version = Study.currentActivity?.version {
-                                print("2getStudyActivityMetadata---")
 //                                  WCPServices().getStudyActivityMetadata(studyId: studyID,
 //                                                                         activityId: activityID,
 //                                                                         activityVersion: version,
@@ -1364,7 +1355,6 @@ extension ActivitiesViewController: UITableViewDelegate{
           if let row = activities.firstIndex(where: {$0.actvityId == actiActivityId}) {
             let indexPath = IndexPath(row: row, section: indexPathMain.section)
           let activity = activities[indexPath.row]
-        print("1jumpactivity---\(activity.actvityId)")
           // Check for activity run status & if run is available
           if activity.currentRun != nil {
               if activity.userParticipationStatus != nil {
@@ -1373,7 +1363,6 @@ extension ActivitiesViewController: UITableViewDelegate{
                       || activityRunParticipationStatus?.status == .inProgress {
                       
                       Study.updateCurrentActivity(activity: activities[indexPath.row])
-                    print("2jumpactivity---\(activities[indexPath.row].actvityId)")
                       // Following to be commented
                       // self.createActivity()
                       Logger.sharedInstance.info("Activity Fetching from db")
@@ -1390,11 +1379,9 @@ extension ActivitiesViewController: UITableViewDelegate{
                               if let studyID = Study.currentStudy?.studyId,
                                  let activityID = Study.currentActivity?.actvityId,
                                  let version = Study.currentActivity?.version {
-                                print("2getStudyActivityMetadata---")
                                 UserDefaults.standard.set("", forKey: "createActiCalled")
                                 UserDefaults.standard.synchronize()
                                 self.createActiCalled = ""
-                                print("3jumpactivity---\(activityID)")
                                   WCPServices().getStudyActivityMetadata(studyId: studyID,
                                                                          activityId: activityID,
                                                                          activityVersion: version,
@@ -1522,7 +1509,6 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             self.removeProgressIndicator()
           
           if createActiCalled != "true" {
-            print("1createActiCalled---")
             UserDefaults.standard.set("true", forKey: "createActiCalled")
             UserDefaults.standard.synchronize()
             
@@ -1532,10 +1518,10 @@ extension ActivitiesViewController: NMWebServiceDelegate {
 //            let ud1 = UserDefaults.standard
 //            let valJum = ud1.object(forKey: "jumpInternalLoad") as? String ?? ""
 //            if valJum != "jumpInternalLoad" {
-//              print("1jumpInternalLoad---")
+
 //            self.createActivity()
 //            } else {
-//              print("2jumpInternalLoad---")
+
 //
 //              addProgressIndicator3()
 ////              DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
@@ -1545,7 +1531,7 @@ extension ActivitiesViewController: NMWebServiceDelegate {
 ////              }
 //            }
           } else {
-            print("2createActiCalled---")
+
             if let valresponse: Dictionary<String, Any> = response as? Dictionary<String, Any> {
 
             setActivityMetaData(activityDict: valresponse[kActivity] as! Dictionary<String, Any>)
@@ -1587,7 +1573,7 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             
             self.checkForActivitiesUpdates()
         } else if requestName as String == "BTC/\(Study.currentStudy?.studyId ?? "")/mobileappstudy-selectRows.api" {
-          print("selectRows---\(response)")
+
           
           guard let rows = response?["rows"] as? [JSONDictionary] ,
                 let rowDetail = rows.last
@@ -1617,7 +1603,6 @@ extension ActivitiesViewController: NMWebServiceDelegate {
                 $0.key.containsIgnoringCase("_labkeyurl_")
               })
               
-              print("valSpecificKeys---\(valSpecificKeys)")
               
               if valSpecificKeys.count > 0 {
                 var valSourceKey = valSpecificKeys.first?.key ?? ""
@@ -1628,9 +1613,9 @@ extension ActivitiesViewController: NMWebServiceDelegate {
                   
                   let val = valSourceKey.dropLast(2)
                   valSourceKey = "\(val)"
-                  print("2valSpecificKeys---\(valSourceKey)")
+
                   queryName = queryName.replacingOccurrences(of: valSourceKey, with: "")
-                  print("3valSpecificKeys---\(queryName)")
+
                   if queryName != "", valSourceKey != ""{
                     getActivityForTextChoicePiping(textactivityid: valSourceKey, textStepId: queryName)
                   }
@@ -1650,8 +1635,7 @@ extension ActivitiesViewController: NMWebServiceDelegate {
 //            }
             
 //          }
-          
-          print("resultA---\(resultA)---\(valPipingValuesMain)")
+
       }
     }
     
@@ -1698,7 +1682,6 @@ extension ActivitiesViewController: NMWebServiceDelegate {
   
   @objc func eventWith(timer: Timer!) {
 //    let info = timer.userInfo as Any
-//    print(info)
     timer.invalidate()
     UserDefaults.standard.setValue("", forKey: "jumpInternalLoad")
 UserDefaults.standard.synchronize()
@@ -1888,10 +1871,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
     public func taskViewController(_ taskViewController: ORKTaskViewController,
                                    didFinishWith reason: ORKTaskViewControllerFinishReason,
                                    error: Error?) {
-        print("taskViewControllertaskViewController---")
-      
-      
-      
+
       
         // Enable Custom Keypad with toolbar
         // IQKeyboardManager.sharedManager().enable = true
@@ -2142,7 +2122,6 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
       
       let valJum = ud1.object(forKey: "jumpActivity") as? String ?? ""
       if valJum != "" {
-        print("valJum---\(valJum)")
         jumpActi(activityId: valJum)
       }
       
@@ -2151,7 +2130,6 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
     
     func taskViewController(_ taskViewController: ORKTaskViewController,
                             stepViewControllerWillAppear stepViewController: ORKStepViewController) {
-        print("111111---")
       UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
       UserDefaults.standard.synchronize()
         if (taskViewController.result.results?.count)! > 1 {
@@ -2256,9 +2234,8 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
               // for question Step
 //            if stepResult.results?.count == 1 && self.type != .form {
             if stepResult.results?.count == 1 { // && activityType != .form {
-              print("1questionstepResult---\(stepResult.results?.first as? ORKQuestionResult?)")
+
                   if let questionstepResult: ORKQuestionResult? = stepResult.results?.first as? ORKQuestionResult? {
-                    print("2questionstepResult---\(questionstepResult)")
                      let val = self.setValue(questionstepResult:questionstepResult! )
                       return val
                   }
@@ -2357,7 +2334,6 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
       
       if (activityStepArray?.count)! > 0 {
           let step1 = activityStepArray?.first
-        print("step1?.resultType---\(step1?.resultType)")
         let val1 = step1?.resultType as? String ?? ""
         
        return val1
@@ -2372,7 +2348,6 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
       
       if (activityStepArray?.count)! > 0 {
           let step1 = activityStepArray?.first
-        print("step1?.resultType---\(step1?.resultType)")
         let val1 = step1?.resultType as? String ?? ""
         
         //        var style = ""
@@ -2394,7 +2369,6 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
               let value = dict[kORKTextChoiceValue] as? String ?? ""
               
               if valFinalRes == value {
-                print("valuevaluevalue---\(value)---\(text)")
                 return text
               }
             }
@@ -2414,7 +2388,6 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
       
       if (activityStepArray?.count)! > 0 {
           let step1 = activityStepArray?.first
-        print("step1?.resultType---\(step1?.resultType)")
         let val1 = step1?.resultType as? String ?? ""
         
         //        var style = ""
@@ -2435,7 +2408,6 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
               let value = dict[kORKTextChoiceValue] as? String ?? ""
               
               if valFinalRes == value {
-                print("valuevaluevalue---\(value)---\(text)")
                 return text
               }
             }
@@ -2455,7 +2427,6 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
       
       if (activityStepArray?.count)! > 0 {
           let step1 = activityStepArray?.first
-        print("step1?.resultType---\(step1?.resultType)")
         let val1 = step1?.resultType as? String ?? ""
         
         //        var style = ""
@@ -2476,7 +2447,6 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
               let value = dict[kORKTextChoiceValue] as? String ?? ""
               
               if valFinalRes == value {
-                print("valuevaluevalue---\(value)---\(text)")
                 return text
               }
             }
@@ -2490,7 +2460,6 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
   }
   
   func getTextChoicesSingleSelection(dataArray: [Any]) -> ([ORKTextChoice]?, OtherChoice?) {
-    print("1getTextChoicesSingleSelection---")
     var textChoiceArray: [ORKTextChoice] = []
     var otherChoice: OtherChoice?
     
@@ -2634,16 +2603,13 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
 
           if (questionstepResult as? ORKScaleQuestionResult) != nil {
               let stepTypeResult = (questionstepResult as? ORKScaleQuestionResult)!
-            print("1res---\(stepTypeResult.answer)---\(stepTypeResult.scaleAnswer)")
             if stepTypeResult.scaleAnswer != nil {
             return "\(stepTypeResult.scaleAnswer!)"
             }
              } else {
               let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
-//               print("2res---\(stepTypeResult.answer)---\(stepTypeResult.choiceAnswers)")
                if (stepTypeResult.choiceAnswers?.count) ?? 0 > 0 {
 //                   self.value = stepTypeResult.choiceAnswers?.first
-                 print("3res---\(stepTypeResult.choiceAnswers?.first)")
                  
 //                 getActualAnswer(choiceSelected: "\(stepTypeResult.choiceAnswers!.first!)", identifierOfRes: <#T##String#>)
                  if stepTypeResult.choiceAnswers != nil {
@@ -2661,7 +2627,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
           let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
 //          var resultType: String? = (self.step?.resultType as? String)!
         var resultType: String = getresultType(identifier: questionstepResult.identifier) //(self.step?.resultType as? String)!
-        print("1resultTyperesultTyperesultType---\(resultType)")
+
           if Utilities.isValidObject(someObject: stepTypeResult.choiceAnswers as AnyObject?) {
             if (stepTypeResult.choiceAnswers?.count) ?? 0 > 0 {
 
@@ -2672,7 +2638,6 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                       let resultValue: String! = "\(stepTypeResult.choiceAnswers!.first!)"
 
 //                      self.value = (resultValue == nil ? "" : resultValue)
-                    print("478res---\((resultValue == nil ? "" : resultValue))")
                     
                     return "\(resultValue == nil ? "" : resultValue ?? "")"
                   } else if resultType == QuestionStepType.valuePicker.rawValue {
@@ -2682,9 +2647,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                     let resultValue: String! = "\(stepTypeResult.choiceAnswers!.first!)"
 
 //                      self.value = (resultValue == nil ? "" : resultValue)
-                  print("478res---\((resultValue == nil ? "" : resultValue))")
-                    
-                    
+        
                     
                     let val = getPickerValueFromValue(identifier: stepTypeResult.identifier, valFinalRes: "\(stepTypeResult.choiceAnswers!.first!)")
                     
@@ -2718,7 +2681,6 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                       } else {
                           resultValue.append(selectedValue as Any)
                       }
-                    print("5res---\(resultValue)")
                     let valFinalRes = resultValue.first as? String ?? ""
                     
                     
@@ -2977,7 +2939,6 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                 let other = dict["other"] as? [String: Any] ?? [:]
                 
                 if other.count > 0 {
-                  print("valuevaluevalue---\(value)---\(text)")
                   
                   let valMandatory = other["isMandatory"] as? Bool ?? false
                   
@@ -3078,7 +3039,6 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
 //
 //           //Going to next activity's particular step
 //           if isActivityDismissed {
-//               print("Came to next activity")
 //           }
 //      //rinuthab
       
@@ -3101,7 +3061,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             pipingactivityid = activityStepArray?.last?.pipingactivityid ?? ""
           }
       }
-      print("valPiping---\(valPiping)---\(pipingSnippet)---\(pipingsourceQuestionKey)---\(step.identifier)---\(pipingactivityid)")
+
       if let step1 = step as? ORKQuestionStep {
         
 //        if valPiping, pipingSnippet != "",  pipingsourceQuestionKey != "" {
@@ -3124,12 +3084,8 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
           // replaced originalVal with this ---> activityStepArray?.last?.title
           if valName != "", valName != "<null>" {
           let changedText2 = activityStepArray?.last?.title?.replacingOccurrences(of: pipingSnippet, with: valName)
-          print("1orignalVal---\(orignalVal1)----\(changedText2)")
-          
-          
-          
+
           let changedText = orignalVal1.replacingOccurrences(of: pipingSnippet, with: valName)
-          print("2orignalVal---\(orignalVal1)")
           step1.question = changedText2// "GGG2"
           if !(step1.question != nil && step1.question != "") {
             
@@ -3143,19 +3099,14 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             
            let valName = self.setResultValue(stepResult: result, activityType: .Questionnaire )
             
-                      print("SORTED STEP RESULT -- \(result)")
-                      print("SORTED STEP RESULT ANSWER -- \((result as? ORKScaleQuestionResult)?.answer)")
             var orignalVal = step1.question ?? ""
             if valName != "", pipingSnippet != "", valName != "<null>" {
               let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
               // replaced originalVal with this ---> activityStepArray?.last?.title
               let changedText2 = activityStepArray?.last?.title?.replacingOccurrences(of: pipingSnippet, with: valName)
-              print("1orignalVal---\(orignalVal)----\(changedText2)")
-              
-              
-              
+             
               let changedText = orignalVal.replacingOccurrences(of: pipingSnippet, with: valName)
-              print("2orignalVal---\(orignalVal)")
+
               step1.question = changedText2// "GGG2"
               if !(step1.question != nil && step1.question != "") {
                 
@@ -3166,7 +3117,6 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
              let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
              // replaced originalVal with this ---> activityStepArray?.last?.title
              let changedText2 = activityStepArray?.last?.title
-             print("1orignalVal---\(orignalVal)----\(changedText2)")
              step1.question = changedText2// "GGG2"
            }
            
@@ -3179,7 +3129,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
           
 //        step1.question = "GGG2"
 //        }
-        print("step1.question---\(step1.question)")
+
 //        taskViewController.currentStepViewController = step1
 //        step = step1
         
@@ -3203,12 +3153,9 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
             // replaced originalVal with this ---> activityStepArray?.last?.title
             let changedText2 = activityStepArray?.last?.title?.replacingOccurrences(of: pipingSnippet, with: valName)
-            print("1orignalVal---\(orignalVal)----\(changedText2)")
-            
-            
+
             
             let changedText = orignalVal.replacingOccurrences(of: pipingSnippet, with: valName)
-            print("2orignalVal---\(orignalVal)")
             step1.title = changedText2// "GGG2"
             if !(step1.title != nil && step1.title != "") {
               
@@ -3223,19 +3170,13 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
           
           let valName = self.setResultValue(stepResult: result, activityType: .Questionnaire )
           
-          print("SORTED STEP RESULT -- \(result)")
-          print("SORTED STEP RESULT ANSWER -- \((result as? ORKScaleQuestionResult)?.answer)")
           var orignalVal = step1.title ?? ""
           if valName != "", pipingSnippet != "", valName != "<null>" {
             let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
             // replaced originalVal with this ---> activityStepArray?.last?.title
             let changedText2 = activityStepArray?.last?.title?.replacingOccurrences(of: pipingSnippet, with: valName)
-            print("1orignalVal---\(orignalVal)----\(changedText2)")
-            
-            
-            
+    
             let changedText = orignalVal.replacingOccurrences(of: pipingSnippet, with: valName)
-            print("2orignalVal---\(orignalVal)")
             step1.title = changedText2// "GGG2"
             if !(step1.title != nil && step1.title != "") {
               
@@ -3246,7 +3187,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         
         //        step1.question = "GGG2"
         //        }
-        print("step1.question---\(step1.text)")
+
         //        taskViewController.currentStepViewController = step1
         //        step = step1
         
@@ -3898,7 +3839,7 @@ extension ActivitiesViewController:UITabBarControllerDelegate{
                                 let valValue = valTextChoices1["value"] as? String ?? ""
                                 if valValue == valRes {
                                   let valText = valTextChoices1["text"] as? String ?? ""
-                                  print("valText---\(valText)---\(valRes)")
+
                                   valPipingValuesMain[valKey] = valText
                                   
                                 }
@@ -3920,7 +3861,6 @@ extension ActivitiesViewController:UITabBarControllerDelegate{
                   let valValue = valTextChoices1["value"] as? String ?? ""
                   if valValue == valRes {
                     let valText = valTextChoices1["text"] as? String ?? ""
-                    print("valText---\(valText)---\(valRes)")
                     valPipingValuesMain[valKey] = valText
                     
                   }
@@ -3994,7 +3934,6 @@ extension ActivitiesViewController:UITabBarControllerDelegate{
                   let valValue = valTextChoices1["value"] as? String ?? ""
                   if valValue == valRes {
                     let valText = valTextChoices1["text"] as? String ?? ""
-                    print("valText---\(valText)---\(valRes)")
                     valPipingValuesMain[valKey] = valText
                     
                   }

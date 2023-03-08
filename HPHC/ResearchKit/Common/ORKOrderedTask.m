@@ -138,10 +138,7 @@
 }
 
 - (ORKStep *)stepAfterStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
-  printf("resultresult---%s---/n", [step.identifier UTF8String]);
-
-
-  ORKStepResult *stepResult = [result stepResultForStepIdentifier:step.identifier];
+    ORKStepResult *stepResult = [result stepResultForStepIdentifier:step.identifier];
 //  ORKQuestionResult *result1 = (ORKQuestionResult *)(stepResult.results.count > 0 ? stepResult.results.firstObject : nil);
 //  if (result1.answer != nil) {
 //      if ([((NSArray *)result1.answer).firstObject isEqualToString:@"2"])
@@ -153,7 +150,7 @@
 //  }
   
 //  let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
-//     print("1valval---\(val)")
+//
   
 //  NSString *val = [ActivityHelper setResultValue];
   
@@ -173,11 +170,7 @@
   NSArray *steps = _steps;
   ORKStep *val3 =  [activityHelper1 setResultValueWithStepResult:stepResult activityType:@"questionnaire" resultType:step.stepresultType allSteps:steps currentStep:step];
   
-  
-  printf("val3---%@----", val3);
-  
   if ([val3.identifier  isEqual: @"valDummy"]) {
-    printf("v---valDummy----");
     NSString *valueToSave = val3.steppreactivityid;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:valueToSave
@@ -211,16 +204,12 @@
     ORKStep *currentStep = step;
     ORKStep *nextStep = nil;
     
-  printf("1therActiStepId---");
     if (currentStep == nil) {
-      printf("2therActiStepId---");
         nextStep = steps[0];
       if (nextStep.steppreOtherActiStepId != nil && ![nextStep.steppreOtherActiStepId isEqual: @""]) {
-        printf("3therActiStepId---");
         
         ORKStep *val5 =  [activityHelper1 getsecondActivityJumpStepWithAllSteps:steps currentStep:nextStep];
         if (val5 != nil) {
-          printf("4therActiStepId---");
           nextStep = val5;
           return nextStep;
         }
@@ -243,7 +232,6 @@
         ORKStep *val9 =  [activityHelper1 setGroupResultValueWithStepResult:stepResult activityType:@"questionnaire" resultType:step.stepresultType allSteps:steps currentStep:step];
         
         if (val9 != nil) {
-          printf("4therActiStepId---");
           nextStep = val9;
           return nextStep;
         }

@@ -2424,7 +2424,6 @@ NSString *const ORKTremorTestTurnWristStepIdentifier = @"tremor.handQueenWave";
     
     NSString *detailFormat = doingBoth ? ORKLocalizedString(@"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@", nil) : ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@", nil);
     NSString *detailText = [NSString localizedStringWithFormat:detailFormat, detailStringForNumberOfTasks[actualTasksIndex]];
-  printf("detailText---%@",detailText);
   
     if (doingBoth) {
         // If doing both hands then ask the user if they need to skip one of the hands

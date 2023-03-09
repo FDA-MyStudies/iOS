@@ -19,8 +19,6 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import UIKit
-import Fabric
-import Crashlytics
 import UserNotifications
 import RealmSwift
 import CallKit
@@ -124,7 +122,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = NSLocalizedStrings("Done", comment: "")
         
         self.customizeNavigationBar()
-        Fabric.with([Crashlytics.self])
         
 //        if #available(iOS 15, *) {
 //            let appearance = UINavigationBarAppearance()
@@ -1344,7 +1341,6 @@ extension AppDelegate {
                      latestVersion.compare(appVersion, options: .numeric, range: nil, locale: nil)
                          == ComparisonResult.orderedDescending,
                      !isForceUpdate {
-                print("manual update")
                 // load manual update Screen
                 self.shouldAddForceUpgradeScreen = true
                 self.blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!,
@@ -1442,7 +1438,6 @@ extension AppDelegate: NMWebServiceDelegate {
             ud.set(false, forKey: kNotificationRegistrationIsPending)
             ud.synchronize()
         } else if (requestName as String == WCPMethods.studyUpdates.rawValue){
-          //            print("")
         }
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {

@@ -194,7 +194,6 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     ORKValidateIdentifiersUnique(allTaskResults, @"All tasks should have unique identifiers");
 
     NSString *destinationStepIdentifier = nil;
-  printf("resultresult---%lu---/n", (unsigned long)_resultPredicates.count);
   
     for (NSInteger i = 0; i < _resultPredicates.count; i++) {
         NSPredicate *predicate = _resultPredicates[i];
@@ -217,8 +216,6 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
             
             if ([(val3)  isEqual: @"true"]) {
               destinationStepIdentifier = _destinationStepIdentifiers[i];
-              
-              printf("_resultPredicates---/n");
               
               break;
             }

@@ -148,7 +148,6 @@ Float32 const VolumeClamp = 60.0;
     // Setup reader
     AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
     if (urlAsset.tracks.count == 0) {
-        NSLog(@"No tracks found for urlAsset: %@", fileURL);
         return NO;
     }
     

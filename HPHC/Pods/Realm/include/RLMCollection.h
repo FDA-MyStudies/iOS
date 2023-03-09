@@ -222,12 +222,12 @@ typedef RLM_CLOSED_ENUM(int32_t, RLMPropertyType);
  the write transaction.
 
      id<RLMCollection> collection = [Dog allObjects];
-     NSLog(@"dogs.count: %zu", dogs.count); // => 0
+     
      self.token = [collection addNotificationBlock:^(id<RLMCollection> dogs,
                                                   RLMCollectionChange *changes,
                                                   NSError *error) {
          // Only fired once for the example
-         NSLog(@"dogs.count: %zu", dogs.count); // => 1
+         
      }];
      [realm transactionWithBlock:^{
          Dog *dog = [[Dog alloc] init];

@@ -61,7 +61,7 @@ enum DateHelper {
 
     static var iso8601DateFormatter: DateFormatter {
         let dateFormatter = DateFormatter()
-        let locale = Locale(identifier: "en_US_POSIX")
+        let locale = Locale(identifier: getLanguageLocale())
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.locale = locale
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
@@ -72,7 +72,7 @@ enum DateHelper {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         dateFormatter.timeZone = TimeZone.current
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.locale = Locale(identifier: getLanguageLocale())
         let dateString = dateFormatter.string(from: date)
 
         return dateString
@@ -82,7 +82,7 @@ enum DateHelper {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         dateFormatter.timeZone = TimeZone.current
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.locale = Locale(identifier: getLanguageLocale())
         let date = dateFormatter.date(from: date)
 
         return date
@@ -111,7 +111,7 @@ enum DateHelper {
     static func formattedDateStringFromDate(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.locale = Locale(identifier: getLanguageLocale())
         let dateString = dateFormatter.string(from: date)
 
         return dateString

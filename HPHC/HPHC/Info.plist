@@ -22,33 +22,14 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>Fabric</key>
-	<dict>
-		<key>APIKey</key>
-		<string>24faf2a83c3fd824044bfbcc2b7b4be24b8b28a1</string>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Crashlytics</string>
-			</dict>
-		</array>
-	</dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>IsStandaloneStudyApp</key>
 	<string>$(IS_STANDALONE_STUDY)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-		<key>NSAllowsArbitraryLoadsInWebContent</key>
-		<true/>
-	</dict>
+	<key>Localization native development region</key>
+	<string>English</string>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to access your camera for the task to give more accurate result.</string>
 	<key>NSFaceIDUsageDescription</key>
@@ -108,7 +89,5 @@
 	<string>$(WCP_URL)</string>
 	<key>WebsiteLink</key>
 	<string>www.fda.gov</string>
-	<key>Localization native development region</key>
-	<string>English</string>
 </dict>
 </plist>

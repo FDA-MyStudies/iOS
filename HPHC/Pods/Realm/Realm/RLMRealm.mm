@@ -108,9 +108,7 @@ static void RLMAddSkipBackupAttributeToItemAtPath(std::string_view path) {
 
 - (void)dealloc {
     if (_realm || _block) {
-        NSLog(@"RLMNotificationToken released without unregistering a notification. You must hold "
-              @"on to the RLMNotificationToken returned from addNotificationBlock and call "
-              @"-[RLMNotificationToken invalidate] when you no longer wish to receive RLMRealm notifications.");
+        
     }
 }
 @end
@@ -731,8 +729,7 @@ REALM_NOINLINE static void translateSharedGroupOpenException(NSError **error) {
 
 - (void)invalidate {
     if (_realm->is_in_transaction()) {
-        NSLog(@"WARNING: An RLMRealm instance was invalidated during a write "
-              "transaction and all pending changes have been rolled back.");
+        
     }
 
     [self detachAllEnumerators];
@@ -801,9 +798,7 @@ REALM_NOINLINE static void translateSharedGroupOpenException(NSError **error) {
     if (_realm) {
         if (_realm->is_in_transaction()) {
             [self cancelWriteTransaction];
-            NSLog(@"WARNING: An RLMRealm instance was deallocated during a write transaction and all "
-                  "pending changes have been rolled back. Make sure to retain a reference to the "
-                  "RLMRealm for the duration of the write transaction.");
+            
         }
     }
 }

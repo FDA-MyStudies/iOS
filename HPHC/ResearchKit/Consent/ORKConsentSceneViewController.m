@@ -271,8 +271,6 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
 
 - (IBAction)showContent:(id)sender {
     ORKConsentLearnMoreViewController *viewController = nil;
-    NSLog(@"Krishna action section = %@",_section.htmlContent);
-    NSLog(@"Krishna action section title = %@",_section.title);
     if (_section.contentURL) {
         viewController = [[ORKConsentLearnMoreViewController alloc] initWithContentURL:_section.contentURL];
     } else {
@@ -291,9 +289,6 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
                target:nil
                action:nil];
  
-    NSLog(@"Krishna action right bar section title = %@",navigationController.navigationItem.rightBarButtonItem.title);
-    NSLog(@"Krishna action right bar section title = %@",navigationController.navigationItem.rightBarButtonItem.title);
-    NSLog(@"Krishna action back bar section title = %@",navigationController.navigationItem.backBarButtonItem.title);
     [self presentViewController:navigationController animated:YES completion:nil];
 }
 

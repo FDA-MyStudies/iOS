@@ -36,7 +36,30 @@
 #import "ORKStep_Private.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
+//#import "ResearchKit.Private.h"
+#import <ResearchKit/ORKResult.h>
+#import "ORKCollectionResult.h"
 
+#import "ORKCollectionResult_Private.h"
+#import "ORKPageStep.h"
+#import "ORKQuestionResult_Private.h"
+#import "ORKResult_Private.h"
+#import "ORKStep.h"
+#import "ORKTask.h"
+
+#import "ORKHelpers_Internal.h"
+
+//#import "ResearchKit-ImageClass.h"
+//#import <UIImage+ResearchKit.h>
+
+//#if __has_include("ActivityHelper-Swift.h")
+//    #import "ActivityHelper-Swift.h"
+//#endif
+
+#import <ResearchKit/ResearchKit-Swift.h>
+//#import <ResearchKit/ResearchKit-HelperUtilities.Swift.h>
+//@class ActivityHelper;
+//@class ImageClass;
 
 @implementation ORKOrderedTask {
     NSString *_identifier;
@@ -57,7 +80,7 @@
         
         _identifier = [identifier copy];
         _steps = steps;
-        
+      _stepsReplaced = steps.mutableCopy;
         _progressLabelColor = ORKColor(ORKProgressLabelColorKey);
         [self validateParameters];
     }
@@ -115,7 +138,64 @@
 }
 
 - (ORKStep *)stepAfterStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
-    NSArray *steps = _steps;
+    ORKStepResult *stepResult = [result stepResultForStepIdentifier:step.identifier];
+//  ORKQuestionResult *result1 = (ORKQuestionResult *)(stepResult.results.count > 0 ? stepResult.results.firstObject : nil);
+//  if (result1.answer != nil) {
+//      if ([((NSArray *)result1.answer).firstObject isEqualToString:@"2"])
+//      {
+////          return self.step3a;
+//      } else {
+////          return self.step3b;
+//      }
+//  }
+  
+//  let val = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+//
+  
+//  NSString *val = [ActivityHelper setResultValue];
+  
+  
+//  [health1KitBiological ]
+//  [health ]
+  
+//  [health1KitBiologicalSex]
+  
+  ImageClass *imgObject = [[ImageClass alloc] init];
+  [imgObject imageFromStringWithName:@"asd"];
+  
+  ActivityHelper *activityHelper1 = [[ActivityHelper alloc] init];
+//  NSString *val3 =  [activityHelper1 setResultValueWithStepResult:stepResult activityType:@"questionnaire" resultType:step.stepresultType];
+  
+  
+  NSArray *steps = _steps;
+  ORKStep *val3 =  [activityHelper1 setResultValueWithStepResult:stepResult activityType:@"questionnaire" resultType:step.stepresultType allSteps:steps currentStep:step];
+  
+  if ([val3.identifier  isEqual: @"valDummy"]) {
+    NSString *valueToSave = val3.steppreactivityid;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:valueToSave
+                     forKey:@"jumpActivity"];
+    
+    NSString *valueToSave2 = val3.steppredestinationTrueStepKey;
+    [userDefaults setObject:valueToSave2
+                     forKey:@"OtherActiStepId"];
+    [userDefaults synchronize];
+    
+    return nil;
+  } else {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:@""
+                     forKey:@"jumpActivity"];
+    [userDefaults setObject:@""
+                     forKey:@"OtherActiStepId"];
+    [userDefaults synchronize];
+  }
+  
+//  ActivityHelper* myScript = [[ActivityHelper alloc] init];
+//
+//  [ActivityHelper isValidObject]
+  
+//    NSArray *steps = _steps;
     
     if (steps.count <= 0) {
         return nil;
@@ -126,11 +206,64 @@
     
     if (currentStep == nil) {
         nextStep = steps[0];
+      if (nextStep.steppreOtherActiStepId != nil && ![nextStep.steppreOtherActiStepId isEqual: @""]) {
+        
+        ORKStep *val5 =  [activityHelper1 getsecondActivityJumpStepWithAllSteps:steps currentStep:nextStep];
+        if (val5 != nil) {
+          nextStep = val5;
+          return nextStep;
+        }
+        
+      }
     } else {
         NSUInteger index = [self indexOfStep:step];
+      
+      if (val3 != nil) {
+        index = [self indexOfStep:val3];
+//        _stepsReplaced = self.steps.mutableCopy;
+        [_stepsReplaced replaceObjectAtIndex:index withObject:val3];
+
+//        steps[index] = val3;
+        nextStep = steps[index];
+        return nextStep;
+      } else if (currentStep.steppregroupId != nil && ![currentStep.steppregroupId isEqual: @""]) {
+        
+        
+        ORKStep *val9 =  [activityHelper1 setGroupResultValueWithStepResult:stepResult activityType:@"questionnaire" resultType:step.stepresultType allSteps:steps currentStep:step];
+        
+        if (val9 != nil) {
+          nextStep = val9;
+          return nextStep;
+        }
+      }
+      
         
         if (NSNotFound != index && index != (steps.count - 1)) {
-            nextStep = steps[index + 1];
+//          if ([step.steppredestinationTrueStepIndex  isEqual: @"6"]) {
+//            nextStep = steps[6];
+//          } else if ([step.steppredestinationTrueStepIndex  isEqual: @"8"]) {
+//            nextStep = steps[13];
+//          }
+//          else {
+//            nextStep = steps[index + 1];
+//          }
+          
+          nextStep = steps[index + 1];
+          if (nextStep.steppreisHidden != nil && ![nextStep.steppreisHidden isEqual: @"false"] ) {
+//            nextStep = steps[index + 2];
+            
+//            ORKStep *val7 =  [activityHelper1 getNonHiddenStep:steps currentStep:nextStep];
+            
+            ORKStep *val7 =  [activityHelper1 getNonHiddenStepWithAllSteps:steps currentStep:nextStep indexVal:index + 1];
+            return val7;
+          } else {
+            
+            if (![step.steppredestinationTrueStepKey isEqual: @"0"] && [nextStep.identifier isEqual: @"CompletionStep"]) {
+              nextStep.steppresourceQuestionKey = @"";
+            }
+            return nextStep;
+          }
+          
         }
     }
     return nextStep;
@@ -138,24 +271,120 @@
 
 - (ORKStep *)stepBeforeStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
     NSArray *steps = _steps;
+  
+  NSArray *arraystepsReplaced = [_stepsReplaced copy];
     
     if (steps.count <= 0) {
         return nil;
     }
+  
+  ORKStep *checkStep = steps[0];
+    if (step.identifier == checkStep.steppreOtherActiStepId) {
+      return nil;
+    }
+  
+  ActivityHelper *activityHelper1 = [[ActivityHelper alloc] init];
+//  ORKStep *val89 =  [activityHelper1 findPreviousStepForNOresultStep:result allSteps:steps currentStep:step];
+  
+  
+  NSString *val89 =  [activityHelper1 findPreviousStepForNOresultStepWithTaskResult:result allSteps:steps currentStep:step];
+  
+  if ([val89  isEqual: @"true"]) {
+    return nil;
+    }
+  
     
     ORKStep *currentStep = step;
     ORKStep *nextStep = nil;
+  
     
     if (currentStep == nil) {
         nextStep = nil;
         
     } else {
+      
+      if ([step.identifier  isEqual: @"CompletionStep"]) {
+//      ORKStep *val3 =  [activityHelper1 findPreviousStepWithTaskResult:result allSteps:steps currentStep:step];
+      ORKStep *val9 =  [activityHelper1 findPreviousStepForCompletionStepWithTaskResult:result allSteps:steps currentStep:step];
+        if (val9 != nil) {
+        return val9;
+        }
+      }
+      
+      
+      if ([step.steppreisHidden isEqual: @"true"] ) {
+//      if ([step.steppredefaultVisibility isEqual: @"false"] ) {
+    //      nextStep = nil;
+        if (![step.steppresourceQuestionKey  isEqual: @""]) {
+        
+    //      ActivityHelper *activityHelper1 = [[ActivityHelper alloc] init];
+          
+    //      ORKStep *val3 =  [activityHelper1 setResultValueWithStepResult:stepResult activityType:@"questionnaire" resultType:step.stepresultType allSteps:steps currentStep:step];
+          NSArray *steps2 = _steps;
+          ORKStep *val3 =  [activityHelper1 findPreviousStepWithTaskResult:result allSteps:steps2 currentStep:step];
+          
+          NSUInteger index1 = [self indexOfStep:step];
+          if (val3 != nil) {
+            index1 = [self indexOfStep:val3];
+            nextStep = steps[index1];
+            return nextStep;
+          }
+          
+        }
+      }
+      
+      
+      
+      
         NSUInteger index = [self indexOfStep:step];
         
         if (NSNotFound != index && index != 0) {
             nextStep = steps[index - 1];
+          
+          if (![nextStep.steppreisHidden isEqual: @"false"] ) {
+//            nextStep = steps[index + 2];
+
+            
+//            ORKStep *val7 =  [activityHelper1 findPreviousStepWithTaskResult:result allSteps:steps2 currentStep:step];
+            
+            NSString *valStr1 = [activityHelper1 findPreviousHiddenResultStepWithTaskResult:result currentStepIdentifier:nextStep.identifier];
+            if ([valStr1  isEqual: @"true"]) {
+              return nextStep;
+            } else {
+            
+            ORKStep *currentStepReplaced = arraystepsReplaced[index - 1];
+              ORKStep *val7 =  [activityHelper1 getNonHiddenPreviousStepWithAllSteps:steps currentStep:nextStep indexVal:index - 1 taskResult:result];
+//            ORKStep *val7 =  [activityHelper1 getNonHiddenPreviousStepWithAllSteps:steps currentStep:nextStep indexVal:index - 1];
+            return val7;
+            }
+          } else {
+            return nextStep;
+          }
+
         }
     }
+//  if ([step.steppreisHidden isEqual: @"false"] ) {//check
+  if ([step.steppredefaultVisibility isEqual: @"false"] ) {
+//      nextStep = nil;
+    if (![step.steppresourceQuestionKey  isEqual: @""]) {
+    
+//      ActivityHelper *activityHelper1 = [[ActivityHelper alloc] init];
+      
+//      ORKStep *val3 =  [activityHelper1 setResultValueWithStepResult:stepResult activityType:@"questionnaire" resultType:step.stepresultType allSteps:steps currentStep:step];
+      NSArray *steps2 = _steps;
+      ORKStep *val3 =  [activityHelper1 findPreviousStepWithTaskResult:result allSteps:steps2 currentStep:step];
+      
+      NSUInteger index1 = [self indexOfStep:step];
+      if (val3 != nil) {
+        index1 = [self indexOfStep:val3];
+        nextStep = steps[index1];
+        return nextStep;
+      }
+      
+    }
+  }
+  
+  
     return nextStep;
 }
 

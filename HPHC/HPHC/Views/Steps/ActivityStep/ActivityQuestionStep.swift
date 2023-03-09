@@ -257,11 +257,11 @@ class ActivityQuestionStep: ActivityStep {
     }
     
     // Setter method with Step Dictionary
-    override func initWithDict(stepDict: Dictionary<String, Any>) {
+    override func initWithDict(stepDict: Dictionary<String, Any>, allSteps: Array<Dictionary<String, Any>>?) {
         
         if Utilities.isValidObject(someObject: stepDict as AnyObject?) {
             
-            super.initWithDict(stepDict: stepDict)
+          super.initWithDict(stepDict: stepDict, allSteps: allSteps)
             
             if Utilities.isValidObject(someObject: stepDict[kStepQuestionFormat] as AnyObject ) {
                 self.formatDict = (stepDict[kStepQuestionFormat] as? Dictionary)!
@@ -291,6 +291,7 @@ class ActivityQuestionStep: ActivityStep {
             
             // Assigning the answerFormat for the questionStep based on questionStep
             switch   QuestionStepType(rawValue: (resultType as? String)!)! as QuestionStepType {
+              
             case .scale:
                 
                 if  Utilities.isValidValue(someObject: formatDict?[kStepQuestionScaleMaxValue] as AnyObject?)
@@ -490,8 +491,11 @@ class ActivityQuestionStep: ActivityStep {
                     
                     let textChoiceDict = formatDict?[kStepQuestionTextChoiceTextChoices] as? [Any] ?? []
                     
-                    let choiceResult = self.getTextChoices(dataArray: textChoiceDict)
-                    var otherChoice: OtherChoice? = choiceResult.1
+                  let choiceResult = ((formatDict?[kStepQuestionTextChoiceSelectionStyle] as? String)!)
+                  == kStepQuestionTextChoiceSelectionStyleSingle ?
+                  self.getTextChoicesSingleSelection(dataArray: textChoiceDict) : self.getTextChoices(dataArray: textChoiceDict)
+                  
+                  var otherChoice: OtherChoice? = choiceResult.1
                     
                     otherChoice = (otherChoice == nil) ? OtherChoice() : otherChoice
                     
@@ -505,7 +509,7 @@ class ActivityQuestionStep: ActivityStep {
                         questionStepAnswerFormat = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.multipleChoice,
                                                                              textChoices: textChoiceArray!)
                     } else {
-                        Logger.sharedInstance.debug("kStepQuestionTextChoiceSelectionStyle has null value:\(String(describing: formatDict))")
+//                        Logger.sharedInstance.debug("kStepQuestionTextChoiceSelectionStyle has null value:\(String(describing: formatDict))")
                         return nil
                     }
    
@@ -518,12 +522,40 @@ class ActivityQuestionStep: ActivityStep {
                     // By default a step is skippable
                     if skippable == false {
                         questionStep?.isOptional = false
+                    } else {
+                      questionStep?.isOptional = true
                     }
                     // setting the placeholder Value if exist any
                     if  Utilities.isValidValue(someObject: placeholderText as AnyObject?) {
                         questionStep?.placeholder = placeholderText
                     }
                     questionStep?.text = text
+                  
+                  
+                  questionStep?.steppredestinationTrueStepKey = predestinationTrueStepKey
+                  questionStep?.steppreactivityid = preactivityid
+                  questionStep?.steppredestinationFalseStepKey = predestinationFalseStepKey
+                  
+                 var valOtherActiStepId = UserDefaults.standard.value(forKey: "OtherActiStepId") as? String ?? "" //CHECK
+//                  UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
+//              UserDefaults.standard.synchronize()
+                  
+                  if valOtherActiStepId == "0" {
+                    valOtherActiStepId = "CompletionStep"
+                  }
+                  
+                  questionStep?.steppreOtherActiStepId = valOtherActiStepId
+                  questionStep?.steppredestinationTrueStepIndex = predestinationTrueStepIndex
+                  questionStep?.steppredestinationFalseStepIndex = predestinationFalseStepIndex
+                  questionStep?.stepresultType = resultType as? String ?? ""
+                  questionStep?.steppreoperator = preoperator
+                  questionStep?.stepprevalue = prevalue
+                  questionStep?.steppresourceQuestionKey = presourceQuestionKey
+                  questionStep?.steppregroupId = pregroupId
+                  questionStep?.steppredefaultVisibility = predefaultVisibility
+                  questionStep?.steppreisHidden = preisHidden
+                  
+                  
                     return questionStep
                     
                 } else {
@@ -542,12 +574,13 @@ class ActivityQuestionStep: ActivityStep {
                     
                     var minValue = formatDict?[kStepQuestionNumericMinValue] as? NSNumber
                     
-                    if maxValue != nil && maxValue == 0 {
-                        maxValue = nil
-                    }
-                    if minValue != nil && minValue == 0 {
-                        minValue = nil
-                    }
+//                    if maxValue != nil && maxValue == 0 {
+//                        maxValue = nil
+//                    }
+//                    if minValue != nil && minValue == 0 {
+//                        minValue = nil
+//                    }
+                  
                     
                     if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericPlaceholder] as AnyObject?) {
                         placeholderText = formatDict?[kStepQuestionNumericPlaceholder] as? String
@@ -627,6 +660,7 @@ class ActivityQuestionStep: ActivityStep {
                 if  Utilities.isValidValue(someObject: formatDict?[kStepQuestionDateStyle] as AnyObject?) {
                     
                     let dateFormatter = DateFormatter()
+                    dateFormatter.locale = Locale(identifier: getLanguageLocale())
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                     
                     var dateRange:DateRange? = DateRange.defaultValue
@@ -793,6 +827,30 @@ class ActivityQuestionStep: ActivityStep {
                 questionStep?.placeholder = placeholderText
             }
             questionStep?.text = text
+          
+          questionStep?.steppredestinationTrueStepKey = predestinationTrueStepKey
+          questionStep?.steppreactivityid = preactivityid
+          questionStep?.steppredestinationFalseStepKey = predestinationFalseStepKey
+          
+          var valOtherActiStepId = UserDefaults.standard.value(forKey: "OtherActiStepId") as? String ?? "" //CHECK
+//          UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
+//          UserDefaults.standard.synchronize()
+          
+          if valOtherActiStepId == "0" {
+            valOtherActiStepId = "CompletionStep"
+          }
+          
+          questionStep?.steppreOtherActiStepId = valOtherActiStepId
+          questionStep?.steppredestinationTrueStepIndex = predestinationTrueStepIndex
+          questionStep?.steppredestinationFalseStepIndex = predestinationFalseStepIndex
+          questionStep?.stepresultType = resultType as? String ?? ""
+          questionStep?.steppreoperator = preoperator
+          questionStep?.stepprevalue = prevalue
+          questionStep?.steppresourceQuestionKey = presourceQuestionKey
+          questionStep?.steppregroupId = pregroupId
+          questionStep?.steppredefaultVisibility = predefaultVisibility
+          questionStep?.steppreisHidden = preisHidden
+          
             return questionStep!
         } else {
             Logger.sharedInstance.debug("FormatDict has null values:\(String(describing: formatDict))")
@@ -870,6 +928,76 @@ class ActivityQuestionStep: ActivityStep {
         }
         
     }
+  
+  func getTextChoicesSingleSelection(dataArray: [Any]) -> ([ORKTextChoice]?, OtherChoice?) {
+    var textChoiceArray: [ORKTextChoice] = []
+    var otherChoice: OtherChoice?
+    
+    if let dictArr = dataArray as? [JSONDictionary] {
+      
+      for dict in dictArr {
+        
+        let text = dict[kORKTextChoiceText] as? String ?? ""
+        let value = dict[kORKTextChoiceValue] as? String ?? ""
+        let detail = dict[kORKTextChoiceDetailText] as? String ?? ""
+        let isExclusive = true
+        
+        if let otherDict = dict[kORKOTherChoice] as? JSONDictionary {
+          
+          let placeholder = otherDict["placeholder"] as? String ?? "enter here"
+          let isMandatory = otherDict["isMandatory"] as? Bool ?? false
+          let textFieldReq = otherDict["textfieldReq"] as? Bool ?? false
+          
+          otherChoice = OtherChoice(
+            isShowOtherCell: true,
+            isShowOtherField: textFieldReq,
+            otherTitle: text,
+            placeholder: placeholder,
+            isMandatory: isMandatory,
+            isExclusive: isExclusive,
+            detailText: detail,
+            value: value
+          )
+          // No need to add other text choice
+          continue
+        }
+        
+        let choice = ORKTextChoice(
+          text: text,
+          detailText: detail,
+          value: value as NSCoding & NSCopying & NSObjectProtocol,
+          exclusive: isExclusive
+        )
+        
+        textChoiceArray.append(choice)
+        
+      }
+      
+    } else if let titleArr = dataArray as? [String] {
+      
+      for (i, title) in titleArr.enumerated() {
+        
+        let choice = ORKTextChoice(
+          text: title,
+          value: i as NSCoding & NSCopying & NSObjectProtocol
+        )
+        
+        if self.textScaleDefaultValue?.isEmpty == false && self.textScaleDefaultValue != "" {
+          if title == self.textScaleDefaultValue {
+            self.textScaleDefaultIndex = i
+          }
+        }
+        textChoiceArray.append(choice)
+      }
+      
+    }
+    if textChoiceArray.isEmpty {
+      return (nil, nil)
+    } else {
+      return (textChoiceArray, otherChoice)
+    }
+    
+  }
     
     /* Method  creates ORKImageChoice Array
      @dataArray: is array of Dictionary

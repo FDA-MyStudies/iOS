@@ -50,8 +50,11 @@
 /* Class = "UILabel"; text = "%"; ObjectID = "J3t-SP-0pl"; */
 "J3t-SP-0pl.text" = "%";
 
-/* Class = "UIButton"; normalTitle = "Join Study"; ObjectID = "MKo-wh-p4O"; */
-"MKo-wh-p4O.normalTitle" = "Unirse al estudio";
+///* Class = "UIButton"; normalTitle = "Join Study"; ObjectID = "MKo-wh-p4O"; */
+//"MKo-wh-p4O.normalTitle" = "Unirse al estudio";
+
+/* Class = "UIButton"; normalTitle = "Get Started!"; ObjectID = "MKo-wh-p4O"; */
+"MKo-wh-p4O.normalTitle" = "Comenzar";
 
 /* Class = "UILabel"; text = "hello"; ObjectID = "MYB-jk-CRD"; */
 "MYB-jk-CRD.text" = "hello";

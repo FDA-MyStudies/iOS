@@ -175,11 +175,11 @@ class StudyHomeViewController: UIViewController {
             }
         }
 
-      let joinStudyTitle =  NSLocalizedStrings("Join Study", comment: "")
-      buttonJoinStudy?.setTitle(joinStudyTitle, for: .normal)
+        // let joinStudyTitle =  NSLocalizedStrings("Join Study", comment: "")
+        // buttonJoinStudy?.setTitle(joinStudyTitle, for: .normal)
       
-      let visitWebsite = NSLocalizedStrings("Visit Website", comment: "")
-      buttonVisitWebsite?.setTitle(visitWebsite, for: .normal)
+      // let visitWebsite = NSLocalizedStrings("Visit Website", comment: "")
+      // buttonVisitWebsite?.setTitle(visitWebsite, for: .normal)
       
       let viewConsent = NSLocalizedStrings("View Consent", comment: "")
       buttonViewConsent?.setTitle(viewConsent, for: .normal)
@@ -1229,7 +1229,7 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
 //                self.studyEnrollmentFinished()
 //            }
            
-            if (reviewStep?.identifier)! == kReviewIdentifier, (reviewStep?.results?.count)! > 0 {
+            if let val = reviewStep?.identifier, (reviewStep?.identifier)! == kReviewIdentifier, (reviewStep?.results?.count)! > 0 {
                 let consentSignatureResult: ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
 
                 if consentSignatureResult?.consented == false {

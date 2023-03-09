@@ -126,7 +126,7 @@ class Utilities: NSObject {
     class func getDateStringWithFormat(_ dateFormatter: String, date: Date) -> String{
         
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "us")
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.dateStyle = DateFormatter.Style.full
         formatter.dateFormat = dateFormatter
         let dateString = formatter.string(from: date)
@@ -137,7 +137,7 @@ class Utilities: NSObject {
     class func getDateFromStringWithFormat(_ dateFormate: String, resultDate: String) -> Date? {
         
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "us")
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.dateStyle = DateFormatter.Style.full
         formatter.dateFormat = dateFormate
         let resDate = formatter.date(from: resultDate)
@@ -467,6 +467,7 @@ class Utilities: NSObject {
             } else {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyy-MM-dd"
+                formatter.locale = Locale(identifier: getLanguageLocale())
                 // formatter.dateStyle = .short
                 formatter.timeZone = TimeZone.current // TimeZone.init(abbreviation:"IST")
                 _formatterShort = formatter
@@ -485,6 +486,7 @@ class Utilities: NSObject {
     class func getDateFromString(dateString: String) -> Date? {
         
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: getLanguageLocale())
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         
         guard let date = dateFormatter.date(from: dateString) else {
@@ -508,6 +510,7 @@ class Utilities: NSObject {
         let dateWithoutTimeZoneArray = dateString.components(separatedBy: ".")
         let dateWithourTimeZone = dateWithoutTimeZoneArray[0] as String
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: getLanguageLocale())
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         
         guard let date = dateFormatter.date(from: dateWithourTimeZone) else {
@@ -526,6 +529,7 @@ class Utilities: NSObject {
     class func findDateFromString(dateString: String) -> Date? {
         
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: getLanguageLocale())
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
        // let finalString = dateFormatter.string(from: date)
@@ -540,6 +544,7 @@ class Utilities: NSObject {
     class func getStringFromDate(date: Date) -> String? {
         
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: getLanguageLocale())
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         dateFormatter.timeZone = TimeZone.current
         

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>JoinStudyButtonTitle</key>
-	<string>Join Study</string>
+	<string>Get Started!</string>
 	<key>ViewConsentButtonTitle</key>
 	<string>View Consent</string>
 	<key>VisitWebsiteButtonTitle</key>
@@ -30,5 +30,7 @@
 	<string>FDA MyStudies</string>
 	<key>PoweredByTitleName</key>
 	<string>Powered by FDA MyStudies</string>
+	<key>ProductTitleName</key>
+	<string>FDA MyStudies</string>
 </dict>
 </plist>

@@ -1,0 +1,1384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "F1D48F14-B657-45E1-9F81-CAE97F9720EA"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F102EBD5-ADE9-46D9-9B36-753995FC4540"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Network/APIs/LabKeyServices.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "processResponse(metaData:activityType:responseData:participantId:delegate:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5226F70B-F063-487D-A7B7-2E3887815391"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/AppDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1605"
+            endingLineNumber = "1605"
+            landmarkName = "taskViewController(_:viewControllerFor:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E3E63E6D-A96E-43D6-9F7D-1D5344C1EDB8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Utils/Helpers/DateHelper.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "iso8601DateFormatter"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C541B7A7-5588-4158-8F00-E880037F8109"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Utils/Helpers/DateHelper.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "stringFromDate(date:format:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "08C48E79-C171-4D78-B5B0-165472A5F9BD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Utils/Helpers/DateHelper.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "dateFromString(date:format:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8420F621-E253-499C-8985-17CE303C50B7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Controllers/StudyUI/ResourceUI/ResourcesDetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
+            landmarkName = "sendEmail()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D88F668D-F37C-4FB2-91E7-B6408CCC1D16"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Utils/Utilities.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "getDateStringWithFormat(_:date:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "30237FF6-C6E5-4CF5-A452-E5A81448DD89"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Utils/Utilities.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "getDateFromStringWithFormat(_:resultDate:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EB99C69B-9974-47F1-B766-EE6F0FA1D08A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKOrderedTask+ORKPredefinedActiveTask.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "717"
+            endingLineNumber = "717"
+            landmarkName = "+fitnessCheckTaskWithIdentifier:intendedUseDescription:walkDuration:restDuration:options:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "930D286C-842F-4C4C-9C47-53D6A77FE184"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKOrderedTask+ORKPredefinedActiveTask.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1931"
+            endingLineNumber = "1931"
+            landmarkName = "+timedWalkTaskWithIdentifier:intendedUseDescription:distanceInMeters:timeLimit:turnAroundTimeLimit:includeAssistiveDeviceForm:options:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "53BB2B89-D429-4EB2-9AE8-A8C7F53D731D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKAnswerFormat.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3055"
+            endingLineNumber = "3055"
+            landmarkName = "-stringForAnswer:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4E5D123C-9F89-455B-A996-DF585A7F16E1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Controllers/GatewayUI/ChangePasswordUI/ChangePasswordViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "293"
+            endingLineNumber = "293"
+            landmarkName = "finishedRequest(_:requestName:response:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3E6FE5E4-F789-4D8F-967E-C8727C80C1D7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Network/APIs/UserServices.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "613"
+            endingLineNumber = "613"
+            landmarkName = "handleConfirmRegistrationResponse(response:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A29DF957-65E8-40CC-A1A6-F4B326CE201D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKWeightPicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "ORKWeightPicker"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D951A972-2E93-48F6-A1B9-92E0EE3B6F73"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKValuePicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "ORKValuePicker"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A32FEC3D-57D5-4C0D-BED7-43D0A7B48D69"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKMultipleValuePicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "ORKMultipleValuePicker"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E2064A6F-5F82-4C1B-BA20-B1B1C1B366DC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKSurveyAnswerCellForPicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "ORKSurveyAnswerCellForPicker()"
+            landmarkType = "2">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "34909B33-B6BC-40F8-A7F4-C7208DC66B34"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/ActionSheetPicker-3.0/Pickers/AbstractActionSheetPicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "402"
+            endingLineNumber = "402"
+            landmarkName = "-customButtonPressed:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F45A962C-1DB2-4F2E-BC46-A1C43C584F3C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/ActionSheetPicker-3.0/Pickers/ActionSheetLocalePicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "-configuredPickerView"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BED71AC8-6887-454A-8C06-E86416259BDB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/ActionSheetPicker-3.0/Pickers/ActionSheetMultipleStringPicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "-configuredPickerView"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F08DC9A5-B27B-44CE-8D34-CEA36DFF8D66"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/ActionSheetPicker-3.0/Pickers/ActionSheetStringPicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "-configuredPickerView"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D00F864C-0C62-43CE-95DB-3C08783E19B3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKMultipleValuePicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "269"
+            endingLineNumber = "269"
+            landmarkName = "-pickerView:viewForRow:forComponent:reusingView:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A9BF317A-628A-4EA6-A1B5-A3FC20493757"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/ActionSheetPicker-3.0/Pickers/ActionSheetDistancePicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
+            landmarkName = "-pickerView:viewForRow:forComponent:reusingView:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "113B51C6-A594-4A1C-9944-C2F602606E92"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/ActionSheetPicker-3.0/Pickers/ActionSheetMultipleStringPicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
+            landmarkName = "-pickerView:viewForRow:forComponent:reusingView:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E63AED91-246F-44C2-9968-3216EE170E0C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/ActionSheetPicker-3.0/Pickers/ActionSheetStringPicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "-pickerView:viewForRow:forComponent:reusingView:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "337CF0AC-02EA-49E2-B6D4-1AC6A73F3BE5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Onboarding/ORKRegistrationStep.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "ORKRegistrationFormItems(options)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A8F428D8-5BEC-4881-A853-E61C1D4C2BBC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Controllers/StudyUI/ResourceUI/ResourcesViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "796"
+            endingLineNumber = "796"
+            landmarkName = "failedRequest(_:requestName:error:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2B70C736-8B6E-4929-9FC2-25DEBA0C36E5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Utils/Utilities.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "469"
+            endingLineNumber = "469"
+            landmarkName = "formatterShort"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "58D5FBA2-6530-4FB5-880F-A127595764AE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Utils/Utilities.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "546"
+            endingLineNumber = "546"
+            landmarkName = "getStringFromDate(date:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "858B5FF1-BBB9-404C-AF45-896190EE93B1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Models/Consent/ConsentResult/ConsentResult.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "initWithORKTaskResult(taskResult:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A4BF6044-CD02-428D-A814-A0CDD45C3DDB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Controllers/GatewayUI/ProfileViewUI/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "buttonActionLeadTime(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9FC01B0F-D7FF-41E4-9009-807758DA338C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Controllers/StudyUI/StudyDashboardUI/StudyDashboardViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "286"
+            endingLineNumber = "286"
+            landmarkName = "labkeyDateFormatter"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9990849A-945A-4417-A3A2-77C1FDF8DD0E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Controllers/StudyUI/StudyDashboardUI/StudyDashboardViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
+            landmarkName = "localDateFormatter"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "98408AE3-8A8A-4295-9670-731141C34A76"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKHelpers.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
+            landmarkName = "ORKResultDateFormatter()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AC642794-5C55-42CF-871C-A822764EA18E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKHelpers.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
+            landmarkName = "ORKResultTimeFormatter()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "97F1E7EB-2869-4455-8BBE-491BA2EC5EDF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKHelpers.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "ORKResultDateTimeFormatter()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CE921FBF-BCDB-4667-92B8-68DE48BBCCF0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Models/Consent/ConsentBuilder/ConsentBuilder.swift"
+            startingColumnNumber = "41"
+            endingColumnNumber = "60"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
+            landmarkName = "createConsentDocument()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F6C7985A-07C7-4DFF-B389-97E78E76B9FD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKWeightPicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "284"
+            endingLineNumber = "284"
+            landmarkName = "-pickerView:viewForRow:forComponent:reusingView:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "23FC8EF6-42D5-48C4-989D-8A98FEBA5003"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKWeightPicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
+            landmarkName = "-pickerView:titleForRow:forComponent:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "471A3883-1E39-40F3-8392-C4777C4DCAFB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKMultipleValuePicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
+            landmarkName = "-pickerView:titleForRow:forComponent:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FFEC2680-6F23-4557-A89B-628D6E04CC6A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/ActionSheetPicker-3.0/Pickers/ActionSheetMultipleStringPicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "-pickerView:titleForRow:forComponent:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EB3AF609-B891-454D-94DE-B2C84480CCEB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/ActionSheetPicker-3.0/Pickers/ActionSheetStringPicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "-pickerView:titleForRow:forComponent:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "30E9C40C-12F2-4DF0-B4E6-8C9FB1017359"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKMultipleValuePicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
+            landmarkName = "-pickerView:attributedTitleForRow:forComponent:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AE2FC464-0483-4A59-9EE1-CC11FA04201F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKMultipleValuePicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "276"
+            endingLineNumber = "276"
+            landmarkName = "-pickerView:viewForRow:forComponent:reusingView:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5D99EF5F-35E9-4E37-8156-AF7C4502D940"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/ActionSheetPicker-3.0/Pickers/ActionSheetMultipleStringPicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "-pickerView:attributedTitleForRow:forComponent:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "856315BB-1722-4EEB-8338-E5576BFA2797"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/ActionSheetPicker-3.0/Pickers/ActionSheetStringPicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "-pickerView:attributedTitleForRow:forComponent:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CC1C8ACB-34E9-41D1-8E66-B8984FC5C105"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKTaskViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "-resume"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7588ABD8-6572-4E19-A2A1-AE0516AD5C26"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKTaskViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "-initWithHandler:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3E509EE3-FCFD-4AEF-A319-488DDE7ED1BD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKLocationSelectionView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "436"
+            endingLineNumber = "436"
+            landmarkName = "-locationManager:didChangeAuthorizationStatus:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "23EDF082-C217-481D-8B31-A16C1F0B3EFE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKLocationSelectionView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "437"
+            endingLineNumber = "437"
+            landmarkName = "-locationManager:didChangeAuthorizationStatus:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "842608BC-3820-47B9-BD04-C3691D12FFDA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/ActiveTasks/ORKLocationRecorder.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "-initWithIdentifier:step:outputDirectory:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "98365383-1BDA-4EDB-80BB-CEB32B2596CE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/ActiveTasks/ORKLocationRecorder.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "-createLocationManager"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "866504F5-44BF-4C9D-9F2C-6571524FC715"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/ActiveTasks/ORKLocationRecorder.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "-start"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "735E2436-8B02-4D83-91C2-C73B58583532"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKLocationSelectionView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "286"
+            endingLineNumber = "286"
+            landmarkName = "-loadCurrentLocationIfNecessary"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "694B772E-9D20-4A82-A031-CBC4F60D651F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKLocationSelectionView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "287"
+            endingLineNumber = "287"
+            landmarkName = "-loadCurrentLocationIfNecessary"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E1ADE6AD-BCC7-4611-853D-8FBDA6A5C2E9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKLocationSelectionView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
+            landmarkName = "-loadCurrentLocationIfNecessary"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5641D78F-CD90-4CA8-8CC1-AF6587794DDD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/ActiveTasks/ORKLocationRecorder.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "-locationManager:didUpdateLocations:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1183DC12-190C-459F-9D8E-7BE886EF60CE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKLocationSelectionView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
+            landmarkName = "-updateMapWithLocation:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "871253DE-E10C-4D8A-B01D-B6D69777733E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKHelpers.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "328"
+            endingLineNumber = "328"
+            landmarkName = "ORKBundleEnglish()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ABA38D4F-9CFB-441B-82EA-A6079166408C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKHelpers.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "340"
+            endingLineNumber = "340"
+            landmarkName = "ORKDurationStringFormatter()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D2F41BC1-6606-4D75-8256-FF2A1DD22FDD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKHelpers.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "363"
+            endingLineNumber = "363"
+            landmarkName = "ORKTimeOfDayReferenceCalendar()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3A95E4B7-574B-4071-87AD-27DB7120D11B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKHelpers.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "372"
+            endingLineNumber = "372"
+            landmarkName = "ORKTimeOfDayStringFromComponents(dateComponents)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "18EA90CD-A317-42F2-92BF-FC5A254D3519"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKHelpers.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "395"
+            endingLineNumber = "395"
+            landmarkName = "ORKTimeOfDayComponentsFromString(string)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A3F372DE-0848-4E84-8088-6AEC815CF67B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKHelpers.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "426"
+            endingLineNumber = "426"
+            landmarkName = "ORKCurrentLocalePresentsFamilyNameFirst()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9199C241-85AA-4A0A-B574-75F9F391DE60"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKHelpers.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "367"
+            endingLineNumber = "367"
+            landmarkName = "ORKTimeOfDayReferenceCalendar()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "264C6C60-1667-446F-9B3F-37DF23C188D5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKHelpers.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
+            landmarkName = "ORKResultTimeFormatter()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "98239572-A3DC-4F69-9F93-AFBC363E5FA3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKHelpers.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "ORKStringFromDateISO8601(date)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8C941A46-5BF3-45C7-867B-04AF298EB79B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKHelpers.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "ORKDateFromStringISO8601(string)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "195513AB-AEA6-4035-B7DC-E879B71E8BA9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKHelpers.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "ORKSignatureStringFromDate(date)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "71D16658-D861-45B3-9524-DFCCFF4DED0F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/ActionSheetPicker-3.0/Pickers/ActionSheetLocalePicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
+            landmarkName = "-pickerView:viewForRow:forComponent:reusingView:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BC566D18-8AD0-497A-8AB6-60BB6EE6B3FE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKDateTimePicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "-labelFormatter"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D255EEF7-FE4D-488F-BB21-E59E6CB8AA6E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKSurveyAnswerCellForLocation.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "-locationSelectionView:didFailWithErrorTitle:message:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "48AF489C-1D41-4FB6-BD64-CAE7250EA9CA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKLocationSelectionView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
+            landmarkName = "-geocodeAndDisplay:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "118B1BBF-CB17-4F40-B29F-A66E0116038B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKAnswerFormat.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3056"
+            endingLineNumber = "3056"
+            landmarkName = "-stringForAnswer:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D4F46618-B976-4DC3-843E-41A5E728639D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKLocationSelectionView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "-addPlacemarkToMap:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6A4EB7E9-0CCE-4237-A6AA-B4DF2937F833"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/ActionSheetPicker-3.0/Pickers/ActionSheetCustomPicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "-configuredPickerView"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "91DFA416-54DD-47A2-9F69-04C5977214B6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/ActionSheetPicker-3.0/Pickers/ActionSheetDistancePicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "-pickerView:numberOfRowsInComponent:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B9E6747E-20C4-4CAA-9DD1-39FF02C50BF7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/ActionSheetPicker-3.0/Pickers/ActionSheetLocalePicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "-selectCurrentLocale:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6E337960-7C64-49CE-AB53-9BB2BB954DF8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/ActionSheetPicker-3.0/Pickers/DistancePickerView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "-didMoveToWindow"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EC76AF37-296F-47D2-A1FB-A7C64AA2F861"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKDateTimePicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
+            landmarkName = "-valueDidChange:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A84AD540-65B6-4178-BC71-265AE2CCE6F7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKAnswerFormat.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3053"
+            endingLineNumber = "3053"
+            landmarkName = "-stringForAnswer:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D4595B3D-3878-4879-A748-463EE6AEA250"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKAnswerFormat.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2974"
+            endingLineNumber = "2974"
+            landmarkName = "-stringForAnswer:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DDF58786-0787-420A-B761-B88BAE3C66BA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKHelpers.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
+            landmarkName = "ORKTimeIntervalLabelFormatter()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B53FEECC-3FE8-4D62-ACC8-61FFECDEDA27"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ResearchKit/Common/ORKHelpers.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "295"
+            endingLineNumber = "295"
+            landmarkName = "ORKTimeIntervalLabelFormatter()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "97AEE600-AD50-41EA-B4C2-3C7152F233C2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Network/Network setup/NetworkWebServiceHandler.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
+            landmarkName = "fireRequest(_:requestName:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "21280D88-4580-4020-91FB-08ADDB1E8DF7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Network/Network setup/NetworkWebServiceHandler.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
+            landmarkName = "handleResponse(_:response:requestName:error:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

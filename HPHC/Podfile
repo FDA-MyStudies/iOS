@@ -8,8 +8,6 @@ def main_pods
   
    pod 'IQKeyboardManagerSwift', '6.5.5'
    pod 'SlideMenuControllerSwift', :git => 'https://github.com/AtomicSLLC/SlideMenuControllerSwift.git', :branch => 'swift5'
-   pod 'Fabric', '1.10.2'
-   pod 'Crashlytics', '3.14.0'
    pod 'SDWebImage', '5.8.0'
    pod 'RealmSwift', '5.0.0'
    pod 'CryptoSwift', '1.3.1'

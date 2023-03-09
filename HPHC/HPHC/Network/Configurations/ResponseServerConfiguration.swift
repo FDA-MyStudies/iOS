@@ -26,6 +26,7 @@ enum ResponseMethods: String {
     case validateEnrollmentToken
     case processResponse
     case withdrawFromStudy
+  case selectRows
     case getParticipantResponse
     case executeSQL
     
@@ -33,7 +34,8 @@ enum ResponseMethods: String {
         switch self {
             
         default:
-            return self.rawValue+".api"
+//            return self.rawValue+".api"
+          return "mobileappstudy-"+self.rawValue+".api"
         }
     }
     
@@ -41,15 +43,21 @@ enum ResponseMethods: String {
         
         switch self {
         case .executeSQL:
-            return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeHTTP)
+            return Method(methodName: ("mobileappstudy-"+self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeHTTP)
         case .withdrawFromStudy, .getParticipantResponse, .validateEnrollmentToken:
-            return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
+            return Method(methodName: ("mobileappstudy-"+self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
+//        case .selectRows:
+//            return Method(methodName: ("/BTC/\(AppDetails.applicationID)/"+self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
+          
+        case .selectRows:
+            return Method(methodName: ("BTC/\(Study.currentStudy?.studyId ?? "")/mobileappstudy-"+self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
+//          return Method(methodName: ("/BTC/LIMITOPEN001/mobileappstudy-"+self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
         case .enroll:
-            return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
+            return Method(methodName: ("mobileappstudy-"+self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
         case .resolveEnrollmentToken:
-          return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
+          return Method(methodName: ("mobileappstudy-"+self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
         default:
-            return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeJSON)
+            return Method(methodName: ("mobileappstudy-"+self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeJSON)
         }
     }
     
@@ -79,7 +87,8 @@ class ResponseServerConfiguration: NetworkConfiguration {
         if localeDefault.hasPrefix("es") { // true
           language = "es"
         }
-        let headers = ["language": language]
+        let headers = ["language": language,
+                       "Connection": "keep-alive"]
 
         return headers
        // return Dictionary()

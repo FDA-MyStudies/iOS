@@ -615,12 +615,12 @@ static inline CGImageRef _Nullable SDCreateCGImageFromCIImage(CIImage * _Nonnull
     vImage_Error err;
     err = vImageBuffer_InitWithCGImage(&effect, &format, NULL, imageRef, kvImageNoFlags);
     if (err != kvImageNoError) {
-        NSLog(@"UIImage+Transform error: vImageBuffer_InitWithCGImage returned error code %zi for inputImage: %@", err, self);
+        
         return nil;
     }
     err = vImageBuffer_Init(&scratch, effect.height, effect.width, format.bitsPerPixel, kvImageNoFlags);
     if (err != kvImageNoError) {
-        NSLog(@"UIImage+Transform error: vImageBuffer_Init returned error code %zi for inputImage: %@", err, self);
+        
         return nil;
     }
     

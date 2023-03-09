@@ -103,14 +103,14 @@ class ActivityBuilder {
                             case .instruction:
                                 
                                 let instructionStep: ActivityInstructionStep? = ActivityInstructionStep()
-                                instructionStep?.initWithDict(stepDict: stepDict)
+                              instructionStep?.initWithDict(stepDict: stepDict, allSteps: (activity?.steps!)!)
                                 orkStepArray?.append((instructionStep?.getInstructionStep())!)
                                 activityStepArray?.append(instructionStep!)
                                 
                             case .question:
                                 
                                 let questionStep: ActivityQuestionStep? = ActivityQuestionStep()
-                                questionStep?.initWithDict(stepDict: stepDict)
+                              questionStep?.initWithDict(stepDict: stepDict, allSteps: (activity?.steps!)!)
                                 
                                 if let step = (questionStep?.getQuestionStep()) {
                                     
@@ -120,7 +120,7 @@ class ActivityBuilder {
                             case .form:
                                 
                                 let formStep: ActivityFormStep? = ActivityFormStep()
-                                formStep?.initWithDict(stepDict: stepDict)
+                              formStep?.initWithDict(stepDict: stepDict, allSteps: (activity?.steps!)!)
                                 orkStepArray?.append((formStep?.getFormStep())!)
                                 activityStepArray?.append(formStep!)
                                 
@@ -146,6 +146,7 @@ class ActivityBuilder {
                     completionStep.title = kActivityCompleted
                     completionStep.image = #imageLiteral(resourceName: "successBlueBig")
                     completionStep.detailText = kTapDoneSubmit
+                  completionStep.steppreisHidden = "false"
                     orkStepArray?.append(completionStep)
                     
                     // Creating ordered or navigable task
@@ -262,7 +263,7 @@ class ActivityBuilder {
                                                  is ORKContinuousScaleAnswerFormat,
                                                  is ORKHealthKitQuantityTypeAnswerFormat:
                                                 
-                                                if let operatorValue = dict[kOperator] as? String {
+                                                if let operatorValue = dict[kOperator] as? String, operatorValue != "" {
                                                     
                                                     let condition: String = (dict[kCondtion] as? String)!
                                                     let conditionValue = condition.components(separatedBy: CharacterSet(charactersIn: ","))
@@ -475,13 +476,13 @@ class ActivityBuilder {
                             case .instruction:
                                 
                                 let instructionStep:ActivityInstructionStep? = ActivityInstructionStep()
-                                instructionStep?.initWithDict(stepDict: stepDict)
+                              instructionStep?.initWithDict(stepDict: stepDict, allSteps: (activity?.steps!)!)
                                 orkStepArray?.append((instructionStep?.getInstructionStep())!)
                                 
                             case .question:
                                 
                                 let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
-                                questionStep?.initWithDict(stepDict: stepDict)
+                              questionStep?.initWithDict(stepDict: stepDict, allSteps: (activity?.steps!)!)
                                 orkStepArray?.append((questionStep?.getQuestionStep())!)
                                 
                             case .active, .taskSpatialSpanMemory, .taskTowerOfHanoi:
@@ -489,7 +490,7 @@ class ActivityBuilder {
                                 var localTask: ORKOrderedTask?
                                 
                                 let activeStep:ActivityActiveStep? = ActivityActiveStep()
-                                activeStep?.initWithDict(stepDict: stepDict)
+                              activeStep?.initWithDict(stepDict: stepDict, allSteps: (activity?.steps!)!)
                                 localTask = activeStep?.getActiveTask() as! ORKOrderedTask?
                                 activityStepArray?.append(activeStep!)
                                 

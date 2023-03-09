@@ -147,11 +147,11 @@ class ActivityActiveStep: ActivityStep {
     /* Setter method to set Activity Active Steps
      @ stepDict should  should contains all params for ActivityStep
      */
-    override func initWithDict(stepDict: Dictionary<String, Any>) {
+    override func initWithDict(stepDict: Dictionary<String, Any>, allSteps: Array<Dictionary<String, Any>>?) {
         
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
             
-            super.initWithDict(stepDict: stepDict)
+          super.initWithDict(stepDict: stepDict, allSteps: allSteps)
             
             if Utilities.isValidObject(someObject: stepDict[kActivityStepActiveOptions] as AnyObject ) {
                 

@@ -90,6 +90,8 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, readonly) NSArray<ORKStep *> *steps;
 
+@property (nonatomic, copy) NSMutableArray<ORKStep *> *stepsReplaced;
+
 /**
  Color property of the progress label.
  Default is black.

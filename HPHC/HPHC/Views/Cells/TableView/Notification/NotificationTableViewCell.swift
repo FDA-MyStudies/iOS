@@ -81,6 +81,7 @@ class NotificationTableViewCell: UITableViewCell {
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd YYYY"
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.timeZone = TimeZone.init(abbreviation: "GMT")
         return formatter
     }()

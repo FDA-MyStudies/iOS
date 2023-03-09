@@ -145,7 +145,7 @@
             } else {
                 ORKScaleRangeLabel *leftRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
                 leftRangeLabel.textAlignment = NSTextAlignmentCenter;
-                leftRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider minimumNumber]];
+//                leftRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider minimumNumber]];
                 _leftRangeView = leftRangeLabel;
             }
             
@@ -154,7 +154,7 @@
             } else {
                 ORKScaleRangeLabel *rightRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
                 rightRangeLabel.textAlignment = NSTextAlignmentCenter;
-                rightRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider maximumNumber]];
+//                rightRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider maximumNumber]];
                 _rightRangeView = rightRangeLabel;
             }
             
@@ -505,10 +505,13 @@
         if ([self textScaleFormatProvider]) {
             ORKTextChoice *textChoice = [[self textScaleFormatProvider] textChoiceAtIndex:[self currentTextChoiceIndex]];
             self.valueLabel.text = textChoice.text;
-            if (textChoice.primaryTextAttributedString) {
-                self.valueLabel.attributedText = textChoice.primaryTextAttributedString;
-            }
+//            if (textChoice.primaryTextAttributedString) {
+//                self.valueLabel.attributedText = textChoice.primaryTextAttributedString;
+//            }
         } else {
+            if (_currentNumberValue.floatValue > -0.5 && _currentNumberValue.floatValue < 0) {
+                return;
+            }
             NSNumber *newValue = [_formatProvider normalizedValueForNumber:_currentNumberValue];
             _valueLabel.text = [_formatProvider localizedStringForNumber:newValue];
         }

@@ -30,6 +30,7 @@ enum WCPMethods: String {
     case studyInfo
     case activityList
     case activity
+  case activity2Version
     case studyDashboard
     case termsPolicy
     case notifications
@@ -37,9 +38,15 @@ enum WCPMethods: String {
     case studyUpdates
     case appUpdates
     case versionInfo
+    case updateVersionInfo
+
     
     var method: Method{
         switch self {
+        case .updateVersionInfo:
+            return Method(methodName: self.rawValue, methodType: .httpMethodPOST, requestType: .requestTypeJSON)
+        case .activity2Version:
+            return Method(methodName: "activity", methodType: .httpMethodGet, requestType: .requestTypeHTTP)
         default:
             return Method(methodName: self.rawValue, methodType: .httpMethodGet, requestType: .requestTypeHTTP)
         }
@@ -83,6 +90,7 @@ class WCPConfiguration: NetworkConfiguration {
         let headers = ["Authorization": base64token,
                        "applicationId": appId,
                        "orgId": orgId,
+                       "Connection": "keep-alive",
                        "language": language]
 
         return headers

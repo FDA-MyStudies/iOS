@@ -748,18 +748,21 @@ class LineChartCell: GraphChartTableViewCell {
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd, MMM YYYY"
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.timeZone = TimeZone.init(abbreviation: "GMT")
         return formatter
     }()
     private static let yearFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY"
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.timeZone = TimeZone.init(abbreviation: "GMT")
         return formatter
     }()
     private static let monthFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM YYYY"
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.timeZone = TimeZone.init(abbreviation: "GMT")
         return formatter
     }()
@@ -767,12 +770,14 @@ class LineChartCell: GraphChartTableViewCell {
     public static let shortMonthFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "M"
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.timeZone = TimeZone.init(abbreviation: "GMT")
         return formatter
     }()
     public static let shortDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd"
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.timeZone = TimeZone.init(abbreviation: "GMT")
         return formatter
     }()
@@ -780,6 +785,7 @@ class LineChartCell: GraphChartTableViewCell {
     public static let shortDayFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "E"
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.timeZone = TimeZone.init(abbreviation: "GMT")
         return formatter
     }()
@@ -792,18 +798,21 @@ class LineChartCell: GraphChartTableViewCell {
     private static let oneTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mma, MMM dd YYYY"
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.timeZone = TimeZone.init(abbreviation: "GMT")
         return formatter
     }()
     private static let dailyFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm:ss"
+        formatter.locale = Locale(identifier: getLanguageLocale())
         // formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
     private static let dailyFormatter2: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm:ss"
+        formatter.locale = Locale(identifier: getLanguageLocale())
         // formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()

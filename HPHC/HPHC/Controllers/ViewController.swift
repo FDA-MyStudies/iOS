@@ -57,14 +57,17 @@ class ViewController: UIViewController {
         let runtime = "2017-03-12"
         
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: getLanguageLocale())
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let endDate:Date = dateFormatter.date(from: end)!
         
         let sdateFormatter = DateFormatter()
+        sdateFormatter.locale = Locale(identifier: getLanguageLocale())
         sdateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let startDate:Date = sdateFormatter.date(from: start)!
          
         let rdateFormatter = DateFormatter()
+        rdateFormatter.locale = Locale(identifier: getLanguageLocale())
         rdateFormatter.dateFormat = "yyyy-MM-dd"
         let rendDate:Date = rdateFormatter.date(from: runtime)!
         

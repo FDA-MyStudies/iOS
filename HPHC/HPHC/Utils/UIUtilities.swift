@@ -205,7 +205,7 @@ class UIUtilities: NSObject {
     
     /* Presents alert message */
     class func showAlertWithTitleAndMessage(title: NSString, message : NSString) {
-        
+      if !(title == "" && message == "") {
         let alert = UIAlertController(title: title as String, message: message as String, preferredStyle: UIAlertController.Style.alert)
 //        
             alert.addAction(UIAlertAction(title: kTitleOKCapital, style: .default, handler: nil))
@@ -217,7 +217,7 @@ class UIUtilities: NSObject {
             rootViewController = tabBarController.selectedViewController
         }
         rootViewController?.present(alert, animated: true, completion: nil)
-        
+    }
     }
     
     /* Dismiss alert message*/
@@ -227,7 +227,9 @@ class UIUtilities: NSObject {
     
     /* Presents alert message */
     class func showAlertWithMessage(alertMessage: String) {
+      if alertMessage != "" {
         self.showAlertWithTitleAndMessage(title: "", message: alertMessage as NSString)
+      }
     }
     
     class func showAlertMessageWithTwoActionsAndHandler(_ errorTitle: String,
@@ -235,7 +237,8 @@ class UIUtilities: NSObject {
                                                         errorAlertActionTitle2: String?,
                                                         viewControllerUsed : UIViewController,
                                                         action1: @escaping AlertAction,
-                                                        action2: @escaping AlertAction){
+                                                        action2: @escaping AlertAction) {
+      if !(errorTitle == "" && errorMessage == "") {
         let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle:UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction(title: errorAlertActionTitle, style: UIAlertAction.Style.default, handler: { (_) in
@@ -248,6 +251,7 @@ class UIUtilities: NSObject {
         }
         
         viewControllerUsed.present(alert, animated: true, completion: nil)
+      }
     }
     
     class func showAlertMessageWithThreeActionsAndHandler(_ errorTitle: String,
@@ -255,6 +259,7 @@ class UIUtilities: NSObject {
                                                           viewControllerUsed: UIViewController,
                                                           action1: @escaping AlertAction,
                                                           action2: @escaping AlertAction, action3: @escaping AlertAction){
+      if !(errorTitle == "" && errorMessage == "") {
         let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle:UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction(title: errorAlertActionTitles?[0] ?? "", style: UIAlertAction.Style.default, handler: { (_) in
@@ -272,6 +277,7 @@ class UIUtilities: NSObject {
             }))
         }
         viewControllerUsed.present(alert, animated: true, completion: nil)
+      }
     }
     
 //    class func showAlertMessageWithThreeActionsAndHandler(_ errorTitle : String,errorMessage : String,errorAlertActionTitle : String,errorAlertActionTitle2 : String?,errorAlertActionTitle3 : String?,viewControllerUsed : UIViewController, action1: @escaping AlertAction, action2: @escaping AlertAction,action3: @escaping AlertAction){
@@ -300,7 +306,7 @@ class UIUtilities: NSObject {
                                                  message: String,
                                                  buttonTitle : String,
                                                  viewControllerUsed: UIViewController, action: @escaping AlertAction){
-        
+      if !(title == "" && message == "") {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction(title: buttonTitle, style: UIAlertAction.Style.default, handler: { (_) in
@@ -308,15 +314,18 @@ class UIUtilities: NSObject {
         }))
         
         viewControllerUsed.present(alert, animated:true, completion: nil)
+      }
     }
     
     class func showAlertMessage(_ errorTitle: String,
                                 errorMessage: String,
                                 errorAlertActionTitle : String,
                                 viewControllerUsed: UIViewController?) {
+      if !(errorTitle == "" && errorMessage == "") {
         let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle:UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: errorAlertActionTitle, style: UIAlertAction.Style.default, handler: nil))
         viewControllerUsed!.present(alert, animated:true, completion: nil)
+      }
     }
     
 }

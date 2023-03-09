@@ -47,6 +47,7 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
     var pdfData: Data?
     
     @IBOutlet weak var buttonEmailPdf: UIBarButtonItem?
+    @IBOutlet weak var buttonDone: UIBarButtonItem?
     
     @IBOutlet weak var buttonNext: UIButton?
     
@@ -85,6 +86,7 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
         webView.contentScaleFactor = 1.0
         webView.navigationDelegate = self
         
+        self.buttonDone?.title = NSLocalizedStrings("Done", comment: "")
         self.buttonNext?.setTitle(NSLocalizedStrings("Done", comment: ""), for: .normal)
     }
     

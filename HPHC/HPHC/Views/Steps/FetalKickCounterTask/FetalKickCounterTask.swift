@@ -130,6 +130,7 @@ class FetalKickCounterTask {
         summaryStep.title = kActivityCompleted
         summaryStep.image = #imageLiteral(resourceName: "successBlueBig")
         summaryStep.detailText = kThankYouForTime
+        summaryStep.steppreisHidden = "false"
        
         steps?.append(summaryStep)
         

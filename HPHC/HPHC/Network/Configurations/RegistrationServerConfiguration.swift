@@ -113,12 +113,14 @@ class RegistrationServerConfiguration: NetworkConfiguration {
             return [kUserAuthToken: User.currentUser.authToken,
                     "applicationId": appId,
                     "orgId": orgId,
+                    "Connection": "keep-alive",
                     "language": language
             ]
         } else {
             return [
                 "applicationId": appId,
                 "orgId": orgId,
+                "Connection": "keep-alive",
               "language": language
             ]
         }

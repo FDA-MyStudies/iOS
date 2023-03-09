@@ -19,8 +19,6 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import UIKit
-import Fabric
-import Crashlytics
 import UserNotifications
 import RealmSwift
 import CallKit
@@ -29,7 +27,7 @@ import IQKeyboardManagerSwift
 
 let kBlockerScreenLabelText = NSLocalizedStrings("Please update to the latest version of the app to continue.", comment: "")
 let kAppStoreUpdateText = NSLocalizedStrings("Please go to AppStore to update to the latest version of the app.", comment: "")
-
+let kAppManualUpdateText = NSLocalizedStrings("New version of app is available, click on 'Update' to update now or 'Cancel' to update later.", comment: "")
 let kConsentUpdatedTitle = NSLocalizedStrings("Consent Updated", comment: "")
 
 let kMessageConsentUpdatedPartTwo = NSLocalizedStrings(
@@ -114,31 +112,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-
+              DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                  /**
+                   To update the current App version to studyBuilder
+                   */
+//                  self.updateAppVersion()
+                          self.checkForAppUpdate()
+                      }
         self.isAppLaunched = true
         IQKeyboardManager.shared.enable = true
-     
-        self.customizeNavigationBar()
-        Fabric.with([Crashlytics.self])
+        IQKeyboardManager.shared.toolbarDoneBarButtonItemText = NSLocalizedStrings("Done", comment: "")
         
-        if #available(iOS 15, *) {
-              let appearance = UINavigationBarAppearance()
-              let navigationBar = UINavigationBar()
-
-              appearance.configureWithOpaqueBackground()
-              appearance.backgroundColor = .white
-              navigationBar.standardAppearance = appearance
-              UINavigationBar.appearance().standardAppearance.backgroundColor = .white
-              UINavigationBar.appearance().standardAppearance.shadowColor = .white
-              UINavigationBar.appearance().scrollEdgeAppearance = appearance
-              UINavigationBar.appearance().standardAppearance = appearance
-            }
+        self.customizeNavigationBar()
+        
+//        if #available(iOS 15, *) {
+//            let appearance = UINavigationBarAppearance()
+//            let navigationBar = UINavigationBar()
+//
+//            appearance.configureWithOpaqueBackground()
+//            appearance.backgroundColor = .white
+//            navigationBar.standardAppearance = appearance
+//            UINavigationBar.appearance().standardAppearance.backgroundColor = .white
+//            UINavigationBar.appearance().standardAppearance.shadowColor = .white
+//            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+//            UINavigationBar.appearance().standardAppearance = appearance
+//        }
         
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.checkForAppUpdate()
-                }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+//                    self.checkForAppUpdate()
+//                }
         
         if UIApplication.shared.applicationIconBadgeNumber > 0 {
             UIApplication.shared.applicationIconBadgeNumber = 0
@@ -258,7 +262,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.updateNotification()
         }
         // Check For Updates
-        self.checkForAppUpdate()
+//        self.checkForAppUpdate()
         
     }
     
@@ -649,10 +653,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: Checker Methods
+  /**
+   To update the current App version to studyBuilder
+   */
+  func updateAppVersion() {
+      WCPServices().updatesAppVersion(delegate: self)
+  }
     
     /**
      To get the current App version from App Store and Adds the blocker screen if it is of lower version
      */
+  
     func checkForAppUpdate() {
         WCPServices().checkForAppUpdates(delegate: self)
     }
@@ -1317,7 +1328,7 @@ extension AppDelegate {
                 self.shouldAddForceUpgradeScreen = true
                 self.blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!,
                                                                       detail: [:])
-                self.blockerScreen?.configureView(with: latestVersion)
+                self.blockerScreen?.configureView(with: latestVersion, isForceUpdate: true)
                 
                 if User.currentUser.userType == .FDAUser {
                     // FDA user
@@ -1328,6 +1339,24 @@ extension AppDelegate {
                     UIApplication.shared.keyWindow?.addSubview(self.blockerScreen!)
                 }
                 
+            } else if appVersion != latestVersion,
+                     latestVersion.compare(appVersion, options: .numeric, range: nil, locale: nil)
+                         == ComparisonResult.orderedDescending,
+                     !isForceUpdate {
+                // load manual update Screen
+                self.shouldAddForceUpgradeScreen = true
+                self.blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!,
+                                                                      detail: [:])
+                
+                self.blockerScreen?.configureView(with: latestVersion, isForceUpdate: false)
+                if User.currentUser.userType == .FDAUser {
+                    // FDA user
+                    if User.currentUser.settings?.passcode! == false {
+                        UIApplication.shared.keyWindow?.addSubview(self.blockerScreen!)
+                    }
+                } else {
+                    UIApplication.shared.keyWindow?.addSubview(self.blockerScreen!)
+                }
             }
         
         }
@@ -1387,8 +1416,6 @@ extension AppDelegate: NMWebServiceDelegate {
             if let response = response as? JSONDictionary {
                 handleAppUpdateResponse(response: response)
             }
-            
-
         } else if requestName as String == WCPMethods.eligibilityConsent.method.methodName {
             self.createEligibilityConsentTask()
             
@@ -1412,6 +1439,7 @@ extension AppDelegate: NMWebServiceDelegate {
             let ud = UserDefaults.standard
             ud.set(false, forKey: kNotificationRegistrationIsPending)
             ud.synchronize()
+        } else if (requestName as String == WCPMethods.studyUpdates.rawValue){
         }
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {

@@ -206,6 +206,13 @@ NSDateFormatter *ORKResultDateTimeFormatter() {
         dateTimeformatter = [[NSDateFormatter alloc] init];
         [dateTimeformatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
         dateTimeformatter.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+        NSString * localestr = @"en";
+        NSString * localeVal = [[NSUserDefaults standardUserDefaults] valueForKey: @"userDeviceLanguage"];
+        if ([localeVal containsString:@"es"]) {
+            localestr = @"es";
+        }
+        NSLocale *_currentLocale = [[NSLocale alloc] initWithLocaleIdentifier:localestr];
+        [dateTimeformatter setLocale:_currentLocale];
     });
     return dateTimeformatter;
 }
@@ -217,6 +224,13 @@ NSDateFormatter *ORKResultTimeFormatter() {
         timeformatter = [[NSDateFormatter alloc] init];
         [timeformatter setDateFormat:@"HH:mm"];
         timeformatter.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+        NSString * localestr = @"en";
+        NSString * localeVal = [[NSUserDefaults standardUserDefaults] valueForKey: @"userDeviceLanguage"];
+        if ([localeVal containsString:@"es"]) {
+            localestr = @"es";
+        }
+        NSLocale *_currentLocale = [[NSLocale alloc] initWithLocaleIdentifier:localestr];
+        [timeformatter setLocale:_currentLocale];
     });
     return timeformatter;
 }
@@ -228,6 +242,13 @@ NSDateFormatter *ORKResultDateFormatter() {
         dateformatter = [[NSDateFormatter alloc] init];
         [dateformatter setDateFormat:@"yyyy-MM-dd"];
         dateformatter.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+        NSString * localestr = @"en";
+        NSString * localeVal = [[NSUserDefaults standardUserDefaults] valueForKey: @"userDeviceLanguage"];
+        if ([localeVal containsString:@"es"]) {
+            localestr = @"es";
+        }
+        NSLocale *_currentLocale = [[NSLocale alloc] initWithLocaleIdentifier:localestr];
+        [dateformatter setLocale:_currentLocale];
     });
     return dateformatter;
 }
@@ -237,7 +258,13 @@ NSDateFormatter *ORKTimeOfDayLabelFormatter() {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         timeformatter = [[NSDateFormatter alloc] init];
-        NSString *dateFormat = [NSDateFormatter dateFormatFromTemplate:@"hma" options:0 locale:[NSLocale currentLocale]];
+        NSString * localestr = @"en";
+        NSString * localeVal = [[NSUserDefaults standardUserDefaults] valueForKey: @"userDeviceLanguage"];
+        if ([localeVal containsString:@"es"]) {
+            localestr = @"es";
+        }
+        NSLocale *_currentLocale = [[NSLocale alloc] initWithLocaleIdentifier:localestr];
+        NSString *dateFormat = [NSDateFormatter dateFormatFromTemplate:@"hma" options:0 locale:_currentLocale];
         [timeformatter setDateFormat:dateFormat];
         timeformatter.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     });
@@ -272,6 +299,16 @@ NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter() {
         [durationFormatter setAllowedUnits:NSCalendarUnitHour | NSCalendarUnitMinute];
         [durationFormatter setFormattingContext:NSFormattingContextStandalone];
         [durationFormatter setMaximumUnitCount: 2];
+        
+        NSString * localestr = @"en";
+        NSString * localeVal = [[NSUserDefaults standardUserDefaults] valueForKey: @"userDeviceLanguage"];
+        if ([localeVal containsString:@"es"]) {
+            localestr = @"es";
+        }
+        NSLocale *_currentLocale = [[NSLocale alloc] initWithLocaleIdentifier:localestr];
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        [calendar setLocale:_currentLocale];
+        durationFormatter.calendar = calendar;
     });
     return durationFormatter;
 }
@@ -282,7 +319,6 @@ NSBundle *ORKBundleEnglish() {
   
   //NSString * localeVal = [[NSLocale preferredLanguages] firstObject];
     NSString * localeVal = [[NSUserDefaults standardUserDefaults] valueForKey: @"userDeviceLanguage"];
-    NSLog(@"Krishna ORKBundleEnglish localeVal = %@",localeVal);
   if ([localeVal containsString:@"es"]) {
     localestr = @"es";
   }
@@ -294,7 +330,6 @@ NSBundle *ORKBundleEnglish() {
       NSString *path = [ORKBundle() pathForResource:localestr ofType:@"lproj"];
       bundle = [NSBundle bundleWithPath:path];
   });
-    NSLog(@"Krishna ORKBundleEnglish localeVal bundle = %@",bundle);
     return bundle;
 }
 
@@ -307,6 +342,16 @@ NSDateComponentsFormatter *ORKDurationStringFormatter() {
         [durationFormatter setAllowedUnits: NSCalendarUnitMinute | NSCalendarUnitSecond];
         [durationFormatter setFormattingContext:NSFormattingContextStandalone];
         [durationFormatter setMaximumUnitCount: 2];
+        
+        NSString * localestr = @"en";
+        NSString * localeVal = [[NSUserDefaults standardUserDefaults] valueForKey: @"userDeviceLanguage"];
+        if ([localeVal containsString:@"es"]) {
+            localestr = @"es";
+        }
+        NSLocale *_currentLocale = [[NSLocale alloc] initWithLocaleIdentifier:localestr];
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        [calendar setLocale:_currentLocale];
+        durationFormatter.calendar = calendar;
     });
     return durationFormatter;
 }
@@ -328,6 +373,16 @@ NSString *ORKTimeOfDayStringFromComponents(NSDateComponents *dateComponents) {
         [timeOfDayFormatter setUnitsStyle:NSDateComponentsFormatterUnitsStylePositional];
         [timeOfDayFormatter setAllowedUnits:NSCalendarUnitHour | NSCalendarUnitMinute];
         [timeOfDayFormatter setZeroFormattingBehavior:NSDateComponentsFormatterZeroFormattingBehaviorPad];
+        
+        NSString * localestr = @"en";
+        NSString * localeVal = [[NSUserDefaults standardUserDefaults] valueForKey: @"userDeviceLanguage"];
+        if ([localeVal containsString:@"es"]) {
+            localestr = @"es";
+        }
+        NSLocale *_currentLocale = [[NSLocale alloc] initWithLocaleIdentifier:localestr];
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        [calendar setLocale:_currentLocale];
+        timeOfDayFormatter.calendar = calendar;
     });
     return [timeOfDayFormatter stringFromDateComponents:dateComponents];
 }
@@ -340,6 +395,14 @@ NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string) {
         timeformatter = [[NSDateFormatter alloc] init];
         [timeformatter setDateFormat:@"HH:mm"];
         timeformatter.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+        
+        NSString * localestr = @"en";
+        NSString * localeVal = [[NSUserDefaults standardUserDefaults] valueForKey: @"userDeviceLanguage"];
+        if ([localeVal containsString:@"es"]) {
+            localestr = @"es";
+        }
+        NSLocale *_currentLocale = [[NSLocale alloc] initWithLocaleIdentifier:localestr];
+        [timeformatter setLocale:_currentLocale];
     });
     NSDate *date = [timeformatter dateFromString:string];
     return [ORKTimeOfDayReferenceCalendar() components:(NSCalendarUnitMinute |NSCalendarUnitHour) fromDate:date];

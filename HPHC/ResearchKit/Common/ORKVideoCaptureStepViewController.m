@@ -335,7 +335,6 @@
             });
         }
         else {
-            NSLog(@"Connection not ready");
             // Use the main queue, as UI components may need to be updated
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (handler) {

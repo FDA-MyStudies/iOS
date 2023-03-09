@@ -96,11 +96,6 @@
     
     _webView.translatesAutoresizingMaskIntoConstraints = NO;
     [self setUpConstraints];
-   
-    
-    NSLog(@"Krishna NSLocale.currentLocale value = %@",NSLocale.preferredLanguages.firstObject);
-    NSLog(@"Krishna ORKLocalizedString(@BUTTON_DONE, nil) = %@",ORKLocalizedString(@"BUTTON_DONE", nil));
-    
     
     self.navigationItem.rightBarButtonItem =  [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_DONE", nil)
                                                                                style:UIBarButtonItemStylePlain

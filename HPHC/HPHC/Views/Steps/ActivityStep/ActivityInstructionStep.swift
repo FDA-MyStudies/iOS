@@ -35,10 +35,10 @@ class ActivityInstructionStep: ActivityStep {
         
     }
     // Initializer with Dictionary
-    override func initWithDict(stepDict: Dictionary<String, Any>) {
+    override func initWithDict(stepDict: Dictionary<String, Any>, allSteps: Array<Dictionary<String, Any>>?) {
         
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
-            super.initWithDict(stepDict: stepDict)
+          super.initWithDict(stepDict: stepDict, allSteps: allSteps)
             
         } else {
             Logger.sharedInstance.debug("Instruction Step Dictionary is null:\(stepDict)")
@@ -59,6 +59,34 @@ class ActivityInstructionStep: ActivityStep {
             
             instructionStep.title = NSLocalizedStrings(title!, comment: "")
             instructionStep.text = text!
+          
+          
+          instructionStep.steppredestinationTrueStepKey = predestinationTrueStepKey ?? ""
+          instructionStep.steppreactivityid = preactivityid ?? ""
+          instructionStep.steppredestinationFalseStepKey = predestinationFalseStepKey ?? ""
+          
+          
+          
+          var valOtherActiStepId = UserDefaults.standard.value(forKey: "OtherActiStepId") as? String ?? "" //CHECK
+//           UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
+//       UserDefaults.standard.synchronize()
+           
+           if valOtherActiStepId == "0" {
+             valOtherActiStepId = "CompletionStep"
+           }
+          
+          instructionStep.steppreOtherActiStepId = valOtherActiStepId
+          instructionStep.steppredestinationTrueStepIndex = predestinationTrueStepIndex ?? ""
+          instructionStep.steppredestinationFalseStepIndex = predestinationFalseStepIndex ?? ""
+          instructionStep.stepresultType = resultType as? String ?? ""
+          instructionStep.steppreoperator = preoperator ?? ""
+          instructionStep.stepprevalue = prevalue ?? ""
+          instructionStep.steppresourceQuestionKey = presourceQuestionKey ?? ""
+          instructionStep.steppregroupId = pregroupId ?? ""
+          instructionStep.steppredefaultVisibility = predefaultVisibility ?? ""
+          instructionStep.steppreisHidden = preisHidden ?? ""
+          
+//          instructionStep.hi
             return instructionStep
         } else {
             Logger.sharedInstance.debug("Instruction Step Data is null ")

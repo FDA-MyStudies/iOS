@@ -1,0 +1,857 @@
+{
+  "message": "SUCCESS",
+  "activity": {
+    "type": "questionnaire",
+    "metadata": {
+      "studyId": "LIMITStudy2",
+      "activityId": "questionstep",
+      "name": "questionstep",
+      "version": "1.4",
+      "lastModified": "2022-05-10T02:06:15.000-0400",
+      "startDate": "",
+      "endDate": ""
+    },
+    "steps": [
+      {
+        "type": "instruction",
+        "groupId": "",
+        "sourceQuestionKey": "",
+        "resultType": "",
+        "key": "Instructionstep",
+        "title": "Instruction step Title",
+        "text": "Instruction step Text",
+        "skippable": false,
+        "isHidden": false,
+        "groupName": "",
+        "repeatable": false,
+        "repeatableText": "",
+        "destinations": [
+          {
+            "condition": "",
+            "operator": "",
+            "destination": "scale"
+          }
+        ],
+        "defaultVisibility": true,
+        "isPiping": false,
+        "preLoadLogic": {
+          "value": "",
+          "operator": "",
+          "activityid": "",
+          "activityVersion": "",
+          "destinationStepKey": ""
+        },
+        "piping": {
+          "sourceQuestionKey": "",
+          "pipingSnippet": "",
+          "activityId": "",
+          "activityVersion": ""
+        },
+        "healthDataKey": "",
+        "format": {},
+        "steps": [],
+        "options": []
+      },
+      {
+        "type": "question",
+        "groupId": "1",
+        "sourceQuestionKey": "",
+        "resultType": "scale",
+        "key": "scale",
+        "title": "scale Text",
+        "text": "scale Description",
+        "skippable": false,
+        "isHidden": false,
+        "groupName": "",
+        "repeatable": false,
+        "repeatableText": "",
+        "destinations": [
+          {
+            "condition": "",
+            "operator": "",
+            "destination": "cscale"
+          }
+        ],
+        "defaultVisibility": false,
+        "isPiping": false,
+        "preLoadLogic": {
+          "value": "40.0",
+          "operator": ">",
+          "activityid": "",
+          "activityVersion": "",
+          "destinationStepKey": "valuepicker"
+        },
+        "piping": {
+          "sourceQuestionKey": "",
+          "pipingSnippet": "",
+          "activityId": "",
+          "activityVersion": ""
+        },
+        "healthDataKey": "",
+        "format": {
+          "maxValue": 100,
+          "minValue": 0,
+          "step": 10,
+          "default": 10,
+          "vertical": false,
+          "maxDesc": "max",
+          "minDesc": "min",
+          "maxImage": "",
+          "minImage": ""
+        },
+        "steps": [],
+        "options": []
+      },
+      {
+        "type": "question",
+        "groupId": "1",
+        "sourceQuestionKey": "",
+        "resultType": "continuousScale",
+        "key": "cscale",
+        "title": "cscale text",
+        "text": "cscale Description",
+        "skippable": false,
+        "isHidden": false,
+        "groupName": "",
+        "repeatable": false,
+        "repeatableText": "",
+        "destinations": [
+          {
+            "condition": "",
+            "operator": "",
+            "destination": "textscale"
+          }
+        ],
+        "defaultVisibility": false,
+        "isPiping": false,
+        "preLoadLogic": {
+          "value": "400:200:350",
+          "operator": "<:AND:>:OR:>",
+          "activityid": "",
+          "activityVersion": "",
+          "destinationStepKey": "textchoice"
+        },
+        "piping": {
+          "sourceQuestionKey": "",
+          "pipingSnippet": "",
+          "activityId": "",
+          "activityVersion": ""
+        },
+        "healthDataKey": "",
+        "format": {
+          "maxValue": 500,
+          "minValue": 0,
+          "default": 10,
+          "maxFractionDigits": 1,
+          "vertical": false,
+          "maxDesc": "max",
+          "minDesc": "min",
+          "maxImage": "",
+          "minImage": ""
+        },
+        "steps": [],
+        "options": []
+      },
+      {
+        "type": "question",
+        "groupId": "2",
+        "sourceQuestionKey": "",
+        "resultType": "textScale",
+        "key": "textscale",
+        "title": "text scale t",
+        "text": "text scale d",
+        "skippable": false,
+        "isHidden": false,
+        "groupName": "",
+        "repeatable": false,
+        "repeatableText": "",
+        "destinations": [
+          {
+            "condition": "1",
+            "operator": "",
+            "destination": "valuepicker"
+          },
+          {
+            "condition": "2",
+            "operator": "",
+            "destination": "valuepicker"
+          },
+          {
+            "condition": "3",
+            "operator": "",
+            "destination": "valuepicker"
+          },
+          {
+            "condition": "",
+            "operator": "",
+            "destination": "valuepicker"
+          }
+        ],
+        "defaultVisibility": false,
+        "isPiping": false,
+        "preLoadLogic": {
+          "value": "2",
+          "operator": "=",
+          "activityid": "",
+          "activityVersion": "",
+          "isPiping": false,
+          "destinationStepKey": "textchoice"
+        },
+        "piping": {
+          "sourceQuestionKey": "",
+          "pipingSnippet": "",
+          "activityId": "",
+          "activityVersion": ""
+        },
+        "healthDataKey": "",
+        "format": {
+          "textChoices": [
+            {
+              "text": "A",
+              "value": "1",
+              "detail": "",
+              "exclusive": true
+            },
+            {
+              "text": "B",
+              "value": "2",
+              "detail": "",
+              "exclusive": true
+            },
+            {
+              "text": "C",
+              "value": "3",
+              "detail": "",
+              "exclusive": true
+            }
+          ],
+          "default": 2,
+          "vertical": true
+        },
+        "steps": [],
+        "options": []
+      },
+      {
+        "type": "question",
+        "groupId": "3",
+        "sourceQuestionKey": "scale",
+        "resultType": "valuePicker",
+        "key": "valuepicker",
+        "title": "value picker t",
+        "text": "value picker d",
+        "skippable": false,
+        "isHidden": true,
+        "groupName": "",
+        "repeatable": false,
+        "repeatableText": "",
+        "destinations": [
+          {
+            "condition": "1",
+            "operator": "",
+            "destination": "imagechoice"
+          },
+          {
+            "condition": "2",
+            "operator": "",
+            "destination": "imagechoice"
+          },
+          {
+            "condition": "3",
+            "operator": "",
+            "destination": "imagechoice"
+          },
+          {
+            "condition": "",
+            "operator": "",
+            "destination": "imagechoice"
+          }
+        ],
+        "defaultVisibility": false,
+        "isPiping": false,
+        "preLoadLogic": {
+          "value": "1",
+          "operator": "=",
+          "activityid": "textchoice",
+          "activityVersion": "",
+          "destinationStepKey": "date"
+        },
+        "piping": {
+          "sourceQuestionKey": "",
+          "pipingSnippet": "",
+          "activityId": "",
+          "activityVersion": ""
+        },
+        "healthDataKey": "",
+        "format": {
+          "textChoices": [
+            {
+              "text": "A",
+              "value": "1",
+              "detail": "",
+              "exclusive": true
+            },
+            {
+              "text": "B",
+              "value": "2",
+              "detail": "",
+              "exclusive": true
+            },
+            {
+              "text": "C",
+              "value": "3",
+              "detail": "",
+              "exclusive": true
+            }
+          ]
+        },
+        "steps": [],
+        "options": []
+      },
+      {
+        "type": "question",
+        "groupId": "",
+        "sourceQuestionKey": "cscale",
+        "resultType": "imageChoice",
+        "key": "imagechoice",
+        "title": "image choice t",
+        "text": "image choice d",
+        "skippable": true,
+        "isHidden": false,
+        "groupName": "",
+        "repeatable": false,
+        "repeatableText": "",
+        "destinations": [
+          {
+            "condition": "1",
+            "operator": "",
+            "destination": "textchoice"
+          },
+          {
+            "condition": "2",
+            "operator": "",
+            "destination": "textchoice"
+          },
+          {
+            "condition": "",
+            "operator": "",
+            "destination": "textchoice"
+          }
+        ],
+        "defaultVisibility": true,
+        "isPiping": false,
+        "preLoadLogic": {
+          "value": "",
+          "operator": "",
+          "activityid": "",
+          "activityVersion": "",
+          "isPiping": false,
+          "destinationStepKey": "textchoice"
+        },
+        "piping": {
+          "sourceQuestionKey": "",
+          "pipingSnippet": "",
+          "activityId": "",
+          "activityVersion": ""
+        },
+        "healthDataKey": "",
+        "format": {
+          "imageChoices": [
+            {
+              "image": "",
+              "selectedImage": "",
+              "text": "A",
+              "value": "1"
+            },
+            {
+              "image": "",
+              "selectedImage": "",
+              "text": "B",
+              "value": "2"
+            }
+          ]
+        },
+        "steps": [],
+        "options": []
+      },
+      {
+        "type": "question",
+        "groupId": "2",
+        "sourceQuestionKey": "cscale",
+        "resultType": "textChoice",
+        "key": "textchoice",
+        "title": "text choice t",
+        "text": "text choice d",
+        "skippable": false,
+        "isHidden": true,
+        "groupName": "",
+        "repeatable": false,
+        "repeatableText": "",
+        "destinations": [
+          {
+            "condition": "1",
+            "operator": "",
+            "destination": "boolean"
+          },
+          {
+            "condition": "2",
+            "operator": "",
+            "destination": "boolean"
+          },
+          {
+            "condition": "",
+            "operator": "",
+            "destination": "boolean"
+          },
+          {
+            "condition": "3",
+            "operator": "",
+            "destination": "boolean"
+          }
+        ],
+        "defaultVisibility": false,
+        "isPiping": true,
+        "preLoadLogic": {
+          "value": "2",
+          "operator": "=",
+          "activityid": "",
+          "activityVersion": "",
+          "destinationStepKey": "numeric"
+        },
+        "piping": {
+          "sourceQuestionKey": "",
+          "pipingSnippet": "",
+          "activityId": "",
+          "activityVersion": ""
+        },
+        "healthDataKey": "",
+        "format": {
+          "textChoices": [
+            {
+              "text": "A",
+              "detail": "Description A",
+              "value": "1",
+              "exclusive": false
+            },
+            {
+              "text": "B",
+              "detail": "Description B",
+              "value": "2",
+              "exclusive": false
+            },
+            {
+              "value": "3",
+              "text": "Other",
+              "detail": "Other",
+              "exclusive": false,
+              "other": {
+                "placeholder": "Place holder text for the text field",
+                "isMandatory": true,
+                "textfieldReq": true
+              }
+            }
+          ],
+          "selectionStyle": "Single"
+        },
+        "steps": [],
+        "options": []
+      },
+      {
+        "type": "question",
+        "sourceQuestionKey": "valuepicker",
+        "groupId": "",
+        "resultType": "boolean",
+        "key": "boolean",
+        "title": "boolean t",
+        "text": "boolean d",
+        "skippable": true,
+        "isHidden": true,
+        "groupName": "",
+        "repeatable": false,
+        "repeatableText": "",
+        "destinations": [
+          {
+            "condition": "true",
+            "operator": "",
+            "destination": "numeric"
+          },
+          {
+            "condition": "false",
+            "operator": "",
+            "destination": "numeric"
+          },
+          {
+            "condition": "",
+            "operator": "",
+            "destination": "numeric"
+          }
+        ],
+        "defaultVisibility": true,
+        "isPiping": false,
+        "preLoadLogic": {
+          "value": "",
+          "operator": "",
+          "activityid": "",
+          "activityVersion": "",
+          "destinationTrueKey": ""
+        },
+        "piping": {
+          "sourceQuestionKey": "textchoice",
+          "pipingSnippet": "boolean",
+          "activityId": "",
+          "activityVersion": ""
+        },
+        "healthDataKey": "",
+        "format": {},
+        "steps": [],
+        "options": []
+      },
+      {
+        "type": "question",
+        "groupId": "1",
+        "sourceQuestionKey": "textchoice",
+        "resultType": "numeric",
+        "key": "numeric",
+        "title": "numeric t",
+        "text": "numeric d",
+        "skippable": true,
+        "isHidden": true,
+        "groupName": "",
+        "repeatable": false,
+        "repeatableText": "",
+        "destinations": [
+          {
+            "condition": "",
+            "operator": "",
+            "destination": "time"
+          }
+        ],
+        "defaultVisibility": true,
+        "isPiping": false,
+        "preLoadLogic": {
+          "value": "400:200:350",
+          "operator": "<:AND:>:OR",
+          "activityid": "",
+          "activityVersion": "",
+          "destinationStepKey": "0"
+        },
+        "piping": {
+          "sourceQuestionKey": "textchoice",
+          "pipingSnippet": "numeric",
+          "activityId": "",
+          "activityVersion": ""
+        },
+        "healthDataKey": "HKQuantityTypeIdentifierNikeFuel",
+        "format": {
+          "style": "Decimal",
+          "minValue": 0,
+          "maxValue": 10000,
+          "placeholder": "Placeholder",
+          "unit": "units"
+        },
+        "steps": [],
+        "options": []
+      },
+      {
+        "type": "question",
+        "groupId": "",
+        "sourceQuestionKey": "",
+        "resultType": "timeOfDay",
+        "key": "time",
+        "title": "time t",
+        "text": "time d",
+        "skippable": true,
+        "isHidden": false,
+        "groupName": "",
+        "repeatable": false,
+        "repeatableText": "",
+        "destinations": [
+          {
+            "condition": "",
+            "operator": "",
+            "destination": "date"
+          }
+        ],
+        "defaultVisibility": true,
+        "isPiping": false,
+        "preLoadLogic": {
+          "value": "",
+          "operator": "",
+          "activityid": "",
+          "activityVersion": "",
+          "destinationStepKey": ""
+        },
+        "piping": {
+          "sourceQuestionKey": "",
+          "pipingSnippet": "",
+          "activityId": "",
+          "activityVersion": ""
+        },
+        "healthDataKey": "",
+        "format": {},
+        "steps": [],
+        "options": []
+      },
+      {
+        "type": "question",
+        "groupId": "",
+        "sourceQuestionKey": "",
+        "resultType": "date",
+        "key": "date",
+        "title": "date t",
+        "text": "date d",
+        "skippable": true,
+        "isHidden": false,
+        "groupName": "",
+        "repeatable": false,
+        "repeatableText": "",
+        "destinations": [
+          {
+            "condition": "",
+            "operator": "",
+            "destination": "text"
+          }
+        ],
+        "defaultVisibility": true,
+        "isPiping": false,
+        "preLoadLogic": {
+          "value": "",
+          "operator": "",
+          "activityid": "",
+          "activityVersion": "",
+          "destinationStepKey": ""
+        },
+        "piping": {
+          "sourceQuestionKey": "",
+          "pipingSnippet": "",
+          "activityId": "",
+          "activityVersion": ""
+        },
+        "healthDataKey": "",
+        "format": {
+          "style": "Date",
+          "minDate": "",
+          "maxDate": "",
+          "default": "",
+          "dateRange": "custom"
+        },
+        "steps": [],
+        "options": []
+      },
+      {
+        "type": "question",
+        "groupId": "3",
+        "sourceQuestionKey": "",
+        "resultType": "text",
+        "key": "text",
+        "title": "text t",
+        "text": "text d",
+        "skippable": true,
+        "isHidden": false,
+        "groupName": "",
+        "repeatable": false,
+        "repeatableText": "",
+        "destinations": [
+          {
+            "condition": "",
+            "operator": "",
+            "destination": "email"
+          }
+        ],
+        "defaultVisibility": true,
+        "isPiping": true,
+        "preLoadLogic": {
+          "value": "",
+          "operator": "",
+          "activityid": "",
+          "activityVersion": "",
+          "destinationStepKey": ""
+        },
+        "piping": {
+          "sourceQuestionKey": "text",
+          "pipingSnippet": "email",
+          "activityId": "",
+          "activityVersion": ""
+        },
+        "healthDataKey": "",
+        "format": {
+          "maxLength": 0,
+          "validationRegex": "",
+          "multipleLines": false,
+          "placeholder": "Placeholder",
+          "invalidMessage": "Invalid Message"
+        },
+        "steps": [],
+        "options": []
+      },
+      {
+        "type": "question",
+        "groupId": "4",
+        "sourceQuestionKey": "",
+        "resultType": "email",
+        "key": "email",
+        "title": "email t",
+        "text": "email d",
+        "skippable": true,
+        "isHidden": false,
+        "groupName": "",
+        "repeatable": false,
+        "repeatableText": "",
+        "destinations": [
+          {
+            "condition": "",
+            "operator": "",
+            "destination": "timeinterval"
+          }
+        ],
+        "defaultVisibility": true,
+        "isPiping": false,
+        "preLoadLogic": {
+          "value": "",
+          "operator": "",
+          "activityid": "",
+          "activityVersion": "",
+          "destinationStepKey": ""
+        },
+        "piping": {
+          "sourceQuestionKey": "text",
+          "pipingSnippet": "email",
+          "activityId": "",
+          "activityVersion": ""
+        },
+        "healthDataKey": "",
+        "format": {
+          "placeholder": "Placeholder"
+        },
+        "steps": [],
+        "options": []
+      },
+      {
+        "type": "question",
+        "groupId": "",
+        "sourceQuestionKey": "text",
+        "resultType": "timeInterval",
+        "key": "timeinterval",
+        "title": "time interval t",
+        "text": "time interval d",
+        "skippable": true,
+        "groupName": "",
+        "repeatable": false,
+        "repeatableText": "",
+        "destinations": [
+          {
+            "condition": "",
+            "operator": "",
+            "destination": "height"
+          }
+        ],
+        "defaultVisibility": true,
+        "isPiping": true,
+        "preLoadLogic": {
+          "value": "",
+          "operator": "",
+          "activityid": "",
+          "activityVersion": "",
+          "destinationStepKey": ""
+        },
+        "piping": {
+          "sourceQuestionKey": "",
+          "pipingSnippet": "",
+          "activityId": "",
+          "activityVersion": ""
+        },
+        "healthDataKey": "",
+        "format": {
+          "default": 60,
+          "step": 1
+        },
+        "steps": [],
+        "options": []
+      },
+      {
+        "type": "question",
+        "groupId": "",
+        "sourceQuestionKey": "",
+        "resultType": "height",
+        "key": "height",
+        "title": "height t",
+        "text": "height d",
+        "skippable": true,
+        "isHidden": false,
+        "groupName": "",
+        "repeatable": false,
+        "repeatableText": "",
+        "destinations": [
+          {
+            "condition": "",
+            "operator": "",
+            "destination": "location"
+          }
+        ],
+        "defaultVisibility": true,
+        "isPiping": false,
+        "preLoadLogic": {
+          "value": "",
+          "operator": "",
+          "activityid": "",
+          "activityVersion": "",
+          "destinationStepKey": ""
+        },
+        "piping": {
+          "sourceQuestionKey": "",
+          "pipingSnippet": "",
+          "activityId": "",
+          "activityVersion": ""
+        },
+        "healthDataKey": "HKQuantityTypeIdentifierStepCount",
+        "format": {
+          "measurementSystem": "US",
+          "placeholder": "Placeholder Text"
+        },
+        "steps": [],
+        "options": []
+      },
+      {
+        "type": "question",
+        "groupId": "",
+        "sourceQuestionKey": "",
+        "resultType": "location",
+        "key": "location",
+        "title": "location t",
+        "text": "location d",
+        "skippable": true,
+        "isHidden": false,
+        "groupName": "",
+        "repeatable": false,
+        "repeatableText": "",
+        "destinations": [
+          {
+            "condition": "",
+            "operator": "",
+            "destination": ""
+          }
+        ],
+        "defaultVisibility": true,
+        "isPiping": false,
+        "preLoadLogic": {
+          "value": "",
+          "operator": "",
+          "activityid": "",
+          "activityVersion": "",
+          "destinationStepKey": ""
+        },
+        "piping": {
+          "sourceQuestionKey": "",
+          "pipingSnippet": "",
+          "activityId": "",
+          "activityVersion": ""
+        },
+        "healthDataKey": "",
+        "format": {
+          "useCurrentLocation": false
+        },
+        "steps": [],
+        "options": []
+      }
+    ]
+  }
+}

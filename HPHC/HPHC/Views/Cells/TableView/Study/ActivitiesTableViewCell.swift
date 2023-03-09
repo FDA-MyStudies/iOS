@@ -278,24 +278,25 @@ class ActivitiesTableViewCell: UITableViewCell {
             let runStartTime =  runStartTimingsList.joined(separator: " | ")
             let dailyStartDate =  ActivitiesTableViewCell.dailyActivityFormatter.string(from: startDate!)
             let endDate = ActivitiesTableViewCell.dailyActivityFormatter.string(from: endDate!)
-            labelTime?.text = runStartTime  + "\n" +  dailyStartDate + " to " + endDate
+            labelTime?.text = runStartTime  + "\n" +  dailyStartDate + " " + NSLocalizedStrings("to", comment: "") + " " + endDate
             
         case .Weekly: // Handle for Weekly Frequency
             
             var weeklyStartTime = ActivitiesTableViewCell.weeklyformatter.string(from: startDate!)
-            weeklyStartTime = weeklyStartTime.replacingOccurrences(of: ",", with: "every")
+            weeklyStartTime = weeklyStartTime.replacingOccurrences(of: ",", with: NSLocalizedStrings("every", comment: ""))
             let endDate = ActivitiesTableViewCell.formatter.string(from: endDate!)
             
-            labelTime?.text = weeklyStartTime + " to " + endDate
+            labelTime?.text = weeklyStartTime + " " + NSLocalizedStrings("to", comment: "") + " " + endDate
             
         case .Monthly: // Handle for Monthly Frequency
             
             var monthlyStartTime = ActivitiesTableViewCell.monthlyformatter.string(from: startDate!)
-            monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ",", with: "on")
-            monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ";", with: "every month\n")
-            
+            monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ",", with: NSLocalizedStrings("on", comment: ""))
+            // monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ";", with: "every month\n")
+            monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ";", with: NSLocalizedStrings("every month", comment: "") + "\n")
+
             let endDate = ActivitiesTableViewCell.formatter.string(from: endDate!)
-            labelTime?.text = monthlyStartTime + " to " + endDate
+            labelTime?.text = monthlyStartTime + " " + NSLocalizedStrings("to", comment: "") + " " + endDate
 
         case .Scheduled: // Handle for Scheduled Frequency
             
@@ -342,21 +343,21 @@ class ActivitiesTableViewCell: UITableViewCell {
     */
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en")
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.dateFormat = "MMM dd YYYY"
         return formatter
     }()
     
     private static let dailyActivityFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en")
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.dateFormat = "MMM dd YYYY"
         return formatter
     }()
     
     private static let oneTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en")
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.dateFormat = "hh:mma, MMM dd YYYY"
         
         return formatter
@@ -364,27 +365,27 @@ class ActivitiesTableViewCell: UITableViewCell {
     
     private static let weeklyformatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en")
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.dateFormat = "hh:mma , EEE MMM dd YYYY"
         return formatter
     }()
 
     private static let monthlyformatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en")
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.dateFormat = "hh:mma , dd ;MMM dd YYYY"
         return formatter
     }()
 
     private static let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en")
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.dateFormat = "hh:mma"
         return formatter
     }()
     private static let dailyFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en")
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.dateFormat = "HH:mm:ss"
         return formatter
     }()

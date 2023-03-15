@@ -23,5 +23,4 @@ func perf(_ text: String, closure: () -> Void) {
   let measurementStop = Date()
   let executionTime = measurementStop.timeIntervalSince(measurementStart)
 
-  print("\(text) \(executionTime)")
 }

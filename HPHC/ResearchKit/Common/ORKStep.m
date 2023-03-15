@@ -89,6 +89,20 @@
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKStep *step = [[[self class] allocWithZone:zone] initWithIdentifier:[_identifier copy]];
     step.title = _title;
+  step.steppredestinationTrueStepKey = _steppredestinationTrueStepKey;
+  step.steppreactivityid = _steppreactivityid;
+  step.steppredestinationFalseStepKey = _steppredestinationFalseStepKey;
+  step.steppreOtherActiStepId = _steppreOtherActiStepId;
+  step.steppreActiBack = _steppreActiBack;
+  step.steppredestinationTrueStepIndex = _steppredestinationTrueStepIndex;
+  step.steppredestinationFalseStepIndex = _steppredestinationFalseStepIndex;
+  step.stepresultType = _stepresultType;
+  step.steppreoperator = _steppreoperator;
+  step.stepprevalue = _stepprevalue;
+  step.steppresourceQuestionKey = _steppresourceQuestionKey;
+  step.steppregroupId = _steppregroupId;
+  step.steppredefaultVisibility = _steppredefaultVisibility;
+  step.steppreisHidden = _steppreisHidden;
     step.optional = _optional;
     step.text = _text;
     step.shouldTintImages = _shouldTintImages;

@@ -111,6 +111,10 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
 
     self.view.backgroundColor = ORKColor(ORKBackgroundColorKey);
     [self.taskViewController.navigationBar setBarTintColor:[self.view backgroundColor]];
+    
+    [self.navigationController.navigationBar setBackgroundColor:[self.view backgroundColor]];
+    [self.navigationController.view setBackgroundColor:ORKColor(ORKLightTintColorKey)];
+
     if ([self step].title) {
         self.title = [self step].title;
     } else {
@@ -123,6 +127,7 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
         [self setupiPadStepTitleLabel];
         [self setupiPadConstraints];
     }
+  
 }
 
 - (void)setupiPadBackgroundView {
@@ -329,6 +334,10 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
     
     [super viewDidDisappear:animated];
 
+  if ([_step.identifier  isEqual: @"CompletionStep"]) {
+    _step.steppresourceQuestionKey = @"";
+  }
+  
     // Set endDate if current stepVC is dismissed
     // Because stepVC is embeded in a UIPageViewController,
     // when current stepVC is out of screen, it didn't belongs to UIPageViewController's viewControllers any more.

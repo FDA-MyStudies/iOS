@@ -403,7 +403,7 @@ class AnchorDateHandler {
                             
                             let anchorDateObject = data[emptyAnchorDateDetail.sourceKey] as? [String:String]
                             let anchorDateString = anchorDateObject?["value"]// as! String
-                            let date = ResponseDataFetch.labkeyDateFormatter.date(from: anchorDateString!)
+                            let date = ResponseDataFetch.labkeyDateFormatter.date(from: anchorDateString ?? "")
                             emptyAnchorDateDetail.anchorDate = date
                         }
                     }

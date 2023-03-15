@@ -117,16 +117,16 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 - (instancetype)initWithStep:(ORKStep *)step result:(ORKResult *)result {
     self = [self initWithStep:step];
     if (self) {
-		ORKStepResult *stepResult = (ORKStepResult *)result;
-		if (stepResult && [stepResult results].count > 0) {
+        ORKStepResult *stepResult = (ORKStepResult *)result;
+        if (stepResult && [stepResult results].count > 0) {
             ORKQuestionResult *questionResult = ORKDynamicCast([stepResult results].firstObject, ORKQuestionResult);
             id answer = [questionResult answer];
             if (questionResult != nil && answer == nil) {
                 answer = ORKNullAnswerValue();
             }
-			self.answer = answer;
+            self.answer = answer;
             self.originalAnswer = answer;
-		}
+        }
     }
     return self;
 }
@@ -588,13 +588,12 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 - (void)notifyDelegateOnResultChange {
     [super notifyDelegateOnResultChange];
     
-    if (self.hasNextStep == NO) {
+    if (self.hasNextStep == NO) {//change
         self.continueButtonItem = self.internalDoneButtonItem;
     } else {
         self.continueButtonItem = self.internalContinueButtonItem;
     }
     
-    self.skipButtonItem = self.internalSkipButtonItem;
     if (!self.questionStep.optional && !self.readOnlyMode) {
         self.skipButtonItem = nil;
     }
@@ -714,7 +713,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     
     ORKSurveyAnswerCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-    if (cell == nil) { 
+    if (cell == nil) {
         cell = [[class alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier step:[self questionStep] answer:self.answer delegate:self];
     }
     
@@ -829,11 +828,11 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     [self saveAnswer:answer];
     self.hasChangedAnswer = YES;
     
-    if (immediateNavigation) {
-        // Proceed as continueButton tapped
-        ORKSuppressPerformSelectorWarning(
-                                         [self.continueButtonItem.target performSelector:self.continueButtonItem.action withObject:self.continueButtonItem];);
-    }
+//    if (immediateNavigation) {
+//        // Proceed as continueButton tapped
+//        ORKSuppressPerformSelectorWarning(
+//                                         [self.continueButtonItem.target performSelector:self.continueButtonItem.action withObject:self.continueButtonItem];);
+//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

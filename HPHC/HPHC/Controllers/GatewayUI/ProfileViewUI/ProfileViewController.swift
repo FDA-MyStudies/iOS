@@ -46,6 +46,7 @@ let kUseFaceIdOrPasscode = NSLocalizedStrings("Use Passcode or Face ID to access
 let kUsePasscodeToAccessApp = NSLocalizedStrings("Use Passcode to access app", comment: "")
 let kSaveText = NSLocalizedStrings("Save", comment: "")
 let kChangePasscodeText = NSLocalizedStrings("Change Passcode", comment: "")
+let kChangePasswordText = NSLocalizedStrings("Change Password", comment: "")
 let kEditText = NSLocalizedStrings("Edit", comment: "")
 
 let ktouchid = "touchIdEnabled"
@@ -68,6 +69,8 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
     var isPasscodeViewPresented: Bool = false
     
     var passcodeStateIsEditing: Bool = false
+  
+  var passcodeAccessEditing: Bool = false
     
     var isProfileEdited = false
   
@@ -90,8 +93,9 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         // Load plist info
         var plistPath = Bundle.main.path(forResource: "Profile", ofType: ".plist", inDirectory: nil)
         let localeDefault = getLanguageLocale()
-        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
-          plistPath = Bundle.main.path(forResource: "Profile", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        plistPath = Bundle.main.path(forResource: "Profile", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        if localeDefault.hasPrefix("es"){
+            plistPath = Bundle.main.path(forResource: "Profile", ofType: ".plist", inDirectory: nil, forLocalization: "es")
         }
         
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
@@ -200,6 +204,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         datePickerView?.datePickerMode = .countDownTimer
         
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: getLanguageLocale())
         dateFormatter.dateFormat = "HH:mm"
         
         datePickerView?.date = dateFormatter.date(from: "00:00")!
@@ -466,13 +471,14 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             
             switch ToggelSwitchTags(rawValue: sender.tag)! as ToggelSwitchTags{
             case .usePasscode:
+              passcodeAccessEditing = true
                 user.settings?.passcode = toggle?.isOn
                 valPasscodeRow = sender.tag
                 if toggle?.isOn == true{
-                    
-                    if ORKPasscodeViewController.isPasscodeStoredInKeychain(){
-                        ORKPasscodeViewController.removePasscodeFromKeychain()
-                    }
+                    //new
+//                    if ORKPasscodeViewController.isPasscodeStoredInKeychain(){
+//                        ORKPasscodeViewController.removePasscodeFromKeychain()
+//                    }
                 }
                 
                 self.checkPasscode()
@@ -654,7 +660,8 @@ extension ProfileViewController: UITableViewDataSource {
                 cell.buttonChangePassword?.isUserInteractionEnabled =  true
                 cell.buttonChangePassword?.isHidden =  false
                 cell.buttonChangePassword?.addTarget(self, action:#selector(pushToChangePassword), for: .touchUpInside)
-                 cell.buttonChangePassword?.setTitleColor(kUIColorForSubmitButtonBackground, for: .normal)
+                cell.buttonChangePassword?.setTitleColor(kUIColorForSubmitButtonBackground, for: .normal)
+                cell.buttonChangePassword?.setTitle(kChangePasswordText, for: .normal)
                 cell.textFieldValue?.isHidden = true
                 cell.isUserInteractionEnabled = true
                 
@@ -846,7 +853,12 @@ extension ProfileViewController: NMWebServiceDelegate {
 extension ProfileViewController: ORKPasscodeDelegate {
     
     func passcodeViewControllerDidFinish(withSuccess viewController: UIViewController) {
-        
+      if passcodeAccessEditing {
+        passcodeAccessEditing = false
+      if ORKPasscodeViewController.isPasscodeStoredInKeychain() && !(user.settings?.passcode ?? true){
+          ORKPasscodeViewController.removePasscodeFromKeychain()
+      }
+      }
         UserServices().updateUserProfile(self)
         self.isPasscodeViewPresented = true
        
@@ -859,10 +871,10 @@ extension ProfileViewController: ORKPasscodeDelegate {
     }
     
     func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {
-        
+      passcodeAccessEditing = false
     }
     func passcodeViewControllerDidCancel(_ viewController: UIViewController){
-        
+      passcodeAccessEditing = false
 //      if valPasscodeRow < 99 && valPasscodeSection < 99 {
 //        let indexPath = IndexPath(row: valPasscodeRow, section: valPasscodeSection)
 //        let cell = tableViewProfile?.cellForRow(at: indexPath)  as? ProfileTableViewCell
@@ -870,9 +882,29 @@ extension ProfileViewController: ORKPasscodeDelegate {
 ////        tableViewProfile?.reloadRows(at: [indexPath], with: .automatic)
 //      }
        
-        if passcodeStateIsEditing{
+      if passcodeStateIsEditing {
+//        self.passcodeStateIsEditing = false
+      } else {
+        self.passcodeStateIsEditing = false
+        self.user.settings?.passcode = true
+        
+        if self.valPasscodeRow < 99 && self.valPasscodeSection < 99 {
+          let indexPath = IndexPath(row: self.valPasscodeRow, section: self.valPasscodeSection)
+          let cell = self.tableViewProfile?.cellForRow(at: indexPath)  as? ProfileTableViewCell
+          cell?.switchToggle?.setOn(true, animated: true)
+  //        tableViewProfile?.reloadRows(at: [indexPath], with: .automatic)
+        }
+        viewController.dismiss(animated: true, completion: {
+
+        })
+        
+        self.tableViewProfile?.reloadData()
+        UserServices().updateUserProfile(self)
+      }
+      
+        if passcodeStateIsEditing{//new
             viewController.dismiss(animated: true, completion: {
-                self.passcodeStateIsEditing = false
+//                self.passcodeStateIsEditing = false
               
 //              self.user.settings?.passcode = true
                
@@ -885,7 +917,8 @@ extension ProfileViewController: ORKPasscodeDelegate {
               
 //              self.tableViewProfile?.reloadData()
             })
-        }
+          
+        }//new
         
     }
     

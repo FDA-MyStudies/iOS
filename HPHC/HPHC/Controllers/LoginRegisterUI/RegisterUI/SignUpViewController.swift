@@ -113,7 +113,7 @@ class SignUpViewController: UIViewController{
       
         TermsAndPolicy.currentTermsAndPolicy?.initWith(terms: terms, policy: policyURL)
         self.agreeToTermsAndConditions()
-      
+        setNavigationBarColor()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -160,17 +160,18 @@ class SignUpViewController: UIViewController{
         var foundRange = attributedString.mutableString.range(of: NSLocalizedStrings("Terms", comment: ""))
         attributedString.addAttribute(NSAttributedString.Key.link,
                                       value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
-        
+        attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont(name: "HelveticaNeue-Medium", size: 16.0)!, range: foundRange)
         foundRange = attributedString.mutableString.range(of: NSLocalizedStrings("Privacy Policy", comment: ""))
         attributedString.addAttribute(NSAttributedString.Key.link,
                                       value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String, range: foundRange)
-        
+        attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont(name: "HelveticaNeue-Medium", size: 16.0)!, range: foundRange)
         termsAndCondition?.attributedText = attributedString
         
       termsAndCondition?.linkTextAttributes =
         convertToOptionalNSAttributedStringKeyDictionary(
             [NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA),
-             NSAttributedString.Key.font.rawValue : "HelveticaNeue-Medium"])
+//             NSAttributedString.Key.font.rawValue : "HelveticaNeue-Medium"
+            ])
         
     }
     
@@ -582,6 +583,6 @@ extension SignUpViewController: NMWebServiceDelegate {
 
 // Helper function inserted by Swift 4.2 migrator.
 private func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
-	guard let input = input else { return nil }
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+  guard let input = input else { return nil }
+  return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

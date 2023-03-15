@@ -450,7 +450,7 @@ class DBHandler: NSObject {
     class func loadStudyOverview(studyId: String, completionHandler: @escaping (Overview?) -> ()){
         
         let realm = DBHandler.getRealmObject()!
-        let studies =  realm.objects(DBOverviewSection.self).filter("studyId == %@", studyId)
+        let studies =  realm.objects(DBOverviewSection.self).filter("studyId == %@", studyId).sorted(byKeyPath: "sectionId", ascending: true)
         let study =  realm.objects(DBStudy.self).filter("studyId == %@", studyId).last
        
         if studies.count > 0 {
@@ -774,18 +774,19 @@ class DBHandler: NSObject {
         }
         
         // get source question value and key
-        let results = response["results"] as! Array<Dictionary<String, Any>>
-        var quesStepKey:String
-        var dictionary:[String:Any] = [:]
-        let sourceKey = (dbActivity.sourceKey)!
-        if dbActivity.sourceFormKey != nil && dbActivity.sourceFormKey!.count > 0{
-            quesStepKey = dbActivity.sourceFormKey!
-            let quesResults = results.filter({$0["key"] as! String == quesStepKey}).first
-            let resultsArray =  ((quesResults!["value"] as? [[Any]])?.first) as? [[String:Any]]
-            dictionary = resultsArray!.filter({$0["key"] as! String == sourceKey}).first!
-        } else {
-            dictionary = results.filter({$0["key"] as! String == sourceKey}).first!
-        }
+      let results = response["results"] as! Array<Dictionary<String, Any>>
+      var quesStepKey:String
+      var dictionary:[String:Any] = [:]
+      let sourceKey = (dbActivity.sourceKey)!
+      if dbActivity.sourceFormKey != nil && dbActivity.sourceFormKey!.count > 0{
+          quesStepKey = dbActivity.sourceFormKey!
+          let quesResults = results.filter({$0["key"] as? String == quesStepKey}).first
+          let resultsArray =  ((quesResults!["value"] as? [[Any]])?.first) as? [[String:Any]]
+          dictionary = resultsArray!.filter({$0["key"] as? String == sourceKey}).first ?? [String:Any]()
+      } else {
+          guard let dict = results.filter({$0["key"] as! String == sourceKey}).first else {return false}
+          dictionary = dict
+      }
         
         // let dictionary = results.filter({$0["key"] as! String == sourceKey}).first
         

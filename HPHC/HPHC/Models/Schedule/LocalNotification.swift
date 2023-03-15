@@ -397,11 +397,13 @@ class LocalNotification: NSObject {
     
     private static let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.dateFormat = "hh:mma"
         return formatter
     }()
     private static let oneTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.dateFormat = "hh:mma, MMM dd YYYY"
         return formatter
     }()

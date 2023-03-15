@@ -56,6 +56,16 @@ class ActivitiesViewController : UIViewController{
     private var managedResult: [String: Any] = [:]
     
     let labkeyResponseFetch = ResponseDataFetch()
+  
+  var isActivityDismissed = false
+  
+  var valPipingDetailsMain: [String: [[String: String]]] = [:]
+  
+  var valPipingValuesMain: JSONDictionary = [:]
+  
+  var createActiCalled = ""
+  
+  var timer: Timer?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
@@ -109,13 +119,23 @@ class ActivitiesViewController : UIViewController{
         refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
         tableView?.addSubview(refreshControl!)
         self.addProgressIndicator()
+        
+        if #available(iOS 15, *) {
+            UITableView.appearance().sectionHeaderTopPadding = CGFloat(0)
+        }
+      UserDefaults.standard.set("", forKey: "createActiCalled")
+      UserDefaults.standard.setValue("", forKey: "jumpActivity")
+      UserDefaults.standard.setValue("", forKey: "jumpInternalLoad")
+      UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
+      UserDefaults.standard.synchronize()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-       
+        setNavigationBarColor()
+        
         if Utilities.isStandaloneApp() {
             self.setNavigationBarItem()
         } else {
@@ -135,6 +155,23 @@ class ActivitiesViewController : UIViewController{
             self.tableView?.isHidden = false
             self.labelNoNetworkAvailable?.isHidden = true
         }
+      
+      if let activityId = UserDefaults.standard.string(forKey: "activityId") {
+          let sectionCount = tableViewSections.count
+          for section in 0..<sectionCount {
+              let rowDetail = tableViewSections[section]
+              let activities = (rowDetail["activities"] as? Array<Activity>)!
+              if activities.count > 0 {
+                  if let row = activities.firstIndex(where: {$0.actvityId == activityId}) {
+                      let indexPath = IndexPath(row: row, section: section)
+                      self.selectTableCell(indexPath: indexPath)
+//                        UserDefaults.standard.setValue("TextScale", forKey: "identifier")
+                      break
+                  }
+              }
+          }
+          UserDefaults.standard.setValue(nil, forKey: "activityId")
+      }
         
     }
   
@@ -376,7 +413,7 @@ class ActivitiesViewController : UIViewController{
      Used to create an activity using ORKTaskViewController
      */
     func createActivity(){
-        
+      addProgressIndicator3()
         // Disable Custom KeyPad with toolbars
         //        IQKeyboardManager.sharedManager().enable = false
         IQKeyboardManager.shared.enableAutoToolbar = false
@@ -390,10 +427,17 @@ class ActivitiesViewController : UIViewController{
         
         let task: ORKTask?
         let taskViewController: ORKTaskViewController?
-        
+      
         task = ActivityBuilder.currentActivityBuilder.createTask()
         
         if task != nil {
+          
+          let activityCu = Study.currentActivity
+          let activityStepArray = activityCu?.activitySteps
+          
+          if let val = activityStepArray {
+          getPipingArray(activityStepArray: val)
+          }
             
             // check if restorationData is available
             if Study.currentActivity?.currentRun.restortionData != nil {
@@ -421,9 +465,26 @@ class ActivitiesViewController : UIViewController{
             taskViewController?.navigationBar.prefersLargeTitles = false
             
             taskViewController?.modalPresentationStyle = .fullScreen
+          
+          let ud1 = UserDefaults.standard
+                      let valJum = ud1.object(forKey: "jumpInternalLoad") as? String ?? ""
+
+          if valJum != "jumpInternalLoad" {
+            self.removeProgressIndicator3()
             present(taskViewController!, animated: true, completion: nil)
+          } else {
             
+//            startTimer()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+              self.removeProgressIndicator3()
+              self.present(taskViewController!, animated: true, completion: nil)
+            }
+            
+            
+          }
         } else {
+          self.removeProgressIndicator3()
             // Task creation failed
             UIUtilities.showAlertMessage(kTitleMessage,
                                          errorMessage: NSLocalizedStrings("Invalid Data!", comment: ""),
@@ -432,6 +493,201 @@ class ActivitiesViewController : UIViewController{
         }
         
     }
+  
+  func getPipingArray(activityStepArray: [ActivityStep]) {
+    valPipingDetailsMain = [:]
+    valPipingValuesMain = [:]
+    createActiCalled = "true"
+    
+    UserDefaults.standard.set("true", forKey: "createActiCalled")
+    UserDefaults.standard.synchronize()
+    
+    var valPipingDetails: [String: [[String: String]]] = [:]
+    for activityStepArr in activityStepArray {
+    let valpipingactivityid = activityStepArr.pipingactivityid ?? ""
+      if valpipingactivityid != "" {
+        var valPipStructure: [String: String] = [:]
+        valPipStructure["pipingactivityid"] = activityStepArr.pipingactivityid
+        valPipStructure["pipingSnippet"] = activityStepArr.pipingSnippet
+        valPipStructure["pipingactivityVersion"] = activityStepArr.pipingactivityVersion
+        valPipStructure["pipingsourceQuestionKey"] = activityStepArr.pipingsourceQuestionKey
+//        valPipStructure["isPiping"] = activityStepArr.isPiping
+        var valActiInmain = valPipingDetails[valpipingactivityid]
+        if valActiInmain?.count ?? 0 > 0 {
+         var valtempPipActiId = valActiInmain
+          valtempPipActiId?.append(valPipStructure)
+          valPipingDetails[valpipingactivityid] = valtempPipActiId
+        } else {
+          valPipingDetails[valpipingactivityid] = [valPipStructure]
+        }
+      }
+    }
+    valPipingDetailsMain = valPipingDetails
+    getValueForPiping()
+    
+//    LabKeyServices().withdrawFromStudy(studyId: (studyToWithdrawn?.studyId)!,
+//                                                   participantId: (studyToWithdrawn?.participantId)!,
+//                                                   deleteResponses: (studyToWithdrawn?.shouldDelete)!,
+//                                                   delegate: self)
+    
+    
+//    let participantId = Study.currentStudy?.userParticipateState.participantId ?? ""
+//    guard let studyID = Study.currentStudy?.studyId else { return }
+//    LabKeyServices().selectRows(studyId: "LIMITOPEN001", activityId: "imageque", stepId: "ContinuousScal", participantId: "dcb2f1938fd6b64c5e039ff476629a49", delegate: self)
+    
+  }
+  
+  func getValueForPiping() {
+    let valvalPipingDetailsMain = valPipingDetailsMain
+    
+    if valvalPipingDetailsMain.count > 0 {
+      let valKeys = valvalPipingDetailsMain.keys
+      if valKeys.count > 0 {
+        for valKey in valKeys {
+          if let valValues1 = valvalPipingDetailsMain[valKey] {
+            if valValues1.count > 0 {
+              let valValues1a = valValues1[0]
+              if let valValues1aActivityId = valValues1a["pipingactivityid"] {
+                
+                UserDefaults.standard.setValue("jumpInternalLoad", forKey: "jumpInternalLoad")
+                UserDefaults.standard.synchronize()
+
+                
+                
+              if valValues1.count > 1 {
+                querypipingresponse(activityId: valValues1aActivityId, stepId: "")
+                
+                
+                getActivityForPiping()
+              } else {
+                querypipingresponse(activityId: valValues1aActivityId, stepId: valValues1a["pipingsourceQuestionKey"] ?? "")
+                
+                getActivityForPiping()
+              }
+            }
+              }
+              
+            }
+          
+          }
+        }
+      }
+      
+//    let participantId = Study.currentStudy?.userParticipateState.participantId ?? ""
+//    guard let studyID = Study.currentStudy?.studyId else { return }
+//    LabKeyServices().selectRows(studyId: "LIMITOPEN001", activityId: "imageque", stepId: "ContinuousScal", participantId: "dcb2f1938fd6b64c5e039ff476629a49", delegate: self)
+
+  }
+  
+  func querypipingresponse(activityId: String, stepId: String) {
+//    let activityId = Study.currentActivity
+    
+    let participantId = Study.currentStudy?.userParticipateState.participantId ?? ""
+//    guard let studyID = Study.currentStudy?.studyId else { return }
+//    LabKeyServices().selectRows(studyId: "LIMITOPEN001", activityId: "imageque", stepId: "ContinuousScal", participantId: "dcb2f1938fd6b64c5e039ff476629a49", delegate: self)
+    
+    guard let studyID = Study.currentStudy?.studyId else { return }
+    LabKeyServices().selectRows(studyId: Study.currentStudy?.studyId ?? "", activityId: "\(activityId)", stepId: "\(stepId)", participantId: "\(participantId)", delegate: self)
+  }
+  
+  func getActivityForPiping() {
+    
+    let valvalPipingDetailsMain = valPipingDetailsMain
+    
+    if valvalPipingDetailsMain.count > 0 {
+      let valKeys = valvalPipingDetailsMain.keys
+      if valKeys.count > 0 {
+        for valKey in valKeys {
+          if let valValues1 = valvalPipingDetailsMain[valKey] {
+            if valValues1.count > 0 {
+              let valValues1a = valValues1[0]
+              if let valValues1aActivityId = valValues1a["pipingactivityid"],  let valpipingactivityVersion = valValues1a["pipingactivityVersion"] {
+                
+                UserDefaults.standard.setValue("jumpInternalLoad", forKey: "jumpInternalLoad")
+            UserDefaults.standard.synchronize()
+                
+                
+              if valValues1.count > 1 {
+                
+                guard let studyID = Study.currentStudy?.studyId else { return }
+                WCPServices().getStudyActivityVersionMetadata(studyId: studyID,
+                                                                                           activityId: valValues1aActivityId,
+                                                                                           activityVersion: valpipingactivityVersion,
+                                                                                           delegate: self)
+                
+                
+//                querypipingresponse(activityId: valValues1aActivityId, stepId: "")
+                
+              } else {
+                guard let studyID = Study.currentStudy?.studyId else { return }
+                WCPServices().getStudyActivityVersionMetadata(studyId: studyID,
+                                                                                           activityId: valValues1aActivityId,
+                                                                                           activityVersion: valpipingactivityVersion,
+                                                                                           delegate: self)
+                
+              }
+            }
+              }
+              
+            }
+          
+          }
+        }
+      }
+      
+//    let participantId = Study.currentStudy?.userParticipateState.participantId ?? ""
+//    guard let studyID = Study.currentStudy?.studyId else { return }
+//    LabKeyServices().selectRows(studyId: "LIMITOPEN001", activityId: "imageque", stepId: "ContinuousScal", participantId: "dcb2f1938fd6b64c5e039ff476629a49", delegate: self)
+
+  }
+  
+  func getActivityForTextChoicePiping(textactivityid: String, textStepId: String) {
+    
+    let valvalPipingDetailsMain = valPipingDetailsMain
+    
+    if valvalPipingDetailsMain.count > 0 {
+      let valKeys = valvalPipingDetailsMain.keys
+      if valKeys.count > 0 {
+        for valKey in valKeys {
+          if let valValues1 = valvalPipingDetailsMain[valKey] {
+            if valValues1.count > 0 {
+              let valValues1a = valValues1[0]
+              if let valValues1aActivityId = valValues1a["pipingactivityid"],  let valpipingactivityVersion = valValues1a["pipingactivityVersion"] {
+                
+                UserDefaults.standard.setValue("jumpInternalLoad", forKey: "jumpInternalLoad")
+            UserDefaults.standard.synchronize()
+                
+                
+              if valValues1.count > 1 {
+                
+                guard let studyID = Study.currentStudy?.studyId else { return }
+                WCPServices().getStudyActivityVersionMetadata(studyId: studyID,
+                                                                                           activityId: valValues1aActivityId,
+                                                                                           activityVersion: valpipingactivityVersion,
+                                                                                           delegate: self)
+                
+                
+//                querypipingresponse(activityId: valValues1aActivityId, stepId: "")
+                
+              } else {
+                guard let studyID = Study.currentStudy?.studyId else { return }
+                WCPServices().getStudyActivityVersionMetadata(studyId: studyID,
+                                                                                           activityId: valValues1aActivityId,
+                                                                                           activityVersion: valpipingactivityVersion,
+                                                                                           delegate: self)
+                
+              }
+            }
+              }
+              
+            }
+          
+          }
+        }
+      }
+
+  }
+  
    
     /**
      Used to get Activity Availability Status
@@ -932,7 +1188,32 @@ extension ActivitiesViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+      
+      
+//      // Comment out when done
+//        let filePath  = Bundle.main.path(forResource: "iOSActivity", ofType: "json")
+//        let data = NSData(contentsOfFile: filePath!)
+//
+//        do {
+//            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String, Any>
+//
+//            if let activites = res![kActivites]  as? Array<Dictionary<String, Any>> {
+//                if Study.currentStudy != nil {
+//                    for activity in activites {
+//                        let participatedActivity = UserActivityStatus(detail: activity,studyId:(Study.currentStudy?.studyId)!)
+//                        user.participatedActivites.append(participatedActivity)
+//                    }
+//                }
+//            }
+//        }
+//        catch {
+//
+//        }
+      
+      createActiCalled = ""
+      UserDefaults.standard.set("", forKey: "createActiCalled")
+      UserDefaults.standard.synchronize()
+      
         let availabilityStatus = ActivityAvailabilityStatus(rawValue: indexPath.section)!
         
         switch availabilityStatus {
@@ -994,7 +1275,142 @@ extension ActivitiesViewController: UITableViewDelegate{
         case .upcoming, .past: break
             
         }
+      
+      selectTableCell(indexPath: indexPath)
     }
+  
+  private func selectTableCell(indexPath: IndexPath) {
+      let availabilityStatus = ActivityAvailabilityStatus(rawValue: indexPath.section)!
+      
+      switch availabilityStatus {
+      case .current:
+          
+          let rowDetail = tableViewSections[indexPath.section]
+          let activities = (rowDetail["activities"] as? Array<Activity>)!
+          
+          let activity = activities[indexPath.row]
+          // Check for activity run status & if run is available
+          if activity.currentRun != nil {
+              if activity.userParticipationStatus != nil {
+                  let activityRunParticipationStatus = activity.userParticipationStatus
+                  if activityRunParticipationStatus?.status == .yetToJoin
+                      || activityRunParticipationStatus?.status == .inProgress {
+                      
+                      Study.updateCurrentActivity(activity: activities[indexPath.row])
+                      
+                      // Following to be commented
+                      // self.createActivity()
+                      Logger.sharedInstance.info("Activity Fetching from db")
+                      // check in database
+                      DBHandler.loadActivityMetaData(
+                          activity: activities[indexPath.row],
+                          completionHandler: { (_) in
+                              
+                              //                            if found {
+                              //
+                              //                                self.createActivity()
+                              //                            } else {
+                              //  if NetworkManager.isNetworkAvailable() {
+                              if let studyID = Study.currentStudy?.studyId,
+                                 let activityID = Study.currentActivity?.actvityId,
+                                 let version = Study.currentActivity?.version {
+//                                  WCPServices().getStudyActivityMetadata(studyId: studyID,
+//                                                                         activityId: activityID,
+//                                                                         activityVersion: version,
+//                                                                         delegate: self)
+                                  //                                } else if found{
+                                  //                                    self.createActivity()
+                                  //                                }
+                                  ///  }
+                              }
+                          })
+                      
+                      self.updateActivityStatusToInProgress()
+                      self.selectedIndexPath = indexPath
+                      
+                  } else {
+                      
+                  }
+              }
+              
+          } else if activity.userParticipationStatus?.status == .abandoned {
+              
+              UIUtilities.showAlertWithMessage(alertMessage: kActivityAbondonedAlertMessage)
+          }
+          
+      case .upcoming, .past: break
+          
+      }
+  }
+  
+  private func selectACTIOTHERTableCell(indexPathMain: IndexPath, actiActivityId: String) {
+      let availabilityStatus = ActivityAvailabilityStatus(rawValue: indexPathMain.section)!
+      
+      switch availabilityStatus {
+      case .current:
+          
+          let rowDetail = tableViewSections[indexPathMain.section]
+          let activities = (rowDetail["activities"] as? Array<Activity>)!
+//        if activities.count > 0 {
+          if let row = activities.firstIndex(where: {$0.actvityId == actiActivityId}) {
+            let indexPath = IndexPath(row: row, section: indexPathMain.section)
+          let activity = activities[indexPath.row]
+          // Check for activity run status & if run is available
+          if activity.currentRun != nil {
+              if activity.userParticipationStatus != nil {
+                  let activityRunParticipationStatus = activity.userParticipationStatus
+                  if activityRunParticipationStatus?.status == .yetToJoin
+                      || activityRunParticipationStatus?.status == .inProgress {
+                      
+                      Study.updateCurrentActivity(activity: activities[indexPath.row])
+                      // Following to be commented
+                      // self.createActivity()
+                      Logger.sharedInstance.info("Activity Fetching from db")
+                      // check in database
+                      DBHandler.loadActivityMetaData(
+                          activity: activities[indexPath.row],
+                          completionHandler: { (_) in
+                              
+                              //                            if found {
+                              //
+                              //                                self.createActivity()
+                              //                            } else {
+                              //  if NetworkManager.isNetworkAvailable() {
+                              if let studyID = Study.currentStudy?.studyId,
+                                 let activityID = Study.currentActivity?.actvityId,
+                                 let version = Study.currentActivity?.version {
+                                UserDefaults.standard.set("", forKey: "createActiCalled")
+                                UserDefaults.standard.synchronize()
+                                self.createActiCalled = ""
+                                  WCPServices().getStudyActivityMetadata(studyId: studyID,
+                                                                         activityId: activityID,
+                                                                         activityVersion: version,
+                                                                         delegate: self)
+                                  //                                } else if found{
+                                  //                                    self.createActivity()
+                                  //                                }
+                                  ///  }
+                              }
+                          })
+                      
+                      self.updateActivityStatusToInProgress()
+                      self.selectedIndexPath = indexPath
+                      
+                  } else {
+                      
+                  }
+              }
+              
+          } else if activity.userParticipationStatus?.status == .abandoned {
+              
+              UIUtilities.showAlertWithMessage(alertMessage: kActivityAbondonedAlertMessage)
+          }
+          }
+      case .upcoming, .past: break
+          
+      }
+  }
+  
 }
 
 // MARK: - ActivitiesCell Delegate
@@ -1091,7 +1507,36 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             
         } else if requestName as String == WCPMethods.activity.method.methodName {
             self.removeProgressIndicator()
+          
+          if createActiCalled != "true" {
+            UserDefaults.standard.set("true", forKey: "createActiCalled")
+            UserDefaults.standard.synchronize()
+            
             self.createActivity()
+            
+            
+//            let ud1 = UserDefaults.standard
+//            let valJum = ud1.object(forKey: "jumpInternalLoad") as? String ?? ""
+//            if valJum != "jumpInternalLoad" {
+
+//            self.createActivity()
+//            } else {
+
+//
+//              addProgressIndicator3()
+////              DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
+////                self.createActivity()
+////                UserDefaults.standard.setValue("", forKey: "jumpInternalLoad")
+////            UserDefaults.standard.synchronize()
+////              }
+//            }
+          } else {
+
+            if let valresponse: Dictionary<String, Any> = response as? Dictionary<String, Any> {
+
+            setActivityMetaData(activityDict: valresponse[kActivity] as! Dictionary<String, Any>)
+            }
+          }
             
         } else if requestName as String == WCPMethods.studyDashboard.method.methodName {
             self.sendRequestToGetResourcesInfo()
@@ -1127,7 +1572,71 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
             
             self.checkForActivitiesUpdates()
-        }
+        } else if requestName as String == "BTC/\(Study.currentStudy?.studyId ?? "")/mobileappstudy-selectRows.api" {
+
+          
+          guard let rows = response?["rows"] as? [JSONDictionary] ,
+                let rowDetail = rows.last
+               else { return }
+          
+//          let valOtherTextChoice = rowDetail["TextChoice_Other_Text"] as? String ?? ""
+//          if valOtherTextChoice != "", valOtherTextChoice != "<null>" {
+//
+//          }
+          let resultA = valPipingValuesMain.merging(rowDetail, uniquingKeysWith: { (first, _) in first })
+          
+          valPipingValuesMain = resultA
+          valPipingValuesMain.removeValue(forKey: "Key")
+          valPipingValuesMain.removeValue(forKey: "ParticipantId")
+//          valPipingValuesMain["valuePicker"] = "3"
+          
+          
+//          let valOtherTextChoice = rowDetail["TextChoice_Other_Text"] as? String ?? ""
+//          if valOtherTextChoice != "", valOtherTextChoice != "<null>" {
+            
+            
+            var queryName = response?["queryName"] as? String ?? ""
+            
+            if queryName != "" {
+              let valKeys = rowDetail.keys
+              let valSpecificKeys = rowDetail.filter({
+                $0.key.containsIgnoringCase("_labkeyurl_")
+              })
+              
+              
+              if valSpecificKeys.count > 0 {
+                var valSourceKey = valSpecificKeys.first?.key ?? ""
+                
+                if valSourceKey != "" {
+                  valSourceKey = valSourceKey.replacingOccurrences(of: "_labkeyurl_", with: "")
+                  valSourceKey = valSourceKey.replacingOccurrences(of: "_labkeyurl_", with: "")
+                  
+                  let val = valSourceKey.dropLast(2)
+                  valSourceKey = "\(val)"
+
+                  queryName = queryName.replacingOccurrences(of: valSourceKey, with: "")
+
+                  if queryName != "", valSourceKey != ""{
+                    getActivityForTextChoicePiping(textactivityid: valSourceKey, textStepId: queryName)
+                  }
+                }
+              }
+            }
+            
+            
+//            if let valValues1aActivityId = valValues1a["pipingactivityid"],  let valpipingactivityVersion = valValues1a["pipingactivityVersion"] {
+//
+//              guard let studyID = Study.currentStudy?.studyId else { return }
+//                              WCPServices().getStudyActivityVersionMetadata(studyId: studyID,
+//                                                                                                         activityId: valValues1aActivityId,
+//                                                                                                         activityVersion: valpipingactivityVersion,
+//                                                                                                         delegate: self)
+//
+//            }
+            
+//          }
+
+      }
     }
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
@@ -1162,6 +1671,22 @@ extension ActivitiesViewController: NMWebServiceDelegate {
                 message: errorMsg as NSString)
         }
     }
+  
+  func startTimer() {
+    timer = Timer.scheduledTimer(timeInterval: 5.0,
+                                 target: self,
+                                 selector: #selector(eventWith(timer:)),
+                                 userInfo: [ "foo" : "bar" ],
+                                 repeats: false)
+  }
+  
+  @objc func eventWith(timer: Timer!) {
+//    let info = timer.userInfo as Any
+    timer.invalidate()
+    UserDefaults.standard.setValue("", forKey: "jumpInternalLoad")
+UserDefaults.standard.synchronize()
+    removeProgressIndicator3()
+  }
 }
 
 // MARK: - ORKTaskViewController Delegate
@@ -1170,6 +1695,154 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
         return true
     }
+  
+  func jumpActi(activityId: String) {
+    addProgressIndicator2()
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {//newww
+    
+      let sectionCount = self.tableViewSections.count
+        for section in 0..<sectionCount {
+          let rowDetail = self.tableViewSections[section]
+            let activities = (rowDetail["activities"] as? Array<Activity>)!
+            if activities.count > 0 {
+                if let row = activities.firstIndex(where: {$0.actvityId == activityId}) {
+                    let indexPath = IndexPath(row: row, section: section)
+                  
+                  
+                  
+                  
+                      let availabilityStatus = ActivityAvailabilityStatus(rawValue: indexPath.section)!
+                      
+                      switch availabilityStatus {
+                      case .current:
+                        
+                        let valCompletedText1 = "Current activity/survey is completed. "
+                        let valCompletedText2 = "Kindly standby for the next activity/survey"
+                        let activityVal = activities[indexPath.row]
+                        let valStatus = activityVal.userParticipationStatus.status
+                        if valStatus == .completed ||
+                            valStatus == .abandoned ||
+                            valStatus == .expired {
+                          UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
+                                                                        message:
+                                                                            valCompletedText1 + valCompletedText2,
+                                                                        buttonTitle: "Ok",
+                                                                        viewControllerUsed: self,
+                                                                        action: {
+                            self.removeProgressIndicator2()
+        //                    self.selectTableCell(indexPath: indexPath)
+  //                          self.selectACTIOTHERTableCell(indexPath: indexPath)
+                          })
+                        } else {
+                        let valDifferentText1 = "You will be navigated to a different activity/survey as "
+                        let valDifferentText2 = "this activity/survey is completed"
+                        UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
+                                                                      message:
+                                                                        valDifferentText1 + valDifferentText2,
+                                                                      buttonTitle: "Ok",
+                                                                      viewControllerUsed: self,
+                                                                      action: {
+                          self.removeProgressIndicator2()
+      //                    self.selectTableCell(indexPath: indexPath)
+                          self.selectACTIOTHERTableCell(indexPathMain: indexPath, actiActivityId: activityId)
+                        })
+                        }
+                      case .upcoming, .past:
+                        let valCurrentText1 = "Current activity/survey is completed. "
+                        let valCurrentText2 = "Kindly standby for the next activity/survey"
+                        UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
+                                                                      message:
+                                                                        valCurrentText1 + valCurrentText2,
+                                                                      buttonTitle: "Ok",
+                                                                      viewControllerUsed: self,
+                                                                      action: {
+                          self.removeProgressIndicator2()
+      //                    self.selectTableCell(indexPath: indexPath)
+//                          self.selectACTIOTHERTableCell(indexPath: indexPath)
+                        })
+                      }
+                  
+                  
+                  
+                  
+                    
+                    break
+                }
+            }
+        }
+        UserDefaults.standard.setValue("", forKey: "jumpActivity")
+    UserDefaults.standard.synchronize()
+  }//newww
+  }
+  
+  func jumpToActivity(identifier: String, indexPath: IndexPath) {
+    let availabilityStatus = ActivityAvailabilityStatus(rawValue: indexPath.section)!
+    
+    switch availabilityStatus {
+    case .current:
+        
+        let rowDetail = tableViewSections[indexPath.section]
+        let activities = (rowDetail["activities"] as? Array<Activity>)!
+        
+        let activity = activities[indexPath.row]
+        // Check for activity run status & if run is available
+        if activity.currentRun != nil {
+            if activity.userParticipationStatus != nil {
+                let activityRunParticipationStatus = activity.userParticipationStatus
+                if activityRunParticipationStatus?.status == .yetToJoin
+                    || activityRunParticipationStatus?.status == .inProgress {
+                    
+                    Study.updateCurrentActivity(activity: activities[indexPath.row])
+                    
+                    // Following to be commented
+                    // self.createActivity()
+                    Logger.sharedInstance.info("Activity Fetching from db")
+                    // check in database
+                    DBHandler.loadActivityMetaData(
+                        activity: activities[indexPath.row],
+                        completionHandler: { (_) in
+                            
+//                            if found {
+//
+//                                self.createActivity()
+//                            } else {
+                      //  if NetworkManager.isNetworkAvailable() {
+                            if let studyID = Study.currentStudy?.studyId,
+                                let activityID = Study.currentActivity?.actvityId,
+                                let version = Study.currentActivity?.version {
+                                WCPServices().getStudyActivityMetadata(studyId: studyID,
+                                                                       activityId: activityID,
+                                                                       activityVersion: version,
+                                                                       delegate: self)
+//                                } else if found{
+//                                    self.createActivity()
+//                                }
+                                ///  }
+                        }
+                    })
+                    
+                    self.updateActivityStatusToInProgress()
+                    self.selectedIndexPath = indexPath
+                    
+                } else {
+                    
+                }
+            }
+            
+        } else if activity.userParticipationStatus?.status == .abandoned {
+            
+            UIUtilities.showAlertWithMessage(alertMessage: kActivityAbondonedAlertMessage)
+        }
+        
+    case .upcoming, .past: break
+        
+      
+      
+    }
+  
+  selectTableCell(indexPath: indexPath)
+}
     
     /// This method will update the result for other choices for each step
     fileprivate func updateResultForChoiceQuestions(_ taskViewController: ORKTaskViewController) {
@@ -1203,7 +1876,8 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
     public func taskViewController(_ taskViewController: ORKTaskViewController,
                                    didFinishWith reason: ORKTaskViewControllerFinishReason,
                                    error: Error?) {
-        
+
+      
         // Enable Custom Keypad with toolbar
         // IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
@@ -1236,10 +1910,12 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             //            }
             
         case ORKTaskViewControllerFinishReason.failed: break
-            
+          UserDefaults.standard.setValue("", forKey: "jumpActivity")
+      UserDefaults.standard.synchronize()
             // taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.discarded:
-                        
+          UserDefaults.standard.setValue("", forKey: "jumpActivity")
+      UserDefaults.standard.synchronize()
             let study = Study.currentStudy
             let activity = Study.currentActivity
             activity?.currentRun.restortionData = nil
@@ -1257,13 +1933,29 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             self.checkForActivitiesUpdates()
             
         case ORKTaskViewControllerFinishReason.saved:
-            
+          UserDefaults.standard.setValue("", forKey: "jumpActivity")
+      UserDefaults.standard.synchronize()
             // taskResult = taskViewController.restorationData
             
             if taskViewController.task?.identifier == "ConsentTask" {
                 // Do Nothing
             } else {
                 ActivityBuilder.currentActivityBuilder.activity?.restortionData = taskViewController.restorationData
+              
+              let study = Study.currentStudy
+              guard let activity = Study.currentActivity else { return }
+              
+              if activity.type != .activeTask {
+                guard let studyId = study?.studyId else { return }
+                // Update RestortionData for Activity in DB
+                DBHandler.updateActivityRestortionDataFor(
+                  activity: activity,
+                  studyId: studyId,
+                  restortionData: taskViewController.restorationData!
+                )
+                activity.currentRun.restortionData = taskViewController.restorationData!
+              }
+              
             }
             
             self.checkForActivitiesUpdates()
@@ -1416,9 +2108,9 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         
         if reason == ORKTaskViewControllerFinishReason.completed {
           
-          let lifeTimeUpdated = DBHandler.updateTargetActivityAnchorDateDetail(studyId: studyId!,
-                                                                               activityId: activityId!,
-                                                                               response: response!)
+          let lifeTimeUpdated = DBHandler.updateTargetActivityAnchorDateDetail(studyId: studyId ?? "",
+                                                                               activityId: activityId ?? "",
+                                                                               response: response ?? [String:Any]())
           if lifeTimeUpdated {
             self.loadActivitiesFromDatabase()
           } else {
@@ -1429,52 +2121,76 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         }
         
       })
+      
+      
+      let ud1 = UserDefaults.standard
+      
+      let valJum = ud1.object(forKey: "jumpActivity") as? String ?? ""
+      if valJum != "" {
+        jumpActi(activityId: valJum)
+      }
+      
+      
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController,
                             stepViewControllerWillAppear stepViewController: ORKStepViewController) {
-        
+      UserDefaults.standard.setValue("", forKey: "OtherActiStepId")
+      UserDefaults.standard.synchronize()
         if (taskViewController.result.results?.count)! > 1 {
             
-            if activityBuilder?.actvityResult?.result?.count == taskViewController.result.results?.count {
-                activityBuilder?.actvityResult?.result?.removeLast()
-            } else {
-                
-                let study = Study.currentStudy
-                let activity = Study.currentActivity
-                
-                if activity?.type != .activeTask{
-                    
-                    // Update RestortionData for Activity in DB
-                    DBHandler.updateActivityRestortionDataFor(activity: activity!,
-                                                              studyId: (study?.studyId)!,
-                                                              restortionData: taskViewController.restorationData!)
-                    activity?.currentRun.restortionData = taskViewController.restorationData!
-                }
-                
-                let orkStepResult: ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2]
-                    as! ORKStepResult?
-                let activityStepResult: ActivityStepResult? = ActivityStepResult()
-                if (activity?.activitySteps?.count )! > 0 {
-                    
-                    let activityStepArray = activity?.activitySteps?.filter({$0.key == orkStepResult?.identifier
-                    })
-                    if (activityStepArray?.count)! > 0 {
-                        activityStepResult?.step  = activityStepArray?.first
-                    }
-                }
-                activityStepResult?.initWithORKStepResult(stepResult: orkStepResult! as ORKStepResult ,
-                                                          activityType: (ActivityBuilder.currentActivityBuilder.actvityResult?.type)!)
-                
-                // let dictionary = activityStepResult?.getActivityStepResultDict()
-                
-                // check for anchor date
-                if study?.anchorDate != nil && study?.anchorDate?.anchorDateActivityId == activity?.actvityId {
-                    
-                    if (study?.anchorDate?.anchorDateQuestionKey)! ==  (activityStepResult?.key)!{
-                        if let value1 = activityStepResult?.value as? String {
-                            isAnchorDateSet = true
-                            study?.anchorDate?.setAnchorDateFromQuestion(date: value1)
+          if activityBuilder?.actvityResult?.result?.count
+            == taskViewController.result.results?
+            .count
+          {
+            activityBuilder?.actvityResult?.result?.removeLast()
+          } else {
+
+            let study = Study.currentStudy
+            guard let activity = Study.currentActivity else { return }
+
+            if activity.type != .activeTask {
+
+              // Update RestortionData for Activity in DB
+              
+              DBHandler.updateActivityRestortionDataFor(
+                activity: activity,
+                studyId: (study?.studyId)!,
+                restortionData: taskViewController.restorationData!
+              )
+              activity.currentRun.restortionData = taskViewController.restorationData!
+            }
+
+            let orkStepResult: ORKStepResult? =
+              taskViewController.result.results?[
+                (taskViewController.result.results?.count)! - 2
+              ] as! ORKStepResult?
+            let activityStepResult: ActivityStepResult? = ActivityStepResult()
+            if (activity.activitySteps?.count)! > 0 {
+
+              let activityStepArray = activity.activitySteps?.filter({
+                $0.key == orkStepResult?.identifier
+              })
+              if (activityStepArray?.count)! > 0 {
+                activityStepResult?.step = activityStepArray?.first
+              }
+            }
+            activityStepResult?.initWithORKStepResult(
+              stepResult: orkStepResult! as ORKStepResult,
+              activityType: (ActivityBuilder.currentActivityBuilder.actvityResult?.type)!
+            )
+
+            /// check for anchor date.
+            if study?.anchorDate != nil
+              && study?.anchorDate?.anchorDateActivityId
+                == activity
+                .actvityId
+            {
+
+              if (study?.anchorDate?.anchorDateQuestionKey)! == (activityStepResult?.key)! {
+                if let value1 = activityStepResult?.value as? String {
+                  isAnchorDateSet = true
+                  study?.anchorDate?.setAnchorDateFromQuestion(date: value1)
                         }
                     }
                 }
@@ -1484,7 +2200,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                     
                     if let value1 = activityStepResult?.value as? NSNumber {
                         let value = value1.floatValue
-                        DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!,
+                        DBHandler.saveStatisticsDataFor(activityId: (activity.actvityId)!,
                                                         key: (activityStepResult?.key)!,
                                                         data: value,
                                                         fkDuration: 0,
@@ -1496,15 +2212,15 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                 
                 let activityId:String? = ud.value(forKey:"FetalKickActivityId" ) as! String?
                 // go forward if fetal kick task is running
-                if activity?.type == .activeTask
+                if activity.type == .activeTask
                     && ud.bool(forKey: "FKC")
                     && activityId != nil
                     && activityId == Study.currentActivity?.actvityId
                     && (stepViewController is ORKInstructionStepViewController)  {
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now()) {
-                        stepViewController.goForward()
-                    }
+//                    DispatchQueue.main.asyncAfter(deadline: .now()) {
+//                        stepViewController.goForward()
+//                    }
                 }
                 
                 // disable back button
@@ -1514,7 +2230,772 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             }
         }
     }
+  
+  func setResultValue(stepResult: ORKStepResult, activityType: ActivityType) -> String {
+      var valAnswer = ""
+      if (stepResult.results?.count)! > 0 {
+          
+          if  activityType == .Questionnaire {
+              // for question Step
+//            if stepResult.results?.count == 1 && self.type != .form {
+            if stepResult.results?.count == 1 { // && activityType != .form {
+
+                  if let questionstepResult: ORKQuestionResult? = stepResult.results?.first as? ORKQuestionResult? {
+                     let val = self.setValue(questionstepResult:questionstepResult! )
+                      return val
+                  }
+              }
+//            else {
+//                  // for form step result
+//
+//                  self.value  = [ActivityStepResult]()
+//                  var formResultArray:[Any] = [Any]()
+//                  var i: Int! = 0
+//                  var j: Int! = 0
+//                  var isAddMore: Bool? =  false
+//
+//                  if (stepResult.results?.count)! > (self.step as? ActivityFormStep)!.itemsArray.count {
+//                      isAddMore = true
+//                  }
+//                  var localArray: [Dictionary<String, Any>] = [Dictionary<String, Any>]()
+//
+//                  for result in stepResult.results! {
+//
+//                      let activityStepResult: ActivityStepResult? = ActivityStepResult()
+//                      activityStepResult?.startTime = self.startTime
+//                      activityStepResult?.endTime = self.endTime
+//                      activityStepResult?.skipped = self.skipped
+//
+//                      let activityStep = ActivityStep()
+//                      activityStepResult?.step = activityStep
+//
+//                      j = (i == 0 ? 0 : i % (self.step as? ActivityFormStep)!.itemsArray.count)
+//
+//                      // Checking if formStep is RepeatableFormStep
+//                      if isAddMore! {
+//                          if j  == 0 {
+//                              localArray.removeAll()
+//                              localArray = [Dictionary<String, Any>]()
+//                          }
+//
+//                          let stepDict = (((self.step as? ActivityFormStep)!.itemsArray) as [Dictionary<String, Any>])[j]
+//
+//                           activityStepResult?.key = stepDict["key"] as! String?
+//
+//                      } else {
+//                           activityStepResult?.key = result.identifier
+//                      }
+//                      let itemDict = (self.step as? ActivityFormStep)!.itemsArray[j] as Dictionary<String, Any>
+//                      activityStepResult?.step?.resultType = (itemDict["resultType"] as? String)!
+//                      if (result as? ORKQuestionResult) != nil {
+//
+//                          let questionResult: ORKQuestionResult? = (result as? ORKQuestionResult)
+//
+//                          if  Utilities.isValidValue(someObject: (activityStepResult?.step?.resultType as? String as AnyObject)) {
+//                              self.subTypeForForm = activityStepResult?.step?.resultType as? String
+//
+//                          } else {
+//                              self.subTypeForForm = ""
+//                          }
+//
+//                          self.setValue(questionstepResult: questionResult!)
+//
+//                          activityStepResult?.value = self.value
+//                          localArray.append((activityStepResult?.getActivityStepResultDict()!)!)
+//
+//                          // checking if more steps added in RepeatableFormStep
+//                          if isAddMore! {
+//                              if j + 1 == (self.step as? ActivityFormStep)!.itemsArray.count {
+//                                  if localArray.count > 0 {
+//                                      formResultArray.append(localArray)
+//                                  }
+//                              }
+//                          }
+//                      }
+//                      i += 1
+//                  }
+//
+//                  if isAddMore! {
+//                      self.value = formResultArray
+//
+//                  } else {
+//                      if localArray.count > 0 {
+//                          formResultArray.append(localArray)
+//                      }
+//                      self.value = formResultArray
+//                  }
+//              }
+              
+          }
+        
+      }
+    return ""
+  }
+  
+  func getresultType (identifier: String) -> String {
+    let activity = Study.currentActivity
+    let activityStepArray = activity?.activitySteps?.filter({$0.key == identifier
+    })
+      
+      if (activityStepArray?.count)! > 0 {
+          let step1 = activityStepArray?.first
+        let val1 = step1?.resultType as? String ?? ""
+        
+       return val1
+      }
+    return ""
+  }
+  
+  func getTextValueFromValue(identifier: String, valFinalRes: String) -> String {
+    let activity = Study.currentActivity
+    let activityStepArray = activity?.activitySteps?.filter({$0.key == identifier
+    })
+      
+      if (activityStepArray?.count)! > 0 {
+          let step1 = activityStepArray?.first
+        let val1 = step1?.resultType as? String ?? ""
+        
+        //        var style = ""
+//                var style = ((step1 as? ActivityQuestionStep)?.formatDict?["textChoices"] as? [String: String])!
+                
+//                let activityStep: ActivityStep?
+
+        let valFormat = (step1 as? ActivityQuestionStep)?.formatDict
+        
+        if  Utilities.isValidObject(someObject: valFormat?[kStepQuestionTextChoiceTextChoices] as AnyObject?)
+            && Utilities.isValidValue(someObject: valFormat?[kStepQuestionTextChoiceSelectionStyle] as AnyObject?) {
+            
+//            let textChoiceDict = valFormat?[kStepQuestionTextChoiceTextChoices] as? [Any] ?? []
+          let textChoiceDict = valFormat?[kStepQuestionTextChoiceTextChoices] as? [JSONDictionary] ?? []
+         
+            
+            for dict in textChoiceDict {
+              let text = dict[kORKTextChoiceText] as? String ?? ""
+              let value = dict[kORKTextChoiceValue] as? String ?? ""
+              
+              if valFinalRes == value {
+                return text
+              }
+            }
+          
+        }
+        
+        
+       return valFinalRes
+      }
+    return valFinalRes
+  }
+  
+  func getScaleValueFromValue(identifier: String, valFinalRes: String) -> String {
+    let activity = Study.currentActivity
+    let activityStepArray = activity?.activitySteps?.filter({$0.key == identifier
+    })
+      
+      if (activityStepArray?.count)! > 0 {
+          let step1 = activityStepArray?.first
+        let val1 = step1?.resultType as? String ?? ""
+        
+        //        var style = ""
+//                var style = ((step1 as? ActivityQuestionStep)?.formatDict?["textChoices"] as? [String: String])!
+                
+//                let activityStep: ActivityStep?
+
+        let valFormat = (step1 as? ActivityQuestionStep)?.formatDict
+        
+        if  Utilities.isValidObject(someObject: valFormat?[kStepQuestionTextChoiceTextChoices] as AnyObject?) {
+            
+//            let textChoiceDict = valFormat?[kStepQuestionTextChoiceTextChoices] as? [Any] ?? []
+          let textChoiceDict = valFormat?[kStepQuestionTextChoiceTextChoices] as? [JSONDictionary] ?? []
+         
+            
+            for dict in textChoiceDict {
+              let text = dict[kORKTextChoiceText] as? String ?? ""
+              let value = dict[kORKTextChoiceValue] as? String ?? ""
+              
+              if valFinalRes == value {
+                return text
+              }
+            }
+          
+        }
+        
+        
+       return valFinalRes
+      }
+    return valFinalRes
+  }
+  
+  func getPickerValueFromValue(identifier: String, valFinalRes: String) -> String {
+    let activity = Study.currentActivity
+    let activityStepArray = activity?.activitySteps?.filter({$0.key == identifier
+    })
+      
+      if (activityStepArray?.count)! > 0 {
+          let step1 = activityStepArray?.first
+        let val1 = step1?.resultType as? String ?? ""
+        
+        //        var style = ""
+//                var style = ((step1 as? ActivityQuestionStep)?.formatDict?["textChoices"] as? [String: String])!
+                
+//                let activityStep: ActivityStep?
+
+        let valFormat = (step1 as? ActivityQuestionStep)?.formatDict
+        
+        if  Utilities.isValidObject(someObject: valFormat?[kStepQuestionTextChoiceTextChoices] as AnyObject?) {
+            
+//            let textChoiceDict = valFormat?[kStepQuestionTextChoiceTextChoices] as? [Any] ?? []
+          let textChoiceDict = valFormat?[kStepQuestionTextChoiceTextChoices] as? [JSONDictionary] ?? []
+         
+            
+            for dict in textChoiceDict {
+              let text = dict[kORKTextChoiceText] as? String ?? ""
+              let value = dict[kORKTextChoiceValue] as? String ?? ""
+              
+              if valFinalRes == value {
+                return text
+              }
+            }
+          
+        }
+        
+        
+       return valFinalRes
+      }
+    return valFinalRes
+  }
+  
+  func getTextChoicesSingleSelection(dataArray: [Any]) -> ([ORKTextChoice]?, OtherChoice?) {
+    var textChoiceArray: [ORKTextChoice] = []
+    var otherChoice: OtherChoice?
     
+    if let dictArr = dataArray as? [JSONDictionary] {
+      
+      for dict in dictArr {
+        
+        let text = dict[kORKTextChoiceText] as? String ?? ""
+        let value = dict[kORKTextChoiceValue] as? String ?? ""
+        let detail = dict[kORKTextChoiceDetailText] as? String ?? ""
+        let isExclusive = true
+        
+        if let otherDict = dict[kORKOTherChoice] as? JSONDictionary {
+          
+          let placeholder = otherDict["placeholder"] as? String ?? "enter here"
+          let isMandatory = otherDict["isMandatory"] as? Bool ?? false
+          let textFieldReq = otherDict["textfieldReq"] as? Bool ?? false
+          
+//          otherChoice = OtherChoice(
+//            isShowOtherCell: true,
+//            isShowOtherField: textFieldReq,
+//            otherTitle: text,
+//            placeholder: placeholder,
+//            isMandatory: isMandatory,
+//            isExclusive: isExclusive,
+//            detailText: detail,
+//            value: value
+//          )
+          // No need to add other text choice
+          continue
+        }
+        
+//        let choice = ORKTextChoice(
+//          text: text,
+//          detailText: detail,
+//          value: value as NSCoding & NSCopying & NSObjectProtocol,
+//          exclusive: isExclusive
+//        )
+//
+//        textChoiceArray.append(choice)
+        
+      }
+      
+    } else if let titleArr = dataArray as? [String] {
+      
+      for (i, title) in titleArr.enumerated() {
+        
+        let choice = ORKTextChoice(
+          text: title,
+          value: i as NSCoding & NSCopying & NSObjectProtocol
+        )
+        
+//        if self.textScaleDefaultValue?.isEmpty == false && self.textScaleDefaultValue != "" {
+//          if title == self.textScaleDefaultValue {
+//            self.textScaleDefaultIndex = i
+//          }
+//        }
+//        textChoiceArray.append(choice)
+      }
+      
+    }
+    if textChoiceArray.isEmpty {
+      return (nil, nil)
+    } else {
+      return (textChoiceArray, otherChoice)
+    }
+    
+  }
+  
+  func getTextChoices(dataArray: [Any]) -> ([ORKTextChoice]?, OtherChoice?) {
+      
+      var textChoiceArray: [ORKTextChoice] = []
+      var otherChoice: OtherChoice?
+      
+      if let dictArr = dataArray as? [JSONDictionary] {
+          
+          for dict in dictArr {
+              
+              let text = dict[kORKTextChoiceText] as? String ?? ""
+              let value = dict[kORKTextChoiceValue] as? String ?? ""
+              let detail = dict[kORKTextChoiceDetailText] as? String ?? ""
+              let isExclusive = dict[kORKTextChoiceExclusive] as? Bool ?? false
+              
+              if let otherDict = dict[kORKOTherChoice] as? JSONDictionary {
+                  
+                  let placeholder = otherDict["placeholder"] as? String ?? kEnterHere
+                  let isMandatory = otherDict["isMandatory"] as? Bool ?? false
+                  let textFieldReq = otherDict["textfieldReq"] as? Bool ?? false
+      
+//                    otherChoice = OtherChoice(isShowOtherCell: true,
+//                                              isShowOtherField: textFieldReq,
+//                                              otherTitle: text,
+//                                              placeholder: placeholder,
+//                                              isMandatory: isMandatory,
+//                                              isExclusive: isExclusive,
+//                                              detailText: detail,
+//                                              value: value)
+//
+//                    continue // No need to add other text choice
+              }
+              
+//                let choice = ORKTextChoice(text: text ,
+//                                           detailText: detail,
+//                                           value: value as NSCoding & NSCopying & NSObjectProtocol,
+//                                           exclusive: isExclusive)
+//
+//                textChoiceArray.append(choice)
+              
+          }
+          
+      } else if let titleArr = dataArray as? [String] {
+          
+          for (i, title) in titleArr.enumerated() {
+              
+              let choice = ORKTextChoice(text: title, value: i as NSCoding & NSCopying & NSObjectProtocol)
+              
+//                if self.textScaleDefaultValue?.isEmpty == false && self.textScaleDefaultValue != "" {
+//                    if title == self.textScaleDefaultValue {
+//                        self.textScaleDefaultIndex = i
+//                    }
+//                }
+//                textChoiceArray.append(choice)
+          }
+          
+      } else {
+          Logger.sharedInstance.debug("dataArray has Invalid data: null for Text Choice ")
+      }
+      
+        if textChoiceArray.isEmpty {
+            return (nil, nil)
+        } else {
+            return (textChoiceArray, otherChoice)
+        }
+      
+  }
+  
+  func setValue(questionstepResult: ORKQuestionResult) -> String {
+      switch questionstepResult.questionType.rawValue {
+
+      case  ORKQuestionType.scale.rawValue : // scale and continuos scale
+
+          if (questionstepResult as? ORKScaleQuestionResult) != nil {
+              let stepTypeResult = (questionstepResult as? ORKScaleQuestionResult)!
+            if stepTypeResult.scaleAnswer != nil {
+            return "\(stepTypeResult.scaleAnswer!)"
+            }
+             } else {
+              let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
+               if (stepTypeResult.choiceAnswers?.count) ?? 0 > 0 {
+//                   self.value = stepTypeResult.choiceAnswers?.first
+                 
+//                 getActualAnswer(choiceSelected: "\(stepTypeResult.choiceAnswers!.first!)", identifierOfRes: <#T##String#>)
+                 if stepTypeResult.choiceAnswers != nil {
+                   
+                   let val = getScaleValueFromValue(identifier: stepTypeResult.identifier, valFinalRes: "\(stepTypeResult.choiceAnswers!.first!)")
+                   
+                 return "\(val)" //check
+                 }
+               }
+               
+          }
+
+      case ORKQuestionType.singleChoice.rawValue: // textchoice + value picker + imageChoice
+
+          let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
+//          var resultType: String? = (self.step?.resultType as? String)!
+        var resultType: String = getresultType(identifier: questionstepResult.identifier) //(self.step?.resultType as? String)!
+
+          if Utilities.isValidObject(someObject: stepTypeResult.choiceAnswers as AnyObject?) {
+            if (stepTypeResult.choiceAnswers?.count) ?? 0 > 0 {
+
+                  if resultType ==  QuestionStepType.imageChoice.rawValue {
+
+                      // for image choice and valuepicker
+
+                      let resultValue: String! = "\(stepTypeResult.choiceAnswers!.first!)"
+
+//                      self.value = (resultValue == nil ? "" : resultValue)
+                    
+                    return "\(resultValue == nil ? "" : resultValue ?? "")"
+                  } else if resultType == QuestionStepType.valuePicker.rawValue {
+                    
+                    // for image choice and valuepicker
+
+                    let resultValue: String! = "\(stepTypeResult.choiceAnswers!.first!)"
+
+//                      self.value = (resultValue == nil ? "" : resultValue)
+        
+                    
+                    let val = getPickerValueFromValue(identifier: stepTypeResult.identifier, valFinalRes: "\(stepTypeResult.choiceAnswers!.first!)")
+                    
+                  return "\(val)" //check
+                    
+                    
+                  
+                  return "\(resultValue == nil ? "" : resultValue ?? "")"
+                } else {
+                      // for text choice
+                      var resultValue: [Any] = []
+                      let selectedValue = stepTypeResult.choiceAnswers?.first
+
+                      if let stringValue = selectedValue as? String {
+                          resultValue.append(stringValue)
+                      } else if let otherDict = selectedValue as? [String:Any] {
+                        
+                        let valOtherText = otherDict["text"]
+//                          resultValue.append(otherDict)
+                        
+                        
+                        let valOthertextString = otherDict["text"] as? String ?? ""
+                        
+                        if valOthertextString == "" {
+                        
+                        let valFinalText = getOtherTextValue(identifier: questionstepResult.identifier, valueStr: "\(valOtherText ?? "")")
+                          resultValue.append(valFinalText)
+                        } else {
+                        resultValue.append(valOthertextString)
+                        }
+                      } else {
+                          resultValue.append(selectedValue as Any)
+                      }
+                    let valFinalRes = resultValue.first as? String ?? ""
+                    
+                    
+                    let val = getTextValueFromValue(identifier: stepTypeResult.identifier, valFinalRes: valFinalRes)
+                    
+//                    return "\(valFinalRes)" //check
+                    return "\(val)" //check
+
+//                      self.value = resultValue
+                  }
+
+              }
+          }
+//      case ORKQuestionType.multipleChoice.rawValue: // textchoice + imageChoice
+//
+//          let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
+//
+//          if let answers = stepTypeResult.choiceAnswers {
+//
+//              var resultArray: [Any] = []
+//
+//              for value in answers {
+//
+//                  if let stringValue = value as? String {
+//                      resultArray.append(stringValue)
+//                  } else if let otherDict = value as? [String:Any] {
+//                      resultArray.append(otherDict)
+//                  } else {
+//                      resultArray.append(value)
+//                  }
+//
+//              }
+//              self.value = resultArray
+//
+//          } else {
+//              // self.value = []
+//              self.skipped = true
+//          }
+//
+//          /*
+//          if Utilities.isValidObject(someObject: stepTypeResult.choiceAnswers as AnyObject?) {
+//              if (stepTypeResult.choiceAnswers?.count)! > 1 {
+//
+//
+//
+//              } else {
+//
+//                  let resultValue: String! = "\(stepTypeResult.choiceAnswers!.first!)"
+//                  let resultArray: Array<String>? = ["\(resultValue == nil ? "" : resultValue!)"]
+//                  self.value = resultArray
+//              }
+//
+//          } else {
+//              self.value = []
+//          }
+//           */
+        
+      case ORKQuestionType.boolean.rawValue:
+
+          let stepTypeResult = (questionstepResult as? ORKBooleanQuestionResult)!
+
+//          if Utilities.isValidValue(someObject: stepTypeResult.booleanAnswer as AnyObject?) {
+              let value = stepTypeResult.booleanAnswer ?? false == 1 ? "True" : "False"
+            return value
+        
+//
+//      case ORKQuestionType.boolean.rawValue:
+//
+//          let stepTypeResult = (questionstepResult as? ORKBooleanQuestionResult)!
+//
+//          if Utilities.isValidValue(someObject: stepTypeResult.booleanAnswer as AnyObject?) {
+//              self.value =  stepTypeResult.booleanAnswer! == 1 ? true : false
+//
+//          } else {
+//              // self.value = false
+//              self.skipped = true
+//          }
+//
+        
+      case ORKQuestionType.integer.rawValue: // numeric type
+          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
+      if let val = stepTypeResult.numericAnswer {
+            let value = Double(truncating:stepTypeResult.numericAnswer!)
+            return "\(value)"
+      }
+        
+//      case ORKQuestionType.integer.rawValue: // numeric type
+//          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
+//
+//          if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?) {
+//              self.value =  Double(truncating:stepTypeResult.numericAnswer!)
+//
+//          } else {
+//              // self.value = 0.0
+//              self.skipped = true
+//          }
+//
+        
+      case ORKQuestionType.decimal.rawValue: // numeric type
+          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
+      if let val = stepTypeResult.numericAnswer {
+            let value = Double(truncating:stepTypeResult.numericAnswer!)
+            return "\(value)"
+      }
+        
+//      case ORKQuestionType.decimal.rawValue: // numeric type
+//          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
+//
+//          if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?) {
+//              self.value = Double(truncating:stepTypeResult.numericAnswer!)
+//
+//          } else {
+//              // self.value = 0.0
+//              self.skipped = true
+//          }
+//
+//      case  ORKQuestionType.timeOfDay.rawValue:
+//          let stepTypeResult = (questionstepResult as? ORKTimeOfDayQuestionResult)!
+//
+//          if stepTypeResult.dateComponentsAnswer != nil {
+//
+//              let hour: Int? = (stepTypeResult.dateComponentsAnswer?.hour == nil ? 0 : stepTypeResult.dateComponentsAnswer?.hour)
+//              let minute: Int? = (stepTypeResult.dateComponentsAnswer?.minute == nil ? 0 : stepTypeResult.dateComponentsAnswer?.minute)
+//              let seconds: Int? = (stepTypeResult.dateComponentsAnswer?.second == nil ? 0 : stepTypeResult.dateComponentsAnswer?.second)
+//
+//              self.value = (( hour! < 10 ? ("0" + "\(hour!)") : "\(hour!)") + ":" + ( minute! < 10 ? ("0" + "\(minute!)") : "\(minute!)") + ":" + ( seconds! < 10 ? ("0" + "\(seconds!)") : "\(seconds!)"))
+//
+//          } else {
+//              // self.value = "00:00:00"
+//              self.skipped = true
+//          }
+//
+//      case ORKQuestionType.date.rawValue:
+//          let stepTypeResult = (questionstepResult as? ORKDateQuestionResult)!
+//
+//          if Utilities.isValidValue(someObject: stepTypeResult.dateAnswer as AnyObject?) {
+//              self.value =  Utilities.getStringFromDate(date: stepTypeResult.dateAnswer!)
+//          } else {
+//              // self.value = "0000-00-00'T'00:00:00"
+//              self.skipped = true
+//          }
+//      case ORKQuestionType.dateAndTime.rawValue:
+//          let stepTypeResult = (questionstepResult as? ORKDateQuestionResult)!
+//
+//          if Utilities.isValidValue(someObject: stepTypeResult.dateAnswer as AnyObject?) {
+//              self.value =  Utilities.getStringFromDate(date: stepTypeResult.dateAnswer! )
+//
+//          } else {
+//              // self.value = "0000-00-00'T'00:00:00"
+//              self.skipped = true
+//          }
+        
+      case ORKQuestionType.text.rawValue: // text + email
+
+          let stepTypeResult = (questionstepResult as? ORKTextQuestionResult)!
+
+        if let value = (stepTypeResult.answer as? String) {
+            return "\(value)"
+        }
+        
+//      case ORKQuestionType.text.rawValue: // text + email
+//
+//          let stepTypeResult = (questionstepResult as? ORKTextQuestionResult)!
+//
+//          if Utilities.isValidValue(someObject: stepTypeResult.answer as AnyObject?) {
+//              self.value = (stepTypeResult.answer as? String)!
+//
+//          } else {
+//              // self.value = ""
+//              self.skipped = true
+//          }
+//
+//      case ORKQuestionType.timeInterval.rawValue:
+//
+//          let stepTypeResult = (questionstepResult as? ORKTimeIntervalQuestionResult)!
+//
+//          if Utilities.isValidValue(someObject: stepTypeResult.intervalAnswer as AnyObject?) {
+//              self.value = Double(truncating:stepTypeResult.intervalAnswer!)/3600
+//
+//          } else {
+//              // self.value = 0.0
+//              self.skipped = true
+//          }
+//
+      case ORKQuestionType.height.rawValue:
+
+          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
+            let value = Double(truncating:stepTypeResult.numericAnswer!)
+            return "\(value)"
+//
+//      case ORKQuestionType.location.rawValue:
+//          let stepTypeResult = (questionstepResult as? ORKLocationQuestionResult)!
+//          /*
+//          if stepTypeResult.locationAnswer != nil && CLLocationCoordinate2DIsValid((stepTypeResult.locationAnswer?.coordinate)!) {
+//
+//              let lat = stepTypeResult.locationAnswer?.coordinate.latitude
+//              let long = stepTypeResult.locationAnswer?.coordinate.longitude
+//
+//              self.value = "\(lat!)" + "," + "\(long!)"
+//
+//          } else {
+//              self.value = "0.0,0.0"
+//          }*/
+//          if let locationAnswer = stepTypeResult.locationAnswer {
+//              if CLLocationCoordinate2DIsValid(locationAnswer.coordinate) {
+//                  let lat = locationAnswer.coordinate.latitude
+//                  let long = locationAnswer.coordinate.longitude
+//                  self.value = "\(lat)" + "," + "\(long)"
+//              } else {
+//                  self.value = "0.0,0.0"
+//              }
+//          } else {
+//              self.skipped = true
+//          }
+      default:break
+      }
+    return ""
+  }
+  
+  func getOtherTextValue(identifier: String, valueStr: String) -> String {
+    let activityCu = Study.currentActivity
+    var valPiping = false
+    var pipingSnippet = ""
+    var pipingsourceQuestionKey = ""
+    var pipingactivityid = ""
+    
+    let valMandatory = false
+    
+    if (activityCu?.activitySteps?.count )! > 0 {
+        
+        let activityStepArray = activityCu?.activitySteps?.filter({$0.key == identifier
+        })
+        if (activityStepArray?.count)! > 0 {
+          valPiping = activityStepArray?.last?.isPiping ?? false
+          pipingSnippet = activityStepArray?.last?.pipingSnippet ?? ""
+          pipingsourceQuestionKey = activityStepArray?.last?.pipingsourceQuestionKey ?? ""
+          pipingactivityid = activityStepArray?.last?.pipingactivityid ?? ""
+          
+          
+          
+          
+          let step1 = activityStepArray?.first
+          let valFormat = (step1 as? ActivityQuestionStep)?.formatDict
+          
+          if  Utilities.isValidObject(someObject: valFormat?[kStepQuestionTextChoiceTextChoices] as AnyObject?)
+              && Utilities.isValidValue(someObject: valFormat?[kStepQuestionTextChoiceSelectionStyle] as AnyObject?) {
+              
+  //            let textChoiceDict = valFormat?[kStepQuestionTextChoiceTextChoices] as? [Any] ?? []
+            let textChoiceDict = valFormat?[kStepQuestionTextChoiceTextChoices] as? [JSONDictionary] ?? []
+           
+              
+              for dict in textChoiceDict {
+                let text = dict[kORKTextChoiceText] as? String ?? ""
+                let value = dict[kORKTextChoiceValue] as? String ?? ""
+                
+                let other = dict["other"] as? [String: Any] ?? [:]
+                
+                if other.count > 0 {
+                  
+                  let valMandatory = other["isMandatory"] as? Bool ?? false
+                  
+                  if !valMandatory {
+                    let valOthertext = dict["text"] as? String ?? valueStr
+                    return valOthertext
+                  }
+//                  return text
+                }
+              }
+            
+          }
+          
+          
+        }
+    }
+    
+    return valueStr
+  }
+  
+  func getActualAnswer(choiceSelected : String, identifierOfRes: String) {
+    let activityCu = Study.currentActivity
+//    let activityself  =
+
+    if (activityCu?.activitySteps?.count )! > 0 {
+              
+              let activityStepArray = activityCu?.activitySteps?.filter({$0.key == identifierOfRes
+              })
+//              if (activityStepArray?.count)! > 0 {
+//                var formatDict: Dictionary<String, Any>?
+//                if Utilities.isValidObject(someObject: stepDict[kStepQuestionFormat] as AnyObject ) {
+//                    self.formatDict = (stepDict[kStepQuestionFormat] as? Dictionary)!
+//                }
+//
+//
+//
+//
+//                valPiping = activityStepArray?.last?.isPiping ?? false
+//                pipingSnippet = activityStepArray?.last?.pipingSnippet ?? ""
+//                pipingsourceQuestionKey = activityStepArray?.last?.pipingsourceQuestionKey ?? ""
+//              }
+          }
+    
+    
+  }
+    
+  //rinuthaa
+  @objc func dismisscontroller() {
+      dismiss(animated: true, completion: nil)
+  }
+  //rinuthab
+  
     // MARK: - StepViewController Delegate
     public func stepViewController(_ stepViewController: ORKStepViewController,
                                    didFinishWith direction: ORKStepViewControllerNavigationDirection){
@@ -1530,13 +3011,209 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
-        
+//      taskViewController.currentStepViewController
+      
         if let result = taskViewController.result.stepResult(forStepIdentifier: step.identifier) {
             self.managedResult[step.identifier] = result
         }
+//      step.title = "GGG"
+//      step.text = "GGG"
+//      step
+      
+//      //rinuthaa
+//      //Perform dismiss task here :
+//           if let result = taskViewController.result.stepResult(forStepIdentifier: "textscale") {
+//
+//               self.isActivityDismissed = true
+//               self.managedResult["textscale"] = result
+//               self.updateActivityStatusToComplete()
+//
+//   //            if isActivityDismissed {
+//   ////                self.addProgressIndicator()
+//   //
+//   //            }
+//
+//               UserDefaults.standard.setValue("Responce_Types", forKey: "activityId")
+//
+//               UserDefaults.standard.setValue("textscale", forKey: "identifier")
+//
+//               //dismiss
+//               perform(#selector(dismisscontroller), with: self, afterDelay: 1.5)
+//
+//           }
+//
+//           //Going to next activity's particular step
+//           if isActivityDismissed {
+//           }
+//      //rinuthab
+      
+      
+      
+     
+      let activityCu = Study.currentActivity
+      var valPiping = false
+      var pipingSnippet = ""
+      var pipingsourceQuestionKey = ""
+      var pipingactivityid = ""
+      if (activityCu?.activitySteps?.count )! > 0 {
+          
+          let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier
+          })
+          if (activityStepArray?.count)! > 0 {
+            valPiping = activityStepArray?.last?.isPiping ?? false
+            pipingSnippet = activityStepArray?.last?.pipingSnippet ?? ""
+            pipingsourceQuestionKey = activityStepArray?.last?.pipingsourceQuestionKey ?? ""
+            pipingactivityid = activityStepArray?.last?.pipingactivityid ?? ""
+          }
+      }
+
+      if let step1 = step as? ORKQuestionStep {
         
-        if let step = step as? QuestionStep, step.answerFormat?.isKind(of: ORKTextChoiceAnswerFormat.self) ?? false {
+//        if valPiping, pipingSnippet != "",  pipingsourceQuestionKey != "" {
+        
+        
+        //other ActivityPiping
+        if pipingSnippet != "", pipingactivityid != "", pipingsourceQuestionKey != "" {// same to Instructio-
+          
+          var valName = "\(valPipingValuesMain[pipingsourceQuestionKey] ?? "")"
+          
+          let valNameOther = "\(valPipingValuesMain[pipingsourceQuestionKey + "_Other_Text"] ?? "")"
+          if valNameOther != "", valNameOther != "<null>" {
+            valName = valNameOther
+          }
+          
+          
+          
+          var orignalVal1 = step1.question ?? ""
+          let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
+          // replaced originalVal with this ---> activityStepArray?.last?.title
+          if valName != "", valName != "<null>" {
+          let changedText2 = activityStepArray?.last?.title?.replacingOccurrences(of: pipingSnippet, with: valName)
+
+          let changedText = orignalVal1.replacingOccurrences(of: pipingSnippet, with: valName)
+          step1.question = changedText2// "GGG2"
+          if !(step1.question != nil && step1.question != "") {
             
+          }
+          }
+        }
+        
+        
+          
+         else if let result = taskViewController.result.stepResult(forStepIdentifier: pipingsourceQuestionKey) {
+            
+           let valName = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+            
+            var orignalVal = step1.question ?? ""
+            if valName != "", pipingSnippet != "", valName != "<null>" {
+              let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
+              // replaced originalVal with this ---> activityStepArray?.last?.title
+              let changedText2 = activityStepArray?.last?.title?.replacingOccurrences(of: pipingSnippet, with: valName)
+             
+              let changedText = orignalVal.replacingOccurrences(of: pipingSnippet, with: valName)
+
+              step1.question = changedText2// "GGG2"
+              if !(step1.question != nil && step1.question != "") {
+                
+              }
+            }
+           
+           else if (valName == "" || valName == "<null>"), pipingSnippet != "" {//Skipped sce
+             let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
+             // replaced originalVal with this ---> activityStepArray?.last?.title
+             let changedText2 = activityStepArray?.last?.title
+             step1.question = changedText2// "GGG2"
+           }
+           
+      
+           
+           
+           
+                    }
+          
+          
+//        step1.question = "GGG2"
+//        }
+
+//        taskViewController.currentStepViewController = step1
+//        step = step1
+        
+        
+        
+      } else if let step1 = step as? ORKInstructionStep {
+        
+        
+        //other ActivityPiping
+        if pipingSnippet != "", pipingactivityid != "", pipingsourceQuestionKey != "" {// same to Instructio-
+          
+          var valName = "\(valPipingValuesMain[pipingsourceQuestionKey] ?? "")"
+          
+          let valNameOther = "\(valPipingValuesMain[pipingsourceQuestionKey + "_Other_Text"] ?? "")"
+          if valNameOther != "", valNameOther != "<null>" {
+            valName = valNameOther
+          }
+          
+          var orignalVal = step1.title ?? ""
+          if valName != "", pipingSnippet != "", valName != "<null>" {
+            let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
+            // replaced originalVal with this ---> activityStepArray?.last?.title
+            let changedText2 = activityStepArray?.last?.title?.replacingOccurrences(of: pipingSnippet, with: valName)
+
+            
+            let changedText = orignalVal.replacingOccurrences(of: pipingSnippet, with: valName)
+            step1.title = changedText2// "GGG2"
+            if !(step1.title != nil && step1.title != "") {
+              
+            }
+          }
+        }
+        
+        
+        
+        
+       else if let result = taskViewController.result.stepResult(forStepIdentifier: pipingsourceQuestionKey) {
+          
+          let valName = self.setResultValue(stepResult: result, activityType: .Questionnaire )
+          
+          var orignalVal = step1.title ?? ""
+          if valName != "", pipingSnippet != "", valName != "<null>" {
+            let activityStepArray = activityCu?.activitySteps?.filter({$0.key == step.identifier })
+            // replaced originalVal with this ---> activityStepArray?.last?.title
+            let changedText2 = activityStepArray?.last?.title?.replacingOccurrences(of: pipingSnippet, with: valName)
+    
+            let changedText = orignalVal.replacingOccurrences(of: pipingSnippet, with: valName)
+            step1.title = changedText2// "GGG2"
+            if !(step1.title != nil && step1.title != "") {
+              
+            }
+          }
+        }
+        
+        
+        //        step1.question = "GGG2"
+        //        }
+
+        //        taskViewController.currentStepViewController = step1
+        //        step = step1
+        
+        
+        
+      }
+        if let step = step as? QuestionStep, step.answerFormat?.isKind(of: ORKTextChoiceAnswerFormat.self) ?? false {
+          
+          let valStep = step
+          if valStep.isOptional {
+            UserDefaults.standard.set("true", forKey: "isOptionalTextChoice")
+            UserDefaults.standard.synchronize()
+          } else {
+            UserDefaults.standard.set("false", forKey: "isOptionalTextChoice")
+            UserDefaults.standard.synchronize()
+          }
+          
+          if let result = taskViewController.result.stepResult(forStepIdentifier: step.identifier) {
+            self.managedResult[step.identifier] = result
+          }
+          
             var textChoiceQuestionController :TextChoiceQuestionController
             
             var result = taskViewController.result.result(forIdentifier: step.identifier)
@@ -1550,37 +3227,60 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                      
             return textChoiceQuestionController
         }
+      
+      UserDefaults.standard.set("", forKey: "isOptionalTextChoice")
+      UserDefaults.standard.synchronize()
+      if let step = step as? CustomInstructionStep {
+        return CustomInstructionStepViewController(step: step)
+      }
 
-        let storyboard = UIStoryboard.init(name: "FetalKickCounter", bundle: nil)
+      let storyboard = UIStoryboard.init(name: "FetalKickCounter", bundle: nil)
         
-        if step is FetalKickCounterStep {
-            
-            let ttController = (storyboard.instantiateViewController(withIdentifier: "FetalKickCounterStepViewController") as?
-                                    FetalKickCounterStepViewController)!
-            ttController.step = step
-            return ttController
-        } else if  step is FetalKickIntroStep {
-            
-            let ttController = (storyboard.instantiateViewController(withIdentifier: "FetalKickIntroStepViewControllerIdentifier") as?
-                                    FetalKickIntroStepViewController)!
-            ttController.step = step
-            return ttController
-        } else {
-            return nil
-        }
+      if step is FetalKickCounterStep {
         
+        let ttController =
+        (storyboard.instantiateViewController(
+          withIdentifier: "FetalKickCounterStepViewController"
+        )
+         as? FetalKickCounterStepViewController)!
+        ttController.step = step
+        return ttController
+      } else if step is FetalKickIntroStep {
+        
+        let ttController =
+        (storyboard.instantiateViewController(
+          withIdentifier: "FetalKickIntroStepViewControllerIdentifier"
+        )
+         as? FetalKickIntroStepViewController)!
+        ttController.step = step
+        return ttController
+      } else {
+        return nil
+      }
+      
     }
     
-    func taskViewController(_ taskViewController: ORKTaskViewController, didChange result: ORKTaskResult) {
-        
-        // Saving the TextChoiceQuestionController result to publish it later.
-        if taskViewController.currentStepViewController?.isKind(of: TextChoiceQuestionController.self) ?? false {
-            if let result = result.stepResult(forStepIdentifier: taskViewController.currentStepViewController?.step?.identifier ?? "") {
-                self.managedResult[result.identifier] = result
-            }
-        }
-    }
+  func taskViewController(_ taskViewController: ORKTaskViewController, didChange result: ORKTaskResult) {
     
+    // Saving the TextChoiceQuestionController result to publish it later.
+    if taskViewController.currentStepViewController?.isKind(
+      of: TextChoiceQuestionController.self
+    )
+        ?? false
+    {
+      if let result = result.stepResult(
+        forStepIdentifier: taskViewController.currentStepViewController?.step?.identifier
+        ?? ""
+      ) {
+        self.managedResult[result.identifier] = result
+      }
+    }
+  }
+  
+  func taskViewController(_ taskViewController: ORKTaskViewController, shouldPresent step: ORKStep) -> Bool {
+    return true
+  }
+  
 }
 
 extension ActivitiesViewController:UITabBarControllerDelegate{
@@ -1593,6 +3293,670 @@ extension ActivitiesViewController:UITabBarControllerDelegate{
             // self.checkForActivitiesUpdates()
         }
     }
+  
+  
+  func setActivityMetaData(activityDict: Dictionary<String, Any>) {
+      
+      if Utilities.isValidObject(someObject: activityDict as AnyObject?) {
+          
+          if Utilities.isValidValue(someObject: activityDict[kActivityType] as AnyObject ) {
+//              self.type? =  ActivityType(rawValue: (activityDict[kActivityType] as? String)!)!
+             
+          }
+        
+//        let valActivityResp = response[kActivity] as! Dictionary<String, Any>
+        
+         let valActivityData = self.setInfo(infoDict: (activityDict[kActivityInfoMetaData] as? Dictionary<String, Any>)!)
+          
+//          if Utilities.isValidObject(someObject: activityDict[kActivitySteps] as AnyObject?) {
+        
+        
+//               self.setStepArray(stepArray: (activityDict[kActivitySteps] as? Array)! )
+              
+        
+        
+        let valactivity1 = activityDict["steps"] as? Array<Dictionary<String, Any>>
+//        let valactivity2 = valactivity1["steps"] as? Array)!
+        
+        self.setStepArray(stepArray: (valactivity1)!, valActivityData: valActivityData )
+        
+        
+//          } else {
+//
+//          }
+      } else {
+          
+      }
+  }
+  
+//  func createTask(varActivityType: ActivityType?) -> ORKTask? {
+//
+//      if  (varActivityType) != nil {
+//
+//          var orkStepArray: [ORKStep]?
+//
+//          orkStepArray = Array<ORKStep>()
+//
+//          var activityStepArray: [ActivityStep]? = Array<ActivityStep>()
+//
+//        switch (varActivityType!) as ActivityType {
+//
+//          // MARK: Questionnaire
+//          case .Questionnaire:
+//
+//              // creating step array
+//
+//              for stepDict in (activity?.steps!)! {
+//
+//                  if Utilities.isValidObject(someObject: stepDict as AnyObject?) {
+//
+//                      if Utilities.isValidValue(someObject: stepDict[kActivityStepType] as AnyObject ) {
+//
+//                          switch ActivityStepType(rawValue:(stepDict[kActivityStepType] as? String)!)! as  ActivityStepType {
+//
+//                          case .instruction:
+//
+//                              let instructionStep: ActivityInstructionStep? = ActivityInstructionStep()
+//                            instructionStep?.initWithDict(stepDict: stepDict, allSteps: (activity?.steps!)!)
+//                              orkStepArray?.append((instructionStep?.getInstructionStep())!)
+//                              activityStepArray?.append(instructionStep!)
+//
+//                          case .question:
+//
+//                              let questionStep: ActivityQuestionStep? = ActivityQuestionStep()
+//                            questionStep?.initWithDict(stepDict: stepDict, allSteps: (activity?.steps!)!)
+//
+//                              if let step = (questionStep?.getQuestionStep()) {
+//
+//                                  orkStepArray?.append(step)
+//                                  activityStepArray?.append(questionStep!)
+//                              }
+//                          case .form:
+//
+//                              let formStep: ActivityFormStep? = ActivityFormStep()
+//                            formStep?.initWithDict(stepDict: stepDict, allSteps: (activity?.steps!)!)
+//                              orkStepArray?.append((formStep?.getFormStep())!)
+//                              activityStepArray?.append(formStep!)
+//
+//                          default: break
+//                          }
+//                      }
+//                  } else {
+//                      Logger.sharedInstance.debug("Activity:stepDict is null:\(stepDict)")
+//                      break
+//                  }
+//              }
+//
+//              if (orkStepArray?.count)! > 0 {
+//
+//                  self.activity?.setORKSteps(orkStepArray: orkStepArray!)
+//                  self.activity?.setActivityStepArray(stepArray: activityStepArray!)
+//
+//                  // addding completion step
+//                  let completionStep = ORKCompletionStep(identifier: kCompletionStep)
+//                  let kActivityCompleted = NSLocalizedStrings("Activity Completed", comment: "")
+//                  let msg = "Tap Done to submit responses. Responses cannot be modified after submission"
+//                  let kTapDoneSubmit = NSLocalizedStrings(msg, comment: "")
+//                  completionStep.title = kActivityCompleted
+//                  completionStep.image = #imageLiteral(resourceName: "successBlueBig")
+//                  completionStep.detailText = kTapDoneSubmit
+//                completionStep.steppreisHidden = "false"
+//                  orkStepArray?.append(completionStep)
+//
+//                  // Creating ordered or navigable task
+//                  if (orkStepArray?.count)! > 0 {
+//
+//                      task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
+//
+//                      if self.activity?.branching == true { // For Branching/Navigable Task
+//                          task =  ORKNavigableOrderedTask(identifier: (activity?.actvityId)!, steps: orkStepArray)
+//
+//                      } else { // For OrderedTask
+//                          task =  ORKOrderedTask(identifier: (activity?.actvityId)!, steps: orkStepArray)
+//                      }
+//                  }
+//                  var i: Int? = 0
+//
+//                  if self.activity?.branching == true {
+//
+//                      for step in orkStepArray! {
+//                          // Setting ActivityStep
+//                          if step.isKind(of: ORKQuestionStep.self) ||
+//                              step is RepeatableFormStep ||
+//                              step is ORKFormStep ||
+//                              (step.isKind(of: ORKInstructionStep.self) &&
+//                                  step.isKind(of: ORKCompletionStep.self) == false) {
+//
+//                              let activityStep: ActivityStep?
+//
+//                              if step.isKind(of: ORKQuestionStep.self) ||
+//                                  (step.isKind(of: ORKInstructionStep.self) == false &&
+//                                   step.isKind(of: ORKCompletionStep.self) == false) {
+//                                  activityStep = activityStepArray?[(i!)] as?  ActivityQuestionStep
+//
+//                              } else if step.isKind(of: ORKFormStep.self) || step.isKind(of: RepeatableFormStep.self) {
+//                                  activityStep = activityStepArray?[(i!)] as?  ActivityFormStep
+//
+//                              } else {
+//                                  activityStep = activityStepArray?[(i!)] as?  ActivityInstructionStep
+//                              }
+//
+//                              if activityStep?.destinations != nil && (activityStep?.destinations?.count)! > 0 {
+//
+//                                  var defaultStepIdentifier: String = ""
+//
+//                                  // Setting Next Step as Default destination
+//                                  if i! + 1 < (activityStepArray?.count)! {
+//                                      defaultStepIdentifier = (activityStepArray?[(i!+1)].key)!
+//
+//                                  } else { // Setting Completion Step as Default destination
+//                                      defaultStepIdentifier = kCompletionStep
+//                                  }
+//
+//                                  var defaultStepExist: Bool? = false
+//                                  let resultSelector: ORKResultSelector?
+//                                  var predicateRule: ORKPredicateStepNavigationRule?
+//
+//                                  // Creating Result Selector
+//                                  resultSelector =  ORKResultSelector(stepIdentifier: step.identifier, resultIdentifier: step.identifier)
+//                                  let questionStep: ORKStep?
+//
+//                                  // Intializing Question Step
+//                                  if step.isKind(of: ORKQuestionStep.self) {
+//                                      questionStep = (step as? ORKQuestionStep)!
+//
+//                                  } else if step is RepeatableFormStep {
+//                                      questionStep = (step as? RepeatableFormStep)!
+//
+//                                  } else if step is ORKFormStep {
+//                                      questionStep = (step as? ORKFormStep)!
+//
+//                                  } else {
+//                                      questionStep = (step as? ORKInstructionStep)!
+//                                  }
+//
+//                                  // choicearray and destination array will hold predicates & their respective destination
+//                                  var choicePredicate: [NSPredicate] = [NSPredicate]()
+//                                  var destination: Array<String>? = Array<String>()
+//
+//                                  for dict in (activityStep?.destinations)! {
+//
+//                                      var predicateQuestionChoiceA: NSPredicate = NSPredicate()
+//
+//                                      // Condition is not nil
+//                                      if Utilities.isValidValue(someObject: dict[kCondtion] as AnyObject) {
+//
+//                                          switch (questionStep as? ORKQuestionStep)!.answerFormat {
+//
+//                                          case is ORKTextChoiceAnswerFormat,
+//                                               is ORKTextScaleAnswerFormat,
+//                                               is ORKImageChoiceAnswerFormat,
+//                                               is ORKValuePickerAnswerFormat:
+//
+//                                              predicateQuestionChoiceA = ORKResultPredicate.predicateForChoiceQuestionResult(
+//                                                  with: resultSelector!,
+//                                                  expectedAnswerValue: dict[kCondtion] as! NSCoding & NSCopying & NSObjectProtocol)
+//
+//                                              choicePredicate.append(predicateQuestionChoiceA)
+//
+//                                              if dict[kCondtion] != nil &&
+//                                                  dict[kDestination] != nil &&
+//                                                  (dict[kDestination] as? String)! == "" {
+//                                                  // this means c = value & d = ""
+//                                                  destination?.append( kCompletionStep )
+//
+//                                              } else {
+//                                                  // this means c = value && d =  value
+//                                                  destination?.append( (dict[kDestination]! as? String)!)
+//                                              }
+//
+//                                          case is ORKNumericAnswerFormat ,
+//                                               is ORKScaleAnswerFormat,
+//                                               is ORKTimeIntervalAnswerFormat,
+//                                               is ORKHeightAnswerFormat,
+//                                               is ORKContinuousScaleAnswerFormat,
+//                                               is ORKHealthKitQuantityTypeAnswerFormat:
+//
+//                                              if let operatorValue = dict[kOperator] as? String, operatorValue != "" {
+//
+//                                                  let condition: String = (dict[kCondtion] as? String)!
+//                                                  let conditionValue = condition.components(separatedBy: CharacterSet(charactersIn: ","))
+//
+//                                                  var lhs: Double? = 0.0
+//                                                  var rhs: Double? = 0.0
+//
+//                                                  lhs = Double(conditionValue.first!)
+//                                                  if conditionValue.count == 2 { // multiple conditions exists
+//                                                      rhs = Double(conditionValue.last!)
+//                                                  }
+//                                                  let operatorType:OperatorType = OperatorType(rawValue: operatorValue)!
+//
+//                                                  switch (questionStep as? ORKQuestionStep)!.answerFormat {
+//                                                  case is ORKNumericAnswerFormat,
+//                                                       is ORKHeightAnswerFormat,
+//                                                       is ORKHealthKitQuantityTypeAnswerFormat: // Height & Numeric Question
+//
+//                                                      var minimumValue = (activityStep
+//                                                                          as? ActivityQuestionStep)!.formatDict![kMinimumValue]
+//                                                      as? Float
+//
+//                                                      var style = ""
+//
+//                                                      if (questionStep as? ORKQuestionStep)!.answerFormat! is ORKHeightAnswerFormat {
+//                                                          minimumValue = 0
+//                                                      } else {
+//                                                          style = ((activityStep
+//                                                                    as? ActivityQuestionStep)?.formatDict?[kStepQuestionNumericStyle]
+//                                                                   as? String)!
+//                                                      }
+//
+//                                                      predicateQuestionChoiceA = self.getPredicateForNumeric(
+//                                                          resultSelector: resultSelector!,
+//                                                          lhs: lhs!,
+//                                                          minimumValue: minimumValue!,
+//                                                          operatorType: operatorType,
+//                                                          answerFormat: (questionStep as? ORKQuestionStep)!.answerFormat!,
+//                                                          style: style)
+//
+//                                                  case is ORKTimeIntervalAnswerFormat: // TimeInterval
+//
+//                                                      predicateQuestionChoiceA = self.getPredicateForTimeInterval(
+//                                                          resultSelector: resultSelector!,
+//                                                          lhs: lhs!,
+//                                                          minimumValue: 0.0,
+//                                                          operatorType: operatorType)
+//
+//                                                  case is ORKScaleAnswerFormat, is ORKContinuousScaleAnswerFormat: // Scale & Continuos Scale
+//
+//                                                      let minimumValue = (activityStep
+//                                                                          as? ActivityQuestionStep)!.formatDict![kMinimumValue] as? Float
+//
+//                                                      predicateQuestionChoiceA = self.getPredicateForScale(resultSelector: resultSelector!,
+//                                                                                       lhs: lhs!, minimumValue: minimumValue!,
+//                                                                                       operatorType: operatorType,
+//                                                                                       rhs: rhs!,
+//                                                                                       resultType: ((questionStep as?
+//                                                                                                      ORKQuestionStep)!.answerFormat)!,
+//                                                                                       activityStep:activityStep!)
+//
+//                                                  case .none: break
+//
+//                                                  case .some(_): break
+//
+//                                                  }
+//                                                  choicePredicate.append(predicateQuestionChoiceA)
+//
+//                                                  if dict[kCondtion] != nil &&
+//                                                      dict[kDestination] != nil &&
+//                                                      (dict[kDestination] as? String)! == "" {
+//                                                      // this means c = value & d = ""
+//                                                      destination?.append( kCompletionStep )
+//
+//                                                  } else {
+//                                                      // this means c = value && d =  value
+//                                                      destination?.append( (dict[kDestination]! as? String)!)
+//                                                  }
+//                                              } else {
+//                                              }
+//
+//                                          case is ORKBooleanAnswerFormat :
+//
+//                                              var boolValue: Bool? = false
+//
+//                                              if (dict[kCondtion] as? String)!.caseInsensitiveCompare("true") ==  ComparisonResult.orderedSame {
+//                                                  boolValue = true
+//
+//                                              } else {
+//                                                  if (dict[kCondtion] as? String)!.caseInsensitiveCompare("false")==ComparisonResult.orderedSame {
+//                                                      boolValue = false
+//
+//                                                  } else if (dict[kCondtion] as? String)! == "" {
+//                                                      boolValue = nil
+//                                                      if Utilities.isValidValue(someObject: dict[kDestination] as AnyObject? ) {
+//
+//                                                          defaultStepIdentifier = (dict[kDestination]! as? String)!
+//                                                      }
+//                                                  }
+//                                              }
+//
+//                                              if  boolValue != nil {
+//
+//                                                  predicateQuestionChoiceA =
+//                                                      ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector!,
+//                                                                                                      expectedAnswer: boolValue!)
+//                                              }
+//                                              choicePredicate.append(predicateQuestionChoiceA)
+//
+//                                              if dict[kCondtion] != nil &&
+//                                                  dict[kDestination] != nil &&
+//                                                  (dict[kDestination] as? String)! == "" {
+//                                                  // this means c = value & d = ""
+//                                                  destination?.append( kCompletionStep )
+//
+//                                              } else {
+//                                                  // this means c = value && d =  value
+//                                                  destination?.append( (dict[kDestination]! as? String)!)
+//                                              }
+//                                          default: break
+//                                          }
+//                                      } else {
+//                                          // it means condition is empty
+//                                          if dict[kCondtion] != nil && (dict[kCondtion] as? String)! == "" {
+//
+//                                              defaultStepExist = true
+//                                              if Utilities.isValidValue(someObject: dict[kDestination] as AnyObject? ) {
+//                                                  // means we ahave valid destination
+//                                                  defaultStepIdentifier = (dict[kDestination]! as? String)!
+//
+//                                              } else {
+//                                                  // invalid destination i.e condition = "" && destination = ""
+//                                                  defaultStepIdentifier = kCompletionStep
+//                                              }
+//                                          }
+//                                      }
+//                                  }
+//                                  if choicePredicate.count == 0 {
+//
+//                                      // if condition is empty
+//
+//                                      if (destination?.count)! > 0 {
+//
+//                                          // if destination is not empty but condition is empty
+//
+//                                          for destinationId in destination! {
+//
+//                                              if destinationId.count != 0 {
+//
+//                                                  let  directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: destinationId)
+//
+//                                                  (task as? ORKNavigableOrderedTask)!.setNavigationRule(directRule,
+//                                                                                                        forTriggerStepIdentifier: step.identifier)
+//                                              }
+//                                          }
+//                                      } else {
+//                                          // if both destination and condition are empty
+//                                          let  directRule: ORKDirectStepNavigationRule!
+//
+//                                          if defaultStepExist == false {
+//                                              directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: kCompletionStep)
+//                                          } else {
+//                                              directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: defaultStepIdentifier)
+//                                          }
+//
+//                                          (task as? ORKNavigableOrderedTask)!.setNavigationRule(directRule!,
+//                                                                                                forTriggerStepIdentifier:step.identifier)
+//                                      }
+//                                  } else {
+//
+//                                      predicateRule = ORKPredicateStepNavigationRule(resultPredicates: choicePredicate,
+//                                                                                     destinationStepIdentifiers: destination!,
+//                                                                                     defaultStepIdentifier: defaultStepIdentifier,
+//                                                                                     validateArrays: true)
+//
+//                                      (task as? ORKNavigableOrderedTask)!.setNavigationRule(predicateRule!,
+//                                                                                            forTriggerStepIdentifier:step.identifier)
+//                                  }
+//                              } else {
+//                                  // destination array is empty - Do Nothing
+//                              }
+//                          } else {
+//                              // this is not question step
+//                          }
+//                          i = i! + 1
+//                      }
+//                  }
+//                  if task != nil {
+//
+//                      if (self.activity?.branching)! {
+//                          return (task as? ORKNavigableOrderedTask)!
+//                      } else {
+//                          return (task as? ORKOrderedTask)!
+//                      }
+//                  } else {
+//                      return nil
+//                  }
+//              }
+//          // MARK: Active Task
+//          case .activeTask:
+//
+//              for stepDict in (activity?.steps!)! {
+//
+//                  if Utilities.isValidObject(someObject: stepDict as AnyObject?) {
+//
+//                      if Utilities.isValidValue(someObject: stepDict[kActivityStepType] as AnyObject ) {
+//
+//                          switch ActivityStepType(rawValue: (stepDict[kActivityStepType] as? String)!)! as  ActivityStepType {
+//
+//                          case .instruction:
+//
+//                              let instructionStep:ActivityInstructionStep? = ActivityInstructionStep()
+//                            instructionStep?.initWithDict(stepDict: stepDict, allSteps: (activity?.steps!)!)
+//                              orkStepArray?.append((instructionStep?.getInstructionStep())!)
+//
+//                          case .question:
+//
+//                              let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
+//                            questionStep?.initWithDict(stepDict: stepDict, allSteps: (activity?.steps!)!)
+//                              orkStepArray?.append((questionStep?.getQuestionStep())!)
+//
+//                          case .active, .taskSpatialSpanMemory, .taskTowerOfHanoi:
+//
+//                              var localTask: ORKOrderedTask?
+//
+//                              let activeStep:ActivityActiveStep? = ActivityActiveStep()
+//                            activeStep?.initWithDict(stepDict: stepDict, allSteps: (activity?.steps!)!)
+//                              localTask = activeStep?.getActiveTask() as! ORKOrderedTask?
+//                              activityStepArray?.append(activeStep!)
+//
+//                              if (localTask?.steps) != nil && ((localTask?.steps)?.count)! > 0 {
+//
+//                                  for step  in (localTask?.steps)! {
+//                                      orkStepArray?.append(step)
+//                                  }
+//                              }
+//                          default: break
+//                          }
+//                      }
+//
+//                  } else {
+//                      Logger.sharedInstance.debug("Activity:stepDict is null:\(stepDict)")
+//                      break
+//                  }
+//              }
+//
+//              if (orkStepArray?.count)! > 0 {
+//
+//                  if (activityStepArray?.count)! > 0 {
+//
+//                      self.activity?.setActivityStepArray(stepArray: activityStepArray!)
+//                  }
+//                  self.activity?.setORKSteps(orkStepArray: orkStepArray!)
+//
+//                  if (orkStepArray?.count)! > 0 {
+//                      task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
+//                  }
+//                  return task!
+//
+//              } else {
+//                  return nil
+//              }
+//          }
+//      } else {
+//          Logger.sharedInstance.debug("activity is null")
+//      }
+//      return nil
+//      // self.actvityResult?.setActivity(activity: self.activity!)
+//  }
+  
+  func setInfo(infoDict: Dictionary<String, Any>) -> [String] {
+      var version = ""
+    var activityId = ""
+    
+      if Utilities.isValidObject(someObject: infoDict as AnyObject?) {
+       
+//          if Utilities.isValidValue(someObject: infoDict["name"] as AnyObject ) {
+//              self.shortName =   infoDict["name"] as? String
+//          }
+          
+          if Utilities.isValidValue(someObject: infoDict["version"] as AnyObject ) {
+            version =  infoDict["version"] as? String ?? ""
+          }
+        if Utilities.isValidValue(someObject: infoDict["activityId"] as AnyObject ) {
+          activityId =  infoDict["activityId"] as? String ?? ""
+        }
+//          if Utilities.isValidValue(someObject: infoDict[kActivityStartTime] as AnyObject ) {
+//              // self.startDate =  Utilities.getDateFromString(dateString: (infoDict[kActivityStartTime] as! String?)!)
+//          }
+//          if Utilities.isValidValue(someObject: infoDict[kActivityEndTime] as AnyObject ) {
+//              // self.endDate =   Utilities.getDateFromString(dateString: (infoDict[kActivityEndTime] as! String?)!)
+//          }
+//          if let lastModified = infoDict[kActivityLastModified] as? String {
+//              self.lastModified =  Utilities.getDateFromString(dateString: lastModified)
+//          }
+        //  self.activityLang = getLanguageLocale()
+      }
+//    else {
+//          Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
+//      }
+    
+    return [activityId, version]
+  }
+  
+  func setStepArray(stepArray: Array<Dictionary<String, Any>>, valActivityData: [String]) {
+     
+      if Utilities.isValidObject(someObject: stepArray as AnyObject?){
+//          self.steps? = stepArray
+        
+        for stepArr in stepArray {
+          let valKey = stepArr["key"] as? String ?? ""
+          if valKey != "" {
+            let valresultType = stepArr["resultType"] as? String ?? ""
+            if valresultType == QuestionStepType.valuePicker.rawValue {
+              
+              //              let stepArr1 = stepArr as? Dictionary<String, Any>
+                            let valformatDict = stepArr["format"] as? [String: Any] ?? [:]
+                            let valTextChoices = valformatDict["textChoices"] as? [[String: Any]] ?? []
+                            
+                            let valRes = valPipingValuesMain[valKey] as? String ?? ""
+                            if valRes != "" {
+                              
+                              for valTextChoices1 in valTextChoices {
+                                let valValue = valTextChoices1["value"] as? String ?? ""
+                                if valValue == valRes {
+                                  let valText = valTextChoices1["text"] as? String ?? ""
+
+                                  valPipingValuesMain[valKey] = valText
+                                  
+                                }
+                              }
+                              
+                              
+                            }
+                            
+            } else if valresultType == QuestionStepType.textChoice.rawValue {
+              
+              //              let stepArr1 = stepArr as? Dictionary<String, Any>
+              let valformatDict = stepArr["format"] as? [String: Any] ?? [:]
+              let valTextChoices = valformatDict["textChoices"] as? [[String: Any]] ?? []
+              
+              let valRes = valPipingValuesMain[valKey] as? String ?? ""
+              if valRes != "" {
+                
+                for valTextChoices1 in valTextChoices {
+                  let valValue = valTextChoices1["value"] as? String ?? ""
+                  if valValue == valRes {
+                    let valText = valTextChoices1["text"] as? String ?? ""
+                    valPipingValuesMain[valKey] = valText
+                    
+                  }
+                }
+                
+                
+              } else {
+                guard let studyID = Study.currentStudy?.studyId else { return }
+                
+               let valValues1aActivityId1 = valActivityData[0]
+                var valValues1aActivityId2 = valActivityData[0]
+                let valpipingactivityVersion = valActivityData[1]
+                
+                if let valValues1 = valPipingDetailsMain[valValues1aActivityId1] {
+                  if valValues1.count > 0 {
+                    
+                    
+                    for valValues1Val in valValues1 {
+//                      let valValues1a = valValues1[0]
+                      
+                      if valValues1Val["pipingsourceQuestionKey"] == valKey {
+                      
+                      if let valValues1aActivityId = valValues1Val["pipingsourceQuestionKey"] {
+//                          valValues1aActivityId2 = valValues1aActivityId2 + valValues1aActivityId
+                          valValues1aActivityId2 += valValues1aActivityId
+                        
+                        break
+                      }
+                    }
+                    }
+                    
+                    
+                    
+//                    let valValues1a = valValues1[0]
+//                    if let valValues1aActivityId = valValues1a["pipingsourceQuestionKey"] {
+//                      valValues1aActivityId2 = valValues1aActivityId2 + valValues1aActivityId
+//                    }
+                  }
+                }
+                
+                if valValues1aActivityId2 != valValues1aActivityId1, valValues1aActivityId2 != "" {
+                  if let valValues1 = valPipingDetailsMain[valValues1aActivityId1] {
+                  if valValues1.count > 0 {
+                    let valValues1a = valValues1[0]
+                    if let valValues1aActivityId = valValues1a["pipingsourceQuestionKey"] {
+                      querypipingresponse(activityId: valValues1aActivityId2, stepId: "") //valValues1aActivityId
+                    }
+                  }
+                    
+                }
+                  
+                  
+                  
+//                WCPServices().getStudyActivityVersionMetadata(studyId: studyID,
+//                                                                                           activityId: valValues1aActivityId2,
+//                                                                                           activityVersion: valpipingactivityVersion,
+//                                                                                           delegate: self)
+                }
+                
+              }
+              
+            } else if valresultType == QuestionStepType.textscale.rawValue {
+              
+//              let stepArr1 = stepArr as? Dictionary<String, Any>
+              let valformatDict = stepArr["format"] as? [String: Any] ?? [:]
+              let valTextChoices = valformatDict["textChoices"] as? [[String: Any]] ?? []
+              
+              let valRes = valPipingValuesMain[valKey] as? String ?? ""
+              if valRes != "" {
+                
+                for valTextChoices1 in valTextChoices {
+                  let valValue = valTextChoices1["value"] as? String ?? ""
+                  if valValue == valRes {
+                    let valText = valTextChoices1["text"] as? String ?? ""
+                    valPipingValuesMain[valKey] = valText
+                    
+                  }
+                }
+                
+                
+              }
+              
+            }
+            
+          }
+        }
+        
+      } else {
+          Logger.sharedInstance.debug("stepArray is null:\(stepArray)")
+      }
+  }
   
 }
 
@@ -1660,6 +4024,7 @@ class ActivitySchedules: UIView, UITableViewDelegate, UITableViewDataSource {
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mma, MMM dd YYYY"
+        formatter.locale = Locale(identifier: getLanguageLocale())
         // formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
@@ -1674,7 +4039,7 @@ class ResponseDataFetch: NMWebServiceDelegate {
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.init(identifier: "America/New_York")
         formatter.dateFormat = "YYYY-MM-dd HH:mm:ss.SSS"
-        
+        formatter.locale = Locale(identifier: getLanguageLocale())
         return formatter
     }()
     
@@ -1683,7 +4048,7 @@ class ResponseDataFetch: NMWebServiceDelegate {
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.current
         formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
-        
+        formatter.locale = Locale(identifier: getLanguageLocale())
         return formatter
     }()
     

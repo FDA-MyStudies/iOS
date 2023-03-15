@@ -18,7 +18,7 @@ public struct PrintLogHandler: LogHandler {
 
     public func emit(record: LogRecord) {
         if let formatter = formatter {
-            print(formatter.format(record: record))
+
         }
     }
 }

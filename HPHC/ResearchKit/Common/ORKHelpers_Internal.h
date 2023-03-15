@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 #  define ORK_LOG_LEVEL_WARNING 1
 #endif
 
-#define _ORK_LogWithLevel(level,fmt,...) NSLog(@"[ResearchKit]["#level"] %s " fmt, __PRETTY_FUNCTION__, ## __VA_ARGS__)
+#define _ORK_LogWithLevel(level,fmt,...)
 
 #if ( ORK_LOG_LEVEL_DEBUG )
 #  define ORK_Log_Debug(fmt,...) _ORK_LogWithLevel(Debug, fmt, ## __VA_ARGS__)

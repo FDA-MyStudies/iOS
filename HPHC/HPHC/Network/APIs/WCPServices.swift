@@ -103,6 +103,15 @@ class WCPServices: NSObject {
     var delegateSource: NMWebServiceDelegate?
     
     // MARK: Requests
+  func updatesAppVersion(delegate: NMWebServiceDelegate){
+    
+    self.delegate = delegate
+    let method = WCPMethods.updateVersionInfo.method
+    let headerParams = ["appId": AppDetails.applicationID,
+                        "appName" : Branding.NavigationTitleName,"appVersion": "2.0.2","osType" : "ios",
+                        "orgId" : AppDetails.organizationID]
+    self.sendRequestWith(method: method, params: headerParams, headers: nil)
+  }
     
     func checkForAppUpdates(delegate: NMWebServiceDelegate){
         
@@ -188,9 +197,22 @@ class WCPServices: NSObject {
         let method = WCPMethods.activity.method
         let headerParams = [kStudyId: studyId,
                             kActivityId: activityId,
-                            kActivityVersion: activityVersion]
+                            kActivityVersion: activityVersion,
+                            "isLive": true] as [String : Any]
         self.sendRequestWith(method: method, params: headerParams, headers: nil)
     }
+  
+  func getStudyActivityVersionMetadata(studyId: String, activityId: String, activityVersion: String, delegate: NMWebServiceDelegate) {
+      
+      self.delegate = delegate
+      
+      let method = WCPMethods.activity.method
+      let headerParams = [kStudyId: studyId,
+                          kActivityId: activityId,
+                          kActivityVersion: activityVersion,
+                          "isLive": false] as [String : Any]
+      self.sendRequestWith(method: method, params: headerParams, headers: nil)
+  }
     
     func getStudyDashboardInfo(studyId: String, delegate: NMWebServiceDelegate){
         
@@ -494,6 +516,41 @@ class WCPServices: NSObject {
     }
     
     func handleGetStudyActivityMetadata(response: Dictionary<String, Any>){
+
+      let val1 = UserDefaults.standard.value(forKey: "changeActivity") as? Bool ?? true
+      if val1 {
+        UserDefaults.standard.set(false, forKey: "changeActivity")
+        UserDefaults.standard.synchronize()
+      } else {
+        UserDefaults.standard.set(true, forKey: "changeActivity")
+        UserDefaults.standard.synchronize()
+      }
+      
+//      let jsonName = val1 ? "iOSActivity6" : "iOSActivity6"
+//      var response2: Dictionary<String, Any> = [:]
+//      // Comment out when done
+//             let filePath  = Bundle.main.path(forResource: jsonName, ofType: "json")
+//             let data = NSData(contentsOfFile: filePath!)
+//
+//             do {
+//                  response2 = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String, Any> ?? [:]
+//
+//
+////               self.handleGetStudyActivityMetadata(response: res as! Dictionary<String, Any>)
+//
+////                 if let activites = res![kActivites]  as? Array<Dictionary<String, Any>> {
+////                     if Study.currentStudy != nil {
+////                         for activity in activites {
+////                             let participatedActivity = UserActivityStatus(detail: activity,studyId:(Study.currentStudy?.studyId)!)
+////                             user.participatedActivites.append(participatedActivity)
+////                         }
+////                     }
+////                 }
+//             }
+//             catch {
+//
+//             }
+      
         
 //        let filePath  = Bundle.main.path(forResource: "ActivityMetadata TEST1", ofType: "json") // Activity_Metadata_Other
 //        let data = NSData(contentsOfFile: filePath!)
@@ -592,8 +649,12 @@ extension WCPServices:NMWebServiceDelegate{
             self.handleStudyInfo(response: response as! Dictionary<String, Any>)
         case .activityList:
             self.handleStudyActivityList(response: response as! Dictionary<String, Any>)
-        case .activity:
+        case .activity:         
+          
+          let val1 = UserDefaults.standard.value(forKey: "createActiCalled") as? String ?? ""
+          if val1 != "true" {
             self.handleGetStudyActivityMetadata(response: response as! Dictionary<String, Any>)
+          }
         case .studyDashboard:
             self.handleStudyDashboard(response: response as! Dictionary<String, Any>)
         case .termsPolicy:

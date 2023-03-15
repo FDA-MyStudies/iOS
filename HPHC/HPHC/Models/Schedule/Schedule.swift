@@ -532,6 +532,7 @@ class Schedule{
                 return f
             } else {
                 let formatter = DateFormatter()
+                formatter.locale = Locale(identifier: getLanguageLocale())
                 formatter.dateFormat = "YYYY-mm-dd"
                 formatter.dateStyle = .short
                 formatter.timeZone = TimeZone.init(abbreviation: "UTC")
@@ -553,6 +554,7 @@ class Schedule{
                 return f
             } else {
                 let formatter = DateFormatter()
+                formatter.locale = Locale(identifier: getLanguageLocale())
                 formatter.dateFormat = "YYYY-mm-dd"
                 formatter.dateStyle = .short
                 formatter.timeZone = TimeZone.current // TimeZone.init(abbreviation:"IST")

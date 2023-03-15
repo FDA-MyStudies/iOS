@@ -41,6 +41,7 @@
 "Select Lead Time"="Seleccionar plazo de entrega";
 "Done"="Aceptar";
 "Cancel"="Cancelar";
+"ySK-jB-LwD.normalTitle.value" = "CANCELAR";
 "Profile"="Perfil";
 "Profile updated Successfully."="Perfil actualizado con éxito.";
 "Sign Out"="Desconectar";
@@ -49,6 +50,7 @@
 "Use Passcode to access app"="Utilizar la contraseña para acceder a la aplicación";
 "Save"="Guardar";
 "Change Passcode"="Cambiar código de acceso";
+"Change Password"="Cambiar contraseña";
 "Edit"="Editar";
 
 "LEAVE US YOUR FEEDBACK"="DÉJENOS SU COMENTARIO";
@@ -148,6 +150,7 @@
 
 
 "Please update to the latest version of the app to continue."="Actualice a la última versión de la aplicación para continuar.";
+"New version of app is available, click on 'Update' to update now or 'Cancel' to update later."="La nueva version de la aplicacion esta disponible, haga clic en “Actualizar” para actualizar ahora o haga clic en “Cancelar” para actualizar mas tarde.";
 "Please go to AppStore to update to the latest version of the app."="Vaya a AppStore para actualizar a la última versión de la aplicación.";
 "Consent Updated"="Consentimiento actualizado";
 
@@ -163,17 +166,19 @@
 "Continue"="Continuar";
 
 
-"Validated!"="¡Validado!";
+"Validated!"="Validado";
 "OK"="Ok";
 "Ok1"="Aceptar1";
 "Enter a token"="Ingrese un token";
 "Enter keyword(s)"="Inserte palabras claves";
-
+"Study Protocol"="Protocolo del estudio";
 
 "Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Continue to proceed to the Consent section."="Según las respuestas que proporcionó, es elegible para participar en este estudio.\nHaga clic en Continuar para pasar a la sección Consentimiento.";
 
 "You are Eligible!"="¡Eres elegible!";
-
+"Enter enrollment token"="Ingrese el token de inscripción";
+"Eligibility"="Elegibilidad";
+"Submit"="Enviar";
 
 "Your token has been validated. You are eligible to join the study. Please tap Get Started to proceed to the consent section."="Su token ha sido validado. Es elegible para participar en el estudio. Toque Empezar para pasar a la sección de consentimiento.";
 
@@ -377,6 +382,11 @@
 " missed"=" perdido";
 "Run(s):"="Ejecución(s):";
 "more"="más";
+"every"="cada";
+"to"="para";
+"month"="mes";
+"every month"="todos los meses";
+"on"="el";
 
 "Tap Done to submit responses. Responses cannot be modified after submission."="Toque Listo para enviar respuestas. Las respuestas no se pueden modificar después del envío.";
 
@@ -562,7 +572,8 @@
 
 "AA0-le-tSn.text.value"="Ver video";
 "AW7-ks-icb.text.value"="Sobre el estudio";
-"MKo-wh-p4O.normalTitle.value"="Unirse al estudio";
+//"MKo-wh-p4O.normalTitle.value"="Unirse al estudio";
+"MKo-wh-p4O.normalTitle.value"="Comenzar";
 "5NQ-r5-mSz.normalTitle.value"="Unirse al estudio";
 "gz3-j6-s6W.normalTitle.value"="Ver consentimiento";
 "bc7-W1-fmy.normalTitle.value"="Visita el sito web";
@@ -582,7 +593,7 @@
 "Weekly"="Semanal";
 "Monthly"="Mensual";
 "As Scheduled"="Como lo planeado";
-"Consent PDF"="PDF de consentimiento";
+"Consent PDF"="Consentimiento PDF";
 "English"="INGLÉS";
 "Spanish"="ESPAÑOL";
 "You are offline. New language settings will be applied once you are connected again."="No tienes conexión. Se aplicará la nueva configuración de idioma una vez que te conectes de nuevo";
@@ -626,3 +637,4 @@
 "2YV-6t-dEM.normalTitle.value"="Siguiente";
 "yvB-Wf-hYf.text.value"="RECUENTO TOTAL DE PATADAS";
 "Sue-m0-sIi.text.value"="TOQUE PARA INICIAR EL TEMPORIZADOR";
+"BUTTON_NEXT" = "Siguiente";

@@ -64,7 +64,9 @@ class ResourcesViewController: UIViewController{
             let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
             appDelegate.checkConsentStatus(controller: self)
         }
-
+        
+        setNavigationBarColor()
+        
         // Branding
         leaveStudy = Branding.LeaveStudy
         consentPDF = Branding.ConsentPDF
@@ -244,6 +246,10 @@ class ResourcesViewController: UIViewController{
         self.appendLeaveStudy()
         
         let todayDate = Date()
+        
+        if getLanguageLocale() != "en" , let idx = Study.currentStudy?.resources?.firstIndex(where: { $0.title ==  "Study Protocol"}) {
+            Study.currentStudy?.resources?[idx].title = NSLocalizedString("Study Protocol", comment: "")
+        }
         
         for  resource in (Study.currentStudy?.resources)!{
             

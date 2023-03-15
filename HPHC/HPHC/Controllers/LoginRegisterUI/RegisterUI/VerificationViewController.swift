@@ -260,7 +260,7 @@ extension VerificationViewController: NMWebServiceDelegate {
             let ud = UserDefaults.standard
             ud.set(true, forKey: kNotificationRegistrationIsPending)
             ud.synchronize()
-            
+            StudyFilterHandler.instance.previousAppliedFilters = []
             if viewLoadFrom == .forgotPassword{
                 // pop to login
                 

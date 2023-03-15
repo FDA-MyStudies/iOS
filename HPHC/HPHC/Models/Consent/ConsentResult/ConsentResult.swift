@@ -120,6 +120,7 @@ class ConsentResult {
                                 var startDate = "\(self.startTime ?? Date())"
                                 
                                 let inputFormatter = DateFormatter()
+                                inputFormatter.locale = Locale(identifier: getLanguageLocale())
                                 inputFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss z"
                                 let showDate = inputFormatter.date(from: startDate)
                                 inputFormatter.dateFormat = "MM/dd/yyyy"

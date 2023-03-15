@@ -282,6 +282,7 @@ class StudyDashboardViewController: UIViewController{
     private static let labkeyDateFormatter: DateFormatter = {
         // 2017/06/13 18:12:13
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.timeZone = TimeZone.init(identifier: "America/New_York")
         formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
         
@@ -291,6 +292,7 @@ class StudyDashboardViewController: UIViewController{
     private static let localDateFormatter: DateFormatter = {
         // 2017/06/13 18:12:13
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: getLanguageLocale())
         formatter.timeZone = TimeZone.current
         formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
         

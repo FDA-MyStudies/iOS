@@ -1,0 +1,1181 @@
+//
+//  HelperUtilities.swift
+//  ResearchKit
+//
+//  Created by MAC-MINI-GOVIND-PRASAD-C on 18/09/22.
+//  Copyright © 2022 researchkit.org. All rights reserved.
+//
+
+import Foundation
+
+@objc public class ActivityHelper: NSObject {
+  
+  @objc public func getorderedNavigationOtherConfirmation(resultval: ORKResult) -> String {
+    if "\(resultval)".contains("other = ") {
+      return "true"
+    }
+    return "false"
+  }
+  
+  @objc public func setResultValue(stepResult: ORKStepResult, activityType: String, resultType: String, allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {// (ORKStep?, NSString?)  {
+    var valAnswer = ""
+    let valRes = stepResult.results?.count ?? 0
+    if valRes > 0 {
+        
+//        if  activityType == "questionnaire" {
+            // for question Step
+//            if stepResult.results?.count == 1 && self.type != .form {
+           if let valForm = currentStep as? ORKFormStep, stepResult.results?.count ?? 0 >= 1 {
+            // && activityType != .form {
+             
+             if let questionstepResult: ORKQuestionResult? = stepResult.results?.last as? ORKQuestionResult? {
+              return set1ResultValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep, questionstepValResult: questionstepResult)
+             }
+           }
+          else if stepResult.results?.count == 1 {
+            // && activityType != .form {
+             
+             if let questionstepResult: ORKQuestionResult? = stepResult.results?.first as? ORKQuestionResult? {
+               return set1ResultValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep, questionstepValResult: questionstepResult)
+             }
+           }
+          
+            
+//        }
+      
+    }
+    return nil
+}
+  
+  func set1ResultValue(stepResult: ORKStepResult, activityType: String, resultType: String, allSteps: [ORKStep], currentStep: ORKStep, questionstepValResult: ORKQuestionResult?) -> ORKStep? {// (ORKStep?, NSString?)  {
+    var valAnswer = ""
+    let valRes = stepResult.results?.count ?? 0
+    if valRes > 0 {
+        
+        if  activityType == "questionnaire" {
+            // for question Step
+//            if stepResult.results?.count == 1 && self.type != .form {
+//          if stepResult.results?.count == 1 { // && activityType != .form {
+                if let questionstepResult: ORKQuestionResult? = questionstepValResult as? ORKQuestionResult? {
+                  let val = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep )
+                  
+//                  let val1 = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep ) as NSString
+                   
+                  if let operato = currentStep.steppreoperator, operato == "=" {
+                      let valCaseSensitive1 = val.lowercased()
+                      let caseSensitive = currentStep.stepprevalue ?? ""
+                      let valCaseSensitive2 = caseSensitive.lowercased()
+                    if currentStep.stepprevalue != "", compareStringNumerics(valStr1: valCaseSensitive1, valStr2: valCaseSensitive2, operatorVal: operato) {
+                      
+//                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
+
+                      
+                     let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
+                      if val90 != nil {
+                        return val90
+                      }
+                                            
+                    } else if currentStep.stepprevalue == "Other", val.contains("\"other\": \"Other\"") {
+                      
+                      //                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
+                                            
+                                            
+                                           let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
+                                            if val90 != nil {
+                                              return val90
+                                            }
+                                                                  
+                                          }
+                  }
+                  else if let operato = currentStep.steppreoperator, operato == "!=" {
+                    if currentStep.stepprevalue == "Other", !(val.contains("\"other\": \"Other\"")) {
+                      
+                      //                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
+                      
+                      
+                      let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
+                      if val90 != nil {
+                        return val90
+                      }
+                      
+                    }
+                      let valCaseSensitive3 = val.lowercased()
+                      let caseSensitive1 = currentStep.stepprevalue ?? ""
+                      let valCaseSensitive4 = caseSensitive1.lowercased()
+//                    if currentStep.stepprevalue != "Other" && val != currentStep.stepprevalue {
+                      if currentStep.stepprevalue != "Other", currentStep.stepprevalue != "", compareStringNumerics(valStr1: valCaseSensitive3, valStr2: valCaseSensitive4, operatorVal: operato) {
+                      
+                      let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
+                      if val90 != nil {
+                        return val90
+                      }
+                      
+                    }
+                    
+                    //                    if val != currentStep.stepprevalue {
+                    //
+                    //                     let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
+                    //                      if val90 != nil {
+                    //                        return val90
+                    //                      }
+                    //
+                    //                    }
+                  }
+                  else if let operato = currentStep.steppreoperator, operato == ">" {
+                    if let intVal1 = Double(val), let intVal2 = Double(currentStep.stepprevalue ?? ""),
+                       intVal1 > intVal2 {
+                      let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
+                       if val90 != nil {
+                         return val90
+                       }
+                    }
+                  }
+                  else if let operato = currentStep.steppreoperator, operato == "<" {
+                    if let intVal1 = Double(val), let intVal2 = Double(currentStep.stepprevalue ?? ""),
+                       intVal1 < intVal2 {
+                      let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
+                       if val90 != nil {
+                         return val90
+                       }
+                    }
+                  }
+                  
+                  else if let operato = currentStep.steppreoperator, operato == ">=" {
+                    if let intVal1 = Double(val), let intVal2 = Double(currentStep.stepprevalue ?? ""),
+                       intVal1 >= intVal2 {
+                      let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
+                       if val90 != nil {
+                         return val90
+                       }
+                    }
+                  }
+                  
+                  else if let operato = currentStep.steppreoperator, operato == "<=" {
+                    if let intVal1 = Double(val), let intVal2 = Double(currentStep.stepprevalue ?? ""),
+                       intVal1 <= intVal2 {
+                      let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
+                       if val90 != nil {
+                         return val90
+                       }
+                    }
+                  }
+
+                  else if let operato = currentStep.steppreoperator, operato.contains(":") {
+                    
+//                    ley va
+                   let valCondition = meetTheCondition(operato: operato, actualResult: val, comparisionValues: currentStep.stepprevalue ?? "")
+                    
+                    if valCondition {
+                      let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
+                       if val90 != nil {
+                         return val90
+                       }
+                    }
+                  }
+                  
+                  
+                  
+                  
+//                    return val1
+                }
+//            }
+            
+        }
+      
+    }
+    return nil
+}
+  
+  func compareStringNumerics(valStr1: String, valStr2: String, operatorVal: String) -> Bool {
+    
+    if operatorVal == "=" {
+      if valStr1 == valStr2 {
+        return true
+      } else if let val = Decimal(string: valStr1), Decimal(string: valStr1) == Decimal(string: valStr2) {
+        return true
+      }
+    }
+    else if operatorVal == "!=" {
+      if valStr1 == valStr2 {
+        return false
+      } else if let val = Decimal(string: valStr1), Decimal(string: valStr1) == Decimal(string: valStr2) {
+        return false
+      }
+      return true
+    }
+    return false
+  }
+  
+  @objc public func getReccurOverStepValue(stepResult: ORKStepResult, activityType: String, resultType: String, allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {
+    
+    let destinStep = currentStep.steppredestinationTrueStepKey ?? ""
+                     
+    var identifierfound = false
+    
+    let destinActiId1 = currentStep.steppreactivityid ?? ""
+    let destinStepId1 = currentStep.steppredestinationTrueStepKey ?? ""
+    if destinActiId1 != "" {//check
+      let destinActiId2 = currentStep.steppreactivityid ?? ""
+      let destinStepId2 = currentStep.steppredestinationTrueStepKey ?? ""
+      var valDummy = ORKStep(identifier: "valDummy")
+      valDummy.steppreactivityid = destinActiId2
+      valDummy.steppredestinationTrueStepKey = destinStepId2
+      return valDummy
+    }
+    
+    if destinStep == "0" {
+      identifierfound = true
+      let val = allSteps.last
+      val?.steppresourceQuestionKey = currentStep.identifier
+      allSteps.last?.steppresourceQuestionKey = currentStep.identifier
+      return val
+    }
+    for aSteps in allSteps {
+      if aSteps.identifier == destinStep {
+        identifierfound = true
+        aSteps.steppreActiBack = currentStep.identifier
+        return aSteps
+      }
+    }
+    if !identifierfound {
+      let destinActiId = currentStep.steppreactivityid ?? ""
+      let destinStepId = currentStep.steppredestinationTrueStepKey ?? ""
+      var valDummy = ORKStep(identifier: "valDummy")
+      valDummy.steppreactivityid = destinActiId
+      valDummy.steppredestinationTrueStepKey = destinStepId
+      return valDummy
+    }
+    
+  }
+  
+  @objc public func  getsecondActivityJumpStep(allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {
+    let destinStep = currentStep.steppreOtherActiStepId ?? ""
+    
+//                      if destinStep != "" {
+//                        findTheIndex(allSteps: allSteps)
+//                      }
+    
+    for aSteps in allSteps {
+      
+      if aSteps.identifier == destinStep {
+        return aSteps
+      }
+    }
+    return nil
+  }
+  
+  @objc public func  getNonHiddenStep(allSteps: [ORKStep], currentStep: ORKStep, indexVal: Int) -> ORKStep? {
+    let destinStep = currentStep.steppreOtherActiStepId ?? ""
+    
+    var valindexVal = indexVal
+    let valAllCount = allSteps.count - 1
+    
+    for acount in 0...valAllCount {
+      if acount > indexVal {
+//        if acount > indexVal && acount < valAllCount {
+        let varStep = allSteps[acount]
+        if ((varStep.steppreisHidden ?? "false") == "false") {
+          return varStep
+        }
+      }
+    }
+    
+//    for aSteps in allSteps {
+//
+//
+//      if aSteps.identifier == destinStep {
+//        return aSteps
+//      }
+//    }
+    return nil
+  }
+  
+  @objc public func getNonHiddenPreviousStep(allSteps: [ORKStep], currentStep: ORKStep, indexVal: Int, taskResult: ORKTaskResult) -> ORKStep? {
+    let destinStep = currentStep.steppreOtherActiStepId ?? ""
+    
+    var valindexVal = allSteps.count - indexVal
+    let valAllCount = allSteps.count - 1
+    let allSteps2 = Array(allSteps.reversed())
+    
+    for acount in 0...valAllCount {
+      if acount >= valindexVal {
+//        if acount > indexVal && acount < valAllCount {
+        let varStep = allSteps2[acount]
+        if ((varStep.steppreisHidden ?? "false") == "false") {
+          return varStep
+        } else if ((varStep.steppreisHidden ?? "false") == "true") {
+          let val = findPreviousHiddenResultStep(taskResult: taskResult, currentStepIdentifier: varStep.identifier)
+          if val == "true" {
+          return varStep
+          }
+        }
+      }
+    }
+    
+//    for aSteps in allSteps {
+//
+//
+//      if aSteps.identifier == destinStep {
+//        return aSteps
+//      }
+//    }
+    return nil
+  }
+  
+  func meetTheCondition(operato: String, actualResult: String, comparisionValues: String) -> Bool {
+    var conditonsatisfied = false
+    if let intValactualResult = Double(actualResult) {
+      let valArroperato = operato.components(separatedBy: ":")
+      let valArrcomparisionValues = comparisionValues.components(separatedBy: ":")
+      if valArroperato.count > 0 && valArrcomparisionValues.count > 0 {
+        
+        var valOperatorCount = 0
+        var valcomparisionValuesCount = 0
+        var conditonRequired = ""
+        
+        for valoperato in valArroperato {
+          valOperatorCount += 1
+         var valInternalconditonRequired = ""
+          var valPreviousconditonsatisfied = conditonsatisfied
+          if valoperato == ">" {
+            if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
+               intValactualResult > intVal2 {
+              
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+            valcomparisionValuesCount += 1
+          }
+          else if valoperato == "<" {
+            if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
+               intValactualResult < intVal2 {
+              
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+            valcomparisionValuesCount += 1
+          }
+          else if valoperato == "=" {
+            if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
+               intValactualResult == intVal2 {
+              
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+            
+            valcomparisionValuesCount += 1
+          }
+          else if valoperato == "!=" {
+            if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
+               intValactualResult != intVal2 {
+              
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+            
+            valcomparisionValuesCount += 1
+          }
+          else if valoperato == ">=" {
+            if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
+               intValactualResult >= intVal2 {
+              
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+            valcomparisionValuesCount += 1
+          }
+          else if valoperato == "<=" {
+            if valArrcomparisionValues.count > valcomparisionValuesCount , let intVal2 = Double(valArrcomparisionValues[valcomparisionValuesCount] ?? ""),
+               intValactualResult <= intVal2 {
+              
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+            valcomparisionValuesCount += 1
+          }
+          
+          else if valoperato == "&&" {
+            
+            valInternalconditonRequired = "&&"
+          }
+          else if valoperato == "||" {
+            
+            valInternalconditonRequired = "||"
+          }
+          
+          if conditonRequired == "&&", valInternalconditonRequired != "&&" {
+            if (valPreviousconditonsatisfied && conditonsatisfied) {
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+          } else if conditonRequired == "||", valInternalconditonRequired != "||" {
+            if valPreviousconditonsatisfied || conditonsatisfied {
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+          }
+          
+          conditonRequired = valInternalconditonRequired
+        }
+        valcomparisionValuesCount += 1
+      }
+      
+      
+    } else if actualResult != "" {
+      let valArroperato = operato.components(separatedBy: ":")
+      let valArrcomparisionValues = comparisionValues.components(separatedBy: ":")
+      if valArroperato.count > 0 && valArrcomparisionValues.count > 0 {
+        
+        var valOperatorCount = 0
+        var valcomparisionValuesCount = 0
+        var conditonRequired = ""
+        
+        for valoperato in valArroperato {
+          valOperatorCount += 1
+         var valInternalconditonRequired = ""
+          var valPreviousconditonsatisfied = conditonsatisfied
+
+           if valoperato == "=" {
+            if valArrcomparisionValues.count > valcomparisionValuesCount,
+               actualResult == (valArrcomparisionValues[valcomparisionValuesCount] ) {
+              
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+            
+            valcomparisionValuesCount += 1
+          }
+          else if valoperato == "!=" {
+            if valArrcomparisionValues.count > valcomparisionValuesCount,
+               actualResult != (valArrcomparisionValues[valcomparisionValuesCount] ) {
+              
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+            
+            valcomparisionValuesCount += 1
+          }
+          
+          else if valoperato == "&&" {
+            
+            valInternalconditonRequired = "&&"
+          }
+          else if valoperato == "||" {
+            
+            valInternalconditonRequired = "||"
+          }
+          
+          if conditonRequired == "&&", valInternalconditonRequired != "&&" {
+            if (valPreviousconditonsatisfied && conditonsatisfied) {
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+          } else if conditonRequired == "||", valInternalconditonRequired != "||" {
+            if valPreviousconditonsatisfied || conditonsatisfied {
+              conditonsatisfied = true
+            } else {
+              conditonsatisfied = false
+            }
+          }
+          
+          conditonRequired = valInternalconditonRequired
+        }
+        valcomparisionValuesCount += 1
+      }
+      
+    }
+    return conditonsatisfied
+  }
+  
+//  func findTheIndex(allSteps: [ORKStep]) -> String {
+//
+//    return ""
+//  }
+
+func setValue(questionstepResult: ORKQuestionResult, resultType: String, currentStep: ORKStep) -> String {
+    switch questionstepResult.questionType.rawValue {
+
+    case  ORKQuestionType.scale.rawValue : // scale and continuos scale
+
+        if (questionstepResult as? ORKScaleQuestionResult) != nil {
+            let stepTypeResult = (questionstepResult as? ORKScaleQuestionResult)!
+          if stepTypeResult.scaleAnswer != nil {
+          return "\(stepTypeResult.scaleAnswer!)"
+          }
+           } else {
+            let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
+             if (stepTypeResult.choiceAnswers?.count) ?? 0 > 0 {
+//                   self.value = stepTypeResult.choiceAnswers?.first
+               
+//                 getActualAnswer(choiceSelected: "\(stepTypeResult.choiceAnswers!.first!)", identifierOfRes: <#T##String#>)
+               
+               return "\(stepTypeResult.choiceAnswers!.first!)" //check
+             }
+             
+        }
+
+    case ORKQuestionType.singleChoice.rawValue: // textchoice + value picker + imageChoice
+
+        let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
+//          var resultType: String? = (self.step?.resultType as? String)!
+//      var resultType: String = getresultType(identifier: questionstepResult.identifier) //(self.step?.resultType as? String)!
+      
+      var resultType: String = resultType
+      
+      if ActivityHelper.isValidObject(someObject: stepTypeResult.choiceAnswers as AnyObject?) {
+            if (stepTypeResult.choiceAnswers?.count)! > 0 {
+
+                if resultType ==  QuestionStepType.imageChoice.rawValue ||  resultType == QuestionStepType.valuePicker.rawValue {
+
+                    // for image choice and valuepicker
+
+                    let resultValue: String! = "\(stepTypeResult.choiceAnswers!.first!)"
+
+//                      self.value = (resultValue == nil ? "" : resultValue)
+                  
+                  return "\(resultValue == nil ? "" : resultValue ?? "")"
+                } else {
+                    // for text choice
+                    var resultValue: [Any] = []
+                    let selectedValue = stepTypeResult.choiceAnswers?.first
+
+                    if let stringValue = selectedValue as? String {
+                        resultValue.append(stringValue)
+                    } else if let otherDict = selectedValue as? [String:Any] {
+                        resultValue.append(otherDict)
+                    } else {
+                        resultValue.append(selectedValue as Any)
+                    }
+                  return "\(resultValue.first ?? "")" //check
+
+//                      self.value = resultValue
+                }
+
+            }
+        }
+//      case ORKQuestionType.multipleChoice.rawValue: // textchoice + imageChoice
+//
+//          let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
+//
+//          if let answers = stepTypeResult.choiceAnswers {
+//
+//              var resultArray: [Any] = []
+//
+//              for value in answers {
+//
+//                  if let stringValue = value as? String {
+//                      resultArray.append(stringValue)
+//                  } else if let otherDict = value as? [String:Any] {
+//                      resultArray.append(otherDict)
+//                  } else {
+//                      resultArray.append(value)
+//                  }
+//
+//              }
+//              self.value = resultArray
+//
+//          } else {
+//              // self.value = []
+//              self.skipped = true
+//          }
+//
+//          /*
+//          if Utilities.isValidObject(someObject: stepTypeResult.choiceAnswers as AnyObject?) {
+//              if (stepTypeResult.choiceAnswers?.count)! > 1 {
+//
+//
+//
+//              } else {
+//
+//                  let resultValue: String! = "\(stepTypeResult.choiceAnswers!.first!)"
+//                  let resultArray: Array<String>? = ["\(resultValue == nil ? "" : resultValue!)"]
+//                  self.value = resultArray
+//              }
+//
+//          } else {
+//              self.value = []
+//          }
+//           */
+//
+      case ORKQuestionType.boolean.rawValue:
+
+          let stepTypeResult = (questionstepResult as? ORKBooleanQuestionResult)!
+
+//          if Utilities.isValidValue(someObject: stepTypeResult.booleanAnswer as AnyObject?) {
+              let value = stepTypeResult.booleanAnswer ?? false == 1 ? "True" : "False"
+            return value
+//          }
+//      else {
+//              // self.value = false
+//              self.skipped = true
+//          }
+      
+      
+    
+//    case  ORKQuestionType.scale.rawValue : // scale and continuos scale
+//
+//        if (questionstepResult as? ORKScaleQuestionResult) != nil {
+//            let stepTypeResult = (questionstepResult as? ORKScaleQuestionResult)!
+//          if stepTypeResult.scaleAnswer != nil {
+//          return "\(stepTypeResult.scaleAnswer!)"
+//          }
+//           } else {
+//            let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
+//             if (stepTypeResult.choiceAnswers?.count) ?? 0 > 0 {
+////                   self.value = stepTypeResult.choiceAnswers?.first
+//
+////                 getActualAnswer(choiceSelected: "\(stepTypeResult.choiceAnswers!.first!)", identifierOfRes: <#T##String#>)
+//
+//               return "\(stepTypeResult.choiceAnswers!.first!)" //check
+//             }
+//
+//        }
+//
+      case ORKQuestionType.integer.rawValue: // numeric type
+          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
+      if let val = stepTypeResult.numericAnswer {
+            let value = Double(truncating:stepTypeResult.numericAnswer!)
+            return "\(value)"
+      }
+//      else {
+//              // self.value = 0.0
+//              self.skipped = true
+//          }
+//
+      case ORKQuestionType.decimal.rawValue: // numeric type
+          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
+      if let val = stepTypeResult.numericAnswer {
+            let value = Double(truncating:stepTypeResult.numericAnswer!)
+            return "\(value)"
+      }
+//      else {
+//              // self.value = 0.0
+//              self.skipped = true
+//          }
+//
+//      case  ORKQuestionType.timeOfDay.rawValue:
+//          let stepTypeResult = (questionstepResult as? ORKTimeOfDayQuestionResult)!
+//
+//          if stepTypeResult.dateComponentsAnswer != nil {
+//
+//              let hour: Int? = (stepTypeResult.dateComponentsAnswer?.hour == nil ? 0 : stepTypeResult.dateComponentsAnswer?.hour)
+//              let minute: Int? = (stepTypeResult.dateComponentsAnswer?.minute == nil ? 0 : stepTypeResult.dateComponentsAnswer?.minute)
+//              let seconds: Int? = (stepTypeResult.dateComponentsAnswer?.second == nil ? 0 : stepTypeResult.dateComponentsAnswer?.second)
+//
+//              self.value = (( hour! < 10 ? ("0" + "\(hour!)") : "\(hour!)") + ":" + ( minute! < 10 ? ("0" + "\(minute!)") : "\(minute!)") + ":" + ( seconds! < 10 ? ("0" + "\(seconds!)") : "\(seconds!)"))
+//
+//          } else {
+//              // self.value = "00:00:00"
+//              self.skipped = true
+//          }
+//
+//      case ORKQuestionType.date.rawValue:
+//          let stepTypeResult = (questionstepResult as? ORKDateQuestionResult)!
+//
+//            let value = Utilities.getStringFromDate(date: stepTypeResult.dateAnswer!) //CHECK
+//            return "\(value ?? "")"
+//      else {
+//              // self.value = "0000-00-00'T'00:00:00"
+//              self.skipped = true
+//          }
+//      case ORKQuestionType.dateAndTime.rawValue:
+//          let stepTypeResult = (questionstepResult as? ORKDateQuestionResult)!
+//
+//          if Utilities.isValidValue(someObject: stepTypeResult.dateAnswer as AnyObject?) {
+//              self.value =  Utilities.getStringFromDate(date: stepTypeResult.dateAnswer! )
+//
+//          } else {
+//              // self.value = "0000-00-00'T'00:00:00"
+//              self.skipped = true
+//          }
+      case ORKQuestionType.text.rawValue: // text + email
+
+          let stepTypeResult = (questionstepResult as? ORKTextQuestionResult)!
+
+      if let value = (stepTypeResult.answer as? String) {
+            return "\(value)"
+      }
+//      else {
+//              // self.value = ""
+//              self.skipped = true
+//          }
+//
+//      case ORKQuestionType.timeInterval.rawValue:
+//
+//          let stepTypeResult = (questionstepResult as? ORKTimeIntervalQuestionResult)!
+//
+//          if Utilities.isValidValue(someObject: stepTypeResult.intervalAnswer as AnyObject?) {
+//              self.value = Double(truncating:stepTypeResult.intervalAnswer!)/3600
+//
+//          } else {
+//              // self.value = 0.0
+//              self.skipped = true
+//          }
+//
+      case ORKQuestionType.height.rawValue:
+
+          let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
+//            let value = Double(truncating:stepTypeResult.numericAnswer!)
+//
+            if let val = stepTypeResult.numericAnswer {
+              let value = Double(truncating:stepTypeResult.numericAnswer!)
+              
+              
+              
+//              if let valStep = currentStep as? ORKQuestionStep {
+//                if let val2 = valStep.answerFormat {
+//                  if let val3 = val2 as? ORKHeightAnswerFormat {
+//                    if val3.measurementSystem.rawValue == 2 {
+//                      let valresult = showFootAndInchesFromCm(value)
+//                      return valresult
+//                    }
+//                  }
+//                }
+//              }
+              
+              
+              
+//              showFootAndInchesFromCm(value)
+              
+              return "\(value)"
+            }
+      
+//            return "\(value)"
+//      else {
+//              // self.value = 0.0
+//              self.skipped = true
+//          }
+//
+//      case ORKQuestionType.location.rawValue:
+//          let stepTypeResult = (questionstepResult as? ORKLocationQuestionResult)!
+//          /*
+//          if stepTypeResult.locationAnswer != nil && CLLocationCoordinate2DIsValid((stepTypeResult.locationAnswer?.coordinate)!) {
+//
+//              let lat = stepTypeResult.locationAnswer?.coordinate.latitude
+//              let long = stepTypeResult.locationAnswer?.coordinate.longitude
+//
+//              self.value = "\(lat!)" + "," + "\(long!)"
+//
+//          } else {
+//              self.value = "0.0,0.0"
+//          }*/
+//          if let locationAnswer = stepTypeResult.locationAnswer {
+//              if CLLocationCoordinate2DIsValid(locationAnswer.coordinate) {
+//                  let lat = locationAnswer.coordinate.latitude
+//                  let long = locationAnswer.coordinate.longitude
+//                  self.value = "\(lat)" + "," + "\(long)"
+//              } else {
+//                  self.value = "0.0,0.0"
+//              }
+//          } else {
+//              self.skipped = true
+//          }
+    default:break
+    }
+  return ""
+}
+  
+  func showFootAndInchesFromCm(_ cms: Double) -> String {
+
+        let feet = cms * 0.0328084
+        let feetShow = Int(floor(feet))
+        let feetRest: Double = ((feet * 100).truncatingRemainder(dividingBy: 100) / 100)
+        let inches = Int(floor(feetRest * 12))
+    
+    
+    let valFeet = "\(feetShow)"
+    let val1 = valFeet.components(separatedBy: "\'")
+    
+    return "\(feetShow).\(inches)"
+  }
+  
+  class func isValidObject(someObject: AnyObject?) -> Bool {
+      
+      guard let someObject = someObject else {
+          // is null
+          return false
+      }
+      
+      if (someObject is NSNull) ==  false {
+          if someObject as? Dictionary<String, Any> != nil  &&
+              (someObject as? Dictionary<String, Any>)?.isEmpty == false &&
+              ((someObject as? Dictionary<String, Any>)?.count)! > 0 {
+              return true
+              
+          } else if someObject as? NSArray != nil && ((someObject as? NSArray)?.count)! > 0 {
+              return true
+              
+          } else {
+              return false
+          }
+          
+      } else {
+          return false
+      }
+  }
+  
+//  func getresultType(identifier: String, resultType: String) -> String {
+//    let activity = Study.currentActivity
+//    let activityStepArray = activity?.activitySteps?.filter({$0.key == identifier
+//    })
+//
+//      if (activityStepArray?.count)! > 0 {
+//          let step1 = activityStepArray?.first
+//        let val1 = step1?.resultType as? String ?? ""
+//
+//       return val1
+//      }
+//    return ""
+//  }
+  
+  
+  @objc public func findPreviousStep(taskResult: ORKTaskResult, allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {
+    var valAnswer = ""
+    let valRes = taskResult.results?.count ?? 0
+    if valRes > 0 {
+      if let valMainResult = taskResult.results, let valSourceKey = currentStep.steppresourceQuestionKey {
+        for aSteps in valMainResult {
+          if aSteps.identifier == valSourceKey {
+            
+            for aSteps1 in allSteps {
+              if aSteps1.identifier == valSourceKey {
+                return aSteps1
+              }
+            }
+            
+          }
+        }
+        
+      }
+    }
+    return nil
+  }
+  
+  @objc public func findPreviousHiddenResultStep(taskResult: ORKTaskResult,  currentStepIdentifier: String) -> String {
+    var valAnswer = ""
+    let valRes = taskResult.results?.count ?? 0
+    if valRes > 0 {
+      if let valMainResult = taskResult.results {
+        for aSteps in valMainResult {
+          if aSteps.identifier == currentStepIdentifier {
+            return "true"
+//            for aSteps1 in allSteps {
+//              if aSteps1.identifier == valSourceKey {
+//                return aSteps1
+//              }
+//            }
+            
+          }
+        }
+        
+      }
+    }
+    return "false"
+  }
+  
+  @objc public func findPreviousStepForCompletionStep(taskResult: ORKTaskResult, allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {
+    var valAnswer = ""
+    let valRes = taskResult.results?.count ?? 0
+    if valRes > 0 {
+      if let valMainResult = taskResult.results, let valSourceKey = currentStep.steppresourceQuestionKey {
+        for aSteps in valMainResult {
+          if aSteps.identifier == valSourceKey {
+            
+            for aSteps1 in allSteps {
+              if aSteps1.identifier == valSourceKey {
+//                let val = allSteps.last
+//                allSteps.last?.steppresourceQuestionKey = ""
+                return aSteps1
+              }
+            }
+            
+          }
+        }
+        
+      }
+    }
+    return nil
+  }
+  
+  @objc public func findPreviousStepForNOresultStep(taskResult: ORKTaskResult, allSteps: [ORKStep], currentStep: ORKStep) -> String? {
+    var valAnswer = ""
+    let valRes = taskResult.results?.count ?? 0
+    
+    if valRes > 0 {
+      if let valMainResult = taskResult.results {
+        var valICOunt = 0
+        for aSteps in valMainResult {
+          if aSteps.identifier == currentStep.identifier, valICOunt == 0 {
+            
+            
+            
+            return "true"
+            
+            
+          }
+          valICOunt += 1
+        }
+        
+      }
+    }
+    return "false"
+  }
+  
+  // MARK:  Groups
+  
+  @objc public func setGroupResultValue(stepResult: ORKStepResult, activityType: String, resultType: String, allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {// (ORKStep?, NSString?)  {
+    var valAnswer = ""
+    let valRes = stepResult.results?.count ?? 0
+    if valRes > 0 {
+        
+//        if  activityType == "questionnaire" {
+            // for question Step
+//            if stepResult.results?.count == 1 && self.type != .form {
+           if let valForm = currentStep as? ORKFormStep, stepResult.results?.count ?? 0 >= 1 {
+            // && activityType != .form {
+             
+             if let questionstepResult: ORKQuestionResult? = stepResult.results?.last as? ORKQuestionResult? {
+              return set1GroupResultValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep, questionstepValResult: questionstepResult)
+             }
+           }
+          else if stepResult.results?.count == 1 {
+            // && activityType != .form {
+             
+             if let questionstepResult: ORKQuestionResult? = stepResult.results?.first as? ORKQuestionResult? {
+               return set1GroupResultValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep, questionstepValResult: questionstepResult)
+             }
+           }
+          
+            
+//        }
+      
+    } else if stepResult.identifier != "" {
+      // && activityType != .form {
+       
+//       if let questionstepResult: ORKQuestionResult? = stepResult.results?.last as? ORKQuestionResult? {
+        return set1GroupInsResultValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
+//       }
+     }
+    return nil
+}
+  
+  func set1GroupResultValue(stepResult: ORKStepResult, activityType: String, resultType: String, allSteps: [ORKStep], currentStep: ORKStep, questionstepValResult: ORKQuestionResult?) -> ORKStep? {// (ORKStep?, NSString?)  {
+    var valAnswer = ""
+    let valRes = stepResult.results?.count ?? 0
+    if valRes > 0 {
+        
+        if  activityType == "questionnaire" {
+            // for question Step
+//            if stepResult.results?.count == 1 && self.type != .form {
+//          if stepResult.results?.count == 1 { // && activityType != .form {
+                if let questionstepResult: ORKQuestionResult? = questionstepValResult as? ORKQuestionResult? {
+                  let val = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep )
+                  
+//                  let val1 = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep ) as NSString
+                  
+                  
+                  let valsteppreoperator = currentStep.steppreoperator ?? ""
+                  let valstepprevalue = currentStep.stepprevalue ?? ""
+                  let valsteppreisHidden = currentStep.steppreisHidden ?? ""
+                  let valsteppresourceQuestionKey = currentStep.steppresourceQuestionKey ?? ""
+                  let valsteppreactivityid = currentStep.steppreactivityid ?? ""
+                  let valsteppredestinationTrueStepKey = currentStep.steppredestinationTrueStepKey ?? ""
+                  
+                  if valsteppreoperator == "", valstepprevalue == "", valsteppreisHidden == "true", valsteppredestinationTrueStepKey != "" {
+                    
+                      
+//                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
+                    
+                      
+                     let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
+                      if val90 != nil {
+                        return val90
+                      }
+                         
+                  }
+//                  else if valsteppreoperator == "", valstepprevalue == "", valsteppreisHidden == "true", valsteppredestinationTrueStepKey == "" {
+//
+//
+//                    let val = allSteps.last
+//                    val?.steppresourceQuestionKey = currentStep.identifier
+//                    allSteps.last?.steppresourceQuestionKey = currentStep.identifier
+//                    return val
+//                  }
+//                    return val1
+                }
+//            }
+            
+        }
+      
+    }
+    return nil
+}
+
+  func set1GroupInsResultValue(stepResult: ORKStepResult, activityType: String, resultType: String, allSteps: [ORKStep], currentStep: ORKStep) -> ORKStep? {// (ORKStep?, NSString?)  {
+    var valAnswer = ""
+//    let valRes = stepResult.results?.count ?? 0
+//    if valRes > 0 {
+        
+//        if  activityType == "questionnaire" {
+            // for question Step
+//            if stepResult.results?.count == 1 && self.type != .form {
+//          if stepResult.results?.count == 1 { // && activityType != .form {
+//                if let questionstepResult: ORKQuestionResult? = questionstepValResult as? ORKQuestionResult? {
+//                  let val = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep )
+                  
+//                  let val1 = self.setValue(questionstepResult:questionstepResult!, resultType: resultType, currentStep: currentStep ) as NSString
+                  
+                  
+                  let valsteppreoperator = currentStep.steppreoperator ?? ""
+                  let valstepprevalue = currentStep.stepprevalue ?? ""
+                  let valsteppreisHidden = currentStep.steppreisHidden ?? ""
+                  let valsteppresourceQuestionKey = currentStep.steppresourceQuestionKey ?? ""
+                  let valsteppreactivityid = currentStep.steppreactivityid ?? ""
+                  let valsteppredestinationTrueStepKey = currentStep.steppredestinationTrueStepKey ?? ""
+                  
+                  if valsteppreoperator == "", valstepprevalue == "", valsteppreisHidden == "true", valsteppredestinationTrueStepKey != "" {
+                    
+                      
+//                    if(val.caseInsensitiveCompare(currentStep.stepprevalue ?? "") == .orderedSame) {
+                      
+                      
+                     let val90 = getReccurOverStepValue(stepResult: stepResult, activityType: activityType, resultType: resultType, allSteps: allSteps, currentStep: currentStep)
+                      if val90 != nil {
+                        return val90
+                      }
+                         
+                  }
+//                  else if valsteppreoperator == "", valstepprevalue == "", valsteppreisHidden == "true", valsteppredestinationTrueStepKey == "" {
+//
+//
+//                    let val = allSteps.last
+//                    val?.steppresourceQuestionKey = currentStep.identifier
+//                    allSteps.last?.steppresourceQuestionKey = currentStep.identifier
+//                    return val
+//                  }
+//                    return val1
+//                }
+//            }
+            
+//        }
+      
+//    }
+    return nil
+}
+  
+}
+
+enum ActivityType: String {
+    case Questionnaire = "questionnaire"
+    case activeTask = "task"
+}
+
+
+enum QuestionStepType: String {
+    
+    // Step for  Boolean question.
+    case boolean = "boolean"
+    
+    // Step for  example of date entry.
+    case date = "date"
+    
+    // Step for  example of date and time entry.
+    case dateTimeQuestionStep
+    
+    // Step for  example of height entry.
+    case height = "height"
+    
+    // Step for  image choice question.
+    case imageChoice = "imageChoice"
+    
+    // Step for  location entry.
+    case location = "location"
+    
+    // Step with examples of numeric questions.
+    case numeric = "numeric"
+    case numericNoUnitQuestionStep
+    
+    // Step with examples of questions with sliding scales.
+    case scale = "scale"
+    case continuousScale = "continuousScale"
+    case discreteVerticalscale
+    case continuousVerticalscale
+    case textscale = "textScale"
+    case textVerticalscale
+    
+    // Step for  example of free text entry.
+    case text = "text"
+    
+    // Step for  example of a multiple choice question.
+    case textChoice = "textChoice"
+    
+    // Step for  example of time of day entry.
+    case timeOfDay = "timeOfDay"
+    
+    // Step for  example of time interval entry.
+    case timeInterval = "timeInterval"
+    
+    // Step for  value picker.
+    case valuePicker = "valuePicker"
+    
+    // Step for  example of validated text entry.
+    case email = "email"
+    case validatedtextDomain
+    
+    // Image capture Step specific identifiers.
+    case imageCaptureStep
+    
+    // Video capture Step specific identifiers.
+    case VideoCaptureStep
+    
+    // Step for  example of waiting.
+    case waitStepDeterminate
+    case waitStepIndeterminate
+    
+    // Consent Step specific identifiers.
+    case visualConsentStep
+    case consentSharingStep
+    case consentReviewStep
+    case consentDocumentParticipantSignature
+    case consentDocumentInvestigatorSignature
+    
+    // Account creation Step specific identifiers.
+    
+    case registrationStep
+    case waitStep
+    case verificationStep
+    
+    // Login Step specific identifiers.
+    case loginStep
+    
+    // Passcode Step specific identifiers.
+    case passcodeStep
+    
+    // Video instruction Steps.
+    case videoInstructionStep
+    
+}
+
+@objc extension ORKOrderedTask {
+  @objc public func health1KitBiologicalSex() {
+      
+  }
+}
+
+@objc public class ImageClass: NSObject {
+  @objc public func imageFromString(name: String?) {
+  //code to make the image
+//  return image
+  }
+}

@@ -131,7 +131,6 @@ class StudyOverviewViewControllerFirst: UIViewController {
      
      */
     func moviePlayBackDidFinish(notification: NSNotification) {
-        //  println("moviePlayBackDidFinish:")
         moviePlayer.moviePlayer.stop()
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish, object: nil)
         moviePlayer.dismiss(animated: true, completion: nil)

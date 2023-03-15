@@ -225,11 +225,13 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             requestString = String(format:"%@?%@", baseURLString, httpRequestString!) as NSString?
         }
         
+      if requestName as String != "BTC/\(Study.currentStudy?.studyId ?? "")/mobileappstudy-selectRows.api" {
         if #available(iOS 9, *) {
             requestString = requestString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) as NSString?
         } else {
             requestString = requestString.addingPercentEscapes(using: String.Encoding.utf8.rawValue) as NSString?
         }
+      }
         
         let requestUrl = URL(string: requestString as String)!
       
@@ -237,11 +239,31 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                                        cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData,
                                        timeoutInterval: self.connectionTimeoutInterval)
         request.httpMethod = self.getRequestMethod(method) as String
+      
+      if requestName as String != "BTC/\(Study.currentStudy?.studyId ?? "")/mobileappstudy-selectRows.api" {
         if httpHeaders != nil && (httpHeaders?.count)! > 0{
             request.allHTTPHeaderFields = httpHeaders as? [String : String]
         }
-        
         self.fireRequest(request, requestName: requestName)
+      } else {
+        let url = URL(string: requestString as String)!
+
+        let task = URLSession.shared.dataTask(with: url) {(data, response, error) -> Void in
+          if let data = data {
+              DispatchQueue.main.async {
+                  self.handleResponse(data, response: response, requestName: requestName, error: error as NSError?)
+              }
+          } else {
+              DispatchQueue.main.async {
+                self.delegate?.failedRequest(self.networkManager!, requestName: requestName, error: error! as NSError)
+              }
+          }
+          }
+
+        task.resume()
+
+      }
+//        self.fireRequest(request, requestName: requestName)
     }
     
     fileprivate func generateJSONRequest(_ requestName: NSString, method: HTTPMethod, params: NSDictionary?, headers: NSDictionary?) {
@@ -275,7 +297,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             if httpHeaders != nil {
                 request.allHTTPHeaderFields = httpHeaders! as? [String : String]
             }
-            
+  
             self.fireRequest(request, requestName: requestName)
             
         } catch {
@@ -339,10 +361,8 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                 do{
                     // NSJSONReadingOptions.MutableContainers
                     responseDict = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary
-                    // print("response1---\(responseDict)---\(requestName)---\(error)")
                     
                 } catch {
-                    // print("Serilization error")
                 }
                 
                 if (delegate?.finishedRequest) != nil {
@@ -362,17 +382,15 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                     }
                 }
             } else {
-                
+              if requestName as? String != "BTC/\(Study.currentStudy?.studyId ?? "")/mobileappstudy-selectRows.api" {
                 if self.configuration.shouldParseErrorMessage() {
                   
                     var responseDict: [String:Any]?
                     do {
                         
                       responseDict = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? [String:Any]
-                      // print("response1---\(responseDict)---\(requestName)---\(error)")
                         
                     } catch {
-                        // print("Serilization error")
                     }
                   
                   error1 = self.configuration.parseError(errorResponse: responseDict ?? [:])
@@ -384,6 +402,23 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                 if (delegate?.failedRequest) != nil {
                     delegate?.failedRequest(networkManager!, requestName: requestName!,error:error1!)
                 }
+              } else {
+//                let responseDict: [String:Any] = [:]
+                
+                var responseDict1: [String:Any]?
+                  do {
+                      
+                    responseDict1 = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? [String:Any]
+                      
+                  } catch {
+
+                  }
+
+                
+                
+                let responseDict: NSDictionary = [:]
+                delegate?.finishedRequest(networkManager!, requestName: requestName!, response: responseDict)
+              }
             }
         }
     }

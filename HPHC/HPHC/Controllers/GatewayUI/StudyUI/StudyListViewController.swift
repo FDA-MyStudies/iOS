@@ -62,6 +62,10 @@ class StudyListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if #available(iOS 15, *) {
+            UITableView.appearance().sectionHeaderTopPadding = CGFloat(0)
+        }
+        
       let navTitle = Branding.NavigationTitleName
         let titleLabel = UILabel()
         titleLabel.text = NSLocalizedStrings(navTitle, comment: "")
@@ -97,6 +101,7 @@ class StudyListViewController: UIViewController {
             isComingFromFilterScreen = false
             return
         }
+        setNavigationBarColor()
 //        if !isComingFromFilterScreen {
 //              self.addProgressIndicator()
 //            }
@@ -414,15 +419,15 @@ class StudyListViewController: UIViewController {
                 Gateway.instance.studies = studies
 
                 // Applying Filters
-                if StudyFilterHandler.instance.previousAppliedFilters.count > 0 {
-                    let previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
-
+                let previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
+                if previousCollectionData.count > 0 {
                     if User.currentUser.userType == .FDAUser {
-                        self.appliedFilter(studyStatus: previousCollectionData.first!,
-                                           pariticipationsStatus: previousCollectionData[2],
-                                           categories: previousCollectionData[3],
-                                           searchText: "",
-                                           bookmarked: previousCollectionData[1].count > 0 ? true : false) // TBD: Crashed
+                            self.appliedFilter(
+                                studyStatus: previousCollectionData.first!,
+                                               pariticipationsStatus: previousCollectionData.count > 2 ? previousCollectionData[2] : [],
+                                               categories: previousCollectionData.count > 3 ? previousCollectionData[3] : [],
+                                               searchText: "",
+                                               bookmarked: previousCollectionData[1].count > 0 ? true : false) // TBD: Crashed
                     } else {
                         self.appliedFilter(studyStatus: previousCollectionData.first!,
                                            pariticipationsStatus: [],

@@ -1717,13 +1717,16 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                       switch availabilityStatus {
                       case .current:
                         
+                        let valCompletedText1 = "Current activity/survey is completed. "
+                        let valCompletedText2 = "Kindly standby for the next activity/survey"
                         let activityVal = activities[indexPath.row]
                         let valStatus = activityVal.userParticipationStatus.status
                         if valStatus == .completed ||
                             valStatus == .abandoned ||
                             valStatus == .expired {
                           UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
-                                                                        message: "Current activity/survey is completed. Kindly standby for the next activity/survey",
+                                                                        message:
+                                                                            valCompletedText1 + valCompletedText2,
                                                                         buttonTitle: "Ok",
                                                                         viewControllerUsed: self,
                                                                         action: {
@@ -1732,12 +1735,11 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
   //                          self.selectACTIOTHERTableCell(indexPath: indexPath)
                           })
                         } else {
-
-                        
-                        
-                        
+                        let valDifferentText1 = "You will be navigated to a different activity/survey as "
+                        let valDifferentText2 = "this activity/survey is completed"
                         UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
-                                                                      message: "You will be navigated to a different activity/survey as this activity/survey is completed",
+                                                                      message:
+                                                                        valDifferentText1 + valDifferentText2,
                                                                       buttonTitle: "Ok",
                                                                       viewControllerUsed: self,
                                                                       action: {
@@ -1747,8 +1749,11 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                         })
                         }
                       case .upcoming, .past:
+                        let valCurrentText1 = "Current activity/survey is completed. "
+                        let valCurrentText2 = "Kindly standby for the next activity/survey"
                         UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
-                                                                      message: "Current activity/survey is completed. Kindly standby for the next activity/survey",
+                                                                      message:
+                                                                        valCurrentText1 + valCurrentText2,
                                                                       buttonTitle: "Ok",
                                                                       viewControllerUsed: self,
                                                                       action: {
@@ -3884,7 +3889,8 @@ extension ActivitiesViewController:UITabBarControllerDelegate{
                       if valValues1Val["pipingsourceQuestionKey"] == valKey {
                       
                       if let valValues1aActivityId = valValues1Val["pipingsourceQuestionKey"] {
-                        valValues1aActivityId2 = valValues1aActivityId2 + valValues1aActivityId
+//                          valValues1aActivityId2 = valValues1aActivityId2 + valValues1aActivityId
+                          valValues1aActivityId2 += valValues1aActivityId
                         
                         break
                       }

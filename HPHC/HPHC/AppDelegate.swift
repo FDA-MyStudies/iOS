@@ -27,7 +27,8 @@ import IQKeyboardManagerSwift
 
 let kBlockerScreenLabelText = NSLocalizedStrings("Please update to the latest version of the app to continue.", comment: "")
 let kAppStoreUpdateText = NSLocalizedStrings("Please go to AppStore to update to the latest version of the app.", comment: "")
-let kAppManualUpdateText = NSLocalizedStrings("New version of app is available, click on 'Update' to update now or 'Cancel' to update later.", comment: "")
+let kAppManualUpdateText =
+NSLocalizedStrings("New version of app is available, click on 'Update' to update now or 'Cancel' to update later.", comment: "")
 let kConsentUpdatedTitle = NSLocalizedStrings("Consent Updated", comment: "")
 
 let kMessageConsentUpdatedPartTwo = NSLocalizedStrings(

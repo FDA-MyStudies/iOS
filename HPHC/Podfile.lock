@@ -24,6 +24,7 @@ PODS:
     - SDWebImage/Core (= 5.8.0)
   - SDWebImage/Core (5.8.0)
   - SlideMenuControllerSwift (5.0.0)
+  - SwiftLint (0.50.3)
   - URITemplate (3.0.1)
 
 DEPENDENCIES:
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - RealmSwift (= 5.0.0)
   - SDWebImage (= 5.8.0)
   - SlideMenuControllerSwift (from `https://github.com/AtomicSLLC/SlideMenuControllerSwift.git`, branch `swift5`)
+  - SwiftLint
 
 SPEC REPOS:
   trunk:
@@ -52,6 +54,7 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - SDWebImage
+    - SwiftLint
     - URITemplate
 
 EXTERNAL SOURCES:
@@ -77,8 +80,9 @@ SPEC CHECKSUMS:
   RealmSwift: c1bdff09b422569dc6881410d9ccf712bcdb79b0
   SDWebImage: 84000f962cbfa70c07f19d2234cbfcf5d779b5dc
   SlideMenuControllerSwift: d740ea24105a658fe6a8c256f2bf5832fee7c047
+  SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
   URITemplate: 5f5a79f3e384884102c4e6b3325d159c20a8035a
 
-PODFILE CHECKSUM: dcab40180fa15d8c63f4b1655176d79b990f3d37
+PODFILE CHECKSUM: ce90812f1701f958e8a7f0fc479b7bc5c28ba89c
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.3

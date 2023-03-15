@@ -14,6 +14,7 @@ def main_pods
    pod 'RealmSwift', '5.0.0'
    pod 'CryptoSwift', '1.3.1'
    pod 'ActionSheetPicker-3.0', '2.5.0'
+   pod 'SwiftLint'
 
 end
 
